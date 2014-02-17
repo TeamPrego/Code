@@ -7,6 +7,12 @@
 #innerBody
 {
 	background-color: white;
+	
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-top: 5%;
+
+	background-color: white;
 
 	/* outer shadows  (note the rgba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
@@ -27,11 +33,7 @@ hr
 }
 body
 {
-	background-color: white;
-	
-	margin-right: 10%;
-	margin-left: 10%;
-	margin-top: 5%;
+
 }
 .firstTableList
 {
@@ -47,8 +49,7 @@ h1
 {
 	text-align: center;
 	color: powderblue;
-	font-family: andalus;
-	padding: 0;
+	font-family: Andalus;
 }
 #buttons{
 	text-align: center;
@@ -64,22 +65,21 @@ h1
 }
 
 .footer{
-	position:fixed;
-	left:0em;
-	bottom:0em;
-    height:3em;
 	width:100%;
-	background-color:white;  
-	font-family:Andalus;
+	position:absolute;
+	bottom:0;
+	left:0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: orange;
+	font-family:Andalus;	
 }
 
 .left-links{
-	margin-left: 12em;
 	float:left;
 }
 
 .right-links{
-	margin-right: 14em;
 	float:right;
 }
 
