@@ -29,22 +29,36 @@ h1
 	color: powderblue;
 }
 
-.footer
-{
+li{
+	list-style-type:none;
+	color:black;
+}
+
+.footer{
 	position:fixed;
-	left:0px;
-	bottom:0px;
-    height:100px;
+	left:0em;
+	bottom:0em;
+    height:3em;
 	width:100%;
-	background-color:rgb(100,100,100);  
-	
+	background-color:powderblue;  
 }
+
 .left-links{
-
-	margin-left: 3em;
-
+	margin-left: 12em;
+	float:left;
 }
-.right-links
-{
-	/*margin-left: 60em;*/
+
+.right-links{
+	margin-right: 16em;
+	float:right;
+}
+
+.footer li {
+    list-style-type:none;
+    float:left;
+    padding-left:4em;
+}
+.footer a {
+    text-decoration:none;
+    color:#0088CC;
 }
