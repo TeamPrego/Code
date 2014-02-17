@@ -1,0 +1,48 @@
+body {
+	background-color: #ddd;
+	font-family: 'Helvetica', sans-serif;
+}
+
+.wrapper {
+	width: 80%;
+	margin: 20px auto;
+}
+
+header {
+	text-align: center;
+}
+
+.row {
+	margin-bottom: 20px;
+}
+
+.onethird {
+	float: left;
+	width: 28%;
+	margin-right: 3%;
+	padding: 1%;
+	background-color: #eee;
+}
+
+.twothirds {
+	float: left;
+	width: 61%;
+	margin-right: 3%;
+	padding: 1%;
+	background-color: #fff;
+}
+
+.threethirds {
+	width: 98%;
+	padding: 1%;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
