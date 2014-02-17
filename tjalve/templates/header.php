@@ -12,4 +12,4 @@
 	<body>
 		<div id = "innerBody">
 			<div id = "logga"><img src="pic/logga.jpg" /></div>
-			<hr noshade size=4 width="80%", color="orange">
+			<hr>

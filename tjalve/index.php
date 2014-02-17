@@ -1,12 +1,10 @@
 
 <?php
 include "templates/header.php";
-?>
-	
-	
-		<h1 id="rubrik">Tjalve Friidrott</h1>
+?>	
+		<h1>Tjalve Friidrott</h1>
 		
-		<hr noshade size=4 width="80%", color="orange">
+		<hr>
 		<table class ="firstTableList">
 			<thead>
 				<tr>
@@ -16,14 +14,14 @@ include "templates/header.php";
 					<th>Reslutatlista</th>
 			</thead>	
 			<tbody>
-				<tr>
+				<tr class="even">
 					<td> Tjalvesupertävling </td>
 					<td> Yesbox </td>
 					<td> Yesbox </td>
 					<td> Yesbox </td>
 				</tr>
 
-				<tr>
+				<tr class="odd">
 					<td> Hannes-super-tävling </td>
 					<td> Yesbox </td>
 					<td> Ligger ej uppe </td>
@@ -31,7 +29,6 @@ include "templates/header.php";
 				</tr>
 			</tbody>
 		</table>
-
 
 <?php
 include "templates/footer.php";
