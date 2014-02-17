@@ -1,0 +1,32 @@
+#logga
+{
+	/*margin-left:auto;
+	margin-right:auto;
+	width:auto;*/
+	vertical-align: middle;
+	text-align:center;
+}
+body
+{
+	background-color:rgb(59,89,152);
+}
+h1
+{
+	text-align: middle;
+	color: powderblue;
+}
+#buttons{
+	text-align: center;
+	color:rgb(1,1,1) ;
+}
+
+#button{
+	background-color:rgb(255,255,255);
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	width: 6em;
+	height: 3em;
+	color: powderblue;
+}
+
+
