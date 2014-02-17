@@ -29,4 +29,22 @@ h1
 	color: powderblue;
 }
 
+.footer
+{
+	position:fixed;
+	left:0px;
+	bottom:0px;
+    height:100px;
+	width:100%;
+	background-color:rgb(100,100,100);  
+	
+}
+.left-links{
 
+	margin-left: 3em;
+
+}
+.right-links
+{
+	/*margin-left: 60em;*/
+}
