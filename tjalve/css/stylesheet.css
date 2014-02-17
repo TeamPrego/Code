@@ -26,12 +26,6 @@ h1
 	margin-right: 0.5em;
 	width: 6em;
 	height: 3em;
-	color: powderblue;
-}
-
-li{
-	list-style-type:none;
-	color:black;
 }
 
 .footer{
@@ -41,6 +35,7 @@ li{
     height:3em;
 	width:100%;
 	background-color:white;  
+	font-family:Andalus;
 }
 
 .left-links{
@@ -59,7 +54,7 @@ li{
     padding-left:4em;
 }
 .footer a {
-  /*  text-decoration:none;*/
-  	font-family:"Serif";
+  	font-family:"Andalus";
     color:black;
+	/*style-type:none*/
 }
