@@ -1,19 +1,49 @@
 #logga
 {
-	/*margin-left:auto;
-	margin-right:auto;
-	width:auto;*/
 	vertical-align: middle;
 	text-align:center;
+	padding: 5px;
+}
+#innerBody
+{
+	background-color: white;
+
+	/* outer shadows  (note the rgba is red, green, blue, alpha) */
+	-webkit-box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.4); 
+	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
+
+	/* rounded corners */
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 7px; 
+	border-radius: 7px;
 }
 body
 {
-	background-color:rgb(59,89,152);
+	background-color: white;
+	
+	border: 2px solid black;
+	border-radius: 5px;
+	
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-top: 5%;
+}
+.firstTableList
+{
+	text-align: center;
+	padding: 5px;
+	font-family: andalus;
+
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
 }
 h1
 {
 	text-align: middle;
+	text-align: center;
 	color: powderblue;
+	font-family: andalus;
 }
 #buttons{
 	text-align: center;
