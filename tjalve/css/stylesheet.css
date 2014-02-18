@@ -64,6 +64,24 @@ h1
 	height: 3em;
 }
 
+#resultbutton
+{
+	background-color:rgb(255,255,255);
+	margin-left: 10em;
+	width: 6em;
+	height: 2em;
+	color: powderblue;
+}
+
+#scrollbar
+{
+	width:6em;
+	height:2em;
+	background-color:rgb(100,100,100);
+	margin-right:10em;
+	margin-top:2em;
+}
+
 .footer{
 	width:100%;
 	position:absolute;
