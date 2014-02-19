@@ -54,7 +54,7 @@ include "templates/header.php";
 	<div class="infoText">
 		<h4>Instruktion:</h4>
 		<ol>
-			<li>Välj klubb och skriv in uppgifter om kontaktpersonen</li>
+			<li class="importantText">Välj klubb och skriv in uppgifter om kontaktpersonen</li>
 			<li>I nästa formulär skriver du in deltagarens namn, födelseår och huvudklass. Om det är stafett kryssa i stafettanmälan och klubbnamn går in som efternamn och du kan sedan skriva in om det är Lag 1 osv, 
 				Kryssa därefter i önskade grenar och ev PB/SB, tryck på knappen "Lägg till deltagare"</li>
 			<li>Skall deltagaren vara med i en gren i en annan klass, ändra klassen i klasslistan och välj grenar och tryck på knappen "Lägg till extra gren". Du ska alltså inte skriva in namnet igen.

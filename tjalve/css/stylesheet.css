@@ -165,7 +165,7 @@ h2
 	text-align: center;
 }
 
-#contactPerson, #email, #repeatEmail, #telephoneNumber, #chooseClub, #continues
+#contactPerson, #email, #repeatEmail, #telephoneNumber, #chooseClub, #continues, #yearOfBirth, #firstName, #lastName,#chooseClass, #addParticipator
 {
 	border-radius: 7px;
 }
@@ -180,4 +180,17 @@ h2
 	text-align: center;
 	text-align: middle;
 }
-
+.importantText
+{
+	font-weight: bold;
+}
+.progress
+{
+	width: 50%;
+	height: 100%;
+	border: 1px solid orange;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	background-color: orange;
+	text-align: right;
+}
