@@ -2,26 +2,18 @@
 		include("resultat.php");
 		session_start();	
 	
-		$con=mysqli_connect("https://competition-192031.phpmyadmin.mysql.binero.se/","192031_jv80473","TeamPrego","192031-competition");
-		/*mysql_query("SET NAMES utf8");
-		  mysql_query("SET NAMES 'utf8' COLLATE 'utf8_general_ci'");
-		  mysql_query("SET CHARACTER_SET utf8");*/	
+		$con=mysqli_connect("competition-192031.mysql.binero.se","192031_jv80473","TeamPrego","192031-competition");
+		
 		// Check connection
 		if (mysqli_connect_errno())
 		  {
 		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		  }
-		  /*mysql_query("SET NAMES utf8");
-		  mysql_query("SET NAMES 'utf8' COLLATE 'utf8_general_ci'");
-		  mysql_query("SET CHARACTER_SET utf8");*/
-/*mysql_query("SET CHARACTER SET 'utf8'") or die(mysql_error()); */
-		//mysql_query("SET caracter_set_results='utf8'") or die(mysql_error());
-		  if (isset($_POST["drop"])) 
+		  		  if (isset($_POST["drop"])) 
 			{
 			if($_POST["drop"] != "noChoice"){
-				$choice = mysql_real_escape_string($_POST["drop"]);
-				echo $choice;
-				echo " is choice";
+				$choice = mysqli_real_escape_string($con, $_POST["drop"]);
+				//var_dump($_POST["drop"]);
 				$result = mysqli_query($con,"SELECT * FROM $choice");
 		
 		$columns = array();
@@ -66,13 +58,7 @@
 				echo "no choice supplied";
 			}
 			//var_dump($_POST);
-		//$selectedText = $("#dropdown option:selected").text();
-		/*if($_POST['submit']){
 		
-			$gren = $_POST['formGender'];
-			$result = mysqli_query($con,"SELECT * FROM $_GET[]");
-			
-		}*/
 		
 		
 	?>
