@@ -1,44 +1,39 @@
-#logga
-{
-	vertical-align: middle;
+#logga{
 	text-align:center;
 	padding: 5px;
+	vertical-align: middle;
 }
-#innerBody
-{
+
+#innerBody{
 	background-color: white;
-	
 	margin-right: 10%;
 	margin-left: 10%;
 	margin-top: 5%;
 	margin-bottom: 10%;
-
 	padding-bottom: 1%;
 	padding-top: 1%;
-
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
 	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
-
 	/* rounded corners */
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
 	border-radius: 7px;
 }
-hr
-{
+
+hr{
 	width: 80%;
     height: 30px;
     border-style: solid;
     border-color: orange;
     border-width: 3px 0 0 0;
 }
-body
-{
+
+body{
 
 }
-.firstTableList
-{
+
+.firstTableList{
 	text-align: center;
 	padding: 5px;
 	font-family: andalus;
@@ -47,12 +42,13 @@ body
 	margin-right: auto;
 	margin-left: auto;
 }
-h1
-{
+
+h1{
 	text-align: center;
 	color: blue;
 	font-family: Andalus;
 }
+
 #buttons{
 	text-align: center;
 	color:rgb(1,1,1) ;
@@ -66,8 +62,7 @@ h1
 	height: 3em;
 }
 
-#resultbutton
-{
+#resultbutton{
 	background-color:rgb(255,255,255);
 	margin-left: 10em;
 	width: 6em;
@@ -75,8 +70,7 @@ h1
 	color: powderblue;
 }
 
-#scrollbar
-{
+#scrollbar{
 	width:6em;
 	height:2em;
 	background-color:rgb(100,100,100);
@@ -111,43 +105,42 @@ h1
     color:black;
 }
 
-.odd
-{
+.odd{
 	background-color: #C1C1C1;
 }
-.even
-{
+
+.even{
 	background-color: #E4E4E4; 
 }
-.formDiv
-{
+
+.formDiv{
 	float: left;
 	text-align: left;
 	padding-left: 10px;
 	width: 50%;
 	border-right: 3px solid orange;
 }
-.infoText
-{
+
+.infoText{
 	float: left;
 	text-align: left;
 	font-family:"Andalus";
 	width: 50%;
 	font-size: 0.8em;
 }
-.infoText ol
-{
+
+.infoText ol{
 	float:right;
 	padding-left: 5%;
 	padding-right: 5%;
 }
-h4
-{
+
+h4{
 	margin: 0;
 	margin-left: 5%;
 }
-.progressBar
-{
+
+.progressBar{
 	clear:both;
 	width:90%;
 	height: 5%;
@@ -158,18 +151,26 @@ h4
 	margin-right: 5%;
 }
 
-h2
-{
+h2{
 	font-family:"Andalus";
 	text-align: center;
 }
 
-#contactPerson, #email, #repeatEmail, #telephoneNumber, #chooseClub, #continues, #yearOfBirth, #firstName, #lastName,#chooseClass, #addParticipator
-{
+#contactPerson, 
+#email,
+#repeatEmail,
+#telephoneNumber,
+#chooseClub,
+#continues,
+#yearOfBirth,
+#firstName,
+#lastName,
+#chooseClass,
+#addParticipator{
 	border-radius: 7px;
 }
-#addTeam
-{
+
+#addTeam{
 	float: left;
 	text-decoration: none;
 	border: 2px solid black;
@@ -179,12 +180,12 @@ h2
 	text-align: center;
 	text-align: middle;
 }
-.importantText
-{
+
+.importantText{
 	font-weight: bold;
 }
-.progress
-{
+
+.progress{
 	width: 50%;
 	height: 100%;
 	border: 1px solid orange;
