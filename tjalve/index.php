@@ -2,6 +2,7 @@
 <?php
 	include "templates/header.php";
 ?>	
+<!-- Headning -->
 <h1>Tjalve Friidrott</h1>
 
 <hr>

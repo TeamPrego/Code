@@ -21,6 +21,7 @@
 	border-radius: 7px;
 }
 
+/* The line */
 hr{
 	width: 80%;
     height: 30px;
@@ -29,10 +30,7 @@ hr{
     border-width: 3px 0 0 0;
 }
 
-body{
-
-}
-
+/* The list on the first page - presents all the competitions that have and will take place*/
 .firstTableList{
 	text-align: center;
 	padding: 5px;
@@ -87,6 +85,7 @@ h1{
 	font-family:Andalus;	
 }
 
+/* In the footer */
 .left-links{
 	float:left;
 }
@@ -105,14 +104,17 @@ h1{
     color:black;
 }
 
+/* For the tables */
 .odd{
 	background-color: #C1C1C1;
 }
 
+/* For the tables */
 .even{
 	background-color: #E4E4E4; 
 }
 
+/* The form för applications */
 .formDiv{
 	float: left;
 	text-align: left;
@@ -121,6 +123,7 @@ h1{
 	border-right: 3px solid orange;
 }
 
+/* Infotext in the application-site*/
 .infoText{
 	float: left;
 	text-align: left;
@@ -140,6 +143,7 @@ h4{
 	margin-left: 5%;
 }
 
+/*The Progress bar on apllication-site */
 .progressBar{
 	clear:both;
 	width:90%;
@@ -149,6 +153,16 @@ h4{
 	text-align: center;
 	margin-left: 5%;
 	margin-right: 5%;
+}
+
+.progress{
+	width: 50%;
+	height: 100%;
+	border: 1px solid orange;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	background-color: orange;
+	text-align: right;
 }
 
 h2{
@@ -170,6 +184,7 @@ h2{
 	border-radius: 7px;
 }
 
+/* Add team to the database */
 #addTeam{
 	float: left;
 	text-decoration: none;
@@ -181,16 +196,7 @@ h2{
 	text-align: middle;
 }
 
+/* Text which is important */
 .importantText{
 	font-weight: bold;
-}
-
-.progress{
-	width: 50%;
-	height: 100%;
-	border: 1px solid orange;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-	background-color: orange;
-	text-align: right;
 }

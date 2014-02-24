@@ -2,9 +2,12 @@
 <?php
 	include "templates/header.php";
 ?>	
+<!--Headning -->
 <h1>Anmälan till "tävlingsnamn"</h1>
+<!--Line -->
 <hr>
 
+<!--The Form Part Two -->
 <table class ="formDiv">
 	<h2>Steg två</h2>
 	<form id="firstForm" name="firstForm" method="post" action=" "> 
@@ -45,6 +48,7 @@
 	</form>
 </table>
 
+<!--The Informationtext -->
 <div class="infoText">
 	<h4>Instruktion:</h4>
 	<ol>
@@ -61,6 +65,7 @@
 	</ol>
 </div>
 
+<!--The Progress Bar -->
 <div class=progressBar>
 	<div class=progress>50% klart</div>
 </div
