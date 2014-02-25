@@ -53,7 +53,7 @@
 		
 		<tr>
 			<td></td>
-			<td><input type="submit" name="continues" id="continues" value="Fortsätt" /></td>
+			<td><a href="applyTwo.php"><input type="submit" name="continues" id="continues" value="Fortsätt" /><a/></td>
 		</tr>
 	</form>
 </table>

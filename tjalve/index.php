@@ -18,7 +18,7 @@
 	<tbody>
 		<tr class="even">
 			<td> Tjalvesupertävling </td>
-			<td> Yesbox </td>
+			<td><a href="applyOne.php"> Anmäl här </a></td>
 			<td> Yesbox </td>
 			<td> Yesbox </td>
 		</tr>

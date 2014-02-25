@@ -11,5 +11,5 @@
 	</head>
 	<body>
 		<div id = "innerBody">
-			<div id = "logga"><img src="pic/logga.jpg" /></div>
+			<div id = "logga"><a href="index.php"><img src="pic/logga.jpg" /></a></div>
 			<hr>
