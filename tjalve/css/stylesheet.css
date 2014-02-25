@@ -27,7 +27,7 @@ hr{
     height: 30px;
     border-style: solid;
     border-color: orange;
-    border-width: 2px 0 0 0;
+    border-width: 3px 0 0 0;
 }
 
 /* The list on the first page - presents all the competitions that have and will take place*/
@@ -54,26 +54,24 @@ h1{
 
 #button{
 	background-color:rgb(255,255,255);
-	margin-left: 0.5em;
-	margin-right: 0.5em;
-	width: 6em;
 	height: 3em;
+  width: 6em;
+  margin-left: 0.5em;
+	margin-right: 0.5em;
 }
 
-#resultbutton{
-	background-color:rgb(255,255,255);
-	margin-left: 10em;
-	width: 6em;
+#result-button {
+	background: #d95243;
 	height: 2em;
-	color: powderblue;
+  width: 6em;
+	margin: 2em 0 20em auto;
 }
 
-#scrollbar{
-	width:6em;
-	height:2em;
-	background-color:rgb(100,100,100);
-	margin-right:10em;
-	margin-top:2em;
+#drop-list {
+	background: #7d7d7d;
+	height: 2em;
+  width: 6em;
+	margin: 2em 20em 0 auto;
 }
 
 .footer{
@@ -106,12 +104,12 @@ h1{
 
 /* For the tables */
 .odd{
-	background-color: #c1c1c1;
+	background-color: #C1C1C1;
 }
 
 /* For the tables */
 .even{
-	background-color: #e4e4e4; 
+	background-color: #E4E4E4; 
 }
 
 /* The form för applications */
@@ -199,4 +197,10 @@ h2{
 /* Text which is important */
 .importantText{
 	font-weight: bold;
+}
+.choice-bar {
+	background: #c08fc7;
+	height: 5em;
+  margin: 5em 10em;
+  text-align: center;
 }
