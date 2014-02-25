@@ -1,8 +1,8 @@
-<!--This is a so called not swole admin man-->
+<!--Primary admin page-->
+
 <?php
 include "templates/adminheader.php";
 ?>
-<h4>Du är inloggad som administratör</h4>
 
 <table class ="adminTable">
 	<thead>
@@ -10,7 +10,7 @@ include "templates/adminheader.php";
 			<th>Tävling</th>
 			<th>Tävlande</th>
 			<th>Fakturering</th>
-		</tr>
+    </tr>
 		
 		<tr>
 			<td><button class="button">Skapa</button></td>

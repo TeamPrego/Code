@@ -22,7 +22,7 @@
 	margin-right: 10%;
 	margin-left: 10%;
 	margin-top: 5%;
-	margin-bottom: 10%;
+	margin-bottom: 5%;
 
 	padding-bottom: 1%;
 	padding-top: 1%;
@@ -35,18 +35,6 @@
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
 	border-radius: 7px;
-}
-
-hr {
-	width: 80%;
-    height: 30px;
-    border-style: solid;
-    border-color: orange;
-    border-width: 2px 0 0 0;
-}
-
-body {
-  background: linear-gradient(white, #ffddbd);
 }
 
 .adminTable {
@@ -65,139 +53,3 @@ h4 {
 	font-family: Andalus;
 }
 
-#buttons {
-	text-align: center;
-	color:rgb(1,1,1) ;
-}
-
-#button {
-	background-color:rgb(255,255,255);
-	margin-left: 0.5em;
-	margin-right: 0.5em;
-	width: 6em;
-	height: 3em;
-}
-
-#resultbutton {
-	background-color:rgb(255,255,255);
-	margin-left: 10em;
-	width: 6em;
-	height: 2em;
-	color: powderblue;
-}
-
-#scrollbar {
-	width:6em;
-	height:2em;
-	background-color:rgb(100,100,100);
-	margin-right:10em;
-	margin-top:2em;
-}
-
-.footer {
-	width:100%;
-	position:fixed;
-	bottom:0;
-	left:0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background-color: orange;
-	font-family:Andalus;	
-}
-
-.left-links {
-	float:left;
-}
-
-.right-links {
-	float:right;
-}
-
-.footer li {
-    list-style-type:none;
-    float:left;
-    padding-left:4em;
-}
-
-.footer a {
-  	font-family:"Andalus";
-    color:black;
-}
-
-.odd {
-	background-color: #c1c1c1;
-}
-.even {
-	background-color: #e4e4e4; 
-}
-
-.formDiv {
-	float: left;
-	text-align: left;
-	padding-left: 10px;
-	width: 50%;
-	border-right: 3px solid orange;
-}
-
-.infoText {
-	float: left;
-	text-align: left;
-	font-family:"Andalus";
-	width: 50%;
-}
-
-.infoText ol {
-	float:right;
-	padding-left: 5%;
-	padding-right: 5%;
-}
-
-h4 {
-	margin: 0;
-	margin-left: 5%;
-}
-
-.progressBar {
-	clear:both;
-	width:90%;
-	height: 5%;
-	border: 3px solid orange;
-	border-radius: 7px;
-	text-align: center;
-	margin-left: 5%;
-	margin-right: 5%;
-}
-
-h2 {
-	font-family:"Andalus";
-	text-align: center;
-}
-
-#contactPerson, #email, #repeatEmail, #telephoneNumber, #chooseClub, #continues, #yearOfBirth, #firstName, #lastName,#chooseClass, #addParticipator {
-	border-radius: 7px;
-}
-
-#addTeam {
-	float: left;
-	text-decoration: none;
-	border: 2px solid black;
-	background-color: orange;
-	border-radius: 100%;
-	width: 20px;
-	text-align: center;
-	text-align: middle;
-}
-
-.importantText {
-	font-weight: bold;
-}
-
-.progress {
-	width: 50%;
-	height: 100%;
-	border: 1px solid orange;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-	background-color: orange;
-	text-align: right;
-}
