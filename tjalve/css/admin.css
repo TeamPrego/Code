@@ -46,7 +46,7 @@ hr {
 }
 
 body {
-
+  background: linear-gradient(white, #ffddbd);
 }
 
 .adminTable {
@@ -56,7 +56,7 @@ body {
 
 	width: 40%;
 	margin: 5% auto;	/*margin:20% auto;
-						top and bottom margins are 20%
+						top and bottom margins are 
 						right and left margins are auto*/
 }
 

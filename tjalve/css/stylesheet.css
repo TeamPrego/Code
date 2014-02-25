@@ -21,6 +21,10 @@
 	border-radius: 7px;
 }
 
+body {
+  background: linear-gradient(white, #ffddbd);
+} 
+
 /* The line */
 hr{
 	width: 80%;
@@ -104,12 +108,12 @@ h1{
 
 /* For the tables */
 .odd{
-	background-color: #C1C1C1;
+	background-color: #c1c1c1;
 }
 
 /* For the tables */
 .even{
-	background-color: #E4E4E4; 
+	background-color: #e4e4e4; 
 }
 
 /* The form för applications */
