@@ -5,13 +5,10 @@
 }
 
 #innerBody{
-	background-color: white;
-	margin-right: 10%;
-	margin-left: 10%;
-	margin-top: 5%;
-	margin-bottom: 10%;
-	padding-bottom: 1%;
-	padding-top: 1%;
+	background-color: white;	
+  margin: 5% 10% 10%;
+  height: 100%;
+  padding: 1% 0 1% 0;
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
 	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
@@ -19,10 +16,15 @@
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
 	border-radius: 7px;
+  border: 10px;
+  
 }
 
 body {
-  background: linear-gradient(white, #ffddbd);
+  background: linear-gradient(white, #ffddbd) fixed no-repeat bottom left;
+  /*background: fixed no-repeat bottom left;*/
+  height: 100%;
+  
 } 
 
 /* The line */
@@ -34,12 +36,13 @@ hr{
     border-width: 3px 0 0 0;
 }
 
-/* The list on the first page - presents all the competitions that have and will take place*/
+/* The list on the first page - presents all the competitions that have and will take place.
+    Also used for the result table.
+*/
 .firstTableList{
 	text-align: center;
 	padding: 5px;
 	font-family: andalus;
-
 	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
@@ -67,15 +70,15 @@ h1{
 #result-button {
 	background: #d95243;
 	height: 2em;
-  width: 6em;
-	margin: 2em 0 20em auto;
+  width: auto;
+	margin: 1em 0 20em auto;
 }
 
 #drop-list {
 	background: #7d7d7d;
 	height: 2em;
-  width: 6em;
-	margin: 2em 20em 0 auto;
+  width: auto;
+	margin: 1em 20em 0 auto;
 }
 
 .footer{
@@ -204,7 +207,9 @@ h2{
 }
 .choice-bar {
 	background: #c08fc7;
-	height: 5em;
-  margin: 5em 10em;
+	height: 3em;
+  /*margin: 5em 10em;*/
   text-align: center;
+  align:middle;
+  width:100%;
 }

@@ -8,7 +8,7 @@ include "templates/header.php";
 		<select name="drop-list" id="drop-list">
 			<option value="noChoice">Välj gren</option>
 			<option value="100m">100m</option>
-			<option value="hojdhopp">hojdhopp</option>
+			<option value="hojdhopp">Höjdhopp</option>
 			<option value="flonk">Flonk</option>
 		</select>
 		<input type="submit" id="result-button">
@@ -16,19 +16,21 @@ include "templates/header.php";
 	</div>
   
   <?php
-		
-  session_start();	
 	
+  session_start();	
+	$odd=0;
   //Choose which database to connect to. The first one is for 
   //binero. It is not working from localhost. The second one is for your 
   //local database. You might need to change database name (tjalve) etc.
   //$con=mysqli_connect("competition-192031.mysql.binero.se","192031_jv80473","TeamPrego","192031-competition");
 	$con=mysqli_connect("localhost","root","","tjalve");
+  mysqli_set_charset($con,"utf8");
 	//Test Connection
 	if (mysqli_connect_errno())
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
+    
     //Gets info from drop-list
 		if (isset($_POST["drop-list"])) 
 		{
@@ -51,17 +53,22 @@ include "templates/header.php";
 				}
         
         //Begin creating table. OBS! firstTableList not working properly
-				echo"<table border=1 align= center class=\"result-table\">";
+				echo"<table align= center class=\"firstTableList\">";
 				//Adds new column
 				foreach ($columns as $value)
 				{
-					echo "<td> $value </td>";
+					echo "<th class=\"odd\"> $value </th>";
 				}
 				//Add entries. Name of competitors, club etc
 				while($row = mysqli_fetch_array($result))
 				{
-					echo"<tr>";
-					
+					if($odd % 2 != 0) {
+            echo"<tr class=\"odd\">";
+          }
+          else {
+            echo"<tr class=\"even\">";
+          }
+					$odd++;
 					foreach ($columns as $value)
 					{
 						echo "<td>" . $row[$value] . "</td>"; 		  
@@ -77,16 +84,8 @@ include "templates/header.php";
 				mysqli_close($con);
 			}
 		} 
-    /*
-		else 
-		{
-			$choice = null;
-			echo "no choice supplied";
-		}*/
-		
 	?>
   
-  wazzupp maddafacka;
 <?php
 include "templates/footer.php";
 ?>
