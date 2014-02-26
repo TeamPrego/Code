@@ -44,25 +44,30 @@ include "templates/adminheader.php";
           <option value="f17">F17</option>
           <option value="k">K</option>
         </select>
-        <p>Ålderssdsklass: <input type="text" id="age" size="4"></p>
-         
-         <!--<input type="submit" id="result-button"-->
-Herrar:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
-        <select id="droplistMale">
-          <option></option>
-          <option value="p7">P7</option>
-          <option value="p8">P8</option>
-          <option value="p9">P9</option>
-          <option value="p10">P10</option>
-          <option value="p11">P11</option>
-          <option value="p12">P12</option>
-          <option value="p13">P13</option>
-          <option value="p14">P14</option>
-          <option value="p15">P15</option>
-          <option value="p17">P17</option>
-          <option value="h">H</option>
-        </select>
-    </form></td>
+      </td>
+      
+      <tr>
+        <td></td>
+        <td>
+           <!--<input type="submit" id="result-button"-->
+  Herrar:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
+          <select id="droplistMale" onchange="maleDisplay()">
+            <option></option>
+            <option value="p7">P7</option>
+            <option value="p8">P8</option>
+            <option value="p9">P9</option>
+            <option value="p10">P10</option>
+            <option value="p11">P11</option>
+            <option value="p12">P12</option>
+            <option value="p13">P13</option>
+            <option value="p14">P14</option>
+            <option value="p15">P15</option>
+            <option value="p17">P17</option>
+            <option value="h">H</option>
+          </select>
+          <input type="text" id="age" size="4">
+      </td>
+    </tr>
     
     <script src="createCompetition.js"></script>
       

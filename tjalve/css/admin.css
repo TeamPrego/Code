@@ -10,10 +10,12 @@
 .adminTable button {
 	width:100%;
 	height:100%;
+  font-family:verdana;
 }
 
 .createcompTable {
 	margin: 5% auto;
+
 }
 
 #adminpicid {
@@ -44,8 +46,6 @@
 .adminTable {
 	text-align: center;
 	padding: 5px;
-	font-family: Verdana;
-
 	width: 40%;
 	margin: 5% auto;	/*margin:5% auto;
 						top and bottom margins are 5%
