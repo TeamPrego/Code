@@ -5,7 +5,7 @@ include "templates/adminheader.php";
 ?>
 <h1> Skapa tävling </h1>
 
-<table class ="createComp">
+<table class ="createcompTable">
 		<tr>
 			<td>Tävlingsnamn:</td>
 			<td><input name="compName" id="compName"/></td>
@@ -30,7 +30,8 @@ include "templates/adminheader.php";
       <td>Åldersklass:</td>
 			
       <td colspan="2"> Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
-        <select name="dropList" id="dropList">
+        <select id="droplistFemale" onchange="femaleDisplay()">
+          <option></option>
           <option value="f7">F7</option>
           <option value="f8">F8</option>
           <option value="f9">F9</option>
@@ -42,12 +43,13 @@ include "templates/adminheader.php";
           <option value="f15">F15</option>
           <option value="f17">F17</option>
           <option value="k">K</option>
-         </select>
+        </select>
+        <p>Ålderssdsklass: <input type="text" id="age" size="4"></p>
+         
          <!--<input type="submit" id="result-button"-->
-    </form></td>
-      
-      <td> Herrar:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
-        <select name="dropList" id="dropList">
+Herrar:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
+        <select id="droplistMale">
+          <option></option>
           <option value="p7">P7</option>
           <option value="p8">P8</option>
           <option value="p9">P9</option>
@@ -59,7 +61,12 @@ include "templates/adminheader.php";
           <option value="p15">P15</option>
           <option value="p17">P17</option>
           <option value="h">H</option>
-         </select>
+        </select>
+    </form></td>
+    
+    <script src="createCompetition.js"></script>
+      
+      <td> 
          <!--<input type="submit" id="result-button"-->
     </form></td>
    

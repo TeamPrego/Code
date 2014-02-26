@@ -12,6 +12,10 @@
 	height:100%;
 }
 
+.createcompTable {
+	margin: 5% auto;
+}
+
 #adminpicid {
 	height:10%;
 	width:10%;
@@ -40,16 +44,15 @@
 .adminTable {
 	text-align: center;
 	padding: 5px;
-	font-family: andalus;
+	font-family: Verdana;
 
 	width: 40%;
-	margin: 5% auto;	/*margin:20% auto;
-						top and bottom margins are 
+	margin: 5% auto;	/*margin:5% auto;
+						top and bottom margins are 5%
 						right and left margins are auto*/
 }
 
 h4 {
 	text-align: center;
-	font-family: Andalus;
+	font-family: Verdana;
 }
-

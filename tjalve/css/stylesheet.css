@@ -42,7 +42,7 @@ hr{
 .firstTableList{
 	text-align: center;
 	padding: 5px;
-	font-family: andalus;
+	font-family: Verdana;
 	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
@@ -51,7 +51,7 @@ hr{
 h1{
 	text-align: center;
 	color: blue;
-	font-family: Andalus;
+	font-family: Verdana;
 }
 
 #buttons{
@@ -87,7 +87,7 @@ h1{
 	bottom:0;
 	left:0;
     background-color: orange;
-	font-family:Andalus;	
+	font-family:Verdana;	
 }
 
 /* In the footer */
@@ -105,7 +105,7 @@ h1{
     padding-left:4em;
 }
 .footer a {
-  	font-family:"Andalus";
+  	font-family:"Verdana";
     color:black;
 }
 
@@ -132,7 +132,7 @@ h1{
 .infoText{
 	float: left;
 	text-align: left;
-	font-family:"Andalus";
+	font-family:"Verdana";
 	width: 50%;
 	font-size: 0.8em;
 }
@@ -171,7 +171,7 @@ h4{
 }
 
 h2{
-	font-family:"Andalus";
+	font-family:"Verdana";
 	text-align: center;
 }
 
