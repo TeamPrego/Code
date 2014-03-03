@@ -11,12 +11,6 @@ include "templates/adminheader.php";
 			<th>Tävlande</th>
 			<th>Fakturering</th>
     </tr>
-		
-		<!-- <tr>
-			<td><button class="button" onclick="createCompetition.php">Skapa</button></td>
-			<td><button class="button">Ändra</button></td>
-			<td><button class="button">Fakturera</button></td>
-		</tr> -->
     
     <tr>
 			<td>

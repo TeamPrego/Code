@@ -15,7 +15,7 @@
 			</ul>
 			
 			<ul class="right-links">
-		        <li><a href onclick ="login()">Logga in</a></li>
+		        <li><a href = "login.php">Logga in</a></li>
 			</ul>
 		</div>
 	</body>
