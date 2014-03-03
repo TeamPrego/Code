@@ -11,13 +11,17 @@ include "templates/adminheader.php";
 			<th>Tävlande</th>
 			<th>Fakturering</th>
     </tr>
-		
-		<tr>
-			<td><button class="button">Skapa</button></td>
+    
+    <tr>
+			<td>
+        <form method="LINK" ACTION="createCompetition.php">
+          <button class="button">Skapa</button>
+        </FORM>
+      </td>
 			<td><button class="button">Ändra</button></td>
 			<td><button class="button">Fakturera</button></td>
 		</tr>
-		
+    
 		<tr>
 			<td><button class="button">Ändra</button></td>
 			<td><button class="button">Sen anmälan</button></td>

@@ -31,7 +31,7 @@ include "templates/adminheader.php";
 			
       <td colspan="2"> Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
         <select id="droplistFemale" onchange="femaleDisplay()">
-          <option></option>
+          <option value="empty"></option>
           <option value="f7">F7</option>
           <option value="f8">F8</option>
           <option value="f9">F9</option>
@@ -44,6 +44,7 @@ include "templates/adminheader.php";
           <option value="f17">F17</option>
           <option value="k">K</option>
         </select>
+
       </td>
       
       <tr>
@@ -79,6 +80,21 @@ include "templates/adminheader.php";
 		</tr>	
 </table>
 
+<table class ="createcompTable">
+  <tr>
+    <td colspan="2">
+      Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      valbara grenar
+    </td>
+    <td>
+      valda grenar
+    </td>
+  </tr>
+</table>
 
 <?php
 include "templates/adminfooter.php";
