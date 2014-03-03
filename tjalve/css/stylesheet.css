@@ -21,7 +21,7 @@
 }
 
 body {
-  background: linear-gradient(white, #ffddbd) fixed no-repeat bottom left;
+  background: linear-gradient(white, #bfcbff) fixed no-repeat bottom left;
   /*background: fixed no-repeat bottom left;*/
   height: 100%;
   
@@ -32,8 +32,8 @@ hr{
 	width: 80%;
     height: 30px;
     border-style: solid;
-    border-color: orange;
-    border-width: 3px 0 0 0;
+    border-color: #344cc2;
+    border-width: 2px 0 0 0;
 }
 
 /* The list on the first page - presents all the competitions that have and will take place.
@@ -50,7 +50,7 @@ hr{
 
 h1{
 	text-align: center;
-	color: blue;
+	color: #344cc2;
 	font-family: Verdana;
 }
 
@@ -86,8 +86,9 @@ h1{
 	position:fixed;
 	bottom:0;
 	left:0;
-    background-color: orange;
+    background-color: #344cc2;
 	font-family:Verdana;	
+  color: white;
 }
 
 /* In the footer */
@@ -97,6 +98,7 @@ h1{
 
 .right-links{
 	float:right;
+  margin-right:10%;
 }
 
 .footer li {
@@ -106,17 +108,17 @@ h1{
 }
 .footer a {
   	font-family:"Verdana";
-    color:black;
+    color:white;
 }
 
 /* For the tables */
 .odd{
-	background-color: #c1c1c1;
+	background-color: #ebeeff;
 }
 
 /* For the tables */
 .even{
-	background-color: #e4e4e4; 
+	background-color: #c2cbff; 
 }
 
 /* The form för applications */
