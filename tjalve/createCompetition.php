@@ -45,13 +45,7 @@ include "templates/adminheader.php";
           <option value="k">K</option>
         </select>
 
-      </td>
-      
-      <tr>
-        <td></td>
-        <td>
-           <!--<input type="submit" id="result-button"-->
-  Herrar:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
+  Herrar:	
           <select id="droplistMale" onchange="maleDisplay()">
             <option></option>
             <option value="p7">P7</option>
@@ -66,16 +60,9 @@ include "templates/adminheader.php";
             <option value="p17">P17</option>
             <option value="h">H</option>
           </select>
-          <input type="text" id="age" size="4">
       </td>
-    </tr>
     
     <script src="createCompetition.js"></script>
-      
-      <td> 
-         <!--<input type="submit" id="result-button"-->
-    </form></td>
-   
    
 		</tr>	
 </table>
