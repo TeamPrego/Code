@@ -1,5 +1,4 @@
 <!--Create competition page-->
-
 <?php
 include "templates/adminheader.php";
 ?>
