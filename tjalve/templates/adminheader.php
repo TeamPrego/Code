@@ -13,7 +13,7 @@
 	<body>
 		<div id = "innerBody">
 			<div id = "adminlogo">
-        <img id ="adminpicid" src="pic/briefcase.png" alt ="adminlogga" />
+        <img id ="adminpicid" src="pic/taskig_copy.jpg" alt ="adminlogga" />
       </div>
 			<hr>
       
