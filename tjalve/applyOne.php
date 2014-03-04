@@ -1,6 +1,7 @@
 <?php
 	include "templates/header.php";
 ?>	
+<!--Granskad och godkänd 2014-03-04-->
 
 <!--Headning -->
 <h1> Anmälan till "tävlingsnamn" </h1>
@@ -19,10 +20,10 @@
 			</td>
 			<td>
 				<select name="chooseClub" id="chooseClub">
-				<option>- Välj klubb -</option>
-				<option value="Tjalve">Tjalve</option>
-				<option value="Norrköping">Norrköping</option>
-				<option value="Linköping">Linköping</option>
+          <option>- Välj klubb -</option>
+          <option value="Tjalve">Tjalve</option>
+          <option value="Norrköping">Norrköping</option>
+          <option value="Linköping">Linköping</option>
 				<option value="Falköping">Falköping</option>
 				</select>
 				Saknas din förening?
@@ -34,27 +35,27 @@
 
 		<tr>
 			<td>Kontaktperson:</td>
-			<td><input type="text" name="contactPerson" id="contactPerson" /></td>
+			<td><input type="text" name="contactPerson" id="contactPerson"></input></td>
 		</tr>
 		
 		<tr>
 			<td>E-mail:</td>
-			<td><input type="text" name="email" id="email" /></td>
+			<td><input type="text" name="email" id="email"></input></td>
 		</tr>
 		
 		<tr>
 			<td>Upprepa e-mail:	</td>
-			<td><input type="text" name="repeatEmail" id="repeatEmail"/></td> 
+			<td><input type="text" name="repeatEmail" id="repeatEmail"></input></td> 
 		</tr>
 		
 		<tr>
 			<td>Telefon:</td>
-			<td><input type="text" name="telefonnumber" id="telephoneNumber"/></td>
+			<td><input type="text" name="telefonnumber" id="telephoneNumber"></input></td>
 		</tr>
 		
 		<tr>
 			<td></td>
-			<td><a href="applyTwo.php"><input type="submit" name="continues" id="continues" value="Fortsätt" /><a/></td>
+			<td><a href="applyTwo.php"><input type="submit" name="continues" id="continues" value="Fortsätt"></a></td>
 		</tr>
 	</form>
 </table>
