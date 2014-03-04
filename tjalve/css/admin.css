@@ -13,9 +13,12 @@
   font-family:verdana;
 }
 
-.createcompTable {
-	margin: 5% auto;
+#chosenAge {
+  margin-left: 34.5%;
+}
 
+.createcompTable {
+	margin: 2% auto;
 }
 
 #adminpicid {
