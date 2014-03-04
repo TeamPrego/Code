@@ -1,5 +1,5 @@
-<!--This is a so called admin header man-->
 <!DOCTYPE HTML>
+<!--This is a so called admin header man-->
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -12,7 +12,9 @@
 	</head>
 	<body>
 		<div id = "innerBody">
-			<div id = "adminlogo"><img id ="adminpicid" src="pic/taskig_copy.jpg" /></div>
+			<div id = "adminlogo">
+        <img id ="adminpicid" src="pic/briefcase.png" alt ="adminlogga" />
+      </div>
 			<hr>
       
       <h4>Du är inloggad som primär administratör.</h4>

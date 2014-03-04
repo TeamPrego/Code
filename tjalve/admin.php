@@ -1,5 +1,5 @@
 <!--Primary admin page-->
-
+<!--Granskad och godkänd 2014-03-04-->
 <?php
 include "templates/adminheader.php";
 ?>

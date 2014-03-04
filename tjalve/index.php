@@ -1,7 +1,8 @@
 
 <?php
 	include "templates/header.php";
-?>	
+?>
+<!--Granskad och godkänd 2014-03-04-->	
 <!-- Headning -->
 <h1>Tjalve Friidrott</h1>
 
