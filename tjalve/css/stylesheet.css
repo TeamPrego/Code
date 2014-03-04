@@ -63,10 +63,10 @@ h4{
 }
 
 .footer{
-	bottom:0;
   background-color: #344cc2;
+	bottom:0;  
   color: white;
-	font-family:Verdana;	
+	font:Verdana 0.7em;	
 	left:0;
   position:fixed;
   width:100%;

@@ -21,13 +21,15 @@ include "templates/adminheader.php";
 		</tr>
 		
 		<tr>
-      <td>Tävlingslogga:</td>
-			<td><input type="file" name="compLogo" id="compLogo" accept="image/*"></input></td>
+		<td>Tävlingslogga:</td>
+			<td>
+			<input type="file" name="compLogo" id="compLogo" accept="image/*"></input>
+			</td>
 		</tr>	
     
     <tr>
       <td>Åldersklass:</td>
-			
+	  
       <td colspan="2"> 
         Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
           <select id="droplistFemale" onchange="femaleDisplay()">
@@ -59,10 +61,11 @@ include "templates/adminheader.php";
             <option value="p15">P15</option>
             <option value="p17">P17</option>
             <option value="h">H</option>
-           </select>
+          </select>
+		  </td>
       </td>
     <script src="createCompetition.js"></script>
-		</tr>	
+	</tr>	
 </table>
 
 <div id ="chosenAge">Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input></div>
