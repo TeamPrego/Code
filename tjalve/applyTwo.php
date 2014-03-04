@@ -11,15 +11,15 @@
 <!--The Form Part Two -->
 <table class ="formDiv">
 	<h2>Steg två</h2>
-	<form id="firstForm" name="firstForm" method="post" action=" "> 
+	<form id="firstForm" name="firstForm"> 
 		<tr>
 			<td>Förnamn:</td>
-			<td><input type="text" name="firstName" id="firstName"/></td>
+			<td><input type="text" name="fName" id="firstName"/></td>
 		</tr>
 
 		<tr>
 			<td>Efternamn:</td>
-			<td><input type="text" name="lastName" id="lastName"/></td>
+			<td><input type="text" name="lName" id="lastName"/></td>
 		</tr>
 		
 		<tr>
@@ -43,7 +43,8 @@
 			</td>
 
 			<td>
-				<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/>
+				<input type="submit" name="addParticipator" onclick="submit()" id="addParticipator" value="Lägg till deltagare"/>
+				<button onclick="addParticipator()">Try me biatch</button>
 			</td>
 		</tr>
 	</form>
@@ -74,6 +75,19 @@
 	</ol>
 </div>
 
+<!-- Table of which sports the competitor should participate in -->
+<script>
+	function addParticipator() {
+		document.getElementById("firstForm").submit();
+		var x = document.getElementById("firstForm");
+		var txt = "";
+		txt = "Just nu är "+  x.elements[0].value + " " x.elements[1].value  +" registrerad. Välj grenar:"; 
+		document.getElementById("tableOfDisciplines").innerHTML= txt;
+	}
+</script>
+<div id="tableOfDisciplines">
+</div>
+
 <!--The Progress Bar -->
 <div class=progressBar>
 	<div class=progress>50% klart</div>
@@ -82,3 +96,4 @@
 <?php
 	include "templates/footer.php";
 ?>
+
