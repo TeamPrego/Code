@@ -88,7 +88,8 @@ h1{
 	left:0;
     background-color: #344cc2;
 	font-family:Verdana;	
-  color: white;
+  	color: white;
+  	font-size: 0.7em;
 }
 
 /* In the footer */
