@@ -1,3 +1,9 @@
+a{
+	color: black;
+	padding-left: 5%;
+	text-decoration: none;
+}
+
 body {
   background: linear-gradient(white, #bfcbff) fixed no-repeat bottom left;
   /*background: fixed no-repeat bottom left;*/
@@ -64,7 +70,8 @@ h4{
   background-color: #344cc2;
 	bottom:0;  
   color: white;
-	font:Verdana 0.7em;	
+	font:Verdana;
+	font-size: 0.7em;
 	left:0;
   position:fixed;
   width:100%;
@@ -76,18 +83,18 @@ h4{
 }
 
 .footer li {
-    float:left;
-    list-style-type:none;
-    padding-left:4em;
+  float:left;
+  list-style-type:none;
+  padding-left:4em;
 }
 
 /* The form för applications */
 .formDiv{
-  border-right: 3px solid orange;
+	border-right: 3px solid #344cc2;
 	float: left;
 	padding-left: 10px;
 	text-align: left;
-  width: 50%;
+	width: 100%;
 }
 
 
@@ -98,11 +105,16 @@ h4{
 
 /* Infotext in the application-site*/
 .infoText{
-	float: left;
+	border: 3px solid #344cc2;
+	border-radius: 7px;
+	float: right;
 	font-family:"Verdana";
 	font-size: 0.8em;
+	margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2.5%;
   text-align: left;
-  width: 50%;
+  width: 45%;
 }
 
 .infoText ol{
@@ -122,8 +134,8 @@ h4{
 }
 
 .progress{
-  border: 1px solid orange;
-  background-color: orange;
+  border: 1px solid #344cc2;
+  background-color: #344cc2;
 	border-bottom-left-radius: 5px;
 	border-top-left-radius: 5px;
 	height: 100%;
@@ -133,14 +145,14 @@ h4{
 
 /*The Progress bar on apllication-site */
 .progressBar{
-  border: 3px solid orange;
+  border: 3px solid #344cc2;
 	border-radius: 7px;
 	clear:both;
 	height: 5%;
-  margin-left: 5%;
-	margin-right: 5%;
+  margin-left: 2.5%;
+	margin-right: 2.5%;
 	text-align: center;
-  width:90%;
+  width:95%;
 }
 
 .right-links{
@@ -154,7 +166,7 @@ h4{
 
 /* Add team to the database */
 #addTeam{
-	background-color: orange;
+	background-color: #344cc2;
 	border: 2px solid black;
   border-radius: 100%;
 	float: left;
@@ -181,6 +193,10 @@ h4{
 	margin: 1em 20em 0 auto;	
   height: 2em;
   width: auto;
+}
+#leftPartOfApplication{
+	width: 50%;
+	float: left;
 }
 
 #innerBody{
@@ -221,3 +237,6 @@ h4{
 #firstName,
 #lastName,
 #chooseClass,
+#addParticipator{
+	border-radius: 7px;
+}
