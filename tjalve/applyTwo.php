@@ -1,4 +1,4 @@
-
+<!--Granskad och godkänd 2014-03-04-->
 <?php
 	include "templates/header.php";
 ?>	
@@ -14,18 +14,18 @@
 	<form id="firstForm" name="firstForm" method="post" action=" "> 
 		<tr>
 			<td>Förnamn:</td>
-			<td><input type="text" name="firstName" id="firstName"/></td>
+			<td><input type="text" name="firstName" id="firstName"></input></td>
 		</tr>
 
 		<tr>
 			<td>Efternamn:</td>
-			<td><input type="text" name="lastName" id="lastName"/></td>
+			<td><input type="text" name="lastName" id="lastName"></input></td>
 		</tr>
 		
 		<tr>
 			<td>Födelseår:</td>
 			<td>
-				<input type="text" name="yearOfBirth" id="yearOfBirth"/>
+				<input type="text" name="yearOfBirth" id="yearOfBirth"></input>
 			</td> 
 		</tr>
 		
@@ -43,7 +43,7 @@
 			</td>
 
 			<td>
-				<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/>
+				<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"></input>
 			</td>
 		</tr>
 	</form>
