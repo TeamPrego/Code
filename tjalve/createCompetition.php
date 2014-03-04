@@ -28,7 +28,7 @@ include "templates/adminheader.php";
     <tr>
       <td>Åldersklass:</td>
 			
-      <td colspan="2"> Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
+      <td> Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
         <select id="droplistFemale" onchange="femaleDisplay()">
           <option value="empty"></option>
           <option value="f7">F7</option>
@@ -43,8 +43,8 @@ include "templates/adminheader.php";
           <option value="f17">F17</option>
           <option value="k">K</option>
         </select>
-
-  Herrar:	
+		<td>
+		Herrar:	
           <select id="droplistMale" onchange="maleDisplay()">
             <option></option>
             <option value="p7">P7</option>
@@ -59,6 +59,7 @@ include "templates/adminheader.php";
             <option value="p17">P17</option>
             <option value="h">H</option>
           </select>
+		  </td>
       </td>
     
     <script src="createCompetition.js"></script>

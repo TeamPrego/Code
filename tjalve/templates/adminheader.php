@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div id = "innerBody">
-			<div id = "adminlogo"><img id ="adminpicid" src="pic/briefcase.png" /></div>
+			<div id = "adminlogo"><img id ="adminpicid" src="pic/taskig_copy.jpg" /></div>
 			<hr>
       
       <h4>Du är inloggad som primär administratör.</h4>
