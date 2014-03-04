@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 include "templates/header.php";
 ?>
 
@@ -24,7 +25,7 @@ include "templates/header.php";
   //binero. It is not working from localhost. The second one is for your 
   //local database. You might need to change database name (tjalve) etc.
   //$con=mysqli_connect("competition-192031.mysql.binero.se","192031_jv80473","TeamPrego","192031-competition");
-  $con=mysqli_connect("localhost","root","","tjalve");
+  //$con=mysqli_connect("localhost","root","","tjalve");
   mysqli_set_charset($con,"utf8");
   //Test Connection
   if (mysqli_connect_errno()) {

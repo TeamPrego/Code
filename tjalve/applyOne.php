@@ -11,7 +11,7 @@
 <!--Div for the form -->
 <table class ="formDiv">
 	<h2>Steg ett</h2>
-	<form id="firstForm" name="firstForm" method="post" action=" "> 
+	<form id="firstForm" name="firstForm" method="post" action="applyTwo.php"> 
 		<tr>
 			<td>
 				<label for="select">
@@ -62,7 +62,7 @@
 
 <!--Div for the Infotext -->
 <div class="infoText">
-	<h4>Instruktion:</h4>
+	<h4>För instruktion:</h4>
 	<ol>
 		<li class="importantText">
       Välj klubb och skriv in uppgifter om kontaktpersonen

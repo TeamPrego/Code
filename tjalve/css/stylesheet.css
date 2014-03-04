@@ -30,10 +30,10 @@ body {
 /* The line */
 hr{
 	width: 80%;
-    height: 30px;
-    border-style: solid;
-    border-color: #344cc2;
-    border-width: 2px 0 0 0;
+  height: 30px;
+  border-style: solid;
+  border-color: #344cc2;
+  border-width: 2px 0 0 0;
 }
 
 /* The list on the first page - presents all the competitions that have and will take place.
@@ -86,10 +86,10 @@ h1{
 	position:fixed;
 	bottom:0;
 	left:0;
-    background-color: #344cc2;
+	background-color: #344cc2;
 	font-family:Verdana;	
-  	color: white;
-  	font-size: 0.7em;
+	color: white;
+	font-size: 0.7em;
 }
 
 /* In the footer */
@@ -103,13 +103,13 @@ h1{
 }
 
 .footer li {
-    list-style-type:none;
-    float:left;
-    padding-left:4em;
+  list-style-type:none;
+  float:left;
+  padding-left:4em;
 }
 .footer a {
-  	font-family:"Verdana";
-    color:white;
+	font-family:"Verdana";
+  color:white;
 }
 
 /* For the tables */
@@ -126,50 +126,47 @@ h1{
 .formDiv{
 	float: left;
 	text-align: left;
-	padding-left: 10px;
-	width: 50%;
-	border-right: 3px solid orange;
+	padding-left: 5%;
+	width: 100%;
+	border-right: 3px solid #344cc2;
 }
 
 /* Infotext in the application-site*/
 .infoText{
-	float: left;
+	float: right;
 	text-align: left;
 	font-family:"Verdana";
 	width: 50%;
 	font-size: 0.8em;
+	cursor:help;
 }
 
 .infoText ol{
-	float:right;
-	padding-left: 5%;
-	padding-right: 5%;
-}
-
-h4{
-	margin: 0;
+	/*float:left;*/
 	margin-left: 5%;
+	margin-right: 5%;
+	border: 3px solid #344cc2;
+	border-radius: 7px;
 }
 
 /*The Progress bar on apllication-site */
 .progressBar{
 	clear:both;
-	width:90%;
 	height: 5%;
-	border: 3px solid orange;
+	border: 3px solid #344cc2;
 	border-radius: 7px;
 	text-align: center;
-	margin-left: 5%;
-	margin-right: 5%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
 }
 
 .progress{
 	width: 50%;
 	height: 100%;
-	border: 1px solid orange;
+	border: 1px solid #344cc2;
 	border-bottom-left-radius: 5px;
 	border-top-left-radius: 5px;
-	background-color: orange;
+	background-color: #344cc2;
 	text-align: right;
 }
 
@@ -197,7 +194,7 @@ h2{
 	float: left;
 	text-decoration: none;
 	border: 2px solid black;
-	background-color: orange;
+	background-color: #344cc2;
 	border-radius: 100%;
 	width: 20px;
 	text-align: center;
@@ -215,4 +212,22 @@ h2{
   text-align: center;
   align:middle;
   width:100%;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+#dropDown{
+	margin-left: 5%;
+}
+
+#tableOfDisciplines{
+	clear: left;
+	float: left;
+	border: 3x solid #344cc2;
+}
+#leftPartOfApplication{
+	float: left;
+	width: 50%;
 }
