@@ -1,4 +1,5 @@
 <!--Detta är en så kallad footar man-->
+<!--granskad 2014-03-03-->
 		</div>
 		<div class="footer">		
 			<script>

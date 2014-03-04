@@ -1,4 +1,5 @@
 <!--This is a so called admin footer man-->
+<!--Granskad och godkänd 2014-03-04-->
 		</div>
 		<div class="footer">		
 			<script>
