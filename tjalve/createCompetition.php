@@ -1,4 +1,5 @@
 <!--Create competition page-->
+<!--Granskad och godkänd 2014-03-04-->
 <?php
 include "templates/adminheader.php";
 ?>
@@ -7,44 +8,44 @@ include "templates/adminheader.php";
 <table class ="createcompTable">
 		<tr>
 			<td>Tävlingsnamn:</td>
-			<td><input name="compName" id="compName"/></td>
+			<td><input name="compName" id="compName"></input></td>
 			<td>Arrangör:</td>
-			<td><input name="organizer" id="organizer"/></td>
+			<td><input name="organizer" id="organizer"></input></td>
 		</tr>
 		
 		<tr>
 			<td>Datum:</td>
-			<td><input name="date" id="date"/></td>
+			<td><input name="date" id="date"></input></td>
 			<td>Sista anmäl.dag:</td>
-			<td><input name="lastDay" id="lastDay"/></td>
+			<td><input name="lastDay" id="lastDay"></input></td>
 		</tr>
 		
 		<tr>
       <td>Tävlingslogga:</td>
-			<td><input name="compLogo" id="compLogo"/></td>
-			<td><button class="button">Bläddra</button></td>
+			<td><input type="file" name="compLogo" id="compLogo" accept="image/*"></input></td>
 		</tr>	
     
     <tr>
       <td>Åldersklass:</td>
-			
-      <td colspan="2"> Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
-        <select id="droplistFemale" onchange="femaleDisplay()">
-          <option value="empty"></option>
-          <option value="f7">F7</option>
-          <option value="f8">F8</option>
-          <option value="f9">F9</option>
-          <option value="f10">F10</option>
-          <option value="f11">F11</option>
-          <option value="f12">F12</option>
-          <option value="f13">F13</option>
-          <option value="f14">F14</option>
-          <option value="f15">F15</option>
-          <option value="f17">F17</option>
-          <option value="k">K</option>
-        </select>
+	  
+      <td colspan="2"> 
+        Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
+          <select id="droplistFemale" onchange="femaleDisplay()">
+            <option value="empty"></option>
+            <option value="f7">F7</option>
+            <option value="f8">F8</option>
+            <option value="f9">F9</option>
+            <option value="f10">F10</option>
+            <option value="f11">F11</option>
+            <option value="f12">F12</option>
+            <option value="f13">F13</option>
+            <option value="f14">F14</option>
+            <option value="f15">F15</option>
+            <option value="f17">F17</option>
+            <option value="k">K</option>
+          </select>
 
-  Herrar:	
+        Herrar:	
           <select id="droplistMale" onchange="maleDisplay()">
             <option></option>
             <option value="p7">P7</option>
@@ -59,25 +60,28 @@ include "templates/adminheader.php";
             <option value="p17">P17</option>
             <option value="h">H</option>
           </select>
+		  </td>
       </td>
-    
     <script src="createCompetition.js"></script>
-   
-		</tr>	
+	</tr>	
 </table>
+
+<div id ="chosenAge">Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input></div>
 
 <table class ="createcompTable">
   <tr>
-    <td colspan="2">
-      Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input>
+    <td>
+      Valbara grenar
     </td>
+    <td>
+      Valda grenar
   </tr>
   <tr>
     <td>
-      valbara grenar
+      <textarea rows="4" cols="50">Test</textarea>
     </td>
     <td>
-      valda grenar
+      <textarea rows="4" cols="50">Textarea2</textarea>
     </td>
   </tr>
 </table>

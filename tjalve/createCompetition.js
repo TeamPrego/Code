@@ -1,3 +1,4 @@
+/*Granskad och godkänd 2014-03-04*/
 function femaleDisplay() {
   var saveAge = document.getElementById("droplistFemale");
   document.getElementById("age").value=saveAge.options[saveAge.selectedIndex].text;

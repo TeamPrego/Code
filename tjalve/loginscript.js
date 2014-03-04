@@ -1,3 +1,4 @@
+/*Granskad och godkänd 2014-04-03*/
 window.onload=function() {
 	document.getElementById("ancor").onclick=popup;
 	document.getElementById("btn").onclick=pushdown;

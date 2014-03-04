@@ -1,4 +1,4 @@
-
+<!--Granskad och godkänd 2014-03-04-->
 <?php
 	include "templates/header.php";
 ?>	
@@ -20,12 +20,13 @@
 		<tr>
 			<td>Efternamn:</td>
 			<td><input type="text" name="lName" id="lastName"/></td>
+
 		</tr>
 		
 		<tr>
 			<td>Födelseår:</td>
 			<td>
-				<input type="text" name="yearOfBirth" id="yearOfBirth"/>
+				<input type="text" name="yearOfBirth" id="yearOfBirth"></input>
 			</td> 
 		</tr>
 		
