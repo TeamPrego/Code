@@ -21,8 +21,7 @@ include "templates/adminheader.php";
 		
 		<tr>
       <td>Tävlingslogga:</td>
-			<td><input name="compLogo" id="compLogo"/></td>
-			<td><button class="button">Bläddra</button></td>
+			<td><input type="file" name="compLogo" id="compLogo" accept="image/*"></input></td>
 		</tr>	
     
     <tr>
