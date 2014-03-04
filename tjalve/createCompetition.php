@@ -22,8 +22,7 @@ include "templates/adminheader.php";
 		
 		<tr>
       <td>Tävlingslogga:</td>
-			<td><input name="compLogo" id="compLogo"></input></td>
-			<td><button class="button">Bläddra</button></td>
+			<td><input type="file" name="compLogo" id="compLogo" accept="image/*"></input></td>
 		</tr>	
     
     <tr>
@@ -67,18 +66,22 @@ include "templates/adminheader.php";
 	</tr>	
 </table>
 
+<div id ="chosenAge">Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input></div>
+
 <table class ="createcompTable">
   <tr>
-    <td colspan="2">
-      Vald ålderssdsklass: <input type="text" id="age" class="disabledField" disabled></input>
+    <td>
+      Valbara grenar
     </td>
+    <td>
+      Valda grenar
   </tr>
   <tr>
     <td>
-      valbara grenar
+      <textarea rows="4" cols="50">Test</textarea>
     </td>
     <td>
-      valda grenar
+      <textarea rows="4" cols="50">Textarea2</textarea>
     </td>
   </tr>
 </table>
