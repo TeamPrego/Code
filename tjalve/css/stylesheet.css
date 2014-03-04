@@ -1,24 +1,4 @@
-#logga{
-	text-align:center;
-	padding: 5px;
-	vertical-align: middle;
-}
 
-#innerBody{
-	background-color: white;	
-  margin: 5% 10% 10%;
-  height: 100%;
-  padding: 1% 0 1% 0;
-	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
-	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
-	/* rounded corners */
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 7px; 
-	border-radius: 7px;
-  border: 10px;
-  
-}
 
 body {
   background: linear-gradient(white, #bfcbff) fixed no-repeat bottom left;
@@ -29,91 +9,44 @@ body {
 
 /* The line */
 hr{
-	width: 80%;
-    height: 30px;
-    border-style: solid;
-    border-color: #344cc2;
-    border-width: 2px 0 0 0;
+	border-style: solid;
+  border-color: #344cc2;
+  border-width: 2px 0 0 0;
+  height: 30px;
+  width: 80%;
 }
 
 /* The list on the first page - presents all the competitions that have and will take place.
     Also used for the result table.
 */
-.firstTableList{
-	text-align: center;
-	padding: 5px;
-	font-family: Verdana;
-	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
-}
 
 h1{
-	text-align: center;
 	color: #344cc2;
 	font-family: Verdana;
-}
-
-#buttons{
 	text-align: center;
-	color:rgb(1,1,1) ;
 }
 
-#button{
-	background-color:rgb(255,255,255);
+h2{
+	font-family:"Verdana";
+	text-align: center;
+}
+
+h4{
+	margin: 0;
+	margin-left: 5%;
+}
+
+.choice-bar {
+	background: #c97575;
 	height: 3em;
-  width: 6em;
-  margin-left: 0.5em;
-	margin-right: 0.5em;
+  margin: 0 0 2em;
+  text-align: center;
+  width:100%;
 }
 
-#result-button {
-	background: #d95243;
-	height: 2em;
-  width: auto;
-	margin: 1em 0 20em auto;
-}
-
-#drop-list {
-	background: #7d7d7d;
-	height: 2em;
-  width: auto;
-	margin: 1em 20em 0 auto;
-}
-
-.footer{
-	width:100%;
-	position:fixed;
-	bottom:0;
-	left:0;
-    background-color: #344cc2;
-	font-family:Verdana;	
-  color: white;
-}
-
-/* In the footer */
-.left-links{
-	float:left;
-}
-
-.right-links{
-	float:right;
-  margin-right:10%;
-}
-
-.footer li {
-    list-style-type:none;
-    float:left;
-    padding-left:4em;
-}
-.footer a {
-  	font-family:"Verdana";
-    color:white;
-}
-
-/* For the tables */
-.odd{
-	background-color: #ebeeff;
+.disabledField {
+  color: #000000;  
+  width:2em;
 }
 
 /* For the tables */
@@ -121,22 +54,57 @@ h1{
 	background-color: #c2cbff; 
 }
 
+.firstTableList{
+  font-family: Verdana;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+	width: 100%;
+}
+
+.footer{
+	bottom:0;
+  background-color: #344cc2;
+  color: white;
+	font-family:Verdana;	
+	left:0;
+  position:fixed;
+  width:100%;
+}
+
+.footer a {
+    color:white;
+  	font-family:"Verdana";
+}
+
+.footer li {
+    float:left;
+    list-style-type:none;
+    padding-left:4em;
+}
+
 /* The form för applications */
 .formDiv{
+  border-right: 3px solid orange;
 	float: left;
-	text-align: left;
 	padding-left: 10px;
-	width: 50%;
-	border-right: 3px solid orange;
+	text-align: left;
+  width: 50%;
+}
+
+
+/* Text which is important */
+.importantText{
+	font-weight: bold;
 }
 
 /* Infotext in the application-site*/
 .infoText{
 	float: left;
-	text-align: left;
 	font-family:"Verdana";
-	width: 50%;
 	font-size: 0.8em;
+  text-align: left;
+  width: 50%;
 }
 
 .infoText ol{
@@ -145,36 +113,104 @@ h1{
 	padding-right: 5%;
 }
 
-h4{
-	margin: 0;
-	margin-left: 5%;
+/* In the footer */
+.left-links{
+	float:left;
+}
+
+/* For the tables */
+.odd{
+	background-color: #ebeeff;
+}
+
+.progress{
+  border: 1px solid orange;
+  background-color: orange;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	height: 100%;
+	text-align: right;
+	width: 50%;
 }
 
 /*The Progress bar on apllication-site */
 .progressBar{
-	clear:both;
-	width:90%;
-	height: 5%;
-	border: 3px solid orange;
+  border: 3px solid orange;
 	border-radius: 7px;
-	text-align: center;
-	margin-left: 5%;
+	clear:both;
+	height: 5%;
+  margin-left: 5%;
 	margin-right: 5%;
-}
-
-.progress{
-	width: 50%;
-	height: 100%;
-	border: 1px solid orange;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-	background-color: orange;
-	text-align: right;
-}
-
-h2{
-	font-family:"Verdana";
 	text-align: center;
+  width:90%;
+}
+
+.right-links{
+	float:right;
+  margin-right:10%;
+}
+
+#addParticipator{
+	border-radius: 7px;
+}
+
+/* Add team to the database */
+#addTeam{
+	background-color: orange;
+	border: 2px solid black;
+  border-radius: 100%;
+	float: left;
+  text-align: center;
+  text-decoration: none;
+	width: 20px;
+}
+
+#button{
+	background-color:rgb(255,255,255);
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+  height: 3em;
+  width: 6em;
+}
+
+#buttons{
+	color:rgb(1,1,1) ;
+	text-align: center;
+}
+
+#drop-list {
+	background: #7d7d7d;
+	margin: 1em 20em 0 auto;	
+  height: 2em;
+  width: auto;
+}
+
+#innerBody{
+	background-color: white;	
+  border: 10px;
+  border-radius: 7px;
+  margin: 5% 10% 10%;
+  height: 100%;
+  padding: 1% 0 1% 0;
+	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
+	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
+	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
+	/* rounded corners */
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 7px; 
+}
+
+#logga{
+	padding: 5px;
+	text-align:center;
+  vertical-align: middle;
+}
+
+#result-button {
+	background: #d95243;
+	height: 2em;
+  margin: 1em 0 20em auto;
+  width: auto;
 }
 
 #contactPerson, 
@@ -187,31 +223,3 @@ h2{
 #firstName,
 #lastName,
 #chooseClass,
-#addParticipator{
-	border-radius: 7px;
-}
-
-/* Add team to the database */
-#addTeam{
-	float: left;
-	text-decoration: none;
-	border: 2px solid black;
-	background-color: orange;
-	border-radius: 100%;
-	width: 20px;
-	text-align: center;
-	text-align: middle;
-}
-
-/* Text which is important */
-.importantText{
-	font-weight: bold;
-}
-.choice-bar {
-	background: #c97575;
-	height: 3em;
-  /*margin: 5em 10em;*/
-  text-align: center;
-  align:middle;
-  width:100%;
-}

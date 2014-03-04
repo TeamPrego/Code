@@ -71,8 +71,6 @@ include "templates/header.php";
         }
       
         echo "</tr>";
-        echo "<br>";
-        echo "</br>";
       }
       
       echo "</table>";

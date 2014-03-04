@@ -1,61 +1,55 @@
 /*Stylesheet for admin to make minor interface changes*/
+/*Granskad och godkänd 2014-03-04*/
 
-#adminlogo
-{
-	vertical-align: middle;
-	text-align:center;
+h4 {
+	font-family: Verdana;
+  text-align: center;
+}
+
+.adminTable {
+	margin: 5% auto;
+	text-align: center;
 	padding: 5px;
+	width: 40%;
 }
 
 .adminTable button {
-	width:100%;
-	height:100%;
   font-family:verdana;
-}
-
-#chosenAge {
-  margin-left: 34.5%;
+	height:100%;
+  width:100%;
 }
 
 .createcompTable {
 	margin: 2% auto;
 }
 
+#adminlogo
+{
+  padding: 5px;
+	text-align:center;
+	vertical-align: middle;
+}
+
 #adminpicid {
 	height:10%;
 	width:10%;
 }
+
+#chosenAge {
+  margin-left: 34.5%;
+}
+
 #innerBody {
 	background-color: white;
-	
-	margin-right: 10%;
-	margin-left: 10%;
-	margin-top: 5%;
-	margin-bottom: 5%;
-
-	padding-bottom: 1%;
-	padding-top: 1%;
-
+  margin: 5% 10% 5%;
+  padding:1% 0 1%;
+  
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
 	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
-
-	/* rounded corners */
+	
+  /* rounded corners */
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
 	border-radius: 7px;
-}
-
-.adminTable {
-	text-align: center;
-	padding: 5px;
-	width: 40%;
-	margin: 5% auto;	/*margin:5% auto;
-						top and bottom margins are 5%
-						right and left margins are auto*/
-}
-
-h4 {
-	text-align: center;
-	font-family: Verdana;
 }
