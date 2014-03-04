@@ -21,8 +21,10 @@ include "templates/adminheader.php";
 		</tr>
 		
 		<tr>
-      <td>Tävlingslogga:</td>
-			<td><input type="file" name="compLogo" id="compLogo" accept="image/*"></input></td>
+		<td>Tävlingslogga:</td>
+			<td>
+			<input type="file" name="compLogo" id="compLogo" accept="image/*"></input>
+			</td>
 		</tr>	
     
     <tr>
