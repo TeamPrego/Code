@@ -60,24 +60,27 @@ include "templates/adminheader.php";
             <option value="h">H</option>
           </select>
       </td>
-    
     <script src="createCompetition.js"></script>
-   
 		</tr>	
 </table>
 
+<div id ="chosenAge">Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input></div>
+
 <table class ="createcompTable">
   <tr>
-    <td colspan="2">
-      Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input>
+    <td>
+      Valbara grenar
+    </td>
+    <td>
+      Valda grenar
     </td>
   </tr>
   <tr>
     <td>
-      valbara grenar
+      <textarea rows="4" cols="50">Test</textarea>
     </td>
     <td>
-      valda grenar
+      <textarea rows="4" cols="50">Textarea2</textarea>
     </td>
   </tr>
 </table>
