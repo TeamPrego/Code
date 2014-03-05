@@ -7,60 +7,70 @@
 <h1> Anmälan till "tävlingsnamn" </h1>
 <!--Line -->
 <hr>
-
+<h2>Steg ett</h2>
 <!--Div for the form -->
-<table class ="formDiv">
-	<h2>Steg ett</h2>
-	<form id="firstForm" name="firstForm" method="post" action="applyTwo.php"> 
-		<tr>
-			<td>
-				<label for="select">
-					Välj klubb:
-				</label>
-			</td>
-			<td>
-				<select name="chooseClub" id="chooseClub">
-          <option>- Välj klubb -</option>
-          <option value="Tjalve">Tjalve</option>
-          <option value="Norrköping">Norrköping</option>
-          <option value="Linköping">Linköping</option>
-				<option value="Falköping">Falköping</option>
-				</select>
-				Saknas din förening?
-			</td>
-			<td>
-				<div id="addTeam">+</div>
-			</td>
-		</tr>
+<div id="leftPartOfApplication">
+	<table class ="formDiv">
+		<form id="firstForm" name="firstForm" method="post" action="applyTwo.php"> 
+			<tr>
+				<td>
+					<label for="select">
+						Välj klubb:
+					</label>
+				</td>
+				<td>
+					<select name="chooseClub" id="chooseClub" required>
+	          <option>- Välj klubb -</option>
+	          <option value="Tjalve">Tjalve</option>
+	          <option value="Norrköping">Norrköping</option>
+	          <option value="Linköping">Linköping</option>
+						<option value="Falköping">Falköping</option>
+					</select>
+					Saknas din förening?
+					<a id="addTeam" href="createNewClub.php">Klicka här</a>
+				</td>
+			</tr>
 
-		<tr>
-			<td>Kontaktperson:</td>
-			<td><input type="text" name="contactPerson" id="contactPerson"></input></td>
-		</tr>
-		
-		<tr>
-			<td>E-mail:</td>
-			<td><input type="text" name="email" id="email"></input></td>
-		</tr>
-		
-		<tr>
-			<td>Upprepa e-mail:	</td>
-			<td><input type="text" name="repeatEmail" id="repeatEmail"></input></td> 
-		</tr>
-		
-		<tr>
-			<td>Telefon:</td>
-			<td><input type="text" name="telefonnumber" id="telephoneNumber"></input></td>
-		</tr>
-		
-		<tr>
-			<td></td>
-			<td><a href="applyTwo.php"><input type="submit" name="continues" id="continues" value="Fortsätt"></a></td>
-		</tr>
-	</form>
-</table>
+			<tr>
+				<td>Kontaktperson:</td>
+				<td><input type="text" name="contactPerson" id="contactPerson" placeholder="Namn"required></input></td>
+			</tr>
+			
+			<tr> 
+				<td>E-mail:</td>
+				<td><input type="email" name="email" id="email" placeholder="namn@exempel.se" required></input></td>
+			</tr>
+			
+			<tr>
+				<td>Upprepa e-mail:	</td>
+				<td><input type="email" name="repeatEmail" id="repeatEmail" placeholder="namn@exempel.se" required></input></td> 
+			</tr>
+			
+			<tr>
+				<td>Telefon:</td>
+				<td><input type="text" name="telefonnumber" id="telephoneNumber" placeholder="ex 07x-xxx xxx xx"required></input></td>
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td><a href="applyTwo.php"><input type="submit" name="continues" id="continues" value="Fortsätt"></a></td>
+			</tr>
+		</form>
+	</table>
+</div>
 
-<!--Div for the Infotext -->
+<!--The Informationtext -->
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery(".infoText").hide();
+		//toggle the componenet with class msg_body
+		jQuery(".cthrough").click(function(e) {
+			e.preventDefault();
+			jQuery(this).next(".infoText").slideToggle(500);
+		});
+	});	
+</script>
+<a id="dropDown" href="#" class="cthrough">För hjälp, klicka här</a>
 <div class="infoText">
 	<h4>För instruktion:</h4>
 	<ol>

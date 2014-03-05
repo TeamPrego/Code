@@ -8,11 +8,9 @@
 
 $disc = [
 	[
-		'pb' => 132,
 		'gren' => 'Höjdhopp'
 	],
 	[
-		'pb' => 908,
 		'gren' => 'Längdhopp'
 	]
 ];

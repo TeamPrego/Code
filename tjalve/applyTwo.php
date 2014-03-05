@@ -4,8 +4,6 @@ session_start();
 	include "templates/header.php";
 ?>	
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
 <!--Headning -->
 <h1>Anmälan till "tävlingsnamn"</h1>
 <!--Line -->
@@ -15,7 +13,7 @@ session_start();
 if (isset($_POST) && count($_POST))
 	$_SESSION['post'] = $_POST;
 
-//print_r($_SESSION);
+print_r($_SESSION);
 ?>
 
 <h2>Steg två</h2>
@@ -26,23 +24,23 @@ if (isset($_POST) && count($_POST))
 		<form id="firstForm" name="firstForm"> 
 			<tr>
 				<td>Förnamn:</td>
-				<td><input type="text" name="fName" id="firstName"/></td>
+				<td><input type="text" name="fName" id="firstName" required/></td>
 			</tr>
 
 			<tr>
 				<td>Efternamn:</td>
-				<td><input type="text" name="lName" id="lastName"/></td>
+				<td><input type="text" name="lName" id="lastName" required/></td>
 			</tr>
 			<tr>
 				<td>Födelseår:</td>
 				<td>
-					<input type="text" name="yearOfBirth" id="yearOfBirth"/>
+					<input type="number" name="yearOfBirth" id="yearOfBirth" min="1900" max="2050" required/>
 				</td> 
 			</tr>
 			<tr>
 				<td><label for="select">Klass:</label></td>
 				<td>
-					<select name="chooseClass" id="chooseClass">
+					<select name="chooseClass" id="chooseClass" required>
 					<option> - Välj klass - </option>
 					<option value="P11"> P11 </option>
 					<option value="P12"> P12 </option>
@@ -87,8 +85,9 @@ if (isset($_POST) && count($_POST))
 				var dat_string = '<table><tr><th></th> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
 				$.each(content, function(index, value) {
 					dat_string += 	'<tr><td><input type = "checkbox" id = "check" value="check"/></td><td>'
-									 + value.gren + '</td><td>Ålderklass</td><td><input type="text" name="personBest" id="personBest"/></td>' + 
-									 '<td><input type="text" name="seasonBest" id="seasonBest"/></td></tr>'
+									 + value.gren 
+									 + '</td><td>Ålderklass</td><td><input type="text" name="personBest" id="personBest"/></td>'
+									 + '<td><input type="text" name="seasonBest" id="seasonBest"/></td></tr>'
 				});
 				dat_string += '</table>';
 
