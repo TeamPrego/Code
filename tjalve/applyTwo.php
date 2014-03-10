@@ -10,9 +10,10 @@ session_start();
 <hr>
 <?php
 
-if (isset($_POST) && count($_POST))
+if (isset($_POST) && count($_POST)) {
 	$_SESSION['post'] = $_POST;
-	
+	$contactId = $_POST['contactId'];
+}
 print_r($_SESSION);
 ?>
 
@@ -23,21 +24,21 @@ print_r($_SESSION);
 	<?php
 		include "database/config.php";
 		
-		$firstName = htmlspecialchars($_POST['fName']);
-		$lastName = htmlspecialchars($_POST['lName']);
-		$bYear = htmlspecialchars($_POST['yearOfBirth']);
+//firstName = htmlspecialchars($_POST['fName']);
+//		$lastName = htmlspecialchars($_POST['lName']);
+//		$bYear = htmlspecialchars($_POST['yearOfBirth']);
 
-		$query = "INSERT INTO `participant` (firstName, lastName, birthYear) VALUES ('$firstName', '$lastName', '$bYear')";
-		$result = $con->query($query) or die($con->error.__LINE__);
+//		$query = "INSERT INTO `participant` (firstName, lastName, birthYear) VALUES ('$firstName', '$lastName', '$bYear')";
+	//	$result = $con->query($query) or die($con->error.__LINE__);
 		
-		if($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				echo stripslashes($row['lastName']);	
-			}
-		}
-		else {
-			echo 'NO RESULTS';	
-		}
+		// if($result->num_rows > 0) {
+		// 	while($row = $result->fetch_assoc()) {
+		// 		echo stripslashes($row['lastName']);	
+		// 	}
+		// }
+		// else {
+		// 	echo 'NO RESULTS';	
+		// }
 	
 // CLOSE CONNECTION
 	mysqli_close($mysqli);
@@ -45,7 +46,7 @@ print_r($_SESSION);
 	?>
 
 
-	<table class ="formDiv" method="POST" action="">
+	<table class ="formDiv" method="POST" action="database/addParticipant.php">
 		<form method="post" id="firstForm" name="firstForm"> 
 			<tr>
 				<td>Förnamn:</td>

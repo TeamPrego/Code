@@ -11,7 +11,7 @@
 <!--Div for the form -->
 <div id="leftPartOfApplication">
 	<table class ="formDiv">
-		<form id="firstForm" name="firstForm" method="post" action="applyTwo.php"> 
+		<form id="firstForm" name="firstForm" method="post" action="addContactPerson.php"> 
 			<tr>
 				<td>
 					<label for="select">
@@ -24,7 +24,7 @@
 							error_reporting(E_ALL);
 	  						ini_set("display_errors", 1);
 							include "database/config.php";
-							$data = mysqli_query($con, "SELECT Name FROM klubbar");
+							$data = mysqli_query($con, "SELECT Name FROM clubs");
 							$count = 0;
 							while($row = $data->fetch_object()) {
 									echo "<option value='" .$count. "'>" .$row->Name. "</option>";
@@ -54,7 +54,7 @@
 			
 			<tr>
 				<td>Telefon:</td>
-				<td><input type="text" name="telefonnumber" id="telephoneNumber" placeholder="ex 07x-xxx xxx xx"required></input></td>
+				<td><input type="text" name="phonenumber" id="phoneNumber" placeholder="ex 07x-xxx xxx xx"required></input></td>
 			</tr>
 			
 			<tr>
