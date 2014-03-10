@@ -21,7 +21,7 @@
 			<td> Tjalvesupertävling </td>
 			<td><a href="applyOne.php"> Anmäl här </a></td>
 			<td> Yesbox </td>
-			<td> <a href="resultat.php"> Fetaste Resultatlistan </td>
+			<td> <a href="result.php"> Fetaste Resultatlistan </td>
 		</tr>
 
 		<tr class="odd">
