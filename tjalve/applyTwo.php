@@ -20,8 +20,43 @@ print_r($_SESSION);
 
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
+	<?php
+		$DB_NAME = 'submission';
+		$DB_HOST = 'localhost';
+		$DB_USER = 'root';
+		$DB_PASS = 'root';
+		
+		$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+		
+		$firstName = htmlspecialchars($_POST['fName']);
+		$lastName = htmlspecialchars($_POST['lName']);
+		$bYear = htmlspecialchars($_POST['bYear']);
+
+		if (mysqli_connect_errno()) {
+			printf("Connect failed: %s\n", mysqli_connect_error());
+			exit();
+		}
+
+		$query = "INSERT INTO `participant` (firstName, lastName, birthYear) VALUES ('$firstName', '$lastName', '$birthYear')";
+		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+		
+		if($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				echo stripslashes($row['lastName']);	
+			}
+		}
+		else {
+			echo 'NO RESULTS';	
+		}
+	
+// CLOSE CONNECTION
+	mysqli_close($mysqli);
+	
+	?>
+
+
 	<table class ="formDiv" method="POST" action="">
-		<form id="firstForm" name="firstForm"> 
+		<form method="post" id="firstForm" name="firstForm"> 
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
