@@ -7,7 +7,7 @@
 <!--Line -->
 <hr>
 <table id="createNewClubForm">
-	<form method="post" action="addNewClubToDatabase.php">
+	<form method="post" action="database/addNewClubToDatabase.php">
 		<tr>
 			<td>
 				Klubb:

@@ -19,12 +19,18 @@
 					</label>
 				</td>
 				<td>
-					<select name="chooseClub" id="chooseClub" required>
-	          <option>- Välj klubb -</option>
-	          <option value="Tjalve">Tjalve</option>
-	          <option value="Norrköping">Norrköping</option>
-	          <option value="Linköping">Linköping</option>
-						<option value="Falköping">Falköping</option>
+					<select>
+						<?php
+							error_reporting(E_ALL);
+	  						ini_set("display_errors", 1);
+							include "database/config.php";
+							$data = mysqli_query($con, "SELECT Name FROM klubbar");
+							$count = 0;
+							while($row = $data->fetch_object()) {
+									echo "<option value='" .$count. "'>" .$row->Name. "</option>";
+									$count = $count + 1;
+								}					
+						?>
 					</select>
 					Saknas din förening?
 					<a id="addTeam" href="createNewClub.php">Klicka här</a>
