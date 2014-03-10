@@ -9,43 +9,19 @@ session_start();
 <!--Line -->
 <hr>
 <?php
-
-if (isset($_POST) && count($_POST)) {
-	$_SESSION['post'] = $_POST;
-	$contactId = $_POST['contactId'];
-}
-print_r($_SESSION);
+	include "database/config.php";
+	$data = mysqli_query($con, "SELECT * FROM contact WHERE contactPhone='111'");
+	echo $data->fetch_object()->contactId;
+	/*
+	while($row = $data->fetch_object()) {
+		echo $row->contactId;
+	}	*/
 ?>
 
 <h2>Steg två</h2>
 
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
-	<?php
-		include "database/config.php";
-		
-//firstName = htmlspecialchars($_POST['fName']);
-//		$lastName = htmlspecialchars($_POST['lName']);
-//		$bYear = htmlspecialchars($_POST['yearOfBirth']);
-
-//		$query = "INSERT INTO `participant` (firstName, lastName, birthYear) VALUES ('$firstName', '$lastName', '$bYear')";
-	//	$result = $con->query($query) or die($con->error.__LINE__);
-		
-		// if($result->num_rows > 0) {
-		// 	while($row = $result->fetch_assoc()) {
-		// 		echo stripslashes($row['lastName']);	
-		// 	}
-		// }
-		// else {
-		// 	echo 'NO RESULTS';	
-		// }
-	
-// CLOSE CONNECTION
-	mysqli_close($mysqli);
-	
-	?>
-
-
 	<table class ="formDiv" method="POST" action="database/addParticipant.php">
 		<form method="post" id="firstForm" name="firstForm"> 
 			<tr>

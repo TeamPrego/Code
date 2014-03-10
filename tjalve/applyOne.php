@@ -21,15 +21,13 @@
 				<td>
 					<select>
 						<?php
-							error_reporting(E_ALL);
-	  						ini_set("display_errors", 1);
 							include "database/config.php";
 							$data = mysqli_query($con, "SELECT Name FROM clubs");
 							$count = 0;
 							while($row = $data->fetch_object()) {
-									echo "<option value='" .$count. "'>" .$row->Name. "</option>";
-									$count = $count + 1;
-								}					
+								echo "<option value='" .$count. "'>" .$row->Name. "</option>";
+								$count = $count + 1;
+							}					
 						?>
 					</select>
 					Saknas din förening?
