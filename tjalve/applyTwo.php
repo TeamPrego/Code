@@ -12,7 +12,7 @@ session_start();
 
 if (isset($_POST) && count($_POST))
 	$_SESSION['post'] = $_POST;
-
+	
 print_r($_SESSION);
 ?>
 
@@ -21,24 +21,14 @@ print_r($_SESSION);
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
 	<?php
-		$DB_NAME = 'submission';
-		$DB_HOST = 'localhost';
-		$DB_USER = 'root';
-		$DB_PASS = 'root';
-		
-		$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+		include "database/config.php";
 		
 		$firstName = htmlspecialchars($_POST['fName']);
 		$lastName = htmlspecialchars($_POST['lName']);
-		$bYear = htmlspecialchars($_POST['bYear']);
+		$bYear = htmlspecialchars($_POST['yearOfBirth']);
 
-		if (mysqli_connect_errno()) {
-			printf("Connect failed: %s\n", mysqli_connect_error());
-			exit();
-		}
-
-		$query = "INSERT INTO `participant` (firstName, lastName, birthYear) VALUES ('$firstName', '$lastName', '$birthYear')";
-		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+		$query = "INSERT INTO `participant` (firstName, lastName, birthYear) VALUES ('$firstName', '$lastName', '$bYear')";
+		$result = $con->query($query) or die($con->error.__LINE__);
 		
 		if($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
