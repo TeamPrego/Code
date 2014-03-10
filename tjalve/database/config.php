@@ -2,7 +2,7 @@
 <?php  
   $dbhost="localhost";
   $dbuser="root";
-  $dbpass="root";
+  $dbpass="";
   $dbname="submission";
   
 $con = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);

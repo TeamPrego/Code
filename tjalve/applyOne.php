@@ -11,7 +11,7 @@
 <!--Div for the form -->
 <div id="leftPartOfApplication">
 	<table class ="formDiv">
-		<form id="firstForm" name="firstForm" method="post" action="addContactPerson.php"> 
+		<form id="firstForm" name="firstForm" method="post" action="database/addContactPerson.php"> 
 			<tr>
 				<td>
 					<label for="select">
@@ -44,7 +44,7 @@
 			
 			<tr> 
 				<td>E-mail:</td>
-				<td><input type="email" name="email" id="email" placeholder="namn@exempel.se" required></input></td>
+				<td><input type="email" name="contactEmail" id="email" placeholder="namn@exempel.se" required></input></td>
 			</tr>
 			
 			<tr>
@@ -54,7 +54,7 @@
 			
 			<tr>
 				<td>Telefon:</td>
-				<td><input type="text" name="phonenumber" id="phoneNumber" placeholder="ex 07x-xxx xxx xx"required></input></td>
+				<td><input type="text" name="contactPhone" id="contactPhone" placeholder="ex 07x-xxx xxx xx"required></input></td>
 			</tr>
 			
 			<tr>
