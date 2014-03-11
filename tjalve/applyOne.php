@@ -11,7 +11,7 @@
 <!--Div for the form -->
 <div id="leftPartOfApplication">
 	<table class ="formDiv">
-		<form id="firstForm" name="firstForm" method="post" action="database/addContactPerson.php"> 
+		<form id="firstForm" name="firstForm" method="post" action="applyTwo.php"> 
 			<tr>
 				<td>
 					<label for="select">

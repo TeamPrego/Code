@@ -9,13 +9,10 @@ session_start();
 <!--Line -->
 <hr>
 <?php
-	include "database/config.php";
-	$data = mysqli_query($con, "SELECT * FROM contact WHERE contactPhone='111'");
-	echo $data->fetch_object()->contactId;
-	/*
-	while($row = $data->fetch_object()) {
-		echo $row->contactId;
-	}	*/
+
+	if (isset($_POST) && count($_POST))
+		$_SESSION['post'] = $_POST;
+	print_r($_SESSION);
 ?>
 
 <h2>Steg två</h2>
