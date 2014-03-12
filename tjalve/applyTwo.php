@@ -9,18 +9,18 @@ session_start();
 <!--Line -->
 <hr>
 <?php
-
-	if (isset($_POST) && count($_POST))
-		$_SESSION['post'] = $_POST;
-	print_r($_SESSION);
+	include "database/config.php";
+	$contactId = $_GET['contactId'];
+	echo "contactId " . $contactId;
 ?>
 
 <h2>Steg två</h2>
 
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
-	<table class ="formDiv" method="POST" action="database/addParticipant.php">
-		<form method="post" id="firstForm" name="firstForm"> 
+	<table class ="formDiv">
+		<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
+			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">;
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
@@ -33,7 +33,7 @@ session_start();
 			<tr>
 				<td>Födelseår:</td>
 				<td>
-					<input type="number" name="yearOfBirth" id="yearOfBirth" min="1900" max="2050" required/>
+					<input type="number" name="bYear" id="yearOfBirth" min="1900" max="2050" required/>
 				</td> 
 			</tr>
 			<tr>

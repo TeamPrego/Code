@@ -11,7 +11,7 @@
 <!--Div for the form -->
 <div id="leftPartOfApplication">
 	<table class ="formDiv">
-		<form id="applyForm" name="firstForm" method="post" action="applyTwo.php"> 
+		<form id="firstForm" name="firstForm" method="post" action="database/addContact.php"> 
 			<tr>
 				<td>
 					<label for="select">
@@ -19,13 +19,13 @@
 					</label>
 				</td>
 				<td>
-					<select>
+					<select name="chooseClub" id="chooseClub">
 						<?php
 							include "database/config.php";
 							$data = mysqli_query($con, "SELECT Name FROM clubs");
 							$count = 0;
 							while($row = $data->fetch_object()) {
-								echo "<option value='" .$count. "'>" .$row->Name. "</option>";
+								echo "<option value='" .$row->Name. "'>" .$row->Name. "</option>";
 								$count = $count + 1;
 							}					
 						?>
