@@ -10,20 +10,18 @@ session_start();
 <hr>
 <?php
 	include "database/config.php";
-	$data = mysqli_query($con, "SELECT * FROM contact WHERE contactPhone='111'");
-	echo $data->fetch_object()->contactId;
-	/*
-	while($row = $data->fetch_object()) {
-		echo $row->contactId;
-	}	*/
+	$contactId = $_GET['contactId'];
+	echo "contactId " . $contactId;
+
 ?>
 
 <h2>Steg två</h2>
 
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
-	<table class ="formDiv" method="POST" action="database/addParticipant.php">
-		<form method="post" id="firstForm" name="firstForm"> 
+	<table class ="formDiv">
+		<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
+			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">;
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
@@ -36,7 +34,7 @@ session_start();
 			<tr>
 				<td>Födelseår:</td>
 				<td>
-					<input type="number" name="yearOfBirth" id="yearOfBirth" min="1900" max="2050" required/>
+					<input type="number" name="bYear" id="yearOfBirth" min="1900" max="2050" required/>
 				</td> 
 			</tr>
 			<tr>
