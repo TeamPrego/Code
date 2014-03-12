@@ -13,6 +13,6 @@
 	$contactId = $data->fetch_object()->contactId;
 
 	mysqli_close($con);
-	//header("Location: ../../applyTwo.php?contactId=".$contactId);
+	//header("Location: ../../applyTwo.php?&cId=".$cId);
 	header("Location: ../applyTwo.php?contactId=".$contactId);
 ?>

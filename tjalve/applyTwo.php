@@ -12,6 +12,7 @@ session_start();
 	include "database/config.php";
 	$contactId = $_GET['contactId'];
 	echo "contactId " . $contactId;
+
 ?>
 
 <h2>Steg två</h2>

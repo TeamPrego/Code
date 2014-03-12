@@ -34,7 +34,7 @@
 					<a id="addTeam" href="createNewClub.php">Klicka här</a>
 				</td>
 			</tr>
-			<!-- Contact -->
+
 			<tr>
 				<td>Kontaktperson:</td>
 				<td><input type="text" name="contactPerson" id="contactPerson" placeholder="Namn"required></input></td>
@@ -57,74 +57,14 @@
 			
 			<tr>
 				<td></td>
-				<td></td>
-			</tr>
-
-			<!-- Participant -->
-			<tr>
-				<td>Förnamn:</td>
-				<td><input type="text" name="fName" id="firstName" required/></td>
-			</tr>
-
-			<tr>
-				<td>Efternamn:</td>
-				<td><input type="text" name="lName" id="lastName" required/></td>
-			</tr>
-			<tr>
-				<td>Födelseår:</td>
-				<td>
-					<input type="number" name="yearOfBirth" id="yearOfBirth" min="1900" max="2050" required/>
-				</td> 
-			</tr>
-			<tr>
-				<td><label for="select">Klass:</label></td>
-				<td>
-					<select name="chooseClass" id="chooseClass" required>
-					<option> - Välj klass - </option>
-					<option value="P11"> P11 </option>
-					<option value="P12"> P12 </option>
-					<option value="P13"> P13 </option>
-					<option value="P14"> P14 </option>
-					</select>
-				</td>
-				<td>
-					<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/>
-				</td>
+				<td><a href="applyTwo.php"><input type="submit" name="continues" id="continues" value="Fortsätt"></a></td>
 			</tr>
 		</form>
 	</table>
-	<!-- Table of which sports the competitor should participate in -->
-	<div id="tableOfDisciplines">
-	</div>
 </div>
 
+<!--The Informationtext -->
 <script type="text/javascript">
-	$('#chooseClass').change(function() {
-		var inp = $(this).find(":selected").text();
-		$.ajax({
-			data: {
-				'name': inp
-			},
-			url: 'getAvailableDisciplines.php',
-			success: function(content) {
-				content = $.parseJSON(content);
-
-				var dat_string = '<table><tr><th></th> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
-				$.each(content, function(index, value) {
-					dat_string += 	'<tr><td><input type = "checkbox" id = "check" value="check"/></td><td>'
-									 + value.gren 
-									 + '</td><td>Ålderklass</td><td><input type="text" name="personBest" id="personBest"/></td>'
-									 + '<td><input type="text" name="seasonBest" id="seasonBest"/></td></tr>'
-				});
-				dat_string += '</table>';
-
-				document.getElementById('tableOfDisciplines').innerHTML = dat_string;
-				//$('#tableOfDisciplines').html(dat_string);
-			}
-		});
-	});
-
-	//The Information text
 	jQuery(document).ready(function() {
 		jQuery(".infoText").hide();
 		//toggle the componenet with class msg_body
