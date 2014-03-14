@@ -75,7 +75,6 @@ session_start();
 			url: 'getAvailableDisciplines.php',
 			success: function(content) {
 				content = $.parseJSON(content);
-
 				var dat_string = '<table><tr><th></th> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
 				$.each(content, function(index, value) {
 					dat_string += 	'<tr><td><input type = "checkbox" id = "check" value="check"/></td><td>'

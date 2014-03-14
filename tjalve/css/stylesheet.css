@@ -263,10 +263,6 @@ h4{
 	margin-bottom: 5%;
 }
 
-#seasonBest{
-	border-radius: 7px;
-}
-
 #contactPerson, 
 #email,
 #repeatEmail,
@@ -277,8 +273,8 @@ h4{
 #firstName,
 #lastName,
 #chooseClass,
-#addParticipator
-#personBest
-#seasonBest{
+#addParticipator,
+#seasonBest,
+#personBest{
 	border-radius: 7px;
 }
