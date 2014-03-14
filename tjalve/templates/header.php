@@ -3,6 +3,7 @@
 <!--granskad och godkänd 2014-03-03-->
 <html>
 	<head>
+		<link href="pic/tjalve_t_icon.ico" rel="shortcut icon" type="image/x-icon" />
 		<meta charset="UTF-8">
 		<title>
 			 Tjalve
