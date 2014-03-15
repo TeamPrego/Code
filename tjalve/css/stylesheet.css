@@ -87,16 +87,6 @@ h4{
   padding-left:4em;
 }
 
-/* The form för applications */
-.formDiv{
-	border-right: 3px solid #344cc2;
-	float: left;
-	padding-left: 10px;
-	text-align: left;
-	width: 100%;
-}
-
-
 /* Text which is important */
 .importantText{
 	font-weight: bold;
@@ -221,6 +211,15 @@ h4{
 
 #dropDown{
 	margin-left: 5%;
+}
+
+/* The form för applications */
+#formDiv{
+	border-right: 3px solid #344cc2;
+	float: left;
+	padding-left: 10px;
+	text-align: left;
+	width: 100%;
 }
 
 #leftPartOfApplication{

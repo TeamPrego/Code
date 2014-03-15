@@ -13,9 +13,9 @@ session_start();
 
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
-	<table class ="formDiv">
-		<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
-			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">;
+	<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
+		<table id ="formDiv">
+			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
@@ -42,15 +42,11 @@ session_start();
 					<option value="P14"> P14 </option>
 					</select>
 				</td>
-				<td>
-					<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/>
-				</td>
 			</tr>
+		</table>
+		<div id="kuk">
 		</form>
-	</table>
-	<!-- Table of which sports the competitor should participate in -->
-	<div id="tableOfDisciplines">
-	</div>
+		</div>
 </div>
 
 <!--The Informationtext -->
@@ -75,17 +71,19 @@ session_start();
 			url: 'getAvailableDisciplines.php',
 			success: function(content) {
 				content = $.parseJSON(content);
-				var dat_string = '<table><tr><th></th> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
+				var dat_string = '<table>';
+				dat_string += '<tr><th></th> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
 				$.each(content, function(index, value) {
-					dat_string += 	'<tr><td><input type = "checkbox" id = "check" value="check"/></td><td>'
+					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
 									 + value.gren 
-									 + '</td><td>Ålderklass</td><td><input type="text" name="personBest" id="personBest"/></td>'
-									 + '<td><input type="text" name="seasonBest" id="seasonBest"/></td></tr>'
+									 + '</td><td>Ålderklass</td><td>'
+									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
+									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
 				});
 				dat_string += '</table>';
+				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
 
-				document.getElementById('tableOfDisciplines').innerHTML = dat_string;
-				//$('#tableOfDisciplines').html(dat_string);
+				document.getElementById('kuk').innerHTML = dat_string;
 			}
 		});
 	});
