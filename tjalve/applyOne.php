@@ -7,10 +7,10 @@
 <h1> Anmälan till "tävlingsnamn" </h1>
 <!--Line -->
 <hr>
-<h2>Steg ett</h2>
 <!--Div for the form -->
 <div id="leftPartOfApplication">
-	<table class ="formDiv">
+	<h2>Skriv in kontaktpersons-uppgifter</h2>
+	<table id ="formDiv">
 		<form id="firstForm" name="firstForm" method="post" action="database/addContact.php"> 
 			<tr>
 				<td>
