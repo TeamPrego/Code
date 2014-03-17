@@ -92,16 +92,6 @@ h4{
 	font-weight: bold;
 }
 
-/* Infotext in the application-site*/
-#infoText{
-	border: 3px solid #344cc2;
-	border-radius: 7px;
-	font-family:"Verdana";
-	font-size: 0.8em;
-	margin-right: 5%;
-	margin-left: 5%;
-  text-align: left;
-}
 /* In the footer */
 .left-links{
 	float:left;
@@ -220,9 +210,14 @@ h4{
 	margin-left: 5%;
 }
 
+#edit-button{
+  background-color: #34eb31;
+  margin: 0 10% 0 90%;
+}
+
 /* The form för applications */
 #formDiv{
-	border-right: 3px solid #344cc2;
+	border-right: 3px solid #348cc2;
 	float: left;
 	text-align: left;
 	width: 100%;
@@ -233,6 +228,17 @@ h4{
 	float: left;
 	margin-left: 5%;
 	margin-bottom: 5%;
+}
+
+/* Infotext in the application-site*/
+#infoText{
+	border: 3px solid #344cc2;
+	border-radius: 7px;
+	font-family:"Verdana";
+	font-size: 0.8em;
+	margin-right: 5%;
+	margin-left: 5%;
+  text-align: left;
 }
 
 #innerBody{
