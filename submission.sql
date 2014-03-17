@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 17 mars 2014 kl 14:07
+-- Skapad: 17 mars 2014 kl 16:23
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
 
@@ -93,11 +93,13 @@ CREATE TABLE IF NOT EXISTS `clubs` (
 --
 
 INSERT INTO `clubs` (`Name`, `Phonenumber`, `Email`, `Adress`, `Zip`) VALUES
+('AlexKlubb', '', '', '', ''),
 ('Annasklubb', '03879438946', '', '', ''),
 ('Dagvalls IF', '1233456', '', 'Hemma', '14424 Hemma'),
 ('Emmas YK', '0735511822', '', '', ''),
 ('Hannes FK', 'soas', 'hannes@het.com', 'iosdhiosdioh', 'dsdship'),
 ('Hannes Nya Klubb', '073552211', '', '', ''),
+('Norrköpings IF', '', '', '', ''),
 ('Philips egna', '073555 5 555 ', 'philip@hej.com', '', ''),
 ('SebClub', '012862', '', '', ''),
 ('skräp', '1234', '', '', ''),
@@ -141,14 +143,16 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `contactEmail` varchar(100) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   `contactPhone` int(14) DEFAULT NULL,
   PRIMARY KEY (`contactId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumpning av Data i tabell `contact`
 --
 
 INSERT INTO `contact` (`competitionId`, `contactId`, `club`, `contactPerson`, `contactEmail`, `contactPhone`) VALUES
-(1, 22, 'SebClub', 'KingKong', 'a@sg.se', 91);
+(1, 22, 'SebClub', 'KingKong', 'a@sg.se', 91),
+(1, 23, 'Annasklubb', 'Hannes', 'hannesingelhag@hotmail.com', 9181),
+(1, 24, 'Norrköpings IF', 'Emma Pemma', 'tomas@hotmail.com', 765426);
 
 -- --------------------------------------------------------
 
@@ -163,6 +167,16 @@ CREATE TABLE IF NOT EXISTS `disciplines` (
   `SB` text CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `PB` text CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumpning av Data i tabell `disciplines`
+--
+
+INSERT INTO `disciplines` (`participantId`, `class`, `discipline`, `SB`, `PB`) VALUES
+(81, 'P7', '100 m', '', ''),
+(82, 'P14', 'Höjdhopp', '', ''),
+(82, 'P14', 'Längdhopp', '', ''),
+(82, 'P14', 'Kula', '', '');
 
 -- --------------------------------------------------------
 
@@ -180,7 +194,14 @@ CREATE TABLE IF NOT EXISTS `participant` (
   `class` varchar(5) NOT NULL,
   `discipline` varchar(50) NOT NULL,
   PRIMARY KEY (`participantId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
+
+--
+-- Dumpning av Data i tabell `participant`
+--
+
+INSERT INTO `participant` (`contactId`, `participantId`, `bib`, `firstName`, `lastName`, `birthYear`, `class`, `discipline`) VALUES
+(24, 82, 10, 'Hannes', 'Ingelhag', 1989, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
