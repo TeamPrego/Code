@@ -1,9 +1,18 @@
 <!--Create competition page-->
 <!--Granskad och godkänd 2014-03-04-->
+
 <?php
 include "templates/adminheader.php";
 ?>
-<h1> "sätt in tävlingens namn här från createCompetition </h1>
+<div id="comp">
+		<?php
+		include "database/getCompetition.php";
+		
+		//include "database/getCompetitionIcon.php";
+		?>
+	<!--<img id ="adminpicid" src="upload/tjalve_t.png" alt ="adminlogga" />-->
+</div>
+
 
 visa bilden som laddades upp på tidiagre sidan 
 visa även datum, anmälningsdatum och liknande så men kan se att man har fyllt i rätt.
@@ -12,6 +21,7 @@ visa även datum, anmälningsdatum och liknande så men kan se att man har fyllt
 Välj åldesklass och resp. gren här:
 
 <table class ="createcompTable">
+	
       <td>Åldersklass:</td>
 	  
       <td colspan="2"> 
@@ -32,7 +42,7 @@ Välj åldesklass och resp. gren här:
           </select>
 
         Herrar:	
-          <select id="droplistMale" onchange="maleDisplay()">
+          <select id="droplistMale" name="droplistMale" onchange="maleDisplay()">
             <option></option>
             <option value="p7">P7</option>
             <option value="p8">P8</option>
@@ -50,9 +60,10 @@ Välj åldesklass och resp. gren här:
       </td>
     <script src="createCompetition.js"></script>
 	</tr>	
+	
 </table>
-
-<div id ="chosenAge">Vald ålderssdsklass: <input type="text" id="age" size="4" disabled style="color:black"></input></div>
+<form id="ageClass" name="ageClass" method="post" action="database/addAgeClass.php"> 
+<div id ="chosenAge">Vald ålderssdsklass: <input  id="age" name="age" size="4" ></input></div><!--type="text" disabled style="color:black"-->
 
 <table class ="createcompTable">
   <tr>
@@ -65,14 +76,16 @@ Välj åldesklass och resp. gren här:
   </tr>
   <tr>
     <td>
-      <textarea rows="4" cols="50">Test</textarea>
+      <!--<textarea rows="4" cols="50">Test</textarea>-->
+	  <input name="event" id="event"></input>
     </td>
     <td>
-      <textarea rows="4" cols="50">Textarea2</textarea>
+      <!--<textarea rows="4" cols="50">Textarea2</textarea>-->
+	  <input type="submit" name="submit" value="Spara!!!!!!!!!!!">
     </td>
   </tr>
 </table>
-
+</form>
 <?php
 include "templates/adminfooter.php";
 ?>
