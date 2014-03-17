@@ -7,12 +7,30 @@
 
 <div id = "leftPartOfApplication">
 	<h2>Nummerlappsinformation</h2>
-	<table>
+
+	<form method='POST' id='firstForm' name='firstForm' action='database/addRaceBib.php'>
+
+	<?php
+	include "database/config.php";
+
+	$query = "SELECT * FROM participant";
+	$data = mysqli_query($con, $query);
+	
+	if (!$data) {
+	  die('Error: ' . mysqli_error($con));
+	}
+
+	$count = 0;
+	while($row = $data->fetch_object())
+		$count +=1;
+
+	echo "<table>
 		<tr><td>Välj tävling: </td> <td>Scroll</td>
-		<tr><td>Antaltävlande</td> <td>Antal</td>
-		<tr><td>Startnummer: </td> <td>0</td>
-		<tr><td>Slutnummer: </td> <td>Antal</td>
+		<tr><td>Antaltävlande:</td> <td>".$count."</td>
+		<tr><td>Startnummer: </td> <td><input name='bibBegin' value='10'</input></td>
 	</table>
+	<input type='submit' name='addParticipator' id='addParticipator' value='Uppdatera'/></form>";
+	?>
 </div>
 
 <div id = "rightPartOfApplication">
