@@ -1,4 +1,5 @@
 <?php
+	ob_start();
 	include "config.php";
 	
 	$sql = "INSERT INTO contact (club ,contactPerson, contactEmail, contactPhone)
@@ -13,6 +14,6 @@
 	$contactId = $data->fetch_object()->contactId;
 
 	mysqli_close($con);
-	//header("Location: ../../applyTwo.php?&cId=".$cId);
 	header("Location: ../applyTwo.php?contactId=".$contactId);
+	ob_end_flush();
 ?>
