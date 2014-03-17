@@ -13,8 +13,14 @@
 	
 	$row = $data->fetch_object();
 	echo "<div id='competition'><h1>" . $row->compName . "</h1></div>";	
+<<<<<<< HEAD
 	echo "<img id ='compLogo' src=". $row->compIcon ." alt ='Image' />";
 	mysqli_close($con);
 	?>
 
 
+=======
+	
+	mysqli_close($con);
+	?>
+>>>>>>> 58104874a8f6145812586926de92b0ebe2f36ec6

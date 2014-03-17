@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.0.6
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2014 at 08:27 AM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.12
+-- Generation Time: Mar 17, 2014 at 10:20 AM
+-- Server version: 5.5.33
+-- PHP Version: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `age_class`
 --
 
-CREATE TABLE IF NOT EXISTS `age_class` (
+CREATE TABLE `age_class` (
   `compID` int(11) NOT NULL AUTO_INCREMENT,
   `ageClass` varchar(4) NOT NULL,
   `event` varchar(40) NOT NULL,

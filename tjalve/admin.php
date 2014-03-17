@@ -29,7 +29,7 @@ include "templates/adminheader.php";
 		
 		<tr>
 			<td><button class="button">Resultat</button></td>
-			<td><button class="button">Tävlingsnummer</button></td>
+			<td><a href="setRaceBib.php"><button class="button">Tävlingsnummer</button></a></td>
 		</tr>
 		
 		<tr>
