@@ -16,5 +16,5 @@
 		<div id = "innerBody">
 			<div id = "logga">
         <a href="index.php"><img src="pic/logga.jpg" alt="sidans logga" /></a>
-      </div>
-			<hr>
+      		</div>
+		<hr>

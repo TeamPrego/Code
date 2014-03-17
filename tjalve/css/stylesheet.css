@@ -87,23 +87,13 @@ h4{
   padding-left:4em;
 }
 
-/* The form för applications */
-.formDiv{
-	border-right: 3px solid #344cc2;
-	float: left;
-	padding-left: 10px;
-	text-align: left;
-	width: 100%;
-}
-
-
 /* Text which is important */
 .importantText{
 	font-weight: bold;
 }
 
 /* Infotext in the application-site*/
-.infoText{
+#infoText{
 	border: 3px solid #344cc2;
 	border-radius: 7px;
 	font-family:"Verdana";
@@ -151,6 +141,8 @@ h4{
 
 #addParticipator{
 	border-radius: 7px;
+	float: right;
+	margin-right: 5%;
 }
 
 /* Add team to the database */
@@ -174,20 +166,25 @@ h4{
 	width: 40%
 }
 
-#confirmedParticipantTable{
+#confirmedDiv {
 	margin-left: 5%;
+}
+
+#confirmedParticipantTable{
 	margin-right: 5%;
 	width: 100%;
 }
+
 #confirmedParticipantTable td {
-	width: 25%;
+	width: 20%;
 }
 
 #confirmedParticipantOneEach{
 	border: 3px solid #344cc2;
 	border-radius: 7px;
-	margin-left: 5%;
 	margin-right: 5%;
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
 }
 
 #deleteButton{
@@ -223,9 +220,18 @@ h4{
 	margin-left: 5%;
 }
 
-#leftPartOfApplication{
-	width: 50%;
+/* The form för applications */
+#formDiv{
+	border-right: 3px solid #344cc2;
 	float: left;
+	text-align: left;
+	width: 100%;
+}
+
+#leftPartOfApplication{
+	width: 45%;
+	float: left;
+	margin-left: 5%;
 	margin-bottom: 5%;
 }
 
@@ -250,6 +256,10 @@ h4{
   vertical-align: middle;
 }
 
+#noParticipants {
+	color: red;
+}
+
 #result-button {
 	background: #d95243;
 	height: 2em;
@@ -258,23 +268,36 @@ h4{
 }
 
 #rightPartOfApplication{
-	width: 50%;
+	width: 45%;
 	float: right;
 	margin-bottom: 5%;
+	margin-right: 5%;
+}
+
+#whichDisciplines {
+	border-right: 3px solid #344cc2;
+	width: 100%;
+}
+
+#whichDisciplines th{
+	text-align: center;
+}
+
+#seasonBest,
+#personBest{
+	border-radius: 7px;
+	width: 90%;
 }
 
 #contactPerson, 
 #email,
 #repeatEmail,
-#telephoneNumber,
+#contactPhone,
 #chooseClub,
 #continues,
 #yearOfBirth,
 #firstName,
 #lastName,
-#chooseClass,
-#addParticipator,
-#seasonBest,
-#personBest{
+#chooseClass{
 	border-radius: 7px;
 }
