@@ -4,29 +4,12 @@
 <?php
 include "templates/adminheader.php";
 ?>
-<<<<<<< HEAD
-=======
 
->>>>>>> 58104874a8f6145812586926de92b0ebe2f36ec6
 <div id="comp">
 		<?php
 		include "database/getCompetition.php";
-		
-		//include "database/getCompetitionIcon.php";
 		?>
-<<<<<<< HEAD
-	<!--<img id ="adminpicid" src="upload/tjalve_t.png" alt ="adminlogga" />-->
 </div>
-
-=======
-</div>
-
-<h1> "sätt in tävlingens namn här från createCompetition </h1>
->>>>>>> 58104874a8f6145812586926de92b0ebe2f36ec6
-
-visa bilden som laddades upp på tidiagre sidan 
-visa även datum, anmälningsdatum och liknande så men kan se att man har fyllt i rätt.
-
 
 Välj åldesklass och resp. gren här:
 
@@ -86,12 +69,7 @@ Välj åldesklass och resp. gren här:
   </tr>
   <tr>
     <td>
-<<<<<<< HEAD
-      <!--<textarea rows="4" cols="50">Test</textarea>-->
-	  <input name="event" id="event"></input>
-=======
       <textarea rows="4" cols="50"><?php include "database/getAllDisciplines.php"; ?></textarea>
->>>>>>> 58104874a8f6145812586926de92b0ebe2f36ec6
     </td>
     <td>
       <!--<textarea rows="4" cols="50">Textarea2</textarea>-->

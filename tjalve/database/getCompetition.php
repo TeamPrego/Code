@@ -10,17 +10,13 @@
 	if (!$data) {
 	  die('Error: ' . mysqli_error($con));
 	}
-	
 	$row = $data->fetch_object();
 	echo "<div id='competition'><h1>" . $row->compName . "</h1></div>";	
-<<<<<<< HEAD
 	echo "<img id ='compLogo' src=". $row->compIcon ." alt ='Image' />";
-	mysqli_close($con);
-	?>
-
-
-=======
+	echo "<div id='competition'> Arrangör: " . $row->compArr . "</div>";	
+	echo "<div id='competition'> Tävlingsdatum: " . $row->compDate . "</div>";	
+	echo "<div id='competition'> Sista anmälningsdag: " . $row->compLastDate . "</div>";	
 	
 	mysqli_close($con);
 	?>
->>>>>>> 58104874a8f6145812586926de92b0ebe2f36ec6
+
