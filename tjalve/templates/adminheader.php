@@ -2,7 +2,7 @@
 <!--This is a so called admin header man-->
 <html>
 	<head>
-	<link href="pic/tjalve_t_icon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link href="pic/tjalve_t_icon.ico" rel="shortcut icon" type="image/x-icon" />
 		<meta charset="UTF-8">
 		<title>
 			 Tjalve - Administratör

@@ -1,4 +1,6 @@
 <?php
+include "config.php";
+
 if ($_FILES["file"]["error"] > 0)
   {
   echo "Error: " . $_FILES["file"]["error"] . "<br>";
@@ -10,7 +12,9 @@ else
   echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
   echo "Stored in: " . $_FILES["file"]["tmp_name"];
   }
-
+  
+  
+/*
 $allowedExts = array("gif", "jpeg", "jpg", "png");
 $temp = explode(".", $_FILES["file"]["name"]);
 $extension = end($temp);
@@ -78,5 +82,5 @@ if ((($_FILES["file"]["type"] == "image/gif")
 else
   {
   echo "Invalid file";
-  }
+  } */
 ?>
