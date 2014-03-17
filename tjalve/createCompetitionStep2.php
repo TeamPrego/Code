@@ -3,6 +3,15 @@
 <?php
 include "templates/adminheader.php";
 ?>
+
+<div id="comp">
+		<?php
+		include "database/getCompetition.php";
+		
+		//include "database/getCompetitionIcon.php";
+		?>
+</div>
+
 <h1> "sätt in tävlingens namn här från createCompetition </h1>
 
 visa bilden som laddades upp på tidiagre sidan 
@@ -65,7 +74,7 @@ Välj åldesklass och resp. gren här:
   </tr>
   <tr>
     <td>
-      <textarea rows="4" cols="50">Test</textarea>
+      <textarea rows="4" cols="50"><?php include "database/getAllDisciplines.php"; ?></textarea>
     </td>
     <td>
       <textarea rows="4" cols="50">Textarea2</textarea>
