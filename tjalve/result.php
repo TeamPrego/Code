@@ -39,6 +39,7 @@ include "templates/header.php";
       //Creates a proper sql-string and chooses the right table from it
       $choice = mysqli_real_escape_string($con, $_POST["drop-list"]);
       $result = mysqli_query($con,"SELECT * FROM $choice");
+
       //creates an array for column names
       $columns = array();
       
