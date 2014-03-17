@@ -9,13 +9,12 @@ session_start();
 <!--Line -->
 <hr>
 
-<h2>Steg två</h2>
-
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
-	<table class ="formDiv">
-		<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
-			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">;
+	<h2>Skriv in deltagarinformation</h2>
+	<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
+		<table id ="formDiv">
+			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
@@ -42,25 +41,25 @@ session_start();
 					<option value="P14"> P14 </option>
 					</select>
 				</td>
-				<td>
-					<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/>
-				</td>
 			</tr>
+		</table>
+		<div id="kuk">
 		</form>
-	</table>
-	<!-- Table of which sports the competitor should participate in -->
-	<div id="tableOfDisciplines">
-	</div>
+		</div>
 </div>
 
 <!--The Informationtext -->
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		jQuery(".infoText").hide();
+		jQuery("#infoText").hide();
 		//toggle the componenet with class msg_body
 		jQuery(".cthrough").click(function(e) {
 			e.preventDefault();
-			jQuery(this).next(".infoText").slideToggle(500);
+			jQuery(this).next("#infoText").slideToggle(500);
+			if(document.getElementById('dropDown').innerHTML == "För hjälp, klicka här")
+				document.getElementById('dropDown').innerHTML = "För att ta bort info, klicka här";
+			else
+				document.getElementById('dropDown').innerHTML = "För hjälp, klicka här";
 		});
 	});	
 
@@ -75,25 +74,33 @@ session_start();
 			url: 'getAvailableDisciplines.php',
 			success: function(content) {
 				content = $.parseJSON(content);
-				var dat_string = '<table><tr><th></th> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
+				var dat_string = '<table id="whichDisciplines">';
+				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
 				$.each(content, function(index, value) {
-					dat_string += 	'<tr><td><input type = "checkbox" id = "check" value="check"/></td><td>'
+					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
 									 + value.gren 
-									 + '</td><td>Ålderklass</td><td><input type="text" name="personBest" id="personBest"/></td>'
-									 + '<td><input type="text" name="seasonBest" id="seasonBest"/></td></tr>'
+									 + '</td><td>'+inp+'</td><td>'
+									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
+									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
 				});
 				dat_string += '</table>';
+				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
 
-				document.getElementById('tableOfDisciplines').innerHTML = dat_string;
-				//$('#tableOfDisciplines').html(dat_string);
+				document.getElementById('kuk').innerHTML = dat_string;
 			}
 		});
 	});
 </script>
 
 <div id="rightPartOfApplication">
+	<h2>Dina anmälda tävlande</h2>
+	<div id="confirmedDiv">
+		<?php
+		include "database/findParticipants.php";
+		?>
+	</div>
 	<a id="dropDown" href="#" class="cthrough">För hjälp, klicka här</a>
-	<div class="infoText">
+	<div id="infoText">
 		<ol>
 			<li>
 	      Välj klubb och skriv in uppgifter om kontaktpersonen
@@ -114,11 +121,6 @@ session_start();
 				Lycka till
 	    	</li>
 		</ol>
-	</div>
-	<div id="confirmed">
-		<?php
-		include "database/findParticipants.php";
-		?>
 	</div>
 </div>
 

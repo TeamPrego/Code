@@ -13,16 +13,16 @@
 		  $dbname="submission";
 		  break;
 		case 2:
-			$dbhost="localhost";
+		  $dbhost="localhost";
 		  $dbuser="root";
 		  $dbpass="root";
 		  $dbname="submission";
 		  break;
 		 case 3:
-		 	$dbhost="localhost";
-		  $dbuser="root";
-		  $dbpass="";
-		  $dbname="submission";
+		  $dbhost="submission-192031.mysql.binero.se";
+		  $dbuser="192031_ds55616";
+		  $dbpass="TeamPrego";
+		  $dbname="192031-submission";
 		  break;
 	}
   
