@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 15 mars 2014 kl 12:20
+-- Skapad: 17 mars 2014 kl 08:41
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `contactEmail` varchar(100) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   `contactPhone` int(14) DEFAULT NULL,
   PRIMARY KEY (`contactId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumpning av Data i tabell `contact`
@@ -80,7 +80,8 @@ INSERT INTO `contact` (`competitionId`, `contactId`, `club`, `contactPerson`, `c
 (NULL, 16, 'SebClub', 'Tobbe', 'Rasmus270@hotmail.com', 54545),
 (NULL, 17, 'Annasklubb', 'Anna', 'anna@tjalve.nu', 73557722),
 (NULL, 18, 'Philips egna', 'Philip', 'Rasmus270@hotmail.com', 1234),
-(NULL, 19, 'Hannes FK', 'Hannes', 'hannesingelhag@hotmail.com', 1234);
+(NULL, 19, 'Hannes FK', 'Hannes', 'hannesingelhag@hotmail.com', 1234),
+(NULL, 20, 'Annasklubb', 'Hannes', 'hannesingelhag@hotmail.com', 73663772);
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,19 @@ INSERT INTO `disciplines` (`participantId`, `class`, `discipline`, `SB`, `PB`) V
 (72, 'P11', 'Höjdhopp', 'SB.Höjdhopp', 'PB.Höjdhopp'),
 (72, 'P11', 'Längdhopp', 'SB.Längdhopp', 'PB.Längdhopp'),
 (73, 'P12', 'Höjdhopp', 'b', 'a'),
-(73, 'P12', 'Längdhopp', 'd', 'c');
+(73, 'P12', 'Längdhopp', 'd', 'c'),
+(74, 'P12', 'Höjdhopp', '', ''),
+(74, 'P12', 'Längdhopp', '', ''),
+(75, 'P11', 'Höjdhopp', '', ''),
+(75, 'P11', 'Längdhopp', '', ''),
+(76, 'P12', 'Höjdhopp', '', ''),
+(76, 'P12', 'Längdhopp', '', ''),
+(77, 'P11', 'Höjdhopp', '', ''),
+(78, 'P11', 'Höjdhopp', '', ''),
+(79, 'P12', 'Höjdhopp', '', ''),
+(79, 'P12', 'Längdhopp', '', ''),
+(80, 'P12', 'Höjdhopp', '', ''),
+(80, 'P12', 'Längdhopp', '', '');
 
 -- --------------------------------------------------------
 
@@ -120,27 +133,25 @@ INSERT INTO `disciplines` (`participantId`, `class`, `discipline`, `SB`, `PB`) V
 CREATE TABLE IF NOT EXISTS `participant` (
   `contactId` int(5) NOT NULL,
   `participantId` int(5) NOT NULL AUTO_INCREMENT,
+  `bib` int(255) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `birthYear` int(4) NOT NULL,
   `class` varchar(5) NOT NULL,
   `discipline` varchar(50) NOT NULL,
   PRIMARY KEY (`participantId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
 
 --
 -- Dumpning av Data i tabell `participant`
 --
 
-INSERT INTO `participant` (`contactId`, `participantId`, `firstName`, `lastName`, `birthYear`, `class`, `discipline`) VALUES
-(11, 29, 'Johan', 'Dagvalk', 1988, 'P12', ''),
-(14, 34, 'Hannes', 'Ingelhag', 1970, 'P14', ''),
-(15, 35, 'Erik', 'Johansson', 1998, 'P13', ''),
-(14, 36, 'Lovisa ', 'Dahl', 1991, 'P14', ''),
-(17, 41, 'Emma', 'Ed', 1987, 'P12', ''),
-(18, 70, 'Petter', 'Niklas', 1990, '', ''),
-(18, 71, 'Henke', 'Penke', 1987, '', ''),
-(18, 73, 'A', 'B', 1990, '', '');
+INSERT INTO `participant` (`contactId`, `participantId`, `bib`, `firstName`, `lastName`, `birthYear`, `class`, `discipline`) VALUES
+(11, 29, 0, 'Johan', 'Dagvalk', 1988, 'P12', ''),
+(14, 34, 0, 'Hannes', 'Ingelhag', 1970, 'P14', ''),
+(15, 35, 0, 'Erik', 'Johansson', 1998, 'P13', ''),
+(14, 36, 0, 'Lovisa ', 'Dahl', 1991, 'P14', ''),
+(17, 41, 0, 'Emma', 'Ed', 1987, 'P12', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

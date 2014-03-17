@@ -7,7 +7,7 @@
 		<title>
 			 Tjalve - Administratör
 		</title>
-		<link rel="stylesheet" href="css/stylesheet.css" />
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
     <link rel="stylesheet" href="css/admin.css" />
 		
 	</head>
@@ -17,5 +17,4 @@
         <img id ="adminpicid" src="pic/taskig_copy.jpg" alt ="adminlogga" />
       </div>
 			<hr>
-      
       <h4>Du är inloggad som primär administratör.</h4>
