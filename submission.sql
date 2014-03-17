@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2014 at 09:48 AM
+-- Generation Time: Mar 17, 2014 at 10:15 AM
 -- Server version: 5.5.33
 -- PHP Version: 5.5.3
 
@@ -78,6 +78,7 @@ INSERT INTO `clubs` (`Name`, `Phonenumber`, `Email`, `Adress`, `Zip`) VALUES
 ('Hannes Nya Klubb', '073552211', '', '', ''),
 ('Philips egna', '073555 5 555 ', 'philip@hej.com', '', ''),
 ('SebClub', '012862', '', '', ''),
+('skräp', '1234', '', '', ''),
 ('Thereseesesesese', '98253810', '', '', '');
 
 -- --------------------------------------------------------
