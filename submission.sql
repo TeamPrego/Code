@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.0.6
 -- http://www.phpmyadmin.net
 --
--- Värd: localhost
--- Skapad: 17 mars 2014 kl 08:41
--- Serverversion: 5.6.12-log
--- PHP-version: 5.4.12
+-- Host: localhost
+-- Generation Time: Mar 17, 2014 at 09:48 AM
+-- Server version: 5.5.33
+-- PHP Version: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,18 +17,47 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databas: `submission`
+-- Database: `submission`
 --
-CREATE DATABASE IF NOT EXISTS `submission` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `submission`;
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `clubs`
+-- Table structure for table `age_class`
 --
 
-CREATE TABLE IF NOT EXISTS `clubs` (
+CREATE TABLE `age_class` (
+  `compID` int(11) NOT NULL AUTO_INCREMENT,
+  `ageClass` varchar(4) NOT NULL,
+  `event` varchar(40) NOT NULL,
+  PRIMARY KEY (`compID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `age_class`
+--
+
+INSERT INTO `age_class` (`compID`, `ageClass`, `event`) VALUES
+(1, '', 'gfsg'),
+(2, '', 'hopp'),
+(3, '', 'hopp'),
+(4, '', 'spriiing!'),
+(5, '', 'springa'),
+(6, 'hej', 'hej'),
+(7, '', ''),
+(8, '', ''),
+(9, '', ''),
+(10, 'F10', ''),
+(11, 'P10', 'springa långt'),
+(12, 'F15', 'hoppa högt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clubs`
+--
+
+CREATE TABLE `clubs` (
   `Name` varchar(30) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `Phonenumber` varchar(30) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   `Email` varchar(30) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
@@ -38,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `clubs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumpning av Data i tabell `clubs`
+-- Dumping data for table `clubs`
 --
 
 INSERT INTO `clubs` (`Name`, `Phonenumber`, `Email`, `Adress`, `Zip`) VALUES
@@ -54,10 +83,10 @@ INSERT INTO `clubs` (`Name`, `Phonenumber`, `Email`, `Adress`, `Zip`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `contact`
+-- Table structure for table `contact`
 --
 
-CREATE TABLE IF NOT EXISTS `contact` (
+CREATE TABLE `contact` (
   `competitionId` int(5) DEFAULT NULL,
   `contactId` int(5) NOT NULL AUTO_INCREMENT,
   `club` varchar(100) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
@@ -68,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Dumpning av Data i tabell `contact`
+-- Dumping data for table `contact`
 --
 
 INSERT INTO `contact` (`competitionId`, `contactId`, `club`, `contactPerson`, `contactEmail`, `contactPhone`) VALUES
@@ -86,10 +115,10 @@ INSERT INTO `contact` (`competitionId`, `contactId`, `club`, `contactPerson`, `c
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `disciplines`
+-- Table structure for table `disciplines`
 --
 
-CREATE TABLE IF NOT EXISTS `disciplines` (
+CREATE TABLE `disciplines` (
   `participantId` int(255) NOT NULL,
   `class` varchar(10) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `discipline` varchar(50) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
@@ -98,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `disciplines` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumpning av Data i tabell `disciplines`
+-- Dumping data for table `disciplines`
 --
 
 INSERT INTO `disciplines` (`participantId`, `class`, `discipline`, `SB`, `PB`) VALUES
@@ -127,10 +156,10 @@ INSERT INTO `disciplines` (`participantId`, `class`, `discipline`, `SB`, `PB`) V
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `participant`
+-- Table structure for table `participant`
 --
 
-CREATE TABLE IF NOT EXISTS `participant` (
+CREATE TABLE `participant` (
   `contactId` int(5) NOT NULL,
   `participantId` int(5) NOT NULL AUTO_INCREMENT,
   `bib` int(255) NOT NULL,
@@ -143,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `participant` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
 
 --
--- Dumpning av Data i tabell `participant`
+-- Dumping data for table `participant`
 --
 
 INSERT INTO `participant` (`contactId`, `participantId`, `bib`, `firstName`, `lastName`, `birthYear`, `class`, `discipline`) VALUES
