@@ -34,7 +34,6 @@ include "database/config.php";
       $choice = mysqli_real_escape_string($con, $_POST["comp-list"]);
       $result = mysqli_query($con,"SELECT * FROM competition WHERE compName='$choice'");
       
-      
       //Saves data as long as their is new data to get. 
       //columns is column-names (fornamn, efternamn etc)
       while ($fieldinfo=mysqli_fetch_field($result)) {
@@ -42,6 +41,7 @@ include "database/config.php";
       }
       
       //Begin creating table. OBS! firstTableList not working properly
+      echo "<form action = \"updateCompetition.php\" method=\"post\" class=\"choice-bar\">";
       echo"<table align= center class=\"firstTableList\">";
       //Adds new column
       
@@ -50,19 +50,49 @@ include "database/config.php";
       }
       
       $row = $result->fetch_object();   
-        echo "<form action = \"updateCompetition.php\" method=\"post\" class=\"choice-bar\">";
+        //echo "<form action = \"updateCompetition.php\" method=\"post\" class=\"choice-bar\">";
         echo"<tr class=\"odd\">";
         echo "<td><input name=\"compID\" id=\"compID\" value=" . $row->compID . " ></input></td>"; 
         echo "<td><input name=\"compName\" id=\"compName\" value=" . $row->compName . "></input></td>";
         echo "<td><input name=\"compArr\" id=\"compArr\" value =" . $row->compArr . "></input></td>";
         echo "<td><input name=\"compDate\" id=\"compDate\" value =" . $row->compDate . "></input></td>";
         echo "<td><input name=\"compLastDate\" id=\"compLastDate\" value =" . $row->compLastDate . "></input></td>";
-        echo "<input type=\"submit\" id=\"change-button\">";
-        echo "</form>";
-    
-       
-        $odd++;
         echo "</table>";
+        echo "<input type=\"submit\" id=\"edit-button\" value=\"Uppdatera\">";
+        echo "</form>";
+        
+        /*Below is code for showing classes and disciplines
+        Might try to shorten code length later
+        */
+        
+        //Creates a proper sql-string and chooses the right table from it
+      //var_dump($choice);
+      $result2 = mysqli_query($con,"SELECT * FROM age_class WHERE compID =" . $row->compID.  ""); //. $row->compID. "");
+      //var_dump($result2);
+      //Begin creating table. 
+     
+      echo"<table align= center class=\"firstTableList\">";
+      //Adds new column
+      //Add entries. Name of competitors, club etc
+      while($row = mysqli_fetch_object($result2)) {
+        if($odd % 2 != 0) {
+          echo"<tr class=\"odd\">";
+        }
+        else {
+          echo"<tr class=\"even\">";
+        }
+        
+        $odd++;
+        
+        
+          echo "<td>" . $row->ageClass . "</td>";
+          echo "<td>" . $row->event . "</td>";
+
+      
+        echo "</tr>";
+      }
+      
+      echo "</table>";
     }
   }
 	mysqli_close($con);	
