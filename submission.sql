@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 14 mars 2014 kl 08:08
+-- Skapad: 15 mars 2014 kl 12:20
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `contactEmail` varchar(100) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   `contactPhone` int(14) DEFAULT NULL,
   PRIMARY KEY (`contactId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumpning av Data i tabell `contact`
@@ -79,7 +79,37 @@ INSERT INTO `contact` (`competitionId`, `contactId`, `club`, `contactPerson`, `c
 (NULL, 15, 'Dagvalls IF', 'Tommy', 'tomas@hotmail.com', 736637722),
 (NULL, 16, 'SebClub', 'Tobbe', 'Rasmus270@hotmail.com', 54545),
 (NULL, 17, 'Annasklubb', 'Anna', 'anna@tjalve.nu', 73557722),
-(NULL, 18, 'Philips egna', 'Philip', 'Rasmus270@hotmail.com', 1234);
+(NULL, 18, 'Philips egna', 'Philip', 'Rasmus270@hotmail.com', 1234),
+(NULL, 19, 'Hannes FK', 'Hannes', 'hannesingelhag@hotmail.com', 1234);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `disciplines`
+--
+
+CREATE TABLE IF NOT EXISTS `disciplines` (
+  `participantId` int(255) NOT NULL,
+  `class` varchar(10) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `discipline` varchar(50) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `SB` text CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `PB` text CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumpning av Data i tabell `disciplines`
+--
+
+INSERT INTO `disciplines` (`participantId`, `class`, `discipline`, `SB`, `PB`) VALUES
+(69, 'P14', 'Höjdhopp', '', ''),
+(69, 'P14', 'Längdhopp', '', ''),
+(70, 'P11', 'Höjdhopp', '', ''),
+(71, 'P14', 'Höjdhopp', '', ''),
+(71, 'P14', 'Längdhopp', '', ''),
+(72, 'P11', 'Höjdhopp', 'SB.Höjdhopp', 'PB.Höjdhopp'),
+(72, 'P11', 'Längdhopp', 'SB.Längdhopp', 'PB.Längdhopp'),
+(73, 'P12', 'Höjdhopp', 'b', 'a'),
+(73, 'P12', 'Längdhopp', 'd', 'c');
 
 -- --------------------------------------------------------
 
@@ -96,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `participant` (
   `class` varchar(5) NOT NULL,
   `discipline` varchar(50) NOT NULL,
   PRIMARY KEY (`participantId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
 
 --
 -- Dumpning av Data i tabell `participant`
@@ -108,7 +138,9 @@ INSERT INTO `participant` (`contactId`, `participantId`, `firstName`, `lastName`
 (15, 35, 'Erik', 'Johansson', 1998, 'P13', ''),
 (14, 36, 'Lovisa ', 'Dahl', 1991, 'P14', ''),
 (17, 41, 'Emma', 'Ed', 1987, 'P12', ''),
-(18, 42, 'Hannes', 'Ingelhag', 1990, 'P11', '');
+(18, 70, 'Petter', 'Niklas', 1990, '', ''),
+(18, 71, 'Henke', 'Penke', 1987, '', ''),
+(18, 73, 'A', 'B', 1990, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
