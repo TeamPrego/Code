@@ -2,7 +2,6 @@
 <?php
 	include "templates/header.php";
 ?>
-<!--Granskad och godkänd 2014-03-04-->	
 <!-- Headning -->
 <h1>Tjalve Friidrott</h1>
 
@@ -15,22 +14,30 @@
 			<th>Startlista</th>
 			<th>Reslutatlista</th>
 	</thead>	
-	
-	<tbody>
-		<tr class="even">
-			<td> Tjalvesupertävling </td>
-			<td><a href="applyOne.php"> Anmäl här </a></td>
-			<td> Yesbox </td>
-			<td> <a href="result.php"> Fetaste Resultatlistan </td>
-		</tr>
+<?php
 
-		<tr class="odd">
-			<td>Hannes-super-tävling</td>
-			<td>Yesbox</td>
-			<td>Ligger ej uppe</td>
-			<td>Ligger ej uppe</td>
-		</tr>
-	</tbody>
+	include "database/config.php";
+
+	$query = "SELECT * FROM competition";
+	$data = mysqli_query($con, $query);
+
+	if (!$data) {
+	  die('Error: ' . mysqli_error($con));
+	}
+
+	$count = 0;
+	while($row = $data->fetch_object()){
+		if($count % 2 === 0)
+			$which = "even";
+		else
+			$which = "odd";
+
+		echo "<tr class='$which'><td>" . $row->compName . "</td>".
+				"<td><a href='applyOne.php?competitionId=".$row->compID."'>Anmäl dig här</a></td>".
+				"<td>Länk</td>".
+				"<td><a href='resultat.php?competitionId=".$row->compID."'>Se resultat här</a></td><tr>";
+	}
+?>
 </table>
 
 <?php

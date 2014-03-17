@@ -19,7 +19,7 @@
 			$which = "odd";
 
 		echo "<tr class='$which'>
-				<td><input name='$row->participantId'value='$row->bib' style='width: 30px; background-color: green'></input> </td><td>" . $row->lastName . ", " . $row->firstName . "</td>";
+				<td><input class='$which' name='$row->participantId'value='$row->bib' style='width: 30px'></input> </td><td>" . $row->lastName . ", " . $row->firstName . "</td>";
 
 		$queryId = "SELECT * FROM contact WHERE contactId = '$row->contactId'";
 		$dataId = mysqli_query($con, $queryId);

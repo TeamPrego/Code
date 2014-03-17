@@ -35,10 +35,19 @@ session_start();
 				<td>
 					<select name="chooseClass" id="chooseClass" required>
 					<option> - Välj klass - </option>
-					<option value="P11"> P11 </option>
-					<option value="P12"> P12 </option>
-					<option value="P13"> P13 </option>
-					<option value="P14"> P14 </option>
+						<?php
+							include "database/config.php";
+							$getCompId = mysqli_query($con, "SELECT * FROM contact WHERE contactId = '$_GET[contactId]'");
+							$compId = $getCompId->fetch_object()->competitionId;
+							$data = mysqli_query($con, "SELECT * FROM age_class WHERE compId= '$compId'");
+							$array=[];
+							while($row = $data->fetch_object()) {
+								if(!in_array($row->ageClass, $array)) {
+									array_push($array, $row->ageClass);
+									echo "<option value='" .$row->ageClass. "'>" .$row->ageClass. "</option>";
+								}
+							}
+						?>
 					</select>
 				</td>
 			</tr>
@@ -71,8 +80,9 @@ session_start();
 			data: {
 				'name': inp
 			},
-			url: 'getAvailableDisciplines.php',
+			url: 'getAvailableDisciplines.php?class='+inp+'',
 			success: function(content) {
+				console.log(content);
 				content = $.parseJSON(content);
 				var dat_string = '<table id="whichDisciplines">';
 				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';

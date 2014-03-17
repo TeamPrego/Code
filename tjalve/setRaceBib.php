@@ -27,7 +27,7 @@
 	echo "<table>
 		<tr><td>Välj tävling: </td> <td>Scroll</td>
 		<tr><td>Antaltävlande:</td> <td>".$count."</td>
-		<tr><td>Startnummer: </td> <td><input name='bibBegin' value='10'</input></td>
+		<tr><td>Startnummer: </td> <td><input name='bibBegin' value='10'></input></td>
 	</table>
 	<input type='submit' name='addParticipator' id='addParticipator' value='Uppdatera'/></form>";
 	?>

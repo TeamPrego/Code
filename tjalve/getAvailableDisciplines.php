@@ -1,18 +1,34 @@
 <?php
 
-// Validera GET variablen
+	// Validera GET variablen
+	$class = $_GET['class'];
+	// Processa.
 
-// Processa.
+	include "database/config.php";
 
-// Skapa innehåll baserat på nedan.
+	//$contactId = $_GET['contactId'];
+	$query = "SELECT * FROM age_class WHERE ageClass = '$class'";
+	$data = mysqli_query($con, $query);
 
-$disc = [
-	[
-		'gren' => 'Höjdhopp'
-	],
-	[
-		'gren' => 'Längdhopp'
-	]
-];
+	if (!$data) {
+	  die('Error: ' . mysqli_error($con));
+	}
 
-echo json_encode($disc);
+	$disc = [];
+	// Skapa innehåll baserat på nedan.
+	while($row = $data->fetch_object()) {
+		//$disc['gren'] = $row->discipline;
+		$disc[] = ['gren' => $row->discipline];
+	}
+
+/*
+	$disc = [
+		[
+			'gren' => 'Höjdhopp'
+		],
+		[
+			'gren' => 'Längdhopp'
+		]
+	];*/
+
+	echo json_encode($disc);

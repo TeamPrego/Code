@@ -12,6 +12,7 @@
 	<h2>Skriv in kontaktpersons-uppgifter</h2>
 	<table id ="formDiv">
 		<form id="firstForm" name="firstForm" method="post" action="database/addContact.php"> 
+			<input type="hidden" value=<?php echo $_GET['competitionId']?> name="competitionId">
 			<tr>
 				<td>
 					<label for="select">
@@ -23,15 +24,15 @@
 						<?php
 							include "database/config.php";
 							$data = mysqli_query($con, "SELECT Name FROM clubs");
-							$count = 0;
 							while($row = $data->fetch_object()) {
 								echo "<option value='" .$row->Name. "'>" .$row->Name. "</option>";
-								$count = $count + 1;
 							}					
 						?>
 					</select>
 					Saknas din förening?
-					<a id="addTeam" href="createNewClub.php">Klicka här</a>
+					<?php
+					echo "<a id='addTeam' href='createNewClub.php?competitionId=".$_GET['competitionId']."'>Klicka här</a>";
+					?>
 				</td>
 			</tr>
 

@@ -7,7 +7,9 @@
 <!--Line -->
 <hr>
 <table id="createNewClubForm">
-	<form method="post" action="database/addNewClubToDatabase.php">
+	<?php
+	echo "<form method='post' action='database/addNewClubToDatabase.php?competitionId=". $_GET['competitionId']."'>";
+	?>
 		<tr>
 			<td>
 				Klubb:
