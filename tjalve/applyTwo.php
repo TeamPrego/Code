@@ -88,7 +88,7 @@ session_start();
 				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
 				$.each(content, function(index, value) {
 					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
-									 + value.gren 
+									 + value.gren
 									 + '</td><td>'+inp+'</td><td>'
 									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
 									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'

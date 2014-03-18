@@ -2,6 +2,7 @@
 <!--This is a so called admin header man-->
 <html>
 	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<link href="pic/tjalve_t_icon.ico" rel="shortcut icon" type="image/x-icon" />
 		<meta charset="UTF-8">
 		<title>
