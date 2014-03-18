@@ -18,7 +18,7 @@ Välj åldesklass och resp. gren här:
       <td>Åldersklass:</td>
 	  
       <td colspan="2"> 
-        Damer:	<!--<form action = "skapa_tabell.php" method="post" class="choice-bar"-->
+       <!-- Damer:	
           <select id="droplistFemale" onchange="femaleDisplay()">
             <option value="empty"></option>
             <option value="f7">F7</option>
@@ -48,11 +48,34 @@ Välj åldesklass och resp. gren här:
             <option value="p15">P15</option>
             <option value="p17">P17</option>
             <option value="h">H</option>
-          </select>
+          </select>-->
+		  <select name="chooseClass" id="chooseClass" required>
+					<option> - Välj klass - </option>
+		 
+						<?php
+							include "database/config.php";
+							$query2 = "SELECT * FROM classes";
+							
+							$data = mysqli_query($con, $query2);
+							
+							if (!$data) {
+							die('Error: ' . mysqli_error($con));
+							}
+							
+							$array=[];
+							while($row = $data->fetch_object()) {
+								if(!in_array($row->Klass, $array)) {
+									array_push($array, $row->Klass);
+									echo "<option value='" . $row->Klass . "'>" . $row->Klass . "</option>";
+								}
+							}
+							mysqli_close($con); 
+						?>
+			</select>
 		  </td>
-      </td>
-    <script src="createCompetition.js"></script>
-	</tr>	
+        </td>
+     <script src="createCompetition.js"></script>
+	 </tr>	 
 	
 </table>
 <form id="ageClass" name="ageClass" method="post" action="database/addAgeClass.php"> 
