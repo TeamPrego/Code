@@ -18,37 +18,6 @@ Välj åldesklass och resp. gren här:
       <td>Åldersklass:</td>
 	  
       <td colspan="2"> 
-       <!-- Damer:	
-          <select id="droplistFemale" onchange="femaleDisplay()">
-            <option value="empty"></option>
-            <option value="f7">F7</option>
-            <option value="f8">F8</option>
-            <option value="f9">F9</option>
-            <option value="f10">F10</option>
-            <option value="f11">F11</option>
-            <option value="f12">F12</option>
-            <option value="f13">F13</option>
-            <option value="f14">F14</option>
-            <option value="f15">F15</option>
-            <option value="f17">F17</option>
-            <option value="k">K</option>
-          </select>
-
-        Herrar:	
-          <select id="droplistMale" name="droplistMale" onchange="maleDisplay()">
-            <option></option>
-            <option value="p7">P7</option>
-            <option value="p8">P8</option>
-            <option value="p9">P9</option>
-            <option value="p10">P10</option>
-            <option value="p11">P11</option>
-            <option value="p12">P12</option>
-            <option value="p13">P13</option>
-            <option value="p14">P14</option>
-            <option value="p15">P15</option>
-            <option value="p17">P17</option>
-            <option value="h">H</option>
-          </select>-->
 		  <select name="chooseClass" id="chooseClass" required>
 					<option> - Välj klass - </option>
 		 
@@ -78,29 +47,50 @@ Välj åldesklass och resp. gren här:
 	 </tr>	 
 	
 </table>
-<form id="ageClass" name="ageClass" method="post" action="database/addAgeClass.php"> 
-<div id ="chosenAge">Vald ålderssdsklass: <input  id="age" name="age" size="4" ></input></div><!--type="text" disabled style="color:black"-->
 
-<table class ="createcompTable">
-  <tr>
-    <td>
-	textfälten måste anpassa sig efter storleken på fönstret de gör dem inte just nu!!!
-      Valbara grenar
-    </td>
-    <td>
-      Valda grenar
-  </tr>
-  <tr>
-    <td>
-      <?php include "database/getAllDisciplines.php"; ?>
-    </td>
-    <td>
-      <!--<textarea rows="4" cols="50">Textarea2</textarea>-->
-	  <input type="submit" name="submit" value="Spara!!!!!!!!!!!">
-    </td>
-  </tr>
-</table>
+<form method="post" id="firstForm" name="firstForm" action="database/add_class.php"> 
+<div id="leftPartOfApplication">
+
 </form>
+</div>
+
+<!--The Informationtext -->
+<script type="text/javascript">	
+
+	console.log($('#chooseClass'));
+
+	$('#chooseClass').change(function() {
+		var inp = $(this).find(":selected").text();
+		console.log(inp);
+		$.ajax({
+			data: {
+				'discipline': inp
+			},
+			url: 'database/getAllDisciplines.php',
+			success: function(content) {
+				console.log(content);
+				content = $.parseJSON(content);
+				var dat_string = '<table id="whichDisciplines">';
+				dat_string += '<tr><td></td> <th>Gren</th> </tr>';
+				$.each(content, function(index, value) {
+				console.log(value);
+					dat_string += 	'<tr><td><input type = "checkbox" discipline = "gren[]" value="'+value.gren+'"/></td><td>'
+									 + '<div id = "'+value.gren+'">' +value.gren+ '</div>' //Lyckas jag verkligen döpa divId på det sättet jag vill??? hur ska man kunna ändra en div utan att hela sidan uppdateras???
+									 //+ '</td><td>'+inp+'</td><td>'
+				});
+				dat_string += '</table>';
+				dat_string += '<input type="submit" discipline="addAgeClass" id="addAgeClass" value="Lägg till Åldersklass"/></form>';
+
+				document.getElementById('leftPartOfApplication').innerHTML = dat_string;
+			}
+		});
+	});
+</script>
+
+<div class=progressBar>
+	<div class=progress>50% klart</div>
+</div
+
 <?php
 include "templates/adminfooter.php";
 ?>
