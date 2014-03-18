@@ -10,7 +10,7 @@
 	}
 	
 	while($row = $data->fetch_object()){
-	echo $row->discipline, "\n";
+	echo "<tr><td>" . $row->discipline . "</td></tr>";
 	}
 	mysqli_close($con);
 	?>

@@ -69,7 +69,7 @@ Välj åldesklass och resp. gren här:
   </tr>
   <tr>
     <td>
-      <textarea rows="4" cols="50"><?php include "database/getAllDisciplines.php"; ?></textarea>
+      <?php include "database/getAllDisciplines.php"; ?>
     </td>
     <td>
       <!--<textarea rows="4" cols="50">Textarea2</textarea>-->
