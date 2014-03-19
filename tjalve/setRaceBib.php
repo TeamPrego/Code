@@ -8,9 +8,10 @@
 <div id = "leftPartOfApplication">
 	<h2>Nummerlappsinformation</h2>
 
-	<form method='POST' id='firstForm' name='firstForm' action='database/addRaceBib.php'>
+	
 
 	<?php
+	//echo "<form method='POST' id='firstForm' name='firstForm' action='database/addRaceBib.php'>";
 	include "database/config.php";
 
 	$query = "SELECT * FROM participant";
@@ -29,8 +30,7 @@
 		<tr>
 			<td>Välj tävling:</td> 
 			<td> 
-				<select name='chooseCompetition' id='chooseCompetition'>
-				<option> - Välj Tävling - </option>";
+				<select name='chooseCompetition' id='chooseCompetition'>";
 				include "database/config.php";
 				$data = mysqli_query($con, 'SELECT * FROM competition');
 				while($row = $data->fetch_object()) {
@@ -46,10 +46,10 @@
 		</tr>
 		<tr>
 			<td>Startnummer: </td>
-			<td><input name='bibBegin' value='10'></input></td>
+			<td><input id='bibBegin' name='bibBegin' value='10'></input></td>
 		</tr>
 	</table>
-	<input type='submit' name='addParticipator' id='addParticipator' value='Uppdatera'/></form>";
+	<input type='button' name='addParticipator' id='Update' value='Uppdatera'/>";
 	?>
 </div>
 
@@ -59,6 +59,22 @@
 </div>
 
 <script type="text/javascript">
+
+
+
+	$('#Update').click(function() {
+		var competition =  $('#chooseCompetition').find(":selected").text();
+		var startNumber = $('#bibBegin').val();
+		$.ajax({
+			url: 'database/addRaceBib.php?competition='+competition+'&startNumber='+startNumber+'',
+			success: function(content){
+				console.log("success");
+				$('#chooseCompetition').trigger("change");
+			}
+		});
+	});
+	
+
 	$('#chooseCompetition').change(function() {
 		var inp = $(this).find(":selected").text();
 		$.ajax({
@@ -87,6 +103,9 @@
 			}
 		});
 	});
+
+	$('#chooseCompetition').trigger("change");
+
 </script>
 
 <div class=progressBar>

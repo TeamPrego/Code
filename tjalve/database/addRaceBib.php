@@ -1,19 +1,36 @@
 <?php
 	include "config.php";
 
-	$query = "SELECT * FROM participant";
-	$data = mysqli_query($con, $query);
+	$competition = $_GET['competition'];
+	$count = $_GET['startNumber'];
+	echo $competition;
+	echo $count;
+
+	$dataCompetition = mysqli_query($con, "SELECT * FROM competition WHERE compName = '$competition'");
 	
-	if (!$data) {
+	if (!$dataCompetition) {
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$count = $_POST['bibBegin'];
-	while($row = $data->fetch_object()) {
-		$bib = $row->participantId;
-		$queryUpdate = "UPDATE `participant` SET `bib` = '$count' WHERE `participantId` = '$row->participantId'";
-		$fjong = mysqli_query($con, $queryUpdate);
-		$count += 1;
+	$competitionId = $dataCompetition->fetch_object()->compID;
+	$dataContact = mysqli_query($con, "SELECT * FROM contact WHERE competitionId = '$competitionId'");
+	
+	if (!$dataContact) {
+	  die('Error: ' . mysqli_error($con));
 	}
-	header("Location: ../setRaceBib.php");
+	while($rowContact = $dataContact->fetch_object()) {
+		$dataParticipant = mysqli_query($con, "SELECT * FROM participant WHERE contactId = '$rowContact->contactId'");
+
+		if (!$dataContact) {
+		  die('Error: ' . mysqli_error($con));
+		}
+
+		while($rowParticipant = $dataParticipant->fetch_object()) {
+			$queryUpdate = "UPDATE `participant` SET `bib` = '$count' WHERE `participantId` = '$rowParticipant->participantId'";
+			$fjong = mysqli_query($con, $queryUpdate);
+			$count += 1;
+		}
+	}
+
+	mysqli_close($con);
 ?>
