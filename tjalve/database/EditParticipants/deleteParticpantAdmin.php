@@ -1,5 +1,5 @@
 <?php
- include "config.php";
+ include "database/config.php";
 
 	if (!isset($_GET['participantId'])) {
 	    echo 'No ID was given...';
@@ -16,5 +16,5 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	mysqli_close($con);
-	header("Location: deleteParticipantAdmin.php");
+	header("Location: editParticipant.php");
 ?>
