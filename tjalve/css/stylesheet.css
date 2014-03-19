@@ -63,7 +63,6 @@ h4{
   padding: 5px;
   text-align: center;
 	width: 100%;
-  
 }
 
 .footer{
@@ -224,11 +223,6 @@ h4{
 	width: 100%;
 }
 
-#left-update-competition{
-	width: 70%;
-  margin: 0 0 0 20%;
-}
-
 #leftPartOfApplication{
 	width: 45%;
 	float: left;
@@ -284,13 +278,6 @@ h4{
 	float: right;
 	margin-bottom: 5%;
 	margin-right: 5%;
-}
-
-#right-update-competition{
-	margin:0 50% 0 0;
-  width: 20%;
-  
-
 }
 
 #whichDisciplines {

@@ -2,40 +2,10 @@
 include "templates/adminheader.php";
 ?>
 
-<script>
-	/*console.log($('#drop-list'));
-  $('#drop-list').change(function() {
-		var inp = $(this).find(":selected").text();
-    alert("Hallå");
-		$.ajax({
-			data: {
-				'name': inp
-			},
-			document.getElementById('Skittext').innerHTML="Röv";
-		});
-	});*/
-  
-  function drule(value) {
-		var inp = $(this).find(":selected").text();
-    alert("Hallå");
-		$.ajax({
-			data: {
-				'name': inp
-			},
-			document.getElementById('Skittext').innerHTML="Röv";
-		});
-	});
-</script>
-
-
 <?php
-
-
-
-
 $odd=0;
 include "database/config.php";
-
+//$contactId = $_GET['contactId'];
 	$query = "SELECT * FROM competition WHERE 1";
 	$data = mysqli_query($con, $query);
 	
@@ -46,7 +16,7 @@ include "database/config.php";
 	
   echo"<div>";
   echo "<form action = \"\" method=\"post\" class=\"choice-bar\">";
-  echo "<select name='comp-list' id='drop-list' onchange='drule(this.value)'>";
+  echo "<select name=\"comp-list\" id=\"drop-list\">";
   echo "<option value='noChoice'>Välj Tävling</option>";
   while($row = $data->fetch_object()){
    echo "<option value='" .$row->compName. "'>" .$row->compName. "</option>";
@@ -91,16 +61,19 @@ include "database/config.php";
         echo "<input type=\"submit\" id=\"edit-button\" value=\"Uppdatera\">";
         echo "</form>";
         
-       
+        /*Below is code for showing classes and disciplines
+        Might try to shorten code length later
+        */
+        
+        //Creates a proper sql-string and chooses the right table from it
+      //var_dump($choice);
       $result2 = mysqli_query($con,"SELECT * FROM age_class WHERE compID =" . $row->compID.  ""); //. $row->compID. "");
-      
-      
+      //var_dump($result2);
+      //Begin creating table. 
      
-      
-      echo"<table class=\"firstTableList\">";
-       echo"<td>";
-      echo"<table  id=\"left-update-competition\" class=\"firstTableList\">";
-      
+      echo"<table align= center class=\"firstTableList\">";
+      //Adds new column
+      //Add entries. Name of competitors, club etc
       while($row = mysqli_fetch_object($result2)) {
         if($odd % 2 != 0) {
           echo"<tr class=\"odd\">";
@@ -110,74 +83,22 @@ include "database/config.php";
         }
         
         $odd++;
-
+        
+        
           echo "<td>" . $row->ageClass . "</td>";
-          echo "<td>" . $row->discipline . "</td>";
+          echo "<td>" . $row->event . "</td>";
 
       
         echo "</tr>";
       }
-      echo"</td>"; 
-      echo "</table>";
-      
-      
-      /*
-      Below is code for showing classes
-      This is brute code
-      */
-      $classes = mysqli_query($con,"SELECT * FROM classes"); 
-     
-      echo"<td>";
-      echo"<select>";
-      
-      while($row = mysqli_fetch_object($classes)) {
-      
-          echo "<option>" . $row->Class . "</option>";
-
-      }
-      
-      echo "</select>";
-      echo"</td>";
-    
-      
-      
-      
-      $disciplines = mysqli_query($con,"SELECT * FROM alldisciplines"); 
-      //var_dump($classes);
-      //Begin creating table. 
-      echo"<td>";
-      echo"<table  id=\"right-update-competition\" class='firstTableList'>";
-      //Adds new column
-      //Add entries. Name of competitors, club etc
-      while($row = mysqli_fetch_object($disciplines)) {
-        if($odd % 2 != 0) {
-          echo"<tr class=\"odd\">";
-        }
-        else {
-          echo"<tr class=\"even\">";
-        }
-        
-        $odd++;
-        
-          echo "<td>" . $row->discipline . "</td>";
-
-        echo "</tr>";
-      }
       
       echo "</table>";
-      echo"</td>";
-      echo"</table>";
-      
-      echo"<div id='Skittext'>Här vill jag att klassen ska dyka upp</div>";
-      
-      //echo "</div>";
-      
     }
   }
 	mysqli_close($con);	
   //var_dump(compID);
-
 ?>
+
 
 
 

@@ -1,5 +1,3 @@
-
-
 <?php
   include "database/config.php";
 	
@@ -14,4 +12,3 @@
 	mysqli_close($con);
 	header("Location: editCompetition.php");
 ?>
-
