@@ -16,5 +16,5 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	mysqli_close($con);
-	header("Location: EditParticipant/deleteParticipantAdmin.php");
+	header("Location: deleteParticipantAdmin.php");
 ?>

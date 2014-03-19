@@ -26,7 +26,7 @@ session_start();
 				<td>Ta bort deltagare</td>
 			</tr>
 			<?php
-				include "database/findAllParticipants.php";
+				include "database/EditParticipants/findAllParticipants.php";
 			?>
 	</table>
 </div>

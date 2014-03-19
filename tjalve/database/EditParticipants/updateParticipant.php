@@ -11,7 +11,7 @@ ob_start();
 	$queryUpdate = "UPDATE participant SET firstName = '$updFName', lastName = '$updLName', birthYear = '$updBYear' WHERE participantId = '$pId' ";
 	$data = mysqli_query($con, $queryUpdate);
 
-	header("Location: ../editParticipants.php");
+	header("Location: ../../editParticipants.php");
 	mysqli_close($con);
 ob_flush();
 ?>
