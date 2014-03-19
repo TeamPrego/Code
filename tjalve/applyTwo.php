@@ -52,7 +52,7 @@ session_start();
 				</td>
 			</tr>
 		</table>
-		<div id="kuk">
+		<div id="disciplines">
 		</form>
 		</div>
 </div>
@@ -71,7 +71,6 @@ session_start();
 				document.getElementById('dropDown').innerHTML = "För hjälp, klicka här";
 		});
 	});	
-
 	console.log($('#chooseClass'));
 
 	$('#chooseClass').change(function() {
@@ -96,10 +95,20 @@ session_start();
 				dat_string += '</table>';
 				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
 
-				document.getElementById('kuk').innerHTML = dat_string;
+				document.getElementById('disciplines').innerHTML = dat_string;
 			}
 		});
 	});
+/*
+$(document).ready(function(){
+	$.ajax({
+		url: 'database/findParticipants.php',
+		success: function(content) {
+			console.log("Loaded Participants");
+		}
+	})
+});*/
+
 </script>
 
 <div id="rightPartOfApplication">

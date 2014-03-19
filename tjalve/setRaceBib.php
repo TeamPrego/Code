@@ -11,7 +11,6 @@
 	
 
 	<?php
-	//echo "<form method='POST' id='firstForm' name='firstForm' action='database/addRaceBib.php'>";
 	include "database/config.php";
 
 	$query = "SELECT * FROM participant";
@@ -97,7 +96,7 @@
 											+ '</input> </td><td>'+value.lName+', '+value.fName+'</td><td>'+value.club+'</td></tr>';
 				});
 				dat_string += '</table>';
-				dat_string += '<input type="submit" id="addParticipator" value="Uppdatera"/>';
+				dat_string += '<input type="submit" id="changeBib" value="Uppdatera"/>';
 
 				document.getElementById('getParticipantBibDiv').innerHTML = dat_string;
 			}
