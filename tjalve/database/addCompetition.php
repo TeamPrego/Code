@@ -55,7 +55,7 @@
 	{
 	  echo "Invalid file";
 	}
-	
+	//$file ->resizeImage(50,50, imagick::FILTER_LANCZOS, 0.9, true);
 	$file = $_FILES["file"]["name"];
 	$filePath  = "upload/" . $file . "";
 	$sql = "INSERT INTO competition (`compID`, `compName`, `compArr`, `compDate`, `compLastDate`, `compIcon`) 

@@ -9,8 +9,11 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	
+	$disc=[];
 	while($row = $data->fetch_object()){
-	echo $row->discipline, "\n";
+	$disc[] = ['gren'=>$row->discipline];
+	//echo "<tr><td>" . $row->discipline . "</td></tr>";
 	}
+	echo json_encode($disc);
 	mysqli_close($con);
 	?>

@@ -13,6 +13,7 @@
 		
 	</head>
 	<body>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<div id = "innerBody">
 			<div id = "adminlogo">
         <img id ="adminpicid" src="pic/taskig_copy.jpg" alt ="adminlogga" />

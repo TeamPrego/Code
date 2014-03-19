@@ -18,7 +18,7 @@ include "templates/adminheader.php";
           <button class="button">Skapa</button>
         </form>
       </td>
-			<td><button class="button">Ändra</button></td>
+			<td><a href="editParticipants.php"><button class="button">Ändra</button></a></td>
 			<td><button class="button">Fakturera</button></td>
 		</tr>
     
