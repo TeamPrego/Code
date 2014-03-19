@@ -22,3 +22,4 @@
 	}
 	mysqli_close($con);
 	header("Location: ../applyTwo.php?contactId=".$_POST['contactId']);
+	?>

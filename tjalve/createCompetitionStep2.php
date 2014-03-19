@@ -8,9 +8,10 @@ include "templates/adminheader.php";
 <div id="comp">
 		<?php
 		include "database/getCompetition.php";
+		//$compID = $_GET['compID'];
 		?>
 </div>
-
+<form method="post" id="firstForm" name="firstForm" action="database/addAgeClass.php?compID=4"'<?php echo $compID?>'>
 Välj åldesklass och resp. gren här:
 
 <table class ="createcompTable">
@@ -48,7 +49,7 @@ Välj åldesklass och resp. gren här:
 	
 </table>
 
-<form method="post" id="firstForm" name="firstForm" action="database/add_class.php"> 
+
 <div id="leftPartOfApplication">
 
 </form>
@@ -74,9 +75,9 @@ Välj åldesklass och resp. gren här:
 				dat_string += '<tr><td></td> <th>Gren</th> </tr>';
 				$.each(content, function(index, value) {
 				console.log(value);
-					dat_string += 	'<tr><td><input type = "checkbox" discipline = "gren[]" value="'+value.gren+'"/></td><td>'
-									 + '<div id = "'+value.gren+'">' +value.gren+ '</div>' //Lyckas jag verkligen döpa divId på det sättet jag vill??? hur ska man kunna ändra en div utan att hela sidan uppdateras???
-									 //+ '</td><td>'+inp+'</td><td>'
+				//dat_string += '<input type="hidden" name="inp" value="'+inp+'"/>'
+					dat_string += '<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
+									 + value.gren
 				});
 				dat_string += '</table>';
 				dat_string += '<input type="submit" discipline="addAgeClass" id="addAgeClass" value="Lägg till Åldersklass"/></form>';
@@ -86,6 +87,15 @@ Välj åldesklass och resp. gren här:
 		});
 	});
 </script>
+
+<div id="rightPartOfApplication">
+	<h2>Dina anmälda tävlande</h2>
+	<div id="confirmedDiv">
+		<?php
+		include "getAvailableDisciplines.php"; //kommer troligtvis behöva göra en ny för hannes hämtar inte "class" från samma ställe som jag vill hämta ifrån...
+		?>
+	</div>
+</div>
 
 <div class=progressBar>
 	<div class=progress>50% klart</div>
