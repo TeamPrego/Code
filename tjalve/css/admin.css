@@ -42,10 +42,16 @@ h4 {
   margin-left:41%;
   margin-right:auto;
   margin-top:0;
+  font-family:Verdana;
 }
 
 #chosenAge {
   margin-left: 34.5%;
+}
+
+#chooseP {
+  text-align:center;
+  font-family:Verdana;
 }
 
 #compLogo {
@@ -60,7 +66,7 @@ h4 {
   color:black;
   margin-left:0;
   margin-right:auto;
-  font-size:huge;
+  font-weight:bold;
   font-family:verdana;
 }
 
@@ -77,4 +83,12 @@ h4 {
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
 	border-radius: 7px;
+}
+
+td {
+  font-family:verdana;
+}
+
+#whichDisciplines {
+  font-family:verdana;
 }

@@ -5,26 +5,15 @@
 include "templates/adminheader.php";
 ?>
 
-<<<<<<< HEAD
-
 <?php
 include "database/getCompetition.php";
-//$compID = $_GET['compID'];
 ?>
-
-<form method="post" id="firstForm" name="firstForm" action="database/addAgeClass.php?compID=4"'<?php echo $compID?>'>
-=======
-<div id="comp">
-		<?php
-		include "database/getCompetition.php";
-		?>
-</div>
+    
 <?php 
 $compID = $_GET['compID'];
 echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAgeClass.php?compID=".$compID."'>";
 ?>
-Välj åldesklass och resp. gren här:
->>>>>>> a068a7a5eb0451bbd3bad4c796c89d4b4d5fed81
+<p id="chooseP">Välj åldesklass och resp. gren här:</p>
 
 <table class ="createcompTable">
 	
@@ -75,7 +64,7 @@ Välj åldesklass och resp. gren här:
 	$('#chooseClass').change(function() {
 		inp = $(this).find(":selected").text();
 		//console.log(inp);
-		/*$.ajax({
+		$.ajax({
 			data: {
 				'discipline': inp
 			},
@@ -88,7 +77,7 @@ Välj åldesklass och resp. gren här:
 				$.each(content, function(index, value) {
 				console.log(value);
 					dat_string += '<input type="hidden" name="compID" value="<?php echo $compID; ?>">'
-					dat_string += '<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"></td><td>'
+					dat_string += '<tr><td><input id = "checkId" type = "checkbox" name = "gren[]" value="'+value.gren+'"></td><td>'
 									 + value.gren;
 				});
 				dat_string += '</table>';
@@ -97,11 +86,11 @@ Välj åldesklass och resp. gren här:
 				document.getElementById('leftPartOfApplication').innerHTML = dat_string;
 			}
 			
-		});*/
+		});
 		
 		// Försök att få denna att fungera jämför med den över för den funkar som den ska tror att troligtvis så är "content2" fel den får inte rätt värden...
 		console.log(inp);
-		$.ajax({
+/* 		$.ajax({
 		data: {
 				//'discipline2': inp //används inte ens data???????
 			},
@@ -123,7 +112,7 @@ Välj åldesklass och resp. gren här:
 
 				document.getElementById('rightPartOfApplication').innerHTML = dat_string;
 			}
-		});
+		}); */
 	});
 </script>
 
