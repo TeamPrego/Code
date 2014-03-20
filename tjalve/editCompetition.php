@@ -2,6 +2,9 @@
 include "templates/adminheader.php";
 ?>
 
+
+
+
 <?php
 $odd=0;
 include "database/config.php";
@@ -15,42 +18,41 @@ include "database/config.php";
 
 	
   echo"<div>";
-  echo "<form action = \"\" method=\"post\" class=\"choice-bar\">";
-  echo "<select name=\"comp-list\" id=\"drop-list\">";
+  //echo "<form action = '' method='post' class='choice-bar'>";
+  //echo "<select name='chooseCompetition' id='chooseCompetition'>";
+  echo "<select name='createTable' id='createTable' value='createTable'>";
   echo "<option value='noChoice'>Välj Tävling</option>";
   while($row = $data->fetch_object()){
    echo "<option value='" .$row->compName. "'>" .$row->compName. "</option>";
   }
   echo"</select>";
-  echo "<input type=\"submit\" id=\"result-button\">";
-  echo "</form>";
+  //echo "<input type='button' name='createTable' id='createTable' value='createTable'>";
+  //echo "</form>";
   echo "</div>";
   
   
-  if (isset($_POST["comp-list"])){
+  
+  
+  //if (isset($_POST["comp-list"])){
     //Runs if and only if the user have made a choice
-    if($_POST["comp-list"] != "noChoice") { 
+    //if($_POST["comp-list"] != "noChoice") { 
       //Creates a proper sql-string and chooses the right table from it
-      $choice = mysqli_real_escape_string($con, $_POST["comp-list"]);
-      $result = mysqli_query($con,"SELECT * FROM competition WHERE compName='$choice'");
+      //$choice = mysqli_real_escape_string($con, $_POST["drop-list"]);
+      //$result = mysqli_query($con,"SELECT * FROM competition WHERE compName='$choice'");
       
       //Saves data as long as their is new data to get. 
       //columns is column-names (fornamn, efternamn etc)
-      while ($fieldinfo=mysqli_fetch_field($result)) {
+     /* while ($fieldinfo=mysqli_fetch_field($result)) {
         $columns[] = $fieldinfo->name;
-      }
+      }*/
       
       //Begin creating table. OBS! firstTableList not working properly
-      echo "<form action = \"updateCompetition.php\" method=\"post\" class=\"choice-bar\">";
-      echo"<table align= center class=\"firstTableList\">";
+      /*echo "<form action = \"updateCompetition.php\" method=\"post\" class=\"choice-bar\">";
+      echo"<table align= center class=\"firstTableList\">";*/
       //Adds new column
       
-      foreach ($columns as $value) {
-        echo "<th class=\"odd\"> $value </th>";
-      }
-      
-      $row = $result->fetch_object();   
-        //echo "<form action = \"updateCompetition.php\" method=\"post\" class=\"choice-bar\">";
+      /*$row = $result->fetch_object();   
+        echo "<form action = \"updateCompetition.php\" method=\"post\" class=\"choice-bar\">";
         echo"<tr class=\"odd\">";
         echo "<td><input name=\"compID\" id=\"compID\" value=" . $row->compID . " ></input></td>"; 
         echo "<td><input name=\"compName\" id=\"compName\" value=" . $row->compName . "></input></td>";
@@ -58,50 +60,64 @@ include "database/config.php";
         echo "<td><input name=\"compDate\" id=\"compDate\" value =" . $row->compDate . "></input></td>";
         echo "<td><input name=\"compLastDate\" id=\"compLastDate\" value =" . $row->compLastDate . "></input></td>";
         echo "</table>";
-        echo "<input type=\"submit\" id=\"edit-button\" value=\"Uppdatera\">";
-        echo "</form>";
+        echo "<input type='submit' id='edit-button' value='Uppdatera'>";
+        echo "</form>";*/
         
-        /*Below is code for showing classes and disciplines
-        Might try to shorten code length later
-        */
         
-        //Creates a proper sql-string and chooses the right table from it
-      //var_dump($choice);
-      $result2 = mysqli_query($con,"SELECT * FROM age_class WHERE compID =" . $row->compID.  ""); //. $row->compID. "");
-      //var_dump($result2);
-      //Begin creating table. 
      
-      echo"<table align= center class=\"firstTableList\">";
-      //Adds new column
-      //Add entries. Name of competitors, club etc
-      while($row = mysqli_fetch_object($result2)) {
-        if($odd % 2 != 0) {
-          echo"<tr class=\"odd\">";
-        }
-        else {
-          echo"<tr class=\"even\">";
-        }
-        
-        $odd++;
-        
-        
-          echo "<td>" . $row->ageClass . "</td>";
-          echo "<td>" . $row->event . "</td>";
-
       
-        echo "</tr>";
-      }
-      
-      echo "</table>";
-    }
-  }
+    //}
+  //}
 	mysqli_close($con);	
   //var_dump(compID);
 ?>
 
 
 
+<script type="text/javascript">
 
+$('#createTable').change(function() {
+    
+		var competition =  $('#createTable').find(":selected").text();
+    //var competition =  document.getElementById("createTable");
+    //var competition =  'Knarklyft';
+    //document.write(competition);
+		$.ajax({
+      
+			url: 'database/getCompetitionByName.php?competition='+competition+'',
+      //url: 'database/getCompetitionByName.php?competition=Knarklyft',
+     
+			success: function(content){
+          
+				//console.log('Här är jag');
+        
+        content = $.parseJSON(content);
+        console.log(content);
+        
+        
+        var dat_string = '<table id="competitionTable">';
+				dat_string += '<tr> <th>ID</th> <th>Name</th> <th>Arr</th> <th>Date</th> <th>LastDate</th></tr>';
+        
+        //console(dat_string  );
+        
+        //$.each(content,function(index,value) {
+          //console.log(index);
+          //dat_string+='<tr><td>'+value.compID+'</td><td>'+value.compID+'</td><td>'+value+'</td><td>'+value+'</td><td>'+value+'</td></tr>' 
+          dat_string+='<tr><td>'+content.compID+'</td><td>'+content.compID+'</td><td>'+content.compArr+'</td><td>'+content.compDate+'</td><td>'+content.compLastDate+'</td></tr>' 
+        //});
+        
+        dat_string += '</table>';
+          //document.write(dat_string);
+        document.getElementById('table').innerHTML = dat_string;
+        
+        //document.getElementById('table').innerHTML = "BALLE";
+			}
+		});
+	});
+  
+</script>
+
+<div id="table">Här ska skit dyka upp</div>
 <?php
 include "templates/adminfooter.php";
 ?>
