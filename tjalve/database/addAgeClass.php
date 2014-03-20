@@ -1,20 +1,19 @@
 <?php
 	include "config.php";
 	
-	var_dump($_POST['age']);
+	$compID = $_GET['compID'];
+	echo $compID;
+	var_dump($compID);
+	$name = $_POST['gren'];
 	
-	$sql = "INSERT INTO `submission`.`age_class` (`compID`, `ageClass`, `event`) 
-	VALUES (NULL,'$_POST[age]','$_POST[event]')";
-	
-	
-	if (!mysqli_query($con,$sql)) {
-	  die('Error: ' . mysqli_error($con));
-	}
-	//include "upload_file.php";
-	//$data = mysqli_query($con, "SELECT compID FROM competition WHERE compName='$_POST[compName]'");
-	//$compID = $data->fetch_object()->compID;
+	foreach ($name as $grentyp) { 
+		$quary = "INSERT INTO age_class (compId, ageClass, discipline)
+		VALUES ('$compID', '$_POST[chooseClass]', '$grentyp')";
 
+		if (!mysqli_query($con,$quary)) {
+		  die('Error: ' . mysqli_error($con));
+		}
+	}
 	mysqli_close($con);
-	
-	header("Location: ../createCompetition.php?compID=".$compID);
-?>
+	header("Location: ../createCompetitionStep2.php?compID=".$compID);
+	?>

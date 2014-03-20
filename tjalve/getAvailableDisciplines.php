@@ -16,3 +16,5 @@
 	}
 
 	echo json_encode($disc);
+	mysqli_close($con);
+?>
