@@ -7,7 +7,7 @@
 	}
 
 	$participantId = $_GET['participantId'];
-	$data = mysqli_query($con, "SELECT contactId FROM participant WHERE participantId='$participantId'");
+	$data = mysqli_query($con, "SELECT * FROM participant WHERE participantId='$participantId'");
 	$contactId = $data->fetch_object()->contactId;
 
 	$sql = "DELETE FROM participant WHERE participantId = $participantId";
@@ -16,5 +16,5 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	mysqli_close($con);
-	header("Location: ../applyTwo.php?contactId=".$contactId);
+	header("Location: ../applyTwo.php?contactId=".$contactId."&prio=".$_GET['prio']);
 ?>

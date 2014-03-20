@@ -8,7 +8,7 @@
 <hr>
 <table id="createNewClubForm">
 	<?php
-	echo "<form method='post' action='database/addNewClubToDatabase.php?competitionId=". $_GET['competitionId']."'>";
+	echo "<form method='post' action='database/addNewClubToDatabase.php?competitionId=". $_GET['competitionId']."&prio=".$_GET['prio']."'>";
 	?>
 		<tr>
 			<td>

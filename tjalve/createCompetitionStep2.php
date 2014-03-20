@@ -13,7 +13,7 @@ include "database/getCompetition.php";
 $compID = $_GET['compID'];
 echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAgeClass.php?compID=".$compID."'>";
 ?>
-Välj åldesklass och resp. gren här:
+<p id="chooseP">Välj åldesklass och resp. gren här:</p>
 
 <table class ="createcompTable">
 	
@@ -42,7 +42,6 @@ Välj åldesklass och resp. gren här:
 								}
 							}
 							mysqli_close($con); 
-							
 						?>
 			</select>
 		  </td>
@@ -73,11 +72,11 @@ Välj åldesklass och resp. gren här:
 				//console.log(content);
 				content = $.parseJSON(content);
 				var dat_string = '<table id="whichDisciplines">';
-				dat_string += '<tr><td></td> <th>Gren</th> </tr>';
+				dat_string += '<tr><td><td> <p id ="discP">Gren</th> </p>';
 				$.each(content, function(index, value) {
-				console.log(value);
+					console.log(value);
 					dat_string += '<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"></td><td>'
-									 + value.gren;
+								+ value.gren;
 				});
 				dat_string += '</table>';
 				dat_string += '<input type="submit" id="addAgeClass" value="Lägg till Åldersklass"/></form>';
@@ -85,8 +84,6 @@ Välj åldesklass och resp. gren här:
 
 				document.getElementById('leftPartOfApplication').innerHTML = dat_string;
 			}
-			
-			
 		});
 	});
 </script>
@@ -95,25 +92,25 @@ Välj åldesklass och resp. gren här:
 <!--The Informationtext -->
 <script type="text/javascript">	
 	//var id = "";
-	
-	
 	//console.log($('input[type="hidden"]').val());
 	$( document ).ready(function() {
 	
 		//hiddenClass = $('#chooseClass').ready(":selected").text();
 		//console.log('---------'+hiddenClass+'--------');
 		$.ajax({
+		
 		data: {
 				//'discipline2': hiddenClass 
 			},
 			//console.log('--------------'id'----------------');
 			url: 'database/getAllAvailableDisciplines.php?compID=<?php $_GET['compID'] ?>',
+			console.log('------<?php $_GET['compID'] ?>------');
 			success: function(content2) {
 				//console.log('-------------------------------------');
 				//console.log(content2);
 				//console.log('-------------------------------------');
 				//content = $.parseJSON(content2);
-				var dat2_string ;= '<table id="selectedDisciplines">';
+				var dat2_string = '<table id="selectedDisciplines">';
 				//dat2_string += '<tr><td><th>Gren</th></td></tr>';
 				//console.log(dat2_string);
 				$.each(content2, function(index, value) {
@@ -121,14 +118,14 @@ Välj åldesklass och resp. gren här:
 				//console.log(index);
 					dat2_string //+= '<tr><td><input type = "textfield" name = "gren2[]" value="'+value.gren2+'"/></td><td>'
 									 + '<tr><td>'value.gren2'</td>'
-									 + '<td>'value.klass'</td></tr>'
+									 + '<td>'value.klass'</td></tr>';
 				});
 				dat2_string += '</table>';
 				dat2_string += '<input type="submit" id="addAgeClass2" value="färdig!?"/></form>';
 
 				document.getElementById('rightPartOfApplication').innerHTML = dat2_string;
 			}
-		});
+		}); 
 	});
 </script>
 

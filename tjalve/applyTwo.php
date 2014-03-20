@@ -15,6 +15,7 @@ session_start();
 	<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
 		<table id ="formDiv">
 			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
+			<input type="hidden" value= <?php echo $_GET['prio'] ?> name="prio">
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
@@ -59,63 +60,80 @@ session_start();
 
 <!--The Informationtext -->
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery("#infoText").hide();
-		//toggle the componenet with class msg_body
-		jQuery(".cthrough").click(function(e) {
-			e.preventDefault();
-			jQuery(this).next("#infoText").slideToggle(500);
-			if(document.getElementById('dropDown').innerHTML == "För hjälp, klicka här")
-				document.getElementById('dropDown').innerHTML = "För att ta bort info, klicka här";
-			else
-				document.getElementById('dropDown').innerHTML = "För hjälp, klicka här";
-		});
-	});	
-	console.log($('#chooseClass'));
 
-	$('#chooseClass').change(function() {
-		var inp = $(this).find(":selected").text();
-		$.ajax({
-			data: {
-				'name': inp
-			},
-			url: 'getAvailableDisciplines.php?class='+inp+'',
-			success: function(content) {
-				console.log(content);
-				content = $.parseJSON(content);
-				var dat_string = '<table id="whichDisciplines">';
-				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
-				$.each(content, function(index, value) {
-					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
-									 + value.gren
-									 + '</td><td>'+inp+'</td><td>'
-									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
-									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
-				});
-				dat_string += '</table>';
-				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
-
-				document.getElementById('disciplines').innerHTML = dat_string;
-			}
-		});
+jQuery(document).ready(function() {
+	jQuery("#infoText").hide();
+	//toggle the componenet with class msg_body
+	jQuery(".cthrough").click(function(e) {
+		e.preventDefault();
+		jQuery(this).next("#infoText").slideToggle(500);
+		if(document.getElementById('dropDown').innerHTML == "För hjälp, klicka här")
+			document.getElementById('dropDown').innerHTML = "För att ta bort info, klicka här";
+		else
+			document.getElementById('dropDown').innerHTML = "För hjälp, klicka här";
 	});
-/*
-$(document).ready(function(){
-	$.ajax({
-		url: 'database/findParticipants.php',
-		success: function(content) {
-			console.log("Loaded Participants");
-		}
-	})
-});*/
+});	
+console.log($('#chooseClass'));
 
+$('#chooseClass').change(function() {
+	var inp = $(this).find(":selected").text();
+	$.ajax({
+		data: {
+			'name': inp
+		},
+		url: 'getAvailableDisciplines.php?class='+inp+'',
+		success: function(content) {
+			console.log(content);
+			content = $.parseJSON(content);
+			var dat_string = '<table id="whichDisciplines">';
+			dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
+			$.each(content, function(index, value) {
+				dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
+								 + value.gren
+								 + '</td><td>'+inp+'</td><td>'
+								 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
+								 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
+			});
+			dat_string += '</table>';
+			dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
+
+			document.getElementById('disciplines').innerHTML = dat_string;
+		}
+	});
+});
+
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+
+jQuery(document).ready(function() {
+	var inp = getURLParameter("contactId");
+	console.log(inp);
+	$.ajax({
+		url: 'database/findParticipants.php?contactId='+inp+'',
+		success: function(content) {
+			console.log(content);
+			content = $.parseJSON(content);
+			var dat_string = "";
+			$.each(content, function(index, value) {
+				dat_string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable"><tr><td>Namn</td>';
+				dat_string += '<td>' + value.lastName + ', ' + value.firstName + '</td></tr>';
+				$.each(value.disciplines, function(ind, val) {	
+					dat_string += '<td></td><td>' + val.ageClass + '</td><td>' + val.discipline + '</td></tr>';
+				});
+				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td> </tr></table></div>';
+			});		
+			document.getElementById('confirmedDiv').innerHTML = dat_string;	
+		}
+	});
+});
 </script>
 
 <div id="rightPartOfApplication">
 	<h2>Dina anmälda tävlande</h2>
 	<div id="confirmedDiv">
 		<?php
-		include "database/findParticipants.php";
+		//include "database/findParticipants.php";
 		?>
 	</div>
 	<a id="dropDown" href="#" class="cthrough">För hjälp, klicka här</a>
