@@ -8,6 +8,8 @@
 	var_dump($compID);
 	$name = $_POST['gren'];
 	
+	//kolla vilka grenar till resp ålder som redan finns i db så men inte kan lägga in dubbla...
+	
 	foreach ($name as $grentyp) { 
 		$quary = "INSERT INTO age_class (compId, ageClass, discipline)
 		VALUES ('$compID', '$_POST[chooseClass]', '$grentyp')";

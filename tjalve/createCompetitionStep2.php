@@ -91,34 +91,26 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 <form method="POST" id="secForm" name="secForm">
 <!--The Informationtext -->
 <script type="text/javascript">	
-	//var id = "";
-	//console.log($('input[type="hidden"]').val());
-	$( document ).ready(function() {
-	
-		//hiddenClass = $('#chooseClass').ready(":selected").text();
-		//console.log('---------'+hiddenClass+'--------');
-		$.ajax({
+var js_var = "<?php echo $_GET['compID']; ?>";
+	$(document).ready(function() {
 		
+		$.ajax({
 		data: {
-				//'discipline2': hiddenClass 
+				
 			},
-			//console.log('--------------'id'----------------');
-			url: 'database/getAllAvailableDisciplines.php?compID=<?php $_GET['compID'] ?>',
-			console.log('------<?php $_GET['compID'] ?>------');
-			success: function(content2) {
-				//console.log('-------------------------------------');
-				//console.log(content2);
-				//console.log('-------------------------------------');
-				//content = $.parseJSON(content2);
-				var dat2_string = '<table id="selectedDisciplines">';
-				//dat2_string += '<tr><td><th>Gren</th></td></tr>';
-				//console.log(dat2_string);
+			
+			url:'database/getAllAvailableDisciplines.php?compID='+js_var,
+			success: function(content2){
+				
+				content2 = $.parseJSON(content2);
+				var dat2_string = '<table id="whichDisciplines">';
+				dat2_string += '<tr><td></td> <th><p id ="discP">valda grenar till resp. åldersklass </p></th></tr>';
 				$.each(content2, function(index, value) {
-				//console.log(value);
-				//console.log(index);
-					dat2_string //+= '<tr><td><input type = "textfield" name = "gren2[]" value="'+value.gren2+'"/></td><td>'
-									 + '<tr><td>'value.gren2'</td>'
-									 + '<td>'value.klass'</td></tr>';
+				console.log(value);
+				console.log(index);
+					dat2_string += '<tr><td>'+value.klass+'</td><td>'
+								+ value.gren+'</td>';
+								+ '<td><button id="deleteButton">Radera</button></td> </tr>';
 				});
 				dat2_string += '</table>';
 				dat2_string += '<input type="submit" id="addAgeClass2" value="färdig!?"/></form>';
@@ -128,7 +120,8 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 		}); 
 	});
 </script>
-
+<!-- nästa gång försök fixa deleteknappen för alla grenar resp åldersklasser!!!!! se under!!
+<!--+ '<td><a href="database/deleteAddedClass.php?participantId=' + value.participantId + '"><button id="deleteButton">Radera</button></a></td> </tr>';-->
 <div id="rightPartOfApplication">
 	<h2>Dina anmälda tävlande</h2>
 	<div id="confirmedDiv">
