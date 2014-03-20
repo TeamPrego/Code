@@ -84,8 +84,10 @@ $('#createTable').change(function() {
     //document.write(competition);
 		$.ajax({
       
-			url: 'database/getCompetitionByName.php?competition='+competition+'',
-      //url: 'database/getCompetitionByName.php?competition=Knarklyft',
+      //Skapar tabellen för tävling
+			/*
+      url: 'database/getCompetitionByName.php?competition='+competition+'',
+      
      
 			success: function(content){
           
@@ -98,19 +100,38 @@ $('#createTable').change(function() {
         var dat_string = '<table id="competitionTable">';
 				dat_string += '<tr> <th>ID</th> <th>Name</th> <th>Arr</th> <th>Date</th> <th>LastDate</th></tr>';
         
-        //console(dat_string  );
-        
-        //$.each(content,function(index,value) {
-          //console.log(index);
-          //dat_string+='<tr><td>'+value.compID+'</td><td>'+value.compID+'</td><td>'+value+'</td><td>'+value+'</td><td>'+value+'</td></tr>' 
-          dat_string+='<tr><td>'+content.compID+'</td><td>'+content.compID+'</td><td>'+content.compArr+'</td><td>'+content.compDate+'</td><td>'+content.compLastDate+'</td></tr>' 
-        //});
+        dat_string+='<tr><td>'+content.compID+'</td><td>'+content.compID+'</td><td>'+content.compArr+'</td><td>'+content.compDate+'</td><td>'+content.compLastDate+'</td></tr>' 
         
         dat_string += '</table>';
-          //document.write(dat_string);
         document.getElementById('table').innerHTML = dat_string;
         
-        //document.getElementById('table').innerHTML = "BALLE";
+        //var id = content.compID;
+     
+			}*/
+      
+      /*
+        Skriver ut grenar från en tävling
+        */
+        
+      //console.log('Yo man');
+      /*url: 'database/getAgeClassById.php',
+      success: function(content){
+          
+				//console.log('YAO!');
+        
+        content = $.parseJSON(content);
+        console.log(content);
+        
+        
+        var dat_string2 = '<table id="competitionTable2">';
+				dat_string2 += '<tr> <th>ageclass</th> <th>discipline</th></tr>';
+        
+        $.each(content, function(index, value) {
+        dat_string2+='<tr><td>'+value.ageC+'</td><td>'+value.discipline+'</td></tr>' 
+        });
+        dat_string2 += '</table>';
+        //document.getElementById('table2').innerHTML = dat_string2;*/
+        document.getElementById('table2').innerHTML = "BALLE";
 			}
 		});
 	});
@@ -118,6 +139,8 @@ $('#createTable').change(function() {
 </script>
 
 <div id="table">Här ska skit dyka upp</div>
+<div id="table2">Här ska skit dyka upp</div>
+
 <?php
 include "templates/adminfooter.php";
 ?>
