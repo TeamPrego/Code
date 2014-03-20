@@ -1,7 +1,7 @@
 <?php
 	include "config.php";
 	
-	$compID = $_GET['ageClass'];
+	$compID = $_GET['ageClass']; //behövs denna?
 	
 	$query = "SELECT * FROM age_class WHERE ageClass = '$ageClass'";
 	$data = mysqli_query($con, $query);

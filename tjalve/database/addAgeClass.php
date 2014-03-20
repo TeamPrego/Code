@@ -2,6 +2,8 @@
 	include "config.php";
 	
 	$compID = $_GET['compID'];
+	//$hidden = $_GET['hiddenClass'];
+	//echo $hidden;
 	echo $compID;
 	var_dump($compID);
 	$name = $_POST['gren'];

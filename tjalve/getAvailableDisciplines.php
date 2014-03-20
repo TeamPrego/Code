@@ -1,5 +1,6 @@
 <?php
 	$class = $_GET['class'];
+	//echo "<br><br><h1>" .$class. "</h1><br><br>";
 
 	include "database/config.php";
 
