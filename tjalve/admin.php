@@ -1,5 +1,4 @@
 <!--Primary admin page-->
-<!--Granskad och godkänd 2014-03-04-->
 <?php
 include "templates/adminheader.php";
 ?>
@@ -24,7 +23,7 @@ include "templates/adminheader.php";
     
 		<tr>
 			<td><button class="button">Ändra</button></td>
-			<td><button class="button">Sen anmälan</button></td>
+			<td><a href="acceptLateReg.php"><button class="button">Sen anmälan</button></a></td>
 		</tr>
 		
 		<tr>

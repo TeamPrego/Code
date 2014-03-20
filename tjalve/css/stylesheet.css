@@ -264,6 +264,7 @@ h4{
 
 #noParticipants {
 	color: red;
+	text-align: center;
 }
 
 #result-button {

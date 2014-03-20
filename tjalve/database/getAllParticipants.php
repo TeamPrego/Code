@@ -25,7 +25,8 @@
 								 'lName' => $rowParticipant->lastName,
 								 'bib' => $rowParticipant->bib,
 								 'club' => $rowContact ->club,
-								 'participantId' => $rowParticipant->participantId];
+								 'participantId' => $rowParticipant->participantId,
+								 'prio' => $rowParticipant->prio];
 		}
 	}
 	mysqli_close($con);	

@@ -13,6 +13,6 @@
 	$contactId = $con->insert_id;
 
 	mysqli_close($con);
-	header("Location: ../applyTwo.php?contactId=".$contactId);
+	header("Location: ../applyTwo.php?contactId=".$contactId."&prio=".$_POST['prio']);
 	ob_end_flush();
 ?>

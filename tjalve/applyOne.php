@@ -13,6 +13,7 @@
 	<table id ="formDiv">
 		<form id="firstForm" name="firstForm" method="post" action="database/addContact.php"> 
 			<input type="hidden" value=<?php echo $_GET['competitionId']?> name="competitionId">
+			<input type="hidden" value=<?php echo $_GET['prio']?> name="prio">
 			<tr>
 				<td>
 					<label for="select">
@@ -31,7 +32,7 @@
 					</select>
 					Saknas din förening?
 					<?php
-					echo "<a id='addTeam' href='createNewClub.php?competitionId=".$_GET['competitionId']."'>Klicka här</a>";
+					echo "<a id='addTeam' href='createNewClub.php?competitionId=".$_GET['competitionId']."&prio=".$_GET['prio']."'>Klicka här</a>";
 					?>
 				</td>
 			</tr>
@@ -67,17 +68,17 @@
 <!--The Informationtext -->
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		jQuery(".infoText").hide();
+		jQuery("#infoText").hide();
 		//toggle the componenet with class msg_body
 		jQuery(".cthrough").click(function(e) {
 			e.preventDefault();
-			jQuery(this).next(".infoText").slideToggle(500);
+			jQuery(this).next("#infoText").slideToggle(500);
 		});
 	});	
 </script>
 <div id="rightPartOfApplication">
 	<a id="dropDown" href="#" class="cthrough">För hjälp, klicka här</a>
-	<div class="infoText">
+	<div id="infoText">
 		<ol>
 			<li class="importantText">
 	      Välj klubb och skriv in uppgifter om kontaktpersonen

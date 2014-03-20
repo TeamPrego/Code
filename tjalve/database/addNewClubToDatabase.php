@@ -9,5 +9,5 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	mysqli_close($con);
-	header("Location: ../applyOne.php?competitionId=".$_GET['competitionId']);
+	header("Location: ../applyOne.php?competitionId=".$_GET['competitionId']."&prio=".$_GET['prio']);
 ?>
