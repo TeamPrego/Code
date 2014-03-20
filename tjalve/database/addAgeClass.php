@@ -2,6 +2,7 @@
 	include "config.php";
 	
 	$compID = $_GET['compID'];
+	echo $compID;
 	var_dump($compID);
 	$name = $_POST['gren'];
 	
