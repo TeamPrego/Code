@@ -35,8 +35,33 @@ h4 {
 	width:15%;
 }
 
+#bronk {
+  background-color:#bfcbff;
+  width:18%;
+  height:100%;
+  margin-left:41%;
+  margin-right:auto;
+  margin-top:0;
+}
+
 #chosenAge {
   margin-left: 34.5%;
+}
+
+#compLogo {
+  margin-left:46%;
+  margin-right:auto;
+  margin-top:2%;
+  width: 8%;
+  height: 13%;
+}
+
+#discP {
+  color:black;
+  margin-left:0;
+  margin-right:auto;
+  font-size:huge;
+  font-family:verdana;
 }
 
 #innerBody {

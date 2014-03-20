@@ -5,14 +5,13 @@
 include "templates/adminheader.php";
 ?>
 
-<div id="comp">
-		<?php
-		include "database/getCompetition.php";
-		//$compID = $_GET['compID'];
-		?>
-</div>
+
+<?php
+include "database/getCompetition.php";
+//$compID = $_GET['compID'];
+?>
+
 <form method="post" id="firstForm" name="firstForm" action="database/addAgeClass.php?compID=4"'<?php echo $compID?>'>
-Välj åldesklass och resp. gren här:
 
 <table class ="createcompTable">
 	
@@ -72,7 +71,7 @@ Välj åldesklass och resp. gren här:
 				console.log(content);
 				content = $.parseJSON(content);
 				var dat_string = '<table id="whichDisciplines">';
-				dat_string += '<tr><td></td> <th>Gren</th> </tr>';
+				dat_string += '<tr><td><td> <p id ="discP">Gren</th> </p>';
 				$.each(content, function(index, value) {
 				console.log(value);
 				//dat_string += '<input type="hidden" name="inp" value="'+inp+'"/>'
