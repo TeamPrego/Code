@@ -220,12 +220,12 @@ h4{
 }
 
 /* The form för applications */
-#formDiv{
+/*#formDiv{
 	border-right: 3px solid #348cc2;
 	float: left;
 	text-align: left;
 	width: 100%;
-}
+}*/
 
 #leftPartOfApplication{
 	width: 45%;

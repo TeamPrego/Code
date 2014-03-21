@@ -6,6 +6,18 @@ h4 {
   text-align: center;
 }
 
+#addAgeClass {
+  margin-left:55%;
+  margin-right:auto;
+  zoom:1.5;
+}
+
+#addAgeClass2 {
+  margin-left:5%;
+  margin-right:auto;
+  zoom:1.5;
+}
+
 .adminTable {
 	margin: 5% auto;
 	text-align: center;
@@ -63,7 +75,6 @@ h4 {
 }
 
 #discP {
-  color:black;
   margin-left:0;
   margin-right:auto;
   font-weight:bold;
@@ -85,10 +96,29 @@ h4 {
 	border-radius: 7px;
 }
 
+#selectBox {
+  margin-right:auto;
+  zoom:1.5; /*Increase the size of checkboxes*/
+} 
+
+#selectedDisciplines {
+  font-family:Verdana;
+  margin-left:5%;
+}
+
+#selectedDiscP {
+  margin-left:0;
+  margin-right:auto;
+  font-weight:bold;
+  font-family:Verdana;
+}
+
 td {
-  font-family:verdana;
+  font-family:Verdana;
 }
 
 #whichDisciplines {
+  margin-left:55%;
+  width:40%;
   font-family:verdana;
 }

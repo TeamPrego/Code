@@ -75,7 +75,7 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 				dat_string += '<tr><td><td> <p id ="discP">Gren</th> </p>';
 				$.each(content, function(index, value) {
 					console.log(value);
-					dat_string += '<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"></td><td>'
+					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value.gren+'"></td><td>'
 								+ value.gren;
 				});
 				dat_string += '</table>';
@@ -103,8 +103,8 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 			success: function(content2){
 				
 				content2 = $.parseJSON(content2);
-				var dat2_string = '<table id="whichDisciplines">';
-				dat2_string += '<tr><td></td> <th><p id ="discP">valda grenar till resp. åldersklass </p></th></tr>';
+				var dat2_string = '<table id="selectedDisciplines">';
+				dat2_string += '<tr><td colspan="2"><p id ="selectedDiscP">Valda grenar till resp. åldersklass </p></td></tr>';
 				$.each(content2, function(index, value) {
 				console.log(value);
 				console.log(index);
@@ -113,7 +113,7 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 								+ '<td><button id="deleteButton">Radera</button></td> </tr>';
 				});
 				dat2_string += '</table>';
-				dat2_string += '<input type="submit" id="addAgeClass2" value="färdig!?"/></form>';
+				dat2_string += '<input type="submit" id="addAgeClass2" value="Färdig!?"/></form>';
 
 				document.getElementById('rightPartOfApplication').innerHTML = dat2_string;
 			}
