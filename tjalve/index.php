@@ -50,7 +50,7 @@
 		else 
 			echo "<td>Too late</td>";
 
-		echo "<td>Länk</td>".
+		echo "<td><a href='startList.php?competitionId=".$row->compID."'>Klicka här</a></td>".
 		"<td><a href='resultat.php?competitionId=".$row->compID."'>Se resultat här</a></td><tr>";
 		$count++;
 	}
