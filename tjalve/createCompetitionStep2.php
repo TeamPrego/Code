@@ -38,8 +38,11 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 							while($row = $data->fetch_object()) {
 								if(!in_array($row->Klass, $array)) {
 									array_push($array, $row->Klass);
-									echo "<option value='" . $row->Klass . "'>" . $row->Klass . "</option>";
 								}
+							}
+							sort($array, SORT_DESC);
+							foreach ($array as $key => $value) {
+							  printf("\t<option value='%s'>%s</option>\n", $value, $value);
 							}
 							mysqli_close($con); 
 						?>
