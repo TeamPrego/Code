@@ -8,7 +8,7 @@ include "templates/adminheader.php";
 <?php
 include "database/getCompetition.php";
 ?>
-    
+
 <?php 
 $compID = $_GET['compID'];
 echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAgeClass.php?compID=".$compID."'>";
@@ -38,17 +38,18 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 							while($row = $data->fetch_object()) {
 								if(!in_array($row->Klass, $array)) {
 									array_push($array, $row->Klass);
-									echo "<option value='" . $row->Klass . "'>" . $row->Klass . "</option>";
 								}
 							}
+							sort($array, SORT_DESC);
+							foreach ($array as $key => $value) {
+							  printf("\t<option value='%s'>%s</option>\n", $value, $value);
+							}
 							mysqli_close($con); 
-							
 						?>
 			</select>
 		  </td>
         </td>
 	 </tr>	 
-	
 </table>
 
 
@@ -63,6 +64,7 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 	var inp = "";
 	$('#chooseClass').change(function() {
 		inp = $(this).find(":selected").text();
+		
 		//console.log(inp);
 		$.ajax({
 			data: {
@@ -75,57 +77,58 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 				var dat_string = '<table id="whichDisciplines">';
 				dat_string += '<tr><td><td> <p id ="discP">Gren</th> </p>';
 				$.each(content, function(index, value) {
-				console.log(value);
-					dat_string += '<input type="hidden" name="compID" value="<?php echo $compID; ?>">'
-					dat_string += '<tr><td><input id = "checkId" type = "checkbox" name = "gren[]" value="'+value.gren+'"></td><td>'
-									 + value.gren;
+					console.log(value);
+					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value.gren+'"></td><td>'
+								+ value.gren;
 				});
 				dat_string += '</table>';
 				dat_string += '<input type="submit" id="addAgeClass" value="Lägg till Åldersklass"/></form>';
+				//dat_string += '<input type="hidden" name="hiddenClass" id="hiddenClass" value="'+inp+'">';
 
 				document.getElementById('leftPartOfApplication').innerHTML = dat_string;
 			}
-			
 		});
-		
-		// Försök att få denna att fungera jämför med den över för den funkar som den ska tror att troligtvis så är "content2" fel den får inte rätt värden...
-		console.log(inp);
-/* 		$.ajax({
-		data: {
-				//'discipline2': inp //används inte ens data???????
-			},
-			url: 'getAvailableDisciplines.php',
-			success: function(content2) {
-				//console.log(content2);
-				content = $.parseJSON(content2);
-				var dat2_string = '<table id="selectedDisciplines">';
-				dat2_string += '<tr><td><th>Gren</th></td></tr>';
-				console.log(dat2_string);
-				$.each(content2, function(index, value) {
-				console.log(value);
-				console.log(index);
-					dat2_string += '<tr><td><input type = "textfield" name = "gren2[]" value="'+value.gren2+'"/></td><td>'
-									 + value.gren2
-				});
-				dat_string += '</table>';
-				dat_string += '<input type="submit" id="addAgeClass2" value="färdig!?"/></form>';
-
-				document.getElementById('rightPartOfApplication').innerHTML = dat_string;
-			}
-		}); */
 	});
 </script>
 
+<form method="POST" id="secForm" name="secForm">
+<!--The Informationtext -->
+<script type="text/javascript">	
+var js_var = "<?php echo $_GET['compID']; ?>";
+	$(document).ready(function() {
+		
+		$.ajax({
+		data: {
+				
+			},
+			
+			url:'database/getAllAvailableDisciplines.php?compID='+js_var,
+			success: function(content2){
+				
+				content2 = $.parseJSON(content2);
+				var dat2_string = '<table id="selectedDisciplines">';
+				dat2_string += '<tr><td colspan="2"><p id ="selectedDiscP">Valda grenar till resp. åldersklass </p></td></tr>';
+				$.each(content2, function(index, value) {
+				console.log(value);
+				console.log(index);
+					dat2_string += '<tr><td>'+value.klass+'</td><td>'
+								+ value.gren+'</td>';
+								+ '<td><button id="deleteButton">Radera</button></td> </tr>';
+				});
+				dat2_string += '</table>';
+				dat2_string += '<input type="submit" id="addAgeClass2" value="Färdig!?"/></form>';
+
+				document.getElementById('rightPartOfApplication').innerHTML = dat2_string;
+			}
+		}); 
+	});
+</script>
+<!-- nästa gång försök fixa deleteknappen för alla grenar resp åldersklasser!!!!! se under!!
+<!--+ '<td><a href="database/deleteAddedClass.php?participantId=' + value.participantId + '"><button id="deleteButton">Radera</button></a></td> </tr>';-->
 <div id="rightPartOfApplication">
 	<h2>Dina anmälda tävlande</h2>
 	<div id="confirmedDiv">
-	
-	<table>
-		<?php
-		
-		//include "database/getAgeClass.php";
-		?>
-	</table>
+	</form>
 	</div>
 </div>
 

@@ -21,10 +21,16 @@
 	//}
 	$disabled = "disabled";
 	$idno = 0;
+	$which = "odd";
 	while ($prow = $data->fetch_object()) {
 		++$idno;
+		if ($idno%2==0)
+			$which="even";
+		else
+			$which="odd";
+		//Kollar om vilket radnummer för att ge raderna rätt färg
 		echo "<form method='POST' id='updateForm' name='updateForm' action='database/EditParticipants/updateParticipant.php?participantId=" . $prow->participantId . "'>" .
-		"<tr> <td>" . 
+		"<tr class='" . $which. "'> <td>" . 
 		"<input class='u_fName".$idno."' name='u_fName' type=text disabled value =" . $prow->firstName . "> </td> <td> " . 
 		"<input class='u_fName".$idno."' name='u_lName' type=text " . $disabled . " value =" . $prow->lastName . "> </td> <td>" . 
 		"<input class='u_fName".$idno."' name='u_bYear' type=text " . $disabled . " value =" . $prow->birthYear . "> </td> <td> " . 
@@ -35,7 +41,7 @@
 		"<input type='button' id='updateButton" .$idno. "' name='updateButton' value='Uppdatera' onclick='updFunc($idno)' > </td> <td>" .
 		"<input type='submit' id='saveButton" .$idno. "' name='saveButton' value='Spara' onclick='saveFunc()' disabled> </td> <td>" .
 		"<a href='database/EditParticipants/deleteParticipantAdmin.php?participantId=" . $prow->participantId . "' class='confirmDelete'><input type='button' id='deleteButt" .$idno. "' name='deleteButt' value='Ta bort'  onclick='deleteFunc()'></a></td> </tr> </form>";
-		// 
+		//        database/EditParticipants/updateParticipant.php?participantId=83
 	}
 
 	mysqli_close($con);	

@@ -19,4 +19,4 @@
         <img id ="adminpicid" src="pic/taskig_copy.jpg" alt ="adminlogga" />
       </div>
 			<hr>
-      <h4>Du är inloggad som primär administratör.</h4>
+      <div id="adminHeaderDiv"><h5>Du är inloggad som primär administratör.</h5></div>

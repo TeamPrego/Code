@@ -1,9 +1,21 @@
 /*Stylesheet for admin to make minor interface changes*/
 /*Granskad och godkänd 2014-03-04*/
 
-h4 {
-	font-family: Verdana;
-  text-align: center;
+#adminHeaderDiv h5 {
+  text-align:center;
+  font-family:Verdana;
+}
+
+#addAgeClass {
+  margin-left:55%;
+  margin-right:auto;
+  zoom:1.5;
+}
+
+#addAgeClass2 {
+  margin-left:5%;
+  margin-right:auto;
+  zoom:1.5;
 }
 
 .adminTable {
@@ -11,6 +23,22 @@ h4 {
 	text-align: center;
 	padding: 5px;
 	width: 40%;
+}
+
+#selectedDisciplines tr:nth-child(n+2) {
+background: #c2cbff
+}
+
+#selectedDisciplines tr:nth-child(2n+2) {
+background: #ebeeff
+}
+
+#whichDisciplines tr:nth-child(n+2) {
+background: #c2cbff
+}
+
+#whichDisciplines tr:nth-child(2n+2) {
+background: #ebeeff
 }
 
 .adminTable button {
@@ -37,12 +65,17 @@ h4 {
 
 #bronk {
   background-color:#bfcbff;
-  width:18%;
-  height:100%;
-  margin-left:41%;
+  margin-left:auto;
   margin-right:auto;
   margin-top:0;
   font-family:Verdana;
+  text-align:left;
+  table-layout:fixed; 
+  border-spacing:10px;
+}
+
+#competition h1 {
+  text-align:center;
 }
 
 #chosenAge {
@@ -63,7 +96,6 @@ h4 {
 }
 
 #discP {
-  color:black;
   margin-left:0;
   margin-right:auto;
   font-weight:bold;
@@ -85,10 +117,37 @@ h4 {
 	border-radius: 7px;
 }
 
+#selectBox {
+  margin-right:auto;
+  zoom:1.5; /*Increase the size of checkboxes*/
+} 
+
+#selectedDisciplines {
+  font-family:Verdana;
+  margin-left:5%;
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-top-left-radius: 8px;
+	-webkit-box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4); 
+	-moz-box-shadow: 2px 2px 2px rgba(23, 69, 88, .5);
+}
+
+#selectedDiscP {
+  margin-left:0;
+  margin-right:auto;
+  font-weight:bold;
+  font-family:Verdana;
+}
+
 td {
-  font-family:verdana;
+  font-family:Verdana;
 }
 
 #whichDisciplines {
+  margin-left:55%;
+  width:40%;
   font-family:verdana;
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-top-left-radius: 8px;
+	-webkit-box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4); 
+	-moz-box-shadow: 2px 2px 2px rgba(23, 69, 88, .5);
 }
