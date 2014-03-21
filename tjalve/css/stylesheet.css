@@ -39,6 +39,10 @@ h4{
 	margin-left: 5%;
 }
 
+tr.spaceOver > td {
+  padding-top: 5%;
+}
+
 .choice-bar {
 	/*background: #8a8a8a;*/
 	height: 3em;
@@ -59,10 +63,24 @@ h4{
 
 .firstTableList{
   font-family: Verdana;
-  margin: 0 auto;
+  margin-left: 5%;
+  margin-right: 5%;
   padding: 5px;
-  text-align: center;
-	width: 100%;
+  text-align: left;
+	width: 90%;
+}
+
+.firstTableList tr:nth-child(n+2) {
+background: #c2cbff
+}
+
+.firstTableList tr:nth-child(2n+2) {
+background: #ebeeff
+}
+
+.firstTableList th {
+	background-color:#344cc2;
+	color:white;
 }
 
 .footer{

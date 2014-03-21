@@ -1,8 +1,8 @@
 <?php
 	include "templates/header.php";
 ?>	
-<h1>Startlista</h1>
-
+<h1>Startlista för <?php include "database/startList/getCompetitionName.php" ?></h1>
+<label>Välj klubb: </label>
 <select name="chooseClass" id="chooseClass" required>
 	<option value="all">Alla</option>
 	<?php
@@ -18,6 +18,7 @@
 		}
 	?>
 </select>
+<label>Välj gren: </label>
 <select name="chooseDiscipline" id="chooseDiscipline" required>
 	<option value="all">Alla</option>
 	<?php
@@ -34,7 +35,7 @@
 	?>
 </select>
 
-<div id="in">
+<div id="startList">
 </div>
 
 <script type="text/javascript">
@@ -63,15 +64,16 @@ function Update() {
 		success: function(content) {
 			console.log(content);
 			content = $.parseJSON(content);
-			var dat_string = 	'<table class="startListTable">';
+			var dat_string = 	'<table class ="firstTableList" cellspacing="0" cellpadding="0">';
 			$.each(content, function(index, value) {
-				dat_string += 	'<tr><th>'+ value.className + '</th><th> ' + value.discipline + '</th></tr>'
-											+	'<tr><td></td><th>Förnamn</th><th>Efternamn</th><th>Klubb</th></tr>';
+				dat_string += '<tr class="spaceOver"><td style="background-color:white"></td></tr>';
+				dat_string += 	'<tr><th>'+ value.className + '</th><th> ' + value.discipline +'</th><th></th><th></th></tr><tr><th></th><th>Förnamn</th><th>Efternamn</th><th>Klubb</th></tr>';
 				$.each(value.participants, function(ind, val) {
-					dat_string += '<td></td><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>' + val.club + '</td></tr>';
+					dat_string += '<tr><td></td><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>' + val.club + '</td></tr>';
 				});
 			});
-			document.getElementById('in').innerHTML = dat_string;
+			dat_string += '</table>'
+			document.getElementById('startList').innerHTML = dat_string;
 		}
 	});
 }

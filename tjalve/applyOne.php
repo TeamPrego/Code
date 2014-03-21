@@ -4,7 +4,7 @@
 <!--Granskad och godkänd 2014-03-04-->
 
 <!--Headning -->
-<h1> Anmälan till "tävlingsnamn" </h1>
+<h1> Anmälan till <?php include "database/startList/getCompetitionName.php" ?> </h1>
 <!--Line -->
 <hr>
 <!--Div for the form -->
