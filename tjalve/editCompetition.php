@@ -75,7 +75,7 @@ include "database/config.php";
 
 
 <script type="text/javascript">
-
+var ID=2;
 $('#createTable').change(function() {
     
 		var competition =  $('#createTable').find(":selected").text();
@@ -85,17 +85,14 @@ $('#createTable').change(function() {
 		$.ajax({
       
       //Skapar tabellen för tävling
-			/*
+			
       url: 'database/getCompetitionByName.php?competition='+competition+'',
       
      
 			success: function(content){
           
-				//console.log('Här är jag');
         
-        content = $.parseJSON(content);
-        console.log(content);
-        
+        content = $.parseJSON(content);        
         
         var dat_string = '<table id="competitionTable">';
 				dat_string += '<tr> <th>ID</th> <th>Name</th> <th>Arr</th> <th>Date</th> <th>LastDate</th></tr>';
@@ -105,21 +102,25 @@ $('#createTable').change(function() {
         dat_string += '</table>';
         document.getElementById('table').innerHTML = dat_string;
         
-        //var id = content.compID;
-     
-			}*/
+        var ID = content.compID;
+        console.log(ID);
+			}
       
+		});
+    
+    $.ajax({
       /*
         Skriver ut grenar från en tävling
         */
-        
-      //console.log('Yo man');
-      /*url: 'database/getAgeClassById.php',
+      
+      url: 'database/getAgeClassById.php?ID='+ID+'',
+      
       success: function(content){
-          
-				//console.log('YAO!');
-        
+        //console.log(ID);
+				//console.log('Dat shiet!');
+        //console.log(content);
         content = $.parseJSON(content);
+        
         console.log(content);
         
         
@@ -127,13 +128,15 @@ $('#createTable').change(function() {
 				dat_string2 += '<tr> <th>ageclass</th> <th>discipline</th></tr>';
         
         $.each(content, function(index, value) {
-        dat_string2+='<tr><td>'+value.ageC+'</td><td>'+value.discipline+'</td></tr>' 
+        dat_string2+='<tr><td>'+value.ageC+'</td><td>'+value.disc+'</td></tr>' 
         });
         dat_string2 += '</table>';
-        //document.getElementById('table2').innerHTML = dat_string2;*/
-        document.getElementById('table2').innerHTML = "BALLE";
+        document.getElementById('table2').innerHTML = dat_string2;
+        //document.getElementById('table2').innerHTML = "BALLE";
 			}
+      
 		});
+    
 	});
   
 </script>
