@@ -3,7 +3,7 @@
 	include "config.php";
 	$competitionID = $_GET['ID'];
   //echo $competitionName;
-	//$dataCompetition = mysqli_query($con, "SELECT * FROM age_class WHERE compId = '$ID'");
+	//$dataCompetition = mysqli_query($con, "SELECT * FROM age_class WHERE compId = 5");
   $dataCompetition = mysqli_query($con, "SELECT * FROM age_class WHERE compId = '$competitionID'");
   //echo $dataCompetition;
 	$ageclass = [];
@@ -14,7 +14,7 @@
    
 	}
   //echo $ageclass['disc'];
-  //echo $ageclass[3];
+ // echo $ageclass;
 	mysqli_close($con);	
 	echo json_encode($ageclass);
   

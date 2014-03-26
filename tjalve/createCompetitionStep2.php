@@ -82,10 +82,9 @@ var js_IDvar = "<?php echo $_GET['compID']; ?>";
 					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value+'"></td><td>'
 								+ value;
 				});
-				dat_string += '</table>';
-				dat_string += '<input type="submit" id="addAgeClass" value="Lägg till Åldersklass"/></form>';
+				dat_string += '<tr><td colspan="2"><input type="submit" id="addAgeClass" value="Lägg till Åldersklass"/></td></tr></form>';
 				//dat_string += '<input type="hidden" name="hiddenClass" id="hiddenClass" value="'+inp+'">';
-
+				dat_string += '</table>';
 				document.getElementById('leftPartOfApplication').innerHTML = dat_string;
 			}
 		});
@@ -111,8 +110,8 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 					dat2_string += '<tr><td>' +value.klass+ '</td><td>'
 								+ value.gren+ '</td><td><button id="deleteButton"><a id="aTagDeleteDisp" href="database/deleteDiscipline.php?compID=' + js_var + '&gren=' +value.gren+ '&klass=' +value.klass+ '">Radera</a></button></td> </tr>';
 				});
+				dat2_string += '<tr><td><td><td><input type="submit" id="done" value="Klar"/></td></td></td></tr></form>';
 				dat2_string += '</table>';
-				dat2_string += '<input type="submit" id="done" value="Färdig!?"/></form>';
 
 				document.getElementById('rightPartOfApplication').innerHTML = dat2_string;
 			}
