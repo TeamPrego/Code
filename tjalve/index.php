@@ -17,6 +17,7 @@
 			<th>Reslutatlista</th>
 		</tr>
 	</thead>	
+	<tr><td></td></tr>
 <?php
 
 	include "database/config.php";

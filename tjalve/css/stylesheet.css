@@ -70,12 +70,12 @@ tr.spaceOver > td {
 	width: 90%;
 }
 
-.firstTableList tr:nth-child() {
-background: #ebeeff
+.firstTableList tr:nth-child(n+2) {
+	background: #c2cbff
 }
 
-.firstTableList tr:nth-child() {
-background: ##c2cbff
+.firstTableList tr:nth-child(2n+2) {
+	background: #ebeeff
 }
 
 .firstTableList th {
@@ -299,6 +299,7 @@ ocal
 #noParticipants {
 	color: red;
 	text-align: center;
+	font-size: bold;
 }
 
 #result-button {

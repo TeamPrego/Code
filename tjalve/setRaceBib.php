@@ -32,14 +32,16 @@
 
 <div id = "rightPartOfApplication">
 	<h2>Tävlingsdeltagare</h2>
-	<?php
-		if(isset($_GET['check'])) {
-			if($_GET['check'] == 0)
-				echo "Finns en eller flera med samma nummerlapp";
-			else
-				echo "Ändrat och klart";
-		}
-	?>
+	<div style="margin-left:5%">
+		<?php
+			if(isset($_GET['check'])) {
+				if($_GET['check'] == 0)
+					echo "<div id='noParticipants'>Fel: Finns en eller flera med samma nummerlapp, kolla igenom så ingen deltagare har samma nummerlapp</div>";
+				else
+					echo "<div id='noParticipants'>Ändrat</div>";
+			}
+		?>
+	</div>
 	<div id="getParticipantBibDiv"></div>
 </div>
 
