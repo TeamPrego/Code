@@ -253,6 +253,10 @@ background: #ebeeff
 	width: 100%;
 }*/
 
+#hideButton{
+	display: none;
+}
+
 #leftPartOfApplication{
 	width: 45%;
 	float: left;
@@ -297,6 +301,11 @@ background: #ebeeff
 	text-align: center;
 }
 
+#participantTable{
+	margin-right: 5%;
+	width: 100%;
+}
+
 #result-button {
 	background: #d95243;
 	height: 2em;
@@ -311,6 +320,9 @@ background: #ebeeff
 	margin-right: 5%;
 }
 
+#showButton{
+	display: inline;
+}
 /* #whichDisciplines {
 	border-right: 3px solid #344cc2;
 	width: 100%;
