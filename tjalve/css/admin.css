@@ -7,8 +7,7 @@
 }
 
 #addAgeClass {
-  margin-left:55%;
-  margin-right:auto;
+  float:right;
   zoom:1.5;
 }
 
@@ -23,6 +22,7 @@
 	text-align: center;
 	padding: 5px;
 	width: 40%;
+  table-layout:fixed;
 }
 
 #selectedDisciplines tr:nth-child(n+2) {
@@ -42,10 +42,39 @@ background: #ebeeff
 }
 
 .adminTable button {
-  font-family:verdana;
 	height:100%;
   width:100%;
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e60b5), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e60b5, #65a9d7);
+   background: -moz-linear-gradient(top, #3e60b5, #65a9d7);
+   background: -ms-linear-gradient(top, #3e60b5, #65a9d7);
+   background: -o-linear-gradient(top, #3e60b5, #65a9d7);
+   padding: 11px 22px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Verdana, 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
 }
+
+.adminTable button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.adminTable button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
 
 .createcompTable {
 	margin: 2% auto;
@@ -101,6 +130,39 @@ background: #ebeeff
   font-weight:bold;
   font-family:verdana;
 }
+
+#done {
+  float:left;
+   border-top: 1px solid #5fff33;
+   background: #1f6e18;
+   background: -webkit-gradient(linear, left top, left bottom, from(#24ab22), to(#1f6e18));
+   background: -webkit-linear-gradient(top, #24ab22, #1f6e18);
+   background: -moz-linear-gradient(top, #24ab22, #1f6e18);
+   background: -ms-linear-gradient(top, #24ab22, #1f6e18);
+   background: -o-linear-gradient(top, #24ab22, #1f6e18);
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-family: Verdana, 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   zoom:1.5;
+}
+
+#done:hover {
+   border-top-color: #1e661c;
+   background: #1e661c;
+   color: #ccc;
+   }
+#done:active {
+   border-top-color: #0e5708;
+   background: #0e5708;
+   }
 
 #innerBody {
 	background-color: white;

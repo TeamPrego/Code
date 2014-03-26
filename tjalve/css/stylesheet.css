@@ -70,12 +70,12 @@ tr.spaceOver > td {
 	width: 90%;
 }
 
-.firstTableList tr:nth-child(n+2) {
-background: #c2cbff
+.firstTableList tr:nth-child() {
+background: #ebeeff
 }
 
-.firstTableList tr:nth-child(2n+2) {
-background: #ebeeff
+.firstTableList tr:nth-child() {
+background: ##c2cbff
 }
 
 .firstTableList th {
@@ -201,7 +201,7 @@ background: #ebeeff
 #confirmedParticipantTable td {
 	width: 20%;
 }
-
+ocal
 #confirmedParticipantOneEach{
 	border: 3px solid #344cc2;
 	border-radius: 7px;
