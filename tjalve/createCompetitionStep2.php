@@ -91,17 +91,13 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 	});
 </script>
 
-<form method="POST" id="secForm" name="secForm">
+<form method="POST" id="secForm" name="secForm" action="admin.php">
 <!--The Informationtext -->
 <script type="text/javascript">	
 var js_var = "<?php echo $_GET['compID']; ?>";
 	$(document).ready(function() {
 		
 		$.ajax({
-		data: {
-				
-			},
-			
 			url:'database/getAllAvailableDisciplines.php?compID='+js_var,
 			success: function(content2){
 				
@@ -115,7 +111,7 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 								+ value.gren+ '</td><td><button id="deleteButton"><a id="aTagDeleteDisp" href="database/deleteDiscipline.php?compID=' + js_var + '&gren=' +value.gren+ '&klass=' +value.klass+ '">Radera</a></button></td> </tr>';
 				});
 				dat2_string += '</table>';
-				dat2_string += '<input type="submit" id="addAgeClass2" value="Färdig!?"/></form>';
+				dat2_string += '<input type="submit" id="done" value="Färdig!?"/></form>';
 
 				document.getElementById('rightPartOfApplication').innerHTML = dat2_string;
 			}
