@@ -32,6 +32,14 @@
 
 <div id = "rightPartOfApplication">
 	<h2>Tävlingsdeltagare</h2>
+	<?php
+		if(isset($_GET['check'])) {
+			if($_GET['check'] == 0)
+				echo "Finns en eller flera med samma nummerlapp";
+			else
+				echo "Ändrat och klart";
+		}
+	?>
 	<div id="getParticipantBibDiv"></div>
 </div>
 
@@ -59,16 +67,11 @@
 				content = $.parseJSON(content);
 				console.log(content);
 				var dat_string = '<form method="POST" id="firstForm" name="firstForm" action="database/changeRaceBib.php">'
-				dat_string += '<table class ="firstTableList">';
+				dat_string += '<table class ="firstTableList" cellspacing="0" cellpadding="0">';
 				dat_string += '<tr><th>Nummerlapp</th><th>Namn</th><th>Klubb</th>';
 				$count = 0;
 				$.each(content, function(index, value) {
-					if($count % 2 === 0)
-						$which = "even";
-					else
-						$which = "odd";
-
-					dat_string += '<tr class="'+$which+'"><td><input name="'+value.participantId+'" value="'+value.bib+'" style="width: 30px">'
+					dat_string += '<tr><td><input name="'+value.participantId+'" value="'+value.bib+'" style="width: 30px">'
 											+ '</input> </td><td>'+value.lName+', '+value.fName+'</td><td>'+value.club+'</td></tr>';
 					$count++;
 				});

@@ -15,6 +15,7 @@
 			<th>Anmälan</th>
 			<th>Startlista</th>
 			<th>Reslutatlista</th>
+		</tr>
 	</thead>	
 <?php
 
@@ -31,13 +32,9 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$count = 0;
+
 	while($row = $data->fetch_object()){
-		if($count % 2 === 0)
-			$which = "even";
-		else
-			$which = "odd";
-		echo "<tr class='$which'><td>" . $row->compName . "</td>".
+		echo "<tr><td>" . $row->compName . "</td>".
 		"<td>". $row->compDate."</td>".
 		"<td>". $row->compLastDate ."</td>";
 
@@ -51,8 +48,7 @@
 			echo "<td>Too late</td>";
 
 		echo "<td><a href='startList.php?competitionId=".$row->compID."'>Klicka här</a></td>".
-		"<td><a href='resultat.php?competitionId=".$row->compID."'>Se resultat här</a></td><tr>";
-		$count++;
+		"<td><a href='resultat.php?competitionId=".$row->compID."'>Se resultat här</a></td></tr>";
 	}
 ?>
 </table>

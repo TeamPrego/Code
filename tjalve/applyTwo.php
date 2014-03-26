@@ -77,10 +77,8 @@ console.log($('#chooseClass'));
 
 $('#chooseClass').change(function() {
 	var inp = $(this).find(":selected").text();
+	console.log(inp);
 	$.ajax({
-		data: {
-			'name': inp
-		},
 		url: 'getAvailableDisciplines.php?class='+inp+'',
 		success: function(content) {
 			console.log(content);
