@@ -17,7 +17,7 @@ include "database/config.php";
 	}
 
 	
-  echo"<div>";
+  echo"<div class='choice-bar'>";
   //echo "<form action = '' method='post' class='choice-bar'>";
   //echo "<select name='chooseCompetition' id='chooseCompetition'>";
   
@@ -55,7 +55,7 @@ $('#createTable').change(function() {
         
         content = $.parseJSON(content);        
         
-        var dat_string = '<table id="competitionTable">';
+        var dat_string = '<table id="competitionTable" class="firstTableList">';
 				dat_string += '<tr> <th>ID</th> <th>Name</th> <th>Arr</th> <th>Date</th> <th>LastDate</th></tr>';
         
         dat_string+='<tr><td>'+content.compID+'</td><td>'+content.compName+'</td><td>'+content.compArr+'</td><td>'+content.compDate+'</td><td>'+content.compLastDate+'</td></tr>' 
@@ -85,7 +85,7 @@ $('#createTable').change(function() {
         console.log(content);
         
         
-        var dat_string2 = '<table id="competitionTable2">';
+        var dat_string2 = '<table id="competitionTable2" class="firstTableList">';
 				dat_string2 += '<tr> <th>ageclass</th> <th>discipline</th></tr>';
         
         $.each(content, function(index, value) {
@@ -97,13 +97,13 @@ $('#createTable').change(function() {
 			}
       
 		});
-    /*
+    
     $.ajax({
       /*
-        Skriver ut grenar från en tävling
+        Skriver tillgängliga grenar i en drop-list 
       */
-      /*
-      url: 'database/getAgeClassById.php?ID='+ID+'',
+      
+      url: 'database/getAllClasses.php',
       
       success: function(content){
         
@@ -112,27 +112,90 @@ $('#createTable').change(function() {
         console.log(content);
         
         
-        var dat_string2 = '<table id="competitionTable2">';
-				dat_string2 += '<tr> <th>ageclass</th> <th>discipline</th></tr>';
+        var dat_string3 = '<select name="createTableDisc" id="createTableDisc" value="createTableDisc">';
+				dat_string3 += '<option>Välj åldersklass</tr>';
         
         $.each(content, function(index, value) {
-        dat_string2+='<tr><td>'+value.ageC+'</td><td>'+value.disc+'</td></tr>' 
+        dat_string3+='<option>'+value.class+'</option>' 
         });
-        dat_string2 += '</table>';
-        document.getElementById('table2').innerHTML = dat_string2;
+        dat_string3 += '</select>';
+        document.getElementById('select').innerHTML = dat_string3;
         
 			}
       
-		});*/
+		});
+    /*
+        Skriver tillgängliga grenar i en tabell 
+      */
+    
+    $.ajax({
+      
+      
+      url: 'database/getAllDisciplines.php',
+      
+      success: function(content){
+        
+        content = $.parseJSON(content);
+        
+        console.log(content);
+        
+        
+        var dat_string4 = '<table id="disciplines" class="firstTableList">';
+        dat_string4 += '<tr></tr>';
+        $.each(content, function(index, value) {
+        dat_string4+='<tr><td><input type="checkbox">'+value.gren+'</td></tr>' 
+        });
+        dat_string4 += '</table>'
+        dat_string4+='<input type="button" class="result-button">';
+       
+        document.getElementById('table3').innerHTML = dat_string4;
+        
+			}
+      
+		});
     
 });
-  
-
+ /* 
+$('#createTableDisc').change(function() {
+    
+		//document.write("DUDE!");
+    
+    $.ajax({
+      
+      //console.log("Zup Brah!");
+      url: 'database/getAllDisciplines.php',
+      
+      success: function(content){
+        //console.log("Zup Brah!");
+        content = $.parseJSON(content);
+        
+        console.log(content);
+        
+        
+        var dat_string4 = '<table id="disciplines">';
+        dat_string4 += '<tr> <th></th></tr>';
+        $.each(content, function(index, value) {
+        dat_string4+='<tr><td>'+value.gren+'</td></tr>' 
+        });
+        dat_string4 += '</table>';
+        document.getElementById('table3').innerHTML = dat_string4;
+        
+			}
+      
+		});
+});
+ */ 
 </script>
-
-<div id="table">Här ska skit dyka upp</div>
-<div id="table2">Här ska skit dyka upp</div>
-
+<table>
+<td id="table">Här ska skit dyka upp</td>
+<td id="table2">Här ska skit dyka upp</td>
+<td>
+<td id="select">Här ska skit dyka upp</td>
+</td>
+<td id="table3">
+Här ska skit dyka upp
+</td>
+</table>
 <?php
 include "templates/adminfooter.php";
 ?>

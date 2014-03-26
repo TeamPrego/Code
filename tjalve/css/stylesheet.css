@@ -147,6 +147,8 @@ background: #ebeeff
   margin-right:10%;
 }
 
+
+
 #addParticipator{
 	border-radius: 7px;
 	float: right;
@@ -158,6 +160,11 @@ background: #ebeeff
 	height=100%;
 }
 /* Add team to the database */
+
+#aTagDeleteDisp{
+	color: #ffffff;
+	
+}
 
 #button{
 	background-color:rgb(255,255,255);
@@ -224,10 +231,7 @@ background: #ebeeff
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 }
-#aTagDeleteDisp{
-	color: #ffffff;
-	
-}
+
 
 #drop-list {
 	background: #3d3d3d;
