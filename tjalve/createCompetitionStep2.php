@@ -59,8 +59,8 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 
 <!--The Informationtext -->
 <script type="text/javascript">	
-
-	console.log($('#chooseClass'));
+var js_IDvar = "<?php echo $_GET['compID']; ?>";
+	//console.log($('#chooseClass'));
 	var inp = "";
 	$('#chooseClass').change(function() {
 		inp = $(this).find(":selected").text();
@@ -70,16 +70,17 @@ echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAg
 			data: {
 				'discipline': inp
 			},
-			url: 'database/getAllDisciplines.php',
+			url: 'database/getAllDisciplines.php?compID='+js_IDvar+ '&inp='+inp,
 			success: function(content) {
 				//console.log(content);
 				content = $.parseJSON(content);
 				var dat_string = '<table id="whichDisciplines">';
 				dat_string += '<tr><td><td> <p id ="discP">Gren</th> </p>';
 				$.each(content, function(index, value) {
+					//console.log(index);
 					console.log(value);
-					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value.gren+'"></td><td>'
-								+ value.gren;
+					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value+'"></td><td>'
+								+ value;
 				});
 				dat_string += '</table>';
 				dat_string += '<input type="submit" id="addAgeClass" value="Lägg till Åldersklass"/></form>';
