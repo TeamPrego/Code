@@ -284,7 +284,7 @@ ocal
   padding: 1% 0 1% 0;
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4);
 	/* rounded corners */
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
