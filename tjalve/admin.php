@@ -13,26 +13,24 @@ include "templates/adminheader.php";
     
     <tr>
 			<td>
-        <form method="LINK" ACTION="createCompetition.php">
-          <button class="button">Skapa</button>
-        </form>
+          <a href="createCompetition.php"><button class="button">Skapa</button></a>
       </td>
 			<td><a href="editParticipants.php"><button class="button">Ändra</button></a></td>
-			<td><button class="button">Fakturera</button></td>
+			<td><a href=""><button class="button">Fakturera</button></a></td>
 		</tr>
     
 		<tr>
-			<td><button class="button">Ändra</button></td>
+			<td><a href=""><button class="button">Ändra</button></a></td>
 			<td><a href="acceptLateReg.php"><button class="button">Sen anmälan</button></a></td>
 		</tr>
 		
 		<tr>
-			<td><button class="button">Resultat</button></td>
+			<td><a href=""><button class="button">Resultat</button></a></td>
 			<td><a href="setRaceBib.php"><button class="button">Tävlingsnummer</button></a></td>
 		</tr>
 		
 		<tr>
-			<td><button class="button">Utskrift</button></td>
+			<td><a href=""><button class="button">Utskrift</button></a></td>
 		</tr>
 	</thead>
 </table>

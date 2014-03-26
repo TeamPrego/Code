@@ -70,12 +70,12 @@ tr.spaceOver > td {
 	width: 90%;
 }
 
-.firstTableList tr:nth-child(n+2) {
-background: #c2cbff
+.firstTableList tr:nth-child() {
+background: #ebeeff
 }
 
-.firstTableList tr:nth-child(2n+2) {
-background: #ebeeff
+.firstTableList tr:nth-child() {
+background: ##c2cbff
 }
 
 .firstTableList th {
@@ -147,6 +147,8 @@ background: #ebeeff
   margin-right:10%;
 }
 
+
+
 #addParticipator{
 	border-radius: 7px;
 	float: right;
@@ -158,6 +160,11 @@ background: #ebeeff
 	height=100%;
 }
 /* Add team to the database */
+
+#aTagDeleteDisp{
+	color: #ffffff;
+	
+}
 
 #button{
 	background-color:rgb(255,255,255);
@@ -194,7 +201,7 @@ background: #ebeeff
 #confirmedParticipantTable td {
 	width: 20%;
 }
-
+ocal
 #confirmedParticipantOneEach{
 	border: 3px solid #344cc2;
 	border-radius: 7px;
@@ -224,6 +231,7 @@ background: #ebeeff
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 }
+
 
 #drop-list {
 	background: #3d3d3d;
@@ -276,7 +284,7 @@ background: #ebeeff
   padding: 1% 0 1% 0;
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4);
 	/* rounded corners */
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 

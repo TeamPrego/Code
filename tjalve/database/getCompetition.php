@@ -19,7 +19,8 @@
 	echo "<tr><td>Sista anmälningsdag: </td><td>" . $row->compLastDate . "</td></tr>";	
 	echo "</table>";
   // echo "</div>";
-  echo "<img id ='compLogo' src=". $row->compIcon ." alt ='Image' />";
-  
+ 
+		echo "<img id ='compLogo' src=". $row->compIcon ." alt ='Image' />";
+		
 	mysqli_close($con);
 	?>
