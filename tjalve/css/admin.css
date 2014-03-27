@@ -7,10 +7,38 @@
 }
 
 #addAgeClass {
-  margin-left:55%;
-  margin-right:auto;
-  zoom:1.5;
+  float:right;
+  zoom:1.5;   
+  border-top: 1px solid #5b8cab;
+  background: #3f7396;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1c699c), to(#126396));
+  background: -webkit-linear-gradient(top, #1c699c, #126396);
+  background: -moz-linear-gradient(top, #1c699c, #126396);
+  background: -ms-linear-gradient(top, #1c699c, #126396);
+  background: -o-linear-gradient(top, #1c699c, #126396);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  color: white;
+  font-family: Verdana, 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+  text-decoration: none;
+  vertical-align: middle;
+  width:100%;
 }
+
+#addAgeClass:hover {
+  border-top-color: #4d6db0;
+  background: #4d6db0;
+  color: #ffffff;
+  }
+#addAgeClass:active {
+  border-top-color: #1b435e;
+  background: #1b435e;
+  }
 
 #addAgeClass2 {
   margin-left:5%;
@@ -23,6 +51,7 @@
 	text-align: center;
 	padding: 5px;
 	width: 40%;
+  table-layout:fixed;
 }
 
 #selectedDisciplines tr:nth-child(n+2) {
@@ -42,10 +71,39 @@ background: #ebeeff
 }
 
 .adminTable button {
-  font-family:verdana;
 	height:100%;
   width:100%;
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e60b5), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e60b5, #65a9d7);
+   background: -moz-linear-gradient(top, #3e60b5, #65a9d7);
+   background: -ms-linear-gradient(top, #3e60b5, #65a9d7);
+   background: -o-linear-gradient(top, #3e60b5, #65a9d7);
+   padding: 11px 22px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Verdana, 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
 }
+
+.adminTable button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.adminTable button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
 
 .createcompTable {
 	margin: 2% auto;
@@ -102,6 +160,39 @@ background: #ebeeff
   font-family:verdana;
 }
 
+#done {
+  float:left;
+   border-top: 1px solid #5fff33;
+   background: #1f6e18;
+   background: -webkit-gradient(linear, left top, left bottom, from(#24ab22), to(#1f6e18));
+   background: -webkit-linear-gradient(top, #24ab22, #1f6e18);
+   background: -moz-linear-gradient(top, #24ab22, #1f6e18);
+   background: -ms-linear-gradient(top, #24ab22, #1f6e18);
+   background: -o-linear-gradient(top, #24ab22, #1f6e18);
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-family: Verdana, 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   zoom:1.5;
+}
+
+#done:hover {
+   border-top-color: #1e661c;
+   background: #1e661c;
+   color: #ccc;
+   }
+#done:active {
+   border-top-color: #0e5708;
+   background: #0e5708;
+   }
+
 #innerBody {
 	background-color: white;
   margin: 5% 10% 5%;
@@ -109,7 +200,7 @@ background: #ebeeff
   
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4);
 	
   /* rounded corners */
 	-webkit-border-radius: 12px;
@@ -128,7 +219,7 @@ background: #ebeeff
   -webkit-border-top-right-radius: 8px;
   -webkit-border-top-left-radius: 8px;
 	-webkit-box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 2px 2px 2px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 2px 0px 4px rgba(23, 69, 88, .5);
 }
 
 #selectedDiscP {
@@ -149,5 +240,5 @@ td {
   -webkit-border-top-right-radius: 8px;
   -webkit-border-top-left-radius: 8px;
 	-webkit-box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 2px 2px 2px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 2px 0px 4px rgba(23, 69, 88, .5);
 }

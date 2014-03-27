@@ -9,16 +9,16 @@ include "templates/adminheader.php";
 	<form id="compForm" name="compForm" method="post" enctype="multipart/form-data" action="database/addCompetition.php">
 		<tr>
 			<td>Tävlingsnamn:</td>
-			<td><input name="compName" id="compName"></input></td>
+			<td><input name="compName" id="compName" required></input></td>
 			<td>Arrangör:</td>
-			<td><input name="organizer" id="organizer"></input></td>
+			<td><input name="organizer" id="organizer" required></input></td>
 		</tr>
 		
 		<tr>
 			<td>Datum:</td>
-			<td><input name="date" id="date" placeholder="ÅÅÅÅ-MM-DD" ></input></td>
+			<td><input name="date" id="date" placeholder="ÅÅÅÅ-MM-DD" required></input></td>
 			<td>Sista anmäl.dag:</td>
-			<td><input name="lastDay" id="lastDay" placeholder="ÅÅÅÅ-MM-DD" ></input></td>
+			<td><input name="lastDay" id="lastDay" placeholder="ÅÅÅÅ-MM-DD" required></input></td>
 		</tr>
 		
 		<tr>

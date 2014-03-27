@@ -11,7 +11,7 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$disc = array[];
+	$disc = [];
 	while($row = $data->fetch_object()) {
 		$disc[] = ['gren' => $row->discipline, 'klass' => $row->ageClass];
 	}
