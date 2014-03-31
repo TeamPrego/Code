@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 31 mars 2014 kl 07:01
+-- Skapad: 31 mars 2014 kl 07:31
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
 
@@ -29,15 +29,15 @@ USE `tjalve`;
 --
 
 CREATE TABLE IF NOT EXISTS `alldisciplines` (
-  `disciplinID` int(11) NOT NULL,
-  `disciplin` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+  `disciplineId` int(11) NOT NULL,
+  `discipline` varchar(100) COLLATE utf8_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumpning av Data i tabell `alldisciplines`
 --
 
-INSERT INTO `alldisciplines` (`disciplinID`, `disciplin`) VALUES
+INSERT INTO `alldisciplines` (`disciplineId`, `discipline`) VALUES
 (1, '60 m'),
 (2, '80 m'),
 (3, '100 m'),
@@ -175,7 +175,7 @@ INSERT INTO `allyearclasses` (`yearClassId`, `yearClass`) VALUES
 CREATE TABLE IF NOT EXISTS `clubs` (
   `clubId` int(11) NOT NULL AUTO_INCREMENT,
   `club` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
-  `adress` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `address` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `zip` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `phone` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `clubs` (
 
 CREATE TABLE IF NOT EXISTS `competition` (
   `competitionId` int(255) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `competitionName` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   `date` date NOT NULL,
   `lastDate` date NOT NULL,
   `organizer` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `competition` (
 CREATE TABLE IF NOT EXISTS `competitiondisciplines` (
   `competitionId` int(11) NOT NULL,
   `yearClass` varchar(10) COLLATE utf8_swedish_ci NOT NULL,
-  `disciplin` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `discipline` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   KEY `competitionId` (`competitionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
@@ -255,12 +255,14 @@ CREATE TABLE IF NOT EXISTS `participant` (
 
 CREATE TABLE IF NOT EXISTS `participantdisciplines` (
   `participantId` int(11) NOT NULL,
+  `pIndex` int(11) NOT NULL AUTO_INCREMENT,
   `yearClass` varchar(10) COLLATE utf8_swedish_ci NOT NULL,
-  `disciplin` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `discipline` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `SB` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `PB` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  PRIMARY KEY (`pIndex`),
   KEY `participantId` (`participantId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
 
 --
 -- Restriktioner för dumpade tabeller
