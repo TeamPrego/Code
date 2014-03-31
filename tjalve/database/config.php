@@ -10,13 +10,13 @@
 		  $dbhost="localhost";
 		  $dbuser="root";
 		  $dbpass="";
-		  $dbname="submission";
+		  $dbname="tjalve";
 		  break;
 		case 2:
 		  $dbhost="localhost";
 		  $dbuser="root";
 		  $dbpass="root";
-		  $dbname="submission";
+		  $dbname="tjalve";
 		  break;
 		 case 3:
 		  $dbhost="submission-192031.mysql.binero.se";
