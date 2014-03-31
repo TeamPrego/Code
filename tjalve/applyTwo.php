@@ -40,12 +40,12 @@ session_start();
 							include "database/config.php";
 							$getCompId = mysqli_query($con, "SELECT * FROM contact WHERE contactId = '$_GET[contactId]'");
 							$compId = $getCompId->fetch_object()->competitionId;
-							$data = mysqli_query($con, "SELECT * FROM age_class WHERE compId= '$compId'");
+							$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$compId'");
 							$array=[];
 							while($row = $data->fetch_object()) {
-								if(!in_array($row->ageClass, $array)) {
-									array_push($array, $row->ageClass);
-									echo "<option value='" .$row->ageClass. "'>" .$row->ageClass. "</option>";
+								if(!in_array($row->yearClass, $array)) {
+									array_push($array, $row->yearClass);
+									echo "<option value='" .$row->yearClass. "'>" .$row->yearClass. "</option>";
 								}
 							}
 						?>

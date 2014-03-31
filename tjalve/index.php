@@ -35,21 +35,21 @@
 
 
 	while($row = $data->fetch_object()){
-		echo "<tr><td>" . $row->compName . "</td>".
-		"<td>". $row->compDate."</td>".
-		"<td>". $row->compLastDate ."</td>";
+		echo "<tr><td>" . $row->competitionName . "</td>".
+		"<td>". $row->date."</td>".
+		"<td>". $row->lastDate ."</td>";
 
-		if($row->compLastDate > $date)
-			echo "<td><a href='applyOne.php?competitionId=".$row->compID."&prio=1'>Anmäl dig här</a></td>";
+		if($row->lastDate > $date)
+			echo "<td><a href='applyOne.php?competitionId=".$row->competitionId."&prio=1'>Anmäl dig här</a></td>";
 
-		elseif($row->compDate > $date)
-			echo "<td><a href='applyOne.php?competitionId=".$row->compID."&prio=0'>Sen anmälan</a></td>";
+		elseif($row->date > $date)
+			echo "<td><a href='applyOne.php?competitionId=".$row->competitionId."&prio=0'>Sen anmälan</a></td>";
 
 		else 
 			echo "<td>Too late</td>";
 
-		echo "<td><a href='startList.php?competitionId=".$row->compID."'>Klicka här</a></td>".
-		"<td><a href='resultat.php?competitionId=".$row->compID."'>Se resultat här</a></td></tr>";
+		echo "<td><a href='startList.php?competitionId=".$row->competitionId."'>Klicka här</a></td>".
+		"<td><a href='resultat.php?competitionId=".$row->competitionId."'>Se resultat här</a></td></tr>";
 	}
 ?>
 </table>

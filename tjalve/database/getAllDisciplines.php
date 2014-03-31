@@ -11,7 +11,7 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	
-	$query2 = "SELECT discipline FROM age_class WHERE compId = '$compID' && ageClass = '$inp'";
+	$query2 = "SELECT discipline FROM competitiondisciplines WHERE competitionId = '$compID' && yearClass = '$inp'";
 	$data2 = mysqli_query($con, $query2);
 
 	if (!$data2) {

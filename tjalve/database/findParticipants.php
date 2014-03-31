@@ -11,7 +11,7 @@
 
 	$disc = [];
 	while($row = $data->fetch_object()) {
-		$disciplinesquery = "SELECT * FROM disciplines WHERE participantId = '$row->participantId'";
+		$disciplinesquery = "SELECT * FROM participantdisciplines WHERE participantId = '$row->participantId'";
 		$disciplinesquerydata = mysqli_query($con, $disciplinesquery);
 
 		if (!$disciplinesquerydata) {
@@ -20,13 +20,13 @@
 
 		$discDisciplines = [];
 		while($disciplineRow = $disciplinesquerydata->fetch_object()) {
-			$discDisciplines[] = ['discipline' => $disciplineRow->discipline, 'ageClass' => $disciplineRow->class];
+			$discDisciplines[] = ['discipline' => $disciplineRow->discipline, 'ageClass' => $disciplineRow->yearClass];
 		}
 		$disc[] = [	'firstName' => $row->firstName, 
-					'lastName' => $row->lastName,
-					'disciplines' => $discDisciplines,
-					'participantId' => $row->participantId,
-					'prio' => $row->prio];
+								'lastName' => $row->lastName,
+								'disciplines' => $discDisciplines,
+								'participantId' => $row->participantId,
+								'prio' => $row->prio];
 	}
 
 	echo json_encode($disc);

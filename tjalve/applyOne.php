@@ -24,9 +24,9 @@
 					<select name="chooseClub" id="chooseClub">
 						<?php
 							include "database/config.php";
-							$data = mysqli_query($con, "SELECT Name FROM clubs");
+							$data = mysqli_query($con, "SELECT club FROM clubs");
 							while($row = $data->fetch_object()) {
-								echo "<option value='" .$row->Name. "'>" .$row->Name. "</option>";
+								echo "<option value='" .$row->club. "'>" .$row->club. "</option>";
 							}					
 						?>
 					</select>

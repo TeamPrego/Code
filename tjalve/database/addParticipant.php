@@ -13,7 +13,7 @@
 	foreach ($name as $grentyp) { 
 		$SB = "SB" . $grentyp;
 		$PB = "PB" . $grentyp;
-		$quary = "INSERT INTO disciplines (participantId, class, discipline, SB, PB)
+		$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB)
 		VALUES ('$id', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]')";
 
 		if (!mysqli_query($con,$quary)) {

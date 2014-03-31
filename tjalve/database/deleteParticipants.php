@@ -7,6 +7,13 @@
 	}
 
 	$participantId = $_GET['participantId'];
+
+	$sql = "DELETE FROM participantdisciplines WHERE participantId = $participantId";
+
+	if (!mysqli_query($con,$sql)) {
+	  die('Error: ' . mysqli_error($con));
+	}
+
 	$data = mysqli_query($con, "SELECT * FROM participant WHERE participantId='$participantId'");
 	$contactId = $data->fetch_object()->contactId;
 

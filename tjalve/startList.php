@@ -8,12 +8,12 @@
 	<?php
 		include "database/config.php";
 		$competitionId = $_GET['competitionId'];
-		$dataClass = mysqli_query($con, "SELECT * FROM age_class WHERE compId= '$competitionId'");
+		$dataClass = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
 		$array=[];
 		while($row = $dataClass->fetch_object()) {
-			if(!in_array($row->ageClass, $array)) {
-				array_push($array, $row->ageClass);
-				echo "<option value='" .$row->ageClass. "'>" .$row->ageClass. "</option>";
+			if(!in_array($row->yearClass, $array)) {
+				array_push($array, $row->yearClass);
+				echo "<option value='" .$row->yearClass. "'>" .$row->yearClass. "</option>";
 			}
 		}
 	?>
@@ -24,7 +24,7 @@
 	<?php
 		include "database/config.php";
 		$competitionId = $_GET['competitionId'];
-		$dataDescipline = mysqli_query($con, "SELECT * FROM age_class WHERE compId= '$competitionId'");
+		$dataDescipline = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
 		$array=[];
 		while($row = $dataDescipline->fetch_object()) {
 			if(!in_array($row->discipline, $array)) {

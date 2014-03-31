@@ -4,7 +4,7 @@
 
 	include "database/config.php";
 
-	$query = "SELECT * FROM age_class WHERE ageClass = '$class'";
+	$query = "SELECT * FROM competitiondisciplines WHERE yearClass = '$class'";
 	$data = mysqli_query($con, $query);
 
 	if (!$data) {
@@ -13,7 +13,7 @@
 
 	$disc = [];
 	while($row = $data->fetch_object()) {
-		$disc[] = ['gren' => $row->discipline, 'klass' => $row->ageClass];
+		$disc[] = ['gren' => $row->discipline, 'klass' => $row->yearClass];
 	}
 	
 	echo json_encode($disc);

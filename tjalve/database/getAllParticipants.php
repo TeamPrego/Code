@@ -2,7 +2,7 @@
 	include "config.php";
 	$competitionName = $_GET['competitionName'];
 
-	$dataCompetition = mysqli_query($con, "SELECT * FROM competition WHERE compName = '$competitionName'");
+	$dataCompetition = mysqli_query($con, "SELECT * FROM competition WHERE competitionName = '$competitionName'");
 	$competitionId = $dataCompetition->fetch_object()->compID;
 
 	$queryContact = "SELECT * FROM contact WHERE competitionId = '$competitionId'";
@@ -24,7 +24,7 @@
 			$disc[] = ['fName' => $rowParticipant->firstName,
 								 'lName' => $rowParticipant->lastName,
 								 'bib' => $rowParticipant->bib,
-								 'club' => $rowContact ->club,
+								 'club' => $rowContact ->clubId,
 								 'participantId' => $rowParticipant->participantId,
 								 'prio' => $rowParticipant->prio];
 		}
