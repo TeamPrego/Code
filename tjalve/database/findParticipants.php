@@ -28,6 +28,5 @@
 								'participantId' => $row->participantId,
 								'prio' => $row->prio];
 	}
-
 	echo json_encode($disc);
 ?>

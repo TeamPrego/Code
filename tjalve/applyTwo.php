@@ -39,8 +39,8 @@ session_start();
 						<?php
 							include "database/config.php";
 							$getCompId = mysqli_query($con, "SELECT * FROM contact WHERE contactId = '$_GET[contactId]'");
-							$compId = $getCompId->fetch_object()->competitionId;
-							$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$compId'");
+							$competitionId = $getCompId->fetch_object()->competitionId;
+							$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
 							$array=[];
 							while($row = $data->fetch_object()) {
 								if(!in_array($row->yearClass, $array)) {
@@ -77,9 +77,10 @@ console.log($('#chooseClass'));
 
 $('#chooseClass').change(function() {
 	var inp = $(this).find(":selected").text();
+	var contactId = getURLParameter('contactId');
 	console.log(inp);
 	$.ajax({
-		url: 'getAvailableDisciplines.php?class='+inp+'',
+		url: 'getAvailableDisciplines.php?class='+inp+'&contactId='+contactId,
 		success: function(content) {
 			console.log(content);
 			content = $.parseJSON(content);
