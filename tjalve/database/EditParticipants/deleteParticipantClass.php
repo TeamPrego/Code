@@ -5,7 +5,7 @@
 	$pId = $_GET['pIndex'];
 	echo $pId;
 
-	$query = "DELETE FROM disciplines WHERE pIndex='$pId'";
+	$query = "DELETE FROM participantdisciplines WHERE pIndex='$pId'";
 	$data = mysqli_query($con, $query);
 
 	if (!$data) {
