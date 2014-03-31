@@ -42,7 +42,7 @@ include "database/config.php";
 $('#createTable').change(function() {
     
 		var competition =  $('#createTable').find(":selected").text();
-    
+    document.getElementById('table3').style.display = 'none';
 		$.ajax({
       async: false,
       //Skapar tabellen för tävling
@@ -149,55 +149,31 @@ function createTableDisc(){
         dat_string4+='<tr><td><input type="checkbox">'+value.gren+'</td></tr>' 
         });
         dat_string4 += '</table>';
-        //dat_string4+='<input type="button" class="result-button">';
+        dat_string4+='<input type="button" class="result-button" value="Lägg till grenar!!!">';
        
         document.getElementById('table3').innerHTML = dat_string4;
+        document.getElementById('table3').style.display = 'block';
         
 			}
       
 		});
 }
- /* 
-$('#createTableDisc').change(function() {
-    
-		//document.write("DUDE!");
-    
-    $.ajax({
-      
-      //console.log("Zup Brah!");
-      url: 'database/getAllDisciplines.php',
-      
-      success: function(content){
-        //console.log("Zup Brah!");
-        content = $.parseJSON(content);
-        
-        console.log(content);
-        
-        
-        var dat_string4 = '<table id="disciplines">';
-        dat_string4 += '<tr> <th></th></tr>';
-        $.each(content, function(index, value) {
-        dat_string4+='<tr><td>'+value.gren+'</td></tr>' 
-        });
-        dat_string4 += '</table>';
-        document.getElementById('table3').innerHTML = dat_string4;
-        
-			}
-      
-		});
-});
- */ 
+
 </script>
-<table>
-<td id="table">Här ska skit dyka upp</td>
-<td id="table2">Här ska skit dyka upp</td>
-<td>
-<td id="select">Här ska skit dyka upp</td>
-</td>
-<td id="table3">
-Här ska skit dyka upp
-</td>
+
+<table id="innerBody">
+  <td id="leftPartOfApplication">
+    <td id="table">Här ska skit dyka upp</td>
+    <td id="table2">Här ska skit dyka upp</td>
+  </td>
+  <td id="rightPartOfApplication">
+    <td id="select">Här ska skit dyka upp</td>
+    <td id="table3">
+      Här ska skit dyka upp
+    </td>
+  </td>
 </table>
+
 <?php
 include "templates/adminfooter.php";
 ?>
