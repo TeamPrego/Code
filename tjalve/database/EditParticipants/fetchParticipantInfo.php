@@ -17,18 +17,18 @@ ob_start();
 	$birthYear = $participant->birthYear;
 	//echo($cId);
 
-	$clubquery = "SELECT club FROM contact WHERE contactId = '$cId'";
+	$clubquery = "SELECT clubId FROM contact WHERE contactId = '$cId'";
 	$clubData = mysqli_query($con, $clubquery);
 
 	if (!$clubData) {
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$club = $clubData->fetch_object()->club;
+	$club = $clubData->fetch_object()->clubId;
 	//echo($club);
 
 	//Select all clubs
-	$allClubs = "SELECT Name FROM clubs";
+	$allClubs = "SELECT club FROM clubs";
 	$allClubsData = mysqli_query($con, $allClubs);
 
 	$clubsArray = [];
@@ -37,7 +37,7 @@ ob_start();
 	}
 
 	$part = [];
-	$disciplinesquery = "SELECT * FROM disciplines WHERE participantId = '$pId'";
+	$disciplinesquery = "SELECT * FROM participantdisciplines WHERE participantId = '$pId'";
 	$data = mysqli_query($con, $disciplinesquery);
 
 	if (!$data) {
@@ -46,7 +46,7 @@ ob_start();
 
 	$discDisciplines = [];
 	while($discRow = $data->fetch_object()) {
-		$discDisciplines[] = ['pIndex' => $discRow->pIndex, 'discipline' => $discRow->discipline, 'ageClass' => $discRow->class];
+		$discDisciplines[] = ['pIndex' => $discRow->pIndex, 'discipline' => $discRow->discipline, 'ageClass' => $discRow->yearClass];
 	}
 	$part[] = [	'firstName' => $firstName,
 				'lastName' => $lastName,
