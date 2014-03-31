@@ -112,7 +112,7 @@ $('#createTable').change(function() {
         console.log(content);
         
         
-        var dat_string3 = '<select name="createTableDisc" id="createTableDisc" value="createTableDisc">';
+        var dat_string3 = '<select name="createTableDisc" id="createTableDisc" value="createTableDisc" onchange="createTableDisc()">';
 				dat_string3 += '<option>Välj åldersklass</tr>';
         
         $.each(content, function(index, value) {
@@ -121,6 +121,7 @@ $('#createTable').change(function() {
         dat_string3 += '</select>';
         document.getElementById('select').innerHTML = dat_string3;
         
+        
 			}
       
 		});
@@ -128,16 +129,18 @@ $('#createTable').change(function() {
         Skriver tillgängliga grenar i en tabell 
       */
     
-    $.ajax({
+    
+    
+});
+function createTableDisc(){
+  $.ajax({
       
       
-      url: 'database/getAllDisciplines.php',
+      url: 'database/getAllDisciplines2.php',
       
       success: function(content){
         
         content = $.parseJSON(content);
-        
-        console.log(content);
         
         
         var dat_string4 = '<table id="disciplines" class="firstTableList">';
@@ -145,16 +148,15 @@ $('#createTable').change(function() {
         $.each(content, function(index, value) {
         dat_string4+='<tr><td><input type="checkbox">'+value.gren+'</td></tr>' 
         });
-        dat_string4 += '</table>'
-        dat_string4+='<input type="button" class="result-button">';
+        dat_string4 += '</table>';
+        //dat_string4+='<input type="button" class="result-button">';
        
         document.getElementById('table3').innerHTML = dat_string4;
         
 			}
       
 		});
-    
-});
+}
  /* 
 $('#createTableDisc').change(function() {
     
