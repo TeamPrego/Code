@@ -257,7 +257,7 @@ ocal
 	width: 100%;
 }*/
 
-#hideButton{
+.hideButton{
 	display: none;
 }
 
@@ -325,7 +325,7 @@ ocal
 	margin-right: 5%;
 }
 
-#showButton{
+.showButton{
 	display: inline;
 }
 /* #whichDisciplines {

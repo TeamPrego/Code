@@ -120,14 +120,24 @@ jQuery(document).ready(function() {
 				$.each(value.disciplines, function(ind, val) {	
 					dat_string += '<td></td><td>' + val.ageClass + '</td><td>' + val.discipline + '</td></tr>';
 				});
-				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td> </tr></table></div>';
+				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td>'
+										+ '<td><button class="showButton" name="addClass" onclick="enableFunc()">Lägg till klass</button></td></tr>'
+										+ '<tr><td><button class="hideButton" name="here" onclick=enableFunc()>Här</button></td></tr></table></div>';
 			});		
 			document.getElementById('confirmedDiv').innerHTML = dat_string;	
 		}
 	});
 });
-</script>
+function enableFunc() {
+		//jQuery("#showButton").hide();
+		var a =  document.getElementsByName("addClass")[0];
+		a.className = "hideButton";
+		var b =  document.getElementsByName("here")[0];
+		b.className = "showButton";
 
+		//document.getElementsByClassName("hideButton")[0] = "showButton";
+	}
+</script>
 <div id="rightPartOfApplication">
 	<h2>Dina anmälda tävlande</h2>
 	<div id="confirmedDiv">
