@@ -36,6 +36,22 @@ session_start();
 	<h2>Redigera tävlande:</h2>
 	<div id="confirmedDiv">
 		<!--Här kommer allt in från ajaxtjossan-->
+		<select name="chooseClass" id="chooseClass" required>
+			<option> - Välj klass - </option>
+			<?php
+				include "database/config.php";
+				$getCompId = mysqli_query($con, "SELECT * FROM contact WHERE contactId = '$_GET[contactId]'");
+				$compId = $getCompId->fetch_object()->competitionId;
+				$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$compId'");
+				$array=[];
+				while($row = $data->fetch_object()) {
+					if(!in_array($row->yearClass, $array)) {
+						array_push($array, $row->yearClass);
+						echo "<option name='classButton' value='" .$row->yearClass. "' id='hideButton'>" .$row->yearClass. "</option>";
+					}
+				}
+			?>
+		</select>	
 	</div>
 </div>
 
@@ -68,9 +84,10 @@ session_start();
 						+ '</td><td> <a href="database/EditParticipants/deleteParticipantClass.php?pIndex='+val.pIndex+'" > <button id="delButton">X</button> </a> </td></tr>';
 					});
 					dat_string += '<tr><td><input type=button name="editButton" id="showButton" value="Redigera" onclick="enableFunc('+inp+')"> '
-					+ '<input type=submit name="saveButton" id="hideButton" value="Spara"> </td>'
-					+ '<td><a href=""><input type=button id="addButton" value="Lägg till grenar"></td></tr></table></form></div>';
-				});		
+					+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td>'
+					+ '<td><a href=""><input type=button class="addButton" value="Lägg till grenar" onclick="classesFunc()"></td></tr></table></form></div>';
+				});
+					
 			document.getElementById('confirmedDiv').innerHTML = dat_string;	
 			}
 		});
@@ -79,15 +96,40 @@ session_start();
 
 	});
 
+	$('#chooseClass').change(function() {
+		var inp = $(this).find(":selected").text();
+		console.log(inp);
+		$.ajax({
+			url: 'getAvailableDisciplines.php?class='+inp+'',
+			success: function(content) {
+				console.log(content);
+				content = $.parseJSON(content);
+				var dat_string = '<table id="whichDisciplines">';
+				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
+				$.each(content, function(index, value) {
+					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
+									 + value.gren
+									 + '</td><td>'+inp+'</td><td>'
+									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
+									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
+				});
+				dat_string += '</table>';
+				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
+
+				document.getElementById('disciplines').innerHTML = dat_string;
+			}
+		});
+	});
+
 	function enableFunc(idno) {
 		var inputs = document.getElementsByClassName('update'+idno);
  		for(i=0; i<inputs.length; i++){
  			inputs[i].disabled = false;
  		}
- 		document.getElementsByName("saveButton")[0].id="showButton";
+ 		document.getElementsByName("saveButton")[0].className="showButton";
 
  		var editB = document.getElementsByName("editButton")[0];
- 		editB.id="hideButton";
+ 		editB.className="hideButton";
  		editB.setAttribute( "onClick", "javascript: saveFunc("+idno+");" );
 	}
 
@@ -96,11 +138,16 @@ session_start();
  		for(i=0; i<inputs.length; i++){
  			inputs[i].disabled = true;
  		}
- 		document.getElementsByName("saveButton")[0].id="hideButton";
+ 		document.getElementsByName("saveButton")[0].className="hideButton";
 
  		var editB = document.getElementsByName("editButton")[0];
-		editB.id="showButton";
+		editB.className="showButton";
  		editB.setAttribute( "onClick", "javascript: enableFunc("+idno+");" );
+	}
+
+	function classesFunc() {
+ 		document.getElementsByName("classButton")[0].className="showButton";
+
 	}
 </script>
 <?php
