@@ -1,4 +1,3 @@
-
 <?php  
 
 	// 1: WAMP 2: MAMP 3: Binero

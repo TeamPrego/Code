@@ -16,6 +16,7 @@ session_start();
 		<table id ="formDiv">
 			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
 			<input type="hidden" value= <?php echo $_GET['prio'] ?> name="prio">
+			<input type="hidden" value="" name="participantId" id="participantId">
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
@@ -34,22 +35,9 @@ session_start();
 			<tr>
 				<td><label for="select">Klass:</label></td>
 				<td>
-					<select name="chooseClass" id="chooseClass" required>
-					<option> - Välj klass - </option>
-						<?php
-							include "database/config.php";
-							$getCompId = mysqli_query($con, "SELECT * FROM contact WHERE contactId = '$_GET[contactId]'");
-							$competitionId = $getCompId->fetch_object()->competitionId;
-							$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
-							$array=[];
-							while($row = $data->fetch_object()) {
-								if(!in_array($row->yearClass, $array)) {
-									array_push($array, $row->yearClass);
-									echo "<option value='" .$row->yearClass. "'>" .$row->yearClass. "</option>";
-								}
-							}
-						?>
-					</select>
+					<?php
+						include "database/apply/disciplineList.php";
+					?>
 				</td>
 			</tr>
 		</table>
@@ -120,23 +108,39 @@ jQuery(document).ready(function() {
 				$.each(value.disciplines, function(ind, val) {	
 					dat_string += '<td></td><td>' + val.ageClass + '</td><td>' + val.discipline + '</td></tr>';
 				});
+				var fName = value.firstName;
+				var lName = value.lastName;
+				var pId = value.participantId;
+
 				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td>'
-										+ '<td><button class="showButton" name="addClass" onclick="enableFunc()">Lägg till klass</button></td></tr>'
-										+ '<tr><td><button class="hideButton" name="here" onclick=enableFunc()>Här</button></td></tr></table></div>';
+										+ '<td><button class="showButton" name="addClass'+pId+'" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'")>Lägg till klass</button></td></tr>'
+										+ '<tr><td><div class="hideButton" name="here">Lägg till ny klass till vänster</div></td></tr></table></div>';
 			});		
 			document.getElementById('confirmedDiv').innerHTML = dat_string;	
 		}
 	});
 });
-function enableFunc() {
-		//jQuery("#showButton").hide();
-		var a =  document.getElementsByName("addClass")[0];
+function enableFunc(Id, fName, lName) {
+		var a =  document.getElementsByName("addClass"+Id)[0];
 		a.className = "hideButton";
 		var b =  document.getElementsByName("here")[0];
 		b.className = "showButton";
 
-		//document.getElementsByClassName("hideButton")[0] = "showButton";
-	}
+		var addParticipator = document.getElementById("addParticipator");
+		addParticipator.value = "Lägg till gren";
+
+		var firstName = document.getElementById("firstName");
+		firstName.value = fName;
+		firstName.disabled = true;
+		var lastName = document.getElementById("lastName");
+		lastName.value = lName;
+		lastName.disabled = true;
+		var yearOfBirth = document.getElementById("yearOfBirth");
+		yearOfBirth.value = "";
+		yearOfBirth.disabled = true;
+		var participantId = document.getElementById("participantId");
+		participantId.value = Id;
+}
 </script>
 <div id="rightPartOfApplication">
 	<h2>Dina anmälda tävlande</h2>
