@@ -2,10 +2,32 @@
 include "templates/adminheader.php";
 ?>
 
+<!--
+Just nu testas koden mot competition-klassen. 
+Tanken är att man ska kunna skapa ett objekt som man arbetar med. 
+Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet. 
+-->
 
 
 
 <?php
+
+  include "competition.php";
+  $comp = new Competition();
+  $comp->getCompetitionByName("Flonk Close");
+  //echo $comp->name;
+  //echo $comp->id;
+  //createTable($comp->id, $comp->name, $comp->beginDate, $comp->lastDate, $comp->arranger)
+  //echo "<input type='button' onclick='" . createTable($comp->id, $comp->name, $comp->beginDate, $comp->lastDate, $comp->arranger) . "' value='Funka!!!'>";
+  echo "<form action='' method='post'>";
+  echo "<input type='button' onclick='doShit();' value='Funka!!!'>";
+  echo "</form>";
+  /* function createTable($id, $namn, $begin, $last, $arr){
+    echo "<table class='firstTableList'><tr><td>" . $id . "</td><td>" . $namn . "</td><td>" . $begin . "</td><td>" . $last . "</td><td>" . $arr . "</td></tr></table>";
+  } */
+  function doShit(){echo "alert('shit')";}
+
+/*
 $odd=0;
 include "database/config.php";
 //$contactId = $_GET['contactId'];
@@ -32,11 +54,11 @@ include "database/config.php";
   //echo "</form>";
   echo "</div>";
   
-	mysqli_close($con);	
+	mysqli_close($con);	*/
 ?>
 
 
-
+<!--
 <script type="text/javascript">
 //var ID=0;
 $('#createTable').change(function() {
@@ -160,6 +182,10 @@ function createTableDisc(){
 }
 
 </script>
+-->
+
+
+
 
 <table id="innerBody">
   <td id="leftPartOfApplication">

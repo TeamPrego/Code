@@ -24,8 +24,16 @@ ob_start();
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$club = $clubData->fetch_object()->clubId;
+	$clubId = $clubData->fetch_object()->clubId;
 	//echo($club);
+	$clubQuery2 = "SELECT club FROM clubs WHERE clubId = '$clubId'";
+	$theClubData = mysqli_query($con, $clubQuery2);
+
+	if(!$theClubData) {
+		die('Errir: ' . mysqli_error($con));
+	}
+
+	$theClub = $theClubData->fetch_object()->club;
 
 	//Select all clubs
 	$allClubs = "SELECT club FROM clubs";
@@ -51,9 +59,10 @@ ob_start();
 	$part[] = [	'firstName' => $firstName,
 				'lastName' => $lastName,
 				'birthYear' => $birthYear,
-				'club' => $club,
+				'club' => $theClub,
 				'disciplines' => $discDisciplines, 
-				'clubs' => $clubsArray];
+				'clubs' => $clubsArray,
+				'contactId' => $cId];
 
 	echo json_encode($part);
 ?>

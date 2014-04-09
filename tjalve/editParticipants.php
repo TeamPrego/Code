@@ -36,31 +36,17 @@ session_start();
 	<h2>Redigera tävlande:</h2>
 	<div id="confirmedDiv">
 		<!--Här kommer allt in från ajaxtjossan-->
-		<select name="chooseClass" id="chooseClass" required>
-			<option> - Välj klass - </option>
-			<?php
-				include "database/config.php";
-				$getCompId = mysqli_query($con, "SELECT * FROM contact WHERE contactId = '$_GET[contactId]'");
-				$compId = $getCompId->fetch_object()->competitionId;
-				$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$compId'");
-				$array=[];
-				while($row = $data->fetch_object()) {
-					if(!in_array($row->yearClass, $array)) {
-						array_push($array, $row->yearClass);
-						echo "<option name='classButton' value='" .$row->yearClass. "' id='hideButton'>" .$row->yearClass. "</option>";
-					}
-				}
-			?>
-		</select>	
+			
 	</div>
 </div>
 
 
 <script type="text/javascript">
 	var disabl = "disabled";
+
 	$('#adminParticipants').change(function() {
 		var inp = $(this).find("option:selected").attr('id');
-		console.log(inp);
+		//console.log(inp);
 		$.ajax({
 			url: 'database/EditParticipants/fetchParticipantInfo.php?participantId='+inp+'',
 			//Content är vad jag har echo:at från url:en
@@ -79,13 +65,16 @@ session_start();
 					+ '<tr><td><input class=update'+inp+' name=bYear type=text ' + disabl + ' value="' + value.birthYear + '"></td></tr>'
 					+ '<tr><td>' + value.club + '</td> <td></td> <td></td></tr>';
 					$.each(value.disciplines, function(ind, val) {
-						console.log(val.pIndex);
+						//console.log(val.pIndex);
 						dat_string += '<tr><td>' + val.ageClass + '</td><td>' + val.discipline 
 						+ '</td><td> <a href="database/EditParticipants/deleteParticipantClass.php?pIndex='+val.pIndex+'" > <button id="delButton">X</button> </a> </td></tr>';
 					});
 					dat_string += '<tr><td><input type=button name="editButton" id="showButton" value="Redigera" onclick="enableFunc('+inp+')"> '
-					+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td>'
-					+ '<td><a href=""><input type=button class="addButton" value="Lägg till grenar" onclick="classesFunc()"></td></tr></table></form></div>';
+					+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td></tr>'
+					+ '<tr><td>Lägg till grenar</td></tr>'
+					+ '<input id=contactId name=contactId type=hidden value="' + value.contactId + '">';
+					dat_string +='<tr><div id="disciplines"> </tr></table></form></div></div>'
+					
 				});
 					
 			document.getElementById('confirmedDiv').innerHTML = dat_string;	
@@ -95,7 +84,34 @@ session_start();
 		//OM LÄGG TILL KLASS ÄR KLICKAD, LÄGG IN DET SOM FINNS I APPLYTWO REDAN.
 
 	});
+	$('#chooseClass').change(function() {
+		var inp = $(this).find(":selected").text();
+		var contactId = document.getElementById('contactId');	
+		console.log(inp);
+		$.ajax({
+			url: 'getAvailableDisciplines.php?class='+inp+'&contactId='+contactId,
+			success: function(content) {
+				//console.log(content);
+				content = $.parseJSON(content);
+				var dat_string = '<table id="whichDisciplines">';
+				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
+				$.each(content, function(index, value) {
+					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
+									 + value.gren
+									 + '</td><td>'+inp+'</td><td>'
+									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
+									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
+				});
+				dat_string += '</table>';
+				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
 
+				document.getElementById('disciplines').innerHTML = dat_string;
+			}
+		});
+	});
+
+
+/*
 	$('#chooseClass').change(function() {
 		var inp = $(this).find(":selected").text();
 		console.log(inp);
@@ -119,7 +135,7 @@ session_start();
 				document.getElementById('disciplines').innerHTML = dat_string;
 			}
 		});
-	});
+	});*/
 
 	function enableFunc(idno) {
 		var inputs = document.getElementsByClassName('update'+idno);
@@ -149,6 +165,7 @@ session_start();
  		document.getElementsByName("classButton")[0].className="showButton";
 
 	}
+	$('#adminParticipants').trigger("change");
 </script>
 <?php
 
