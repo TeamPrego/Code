@@ -20,7 +20,8 @@
 
 		$discDisciplines = [];
 		while($disciplineRow = $disciplinesquerydata->fetch_object()) {
-			$discDisciplines[] = ['discipline' => $disciplineRow->discipline, 'ageClass' => $disciplineRow->yearClass];
+			$discDisciplines[] = ['discipline' => $disciplineRow->discipline, 'ageClass' => $disciplineRow->yearClass,
+														'sb' => $disciplineRow->SB, 'pb' => $disciplineRow->PB];
 		}
 		$disc[] = [	'firstName' => $row->firstName, 
 								'lastName' => $row->lastName,
