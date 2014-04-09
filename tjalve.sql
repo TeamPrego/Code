@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 31 mars 2014 kl 07:31
+-- Skapad: 09 apr 2014 kl 08:15
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
 
@@ -180,7 +180,15 @@ CREATE TABLE IF NOT EXISTS `clubs` (
   `phone` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`clubId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumpning av Data i tabell `clubs`
+--
+
+INSERT INTO `clubs` (`clubId`, `club`, `address`, `zip`, `phone`, `email`) VALUES
+(1, 'Tjalve IK', 'Villagatan 18', '60247 Norrköping', '07366221', 'kontakt@tjalve.se'),
+(2, 'LinnéaKlubb', '', '', '8739734973', '');
 
 -- --------------------------------------------------------
 
@@ -196,7 +204,15 @@ CREATE TABLE IF NOT EXISTS `competition` (
   `organizer` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   `logo` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`competitionId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumpning av Data i tabell `competition`
+--
+
+INSERT INTO `competition` (`competitionId`, `competitionName`, `date`, `lastDate`, `organizer`, `logo`) VALUES
+(1, 'HannesTävling', '2014-04-16', '2014-04-04', 'TjalveAB', ''),
+(2, 'EmmasTävling', '2014-04-02', '2014-03-28', 'Rolf', '');
 
 -- --------------------------------------------------------
 
@@ -210,6 +226,19 @@ CREATE TABLE IF NOT EXISTS `competitiondisciplines` (
   `discipline` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   KEY `competitionId` (`competitionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumpning av Data i tabell `competitiondisciplines`
+--
+
+INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `discipline`) VALUES
+(1, 'P17', 'Spjut'),
+(1, 'P17', 'Kula'),
+(1, 'P15', '100 m'),
+(1, 'P15', '200 m'),
+(2, 'P15', 'SpringHopp'),
+(2, 'P15', '1000 m'),
+(1, 'F12', 'Höjdhopp');
 
 -- --------------------------------------------------------
 
@@ -227,7 +256,17 @@ CREATE TABLE IF NOT EXISTS `contact` (
   PRIMARY KEY (`contactId`),
   KEY `competitionId` (`competitionId`),
   KEY `clubId` (`clubId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumpning av Data i tabell `contact`
+--
+
+INSERT INTO `contact` (`competitionId`, `contactId`, `clubId`, `name`, `phone`, `email`) VALUES
+(1, 2, 1, 'Maria Montazami', '07163871', 'Maria@mail.com'),
+(2, 3, 1, 'Yngve Malmsten', '5472615', 'Malmsten@hopp.se'),
+(1, 4, 2, 'Linnéa', '73737', 'lin@mail.com'),
+(1, 5, 1, 'Hannes', '82726', 'hannesingelhag@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -245,7 +284,19 @@ CREATE TABLE IF NOT EXISTS `participant` (
   `contactId` int(11) NOT NULL,
   PRIMARY KEY (`participantId`),
   KEY `contactId` (`contactId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=12 ;
+
+--
+-- Dumpning av Data i tabell `participant`
+--
+
+INSERT INTO `participant` (`participantId`, `firstName`, `lastName`, `birthYear`, `bib`, `prio`, `contactId`) VALUES
+(1, 'Hannes', 'Ingelhag', 1990, 0, 1, 2),
+(5, 'Fredrik', 'Johnson', 1990, 0, 0, 3),
+(6, 'Linnéa', 'NÅ', 1990, 0, 1, 4),
+(7, 'Erik', 'Broberg', 1987, 0, 1, 4),
+(8, 'Emma', 'Korv', 1987, 0, 0, 5),
+(11, 'Emma', 'Pemma', 1901, 0, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -262,7 +313,27 @@ CREATE TABLE IF NOT EXISTS `participantdisciplines` (
   `PB` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`pIndex`),
   KEY `participantId` (`participantId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=35 ;
+
+--
+-- Dumpning av Data i tabell `participantdisciplines`
+--
+
+INSERT INTO `participantdisciplines` (`participantId`, `pIndex`, `yearClass`, `discipline`, `SB`, `PB`) VALUES
+(1, 1, 'P15', '100 m', '', ''),
+(1, 2, 'P15', '200 m', '', ''),
+(5, 8, 'P15', '100 m', '', ''),
+(5, 9, 'P15', '200 m', '', ''),
+(6, 10, 'P17', 'Spjut', '25', '30'),
+(6, 11, 'P17', 'Kula', '', ''),
+(7, 12, 'P15', '100 m', '', ''),
+(7, 13, 'P15', '200 m', '', ''),
+(8, 14, 'P17', 'Spjut', '', ''),
+(8, 15, 'P17', 'Kula', '', ''),
+(8, 28, 'F12', 'Höjdhopp', '', ''),
+(11, 29, 'P17', 'Spjut', '', ''),
+(11, 30, 'F12', 'Höjdhopp', '', ''),
+(8, 31, 'P15', '200 m', '', '');
 
 --
 -- Restriktioner för dumpade tabeller
@@ -278,8 +349,8 @@ ALTER TABLE `competitiondisciplines`
 -- Restriktioner för tabell `contact`
 --
 ALTER TABLE `contact`
-  ADD CONSTRAINT `contact_ibfk_2` FOREIGN KEY (`clubId`) REFERENCES `clubs` (`clubId`),
-  ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`competitionId`) REFERENCES `competition` (`competitionId`);
+  ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`competitionId`) REFERENCES `competition` (`competitionId`),
+  ADD CONSTRAINT `contact_ibfk_2` FOREIGN KEY (`clubId`) REFERENCES `clubs` (`clubId`);
 
 --
 -- Restriktioner för tabell `participant`
