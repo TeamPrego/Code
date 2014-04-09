@@ -6,19 +6,19 @@ include "templates/adminheader.php";
 <h1> Skapa tävling </h1>
 
 <table class ="createcompTable">
-	<form id="compForm" name="compForm" method="post" enctype="multipart/form-data" action="database/addCompetition.php">
+	<form id="compForm" name="compForm" method="post" enctype="multipart/form-data" action="createCompetition_classTest.php">
 		<tr>
 			<td>Tävlingsnamn:</td>
 			<td><input name="compName" id="compName" required></input></td>
 			<td>Arrangör:</td>
-			<td><input name="organizer" id="organizer" required></input></td>
+			<td><input name="organizer" id="organizer" ></input></td>
 		</tr>
 		
 		<tr>
 			<td>Datum:</td>
-			<td><input name="date" id="date" placeholder="ÅÅÅÅ-MM-DD" required></input></td>
+			<td><input name="date" id="date" placeholder="ÅÅÅÅ-MM-DD" ></input></td>
 			<td>Sista anmäl.dag:</td>
-			<td><input name="lastDay" id="lastDay" placeholder="ÅÅÅÅ-MM-DD" required></input></td>
+			<td><input name="lastDay" id="lastDay" placeholder="ÅÅÅÅ-MM-DD" ></input></td>
 		</tr>
 		
 		<tr>
@@ -35,6 +35,17 @@ include "templates/adminheader.php";
 	</form>
 </table>
 
+<?php
+if(isset($_POST['compName']) && isset($_POST['organizer']) && isset($_POST['date']) && isset($_POST['lastDay'])){
+	if(!isset($_POST['file'])){
+		$_POST['file'] = NULL;
+	}
+include "class/competition.php";
+$temp = new Competition();
+//echo "hello ".$_POST['compName'];
+$temp->pushToDB($_POST['compName'], $_POST['organizer'], $_POST['date'], $_POST['lastDay'], $_POST['file']);
+}
+?>
 <!--The Progress Bar -->
 <div class=progressBar>
 	0% klart

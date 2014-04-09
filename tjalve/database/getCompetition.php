@@ -13,7 +13,7 @@
 	$row = $data->fetch_object();
 	echo "<div id='competition'><h1>" . $row->compName . "</h1></div>";	
   // echo "<div id='compLogoDiv'>";
-  echo "<table id='bronk'>";
+	echo "<table id='bronk'>";
 	echo "<tr><td>Arrangör: </td><td>" . $row->compArr . "</td></tr>";	
 	echo "<tr><td>Tävlingsdatum: </td><td>" . $row->compDate . "</td></tr>";	
 	echo "<tr><td>Sista anmälningsdag: </td><td>" . $row->compLastDate . "</td></tr>";	
