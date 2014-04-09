@@ -93,6 +93,7 @@ function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
 
+var count = 0;
 jQuery(document).ready(function() {
 	var inp = getURLParameter("contactId");
 	console.log(inp);
@@ -102,9 +103,10 @@ jQuery(document).ready(function() {
 			console.log(content);
 			content = $.parseJSON(content);
 			var dat_string = "";
+			count = 0;
 			$.each(content, function(index, value) {
-				dat_string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable"><tr><td>Namn</td>';
-				dat_string += '<td>' + value.lastName + ', ' + value.firstName + '</td></tr>';
+				dat_string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable" cellspacing="0">';
+				dat_string += '<tr><th>' + value.lastName + ', ' + value.firstName + '</th><th>'+value.birthYear+'</th><th></th></tr>';
 				$.each(value.disciplines, function(ind, val) {	
 					dat_string += '<td></td><td>' + val.ageClass + '</td><td>' + val.discipline + '</td></tr>';
 				});
@@ -113,21 +115,27 @@ jQuery(document).ready(function() {
 				var pId = value.participantId;
 
 				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td>'
-										+ '<td><button class="showButton" name="addClass'+pId+'" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'")>Lägg till klass</button></td></tr>'
-										+ '<tr><td><div class="hideButton" name="here">Lägg till ny klass till vänster</div></td></tr></table></div>';
+										+ '<td><button class="showButton" name="addClass" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'",'+count+')>Lägg till klass</button>'
+										+ '<div class="hideButton" name="infoAddClass"><div id="noParticipants">Lägg till gren till vänster</div></div></td><td></td></table></div>';
+				count = count + 1;
 			});		
 			document.getElementById('confirmedDiv').innerHTML = dat_string;	
 		}
 	});
 });
-function enableFunc(Id, fName, lName) {
-		var a =  document.getElementsByName("addClass"+Id)[0];
+function enableFunc(Id, fName, lName, counter) {
+		for (var i=0;i<count;i++) {
+			console.log(i);
+			var a =  document.getElementsByName("addClass")[i];
+			a.className = "showButton";
+			var b =  document.getElementsByName("infoAddClass")[i];
+			b.className = "hideButton";
+		}
+		console.log(count);
+		var a =  document.getElementsByName("addClass")[counter];
 		a.className = "hideButton";
-		var b =  document.getElementsByName("here")[0];
+		var b =  document.getElementsByName("infoAddClass")[counter];
 		b.className = "showButton";
-
-		var addParticipator = document.getElementById("addParticipator");
-		addParticipator.value = "Lägg till gren";
 
 		var firstName = document.getElementById("firstName");
 		firstName.value = fName;

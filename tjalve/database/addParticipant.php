@@ -13,19 +13,29 @@
 		}
 		$id = $con->insert_id;
 	}
+	else {
+		$checkDiscipline = []; 
+		$sqlDiscipline = mysqli_query($con, "SELECT * FROM participantdisciplines WHERE participantId = '$id'");
+
+		while($row = $sqlDiscipline->fetch_object()) {
+			$checkDiscipline[] = $row->discipline;
+		}
+	}
 
 	$name = $_POST['gren'];
 	foreach ($name as $grentyp) { 
-		$SB = "SB" . $grentyp;
-		$PB = "PB" . $grentyp;
-		$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB)
-		VALUES ('$id', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]')";
+		if(!in_array($grentyp, $checkDiscipline)) {
+			array_push($checkDiscipline, $grentyp);
+			$SB = "SB" . $grentyp;
+			$PB = "PB" . $grentyp;
+			$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB)
+			VALUES ('$id', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]')";
 
-		if (!mysqli_query($con,$quary)) {
-		  die('Error: ' . mysqli_error($con));
+			if (!mysqli_query($con,$quary)) {
+			  die('Error: ' . mysqli_error($con));
+			}
 		}
 	}
-	
 
 	mysqli_close($con);
 	header("Location: ../applyTwo.php?contactId=".$_POST['contactId']."&prio=".$_POST['prio']);

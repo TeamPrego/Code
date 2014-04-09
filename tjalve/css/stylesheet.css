@@ -201,7 +201,20 @@ tr.spaceOver > td {
 #confirmedParticipantTable td {
 	width: 20%;
 }
-ocal
+#confirmedParticipantTable tr:nth-child(n+2) {
+	background: #c2cbff
+}
+
+#confirmedParticipantTable tr:nth-child(2n+2) {
+	background: #ebeeff
+}
+
+#confirmedParticipantTable th {
+	background-color:#344cc2;
+	color:white;
+}
+
+
 #confirmedParticipantOneEach{
 	border: 3px solid #344cc2;
 	border-radius: 7px;
