@@ -2,10 +2,32 @@
 include "templates/adminheader.php";
 ?>
 
+<!--
+Just nu testas koden mot competition-klassen. 
+Tanken är att man ska kunna skapa ett objekt som man arbetar med. 
+Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet. 
+-->
 
 
 
 <?php
+
+  include "competition.php";
+  $comp = new Competition();
+  $comp->getCompetitionByName("Flonk Close");
+  //echo $comp->name;
+  //echo $comp->id;
+  //createTable($comp->id, $comp->name, $comp->beginDate, $comp->lastDate, $comp->arranger)
+  //echo "<input type='button' onclick='" . createTable($comp->id, $comp->name, $comp->beginDate, $comp->lastDate, $comp->arranger) . "' value='Funka!!!'>";
+  echo "<form action='' method='post'>";
+  echo "<input type='button' onclick='doShit();' value='Funka!!!'>";
+  echo "</form>";
+  /* function createTable($id, $namn, $begin, $last, $arr){
+    echo "<table class='firstTableList'><tr><td>" . $id . "</td><td>" . $namn . "</td><td>" . $begin . "</td><td>" . $last . "</td><td>" . $arr . "</td></tr></table>";
+  } */
+  function doShit(){echo "alert('shit')";}
+
+/*
 $odd=0;
 include "database/config.php";
 //$contactId = $_GET['contactId'];
@@ -32,17 +54,17 @@ include "database/config.php";
   //echo "</form>";
   echo "</div>";
   
-	mysqli_close($con);	
+	mysqli_close($con);	*/
 ?>
 
 
-
+<!--
 <script type="text/javascript">
 //var ID=0;
 $('#createTable').change(function() {
     
 		var competition =  $('#createTable').find(":selected").text();
-    
+    document.getElementById('table3').style.display = 'none';
 		$.ajax({
       async: false,
       //Skapar tabellen för tävling
@@ -112,7 +134,7 @@ $('#createTable').change(function() {
         console.log(content);
         
         
-        var dat_string3 = '<select name="createTableDisc" id="createTableDisc" value="createTableDisc">';
+        var dat_string3 = '<select name="createTableDisc" id="createTableDisc" value="createTableDisc" onchange="createTableDisc()">';
 				dat_string3 += '<option>Välj åldersklass</tr>';
         
         $.each(content, function(index, value) {
@@ -121,6 +143,7 @@ $('#createTable').change(function() {
         dat_string3 += '</select>';
         document.getElementById('select').innerHTML = dat_string3;
         
+        
 			}
       
 		});
@@ -128,16 +151,18 @@ $('#createTable').change(function() {
         Skriver tillgängliga grenar i en tabell 
       */
     
-    $.ajax({
+    
+    
+});
+function createTableDisc(){
+  $.ajax({
       
       
-      url: 'database/getAllDisciplines.php',
+      url: 'database/getAllDisciplines2.php',
       
       success: function(content){
         
         content = $.parseJSON(content);
-        
-        console.log(content);
         
         
         var dat_string4 = '<table id="disciplines" class="firstTableList">';
@@ -145,57 +170,36 @@ $('#createTable').change(function() {
         $.each(content, function(index, value) {
         dat_string4+='<tr><td><input type="checkbox">'+value.gren+'</td></tr>' 
         });
-        dat_string4 += '</table>'
-        dat_string4+='<input type="button" class="result-button">';
+        dat_string4 += '</table>';
+        dat_string4+='<input type="button" class="result-button" value="Lägg till grenar!!!">';
        
         document.getElementById('table3').innerHTML = dat_string4;
+        document.getElementById('table3').style.display = 'block';
         
 			}
       
 		});
-    
-});
- /* 
-$('#createTableDisc').change(function() {
-    
-		//document.write("DUDE!");
-    
-    $.ajax({
-      
-      //console.log("Zup Brah!");
-      url: 'database/getAllDisciplines.php',
-      
-      success: function(content){
-        //console.log("Zup Brah!");
-        content = $.parseJSON(content);
-        
-        console.log(content);
-        
-        
-        var dat_string4 = '<table id="disciplines">';
-        dat_string4 += '<tr> <th></th></tr>';
-        $.each(content, function(index, value) {
-        dat_string4+='<tr><td>'+value.gren+'</td></tr>' 
-        });
-        dat_string4 += '</table>';
-        document.getElementById('table3').innerHTML = dat_string4;
-        
-			}
-      
-		});
-});
- */ 
+}
+
 </script>
-<table>
-<td id="table">Här ska skit dyka upp</td>
-<td id="table2">Här ska skit dyka upp</td>
-<td>
-<td id="select">Här ska skit dyka upp</td>
-</td>
-<td id="table3">
-Här ska skit dyka upp
-</td>
+-->
+
+
+
+
+<table id="innerBody">
+  <td id="leftPartOfApplication">
+    <td id="table">Här ska skit dyka upp</td>
+    <td id="table2">Här ska skit dyka upp</td>
+  </td>
+  <td id="rightPartOfApplication">
+    <td id="select">Här ska skit dyka upp</td>
+    <td id="table3">
+      Här ska skit dyka upp
+    </td>
+  </td>
 </table>
+
 <?php
 include "templates/adminfooter.php";
 ?>

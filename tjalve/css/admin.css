@@ -8,8 +8,37 @@
 
 #addAgeClass {
   float:right;
-  zoom:1.5;
+  zoom:1.5;   
+  border-top: 1px solid #5b8cab;
+  background: #3f7396;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1c699c), to(#126396));
+  background: -webkit-linear-gradient(top, #1c699c, #126396);
+  background: -moz-linear-gradient(top, #1c699c, #126396);
+  background: -ms-linear-gradient(top, #1c699c, #126396);
+  background: -o-linear-gradient(top, #1c699c, #126396);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  color: white;
+  font-family: Verdana, 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+  text-decoration: none;
+  vertical-align: middle;
+  width:100%;
 }
+
+#addAgeClass:hover {
+  border-top-color: #4d6db0;
+  background: #4d6db0;
+  color: #ffffff;
+  }
+#addAgeClass:active {
+  border-top-color: #1b435e;
+  background: #1b435e;
+  }
 
 #addAgeClass2 {
   margin-left:5%;
@@ -171,7 +200,7 @@ background: #ebeeff
   
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4);
 	
   /* rounded corners */
 	-webkit-border-radius: 12px;
@@ -190,7 +219,7 @@ background: #ebeeff
   -webkit-border-top-right-radius: 8px;
   -webkit-border-top-left-radius: 8px;
 	-webkit-box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 2px 2px 2px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 2px 0px 4px rgba(23, 69, 88, .5);
 }
 
 #selectedDiscP {
@@ -211,5 +240,5 @@ td {
   -webkit-border-top-right-radius: 8px;
   -webkit-border-top-left-radius: 8px;
 	-webkit-box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 2px 2px 2px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 2px 0px 4px rgba(23, 69, 88, .5);
 }

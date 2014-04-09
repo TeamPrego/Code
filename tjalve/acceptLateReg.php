@@ -8,7 +8,7 @@ include "templates/adminheader.php";
 		include "database/config.php";
 		$data = mysqli_query($con, 'SELECT * FROM competition');
 		while($row = $data->fetch_object()) {
-			echo "<option value='" .$row->compID. "'>" .$row->compName. "</option>";
+			echo "<option value='" .$row->competitionId. "'>" .$row->competitionName. "</option>";
 		}					
 	?>
 	</select>

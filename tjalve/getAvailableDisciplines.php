@@ -1,19 +1,21 @@
 <?php
 	$class = $_GET['class'];
-	//echo "<br><br><h1>" .$class. "</h1><br><br>";
-
+	$contactId = $_GET['contactId'];
 	include "database/config.php";
 
-	$query = "SELECT * FROM age_class WHERE ageClass = '$class'";
+	$data = mysqli_query($con, "SELECT competitionId FROM contact WHERE contactId = '$contactId'");
+	$competitionid = $data->fetch_object()->competitionId;
+
+	$query = "SELECT * FROM competitiondisciplines WHERE yearClass = '$class' AND competitionId = '$competitionid'";
 	$data = mysqli_query($con, $query);
 
 	if (!$data) {
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$disc = array[];
+	$disc = [];
 	while($row = $data->fetch_object()) {
-		$disc[] = ['gren' => $row->discipline, 'klass' => $row->ageClass];
+		$disc[] = ['gren' => $row->discipline, 'klass' => $row->yearClass];
 	}
 	
 	echo json_encode($disc);

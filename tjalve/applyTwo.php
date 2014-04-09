@@ -16,6 +16,7 @@ session_start();
 		<table id ="formDiv">
 			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
 			<input type="hidden" value= <?php echo $_GET['prio'] ?> name="prio">
+			<input type="hidden" value="" name="participantId" id="participantId">
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
@@ -34,22 +35,9 @@ session_start();
 			<tr>
 				<td><label for="select">Klass:</label></td>
 				<td>
-					<select name="chooseClass" id="chooseClass" required>
-					<option> - Välj klass - </option>
-						<?php
-							include "database/config.php";
-							$getCompId = mysqli_query($con, "SELECT * FROM contact WHERE contactId = '$_GET[contactId]'");
-							$compId = $getCompId->fetch_object()->competitionId;
-							$data = mysqli_query($con, "SELECT * FROM age_class WHERE compId= '$compId'");
-							$array=[];
-							while($row = $data->fetch_object()) {
-								if(!in_array($row->ageClass, $array)) {
-									array_push($array, $row->ageClass);
-									echo "<option value='" .$row->ageClass. "'>" .$row->ageClass. "</option>";
-								}
-							}
-						?>
-					</select>
+					<?php
+						include "database/apply/disciplineList.php";
+					?>
 				</td>
 			</tr>
 		</table>
@@ -77,11 +65,10 @@ console.log($('#chooseClass'));
 
 $('#chooseClass').change(function() {
 	var inp = $(this).find(":selected").text();
+	var contactId = getURLParameter('contactId');
+	console.log(inp);
 	$.ajax({
-		data: {
-			'name': inp
-		},
-		url: 'getAvailableDisciplines.php?class='+inp+'',
+		url: 'getAvailableDisciplines.php?class='+inp+'&contactId='+contactId,
 		success: function(content) {
 			console.log(content);
 			content = $.parseJSON(content);
@@ -106,6 +93,7 @@ function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
 
+var count = 0;
 jQuery(document).ready(function() {
 	var inp = getURLParameter("contactId");
 	console.log(inp);
@@ -115,20 +103,53 @@ jQuery(document).ready(function() {
 			console.log(content);
 			content = $.parseJSON(content);
 			var dat_string = "";
+			count = 0;
 			$.each(content, function(index, value) {
-				dat_string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable"><tr><td>Namn</td>';
-				dat_string += '<td>' + value.lastName + ', ' + value.firstName + '</td></tr>';
+				dat_string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable" cellspacing="0">';
+				dat_string += '<tr><th>' + value.lastName + ', ' + value.firstName + '</th><th>'+value.birthYear+'</th><th></th></tr>';
 				$.each(value.disciplines, function(ind, val) {	
 					dat_string += '<td></td><td>' + val.ageClass + '</td><td>' + val.discipline + '</td></tr>';
 				});
-				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td> </tr></table></div>';
+				var fName = value.firstName;
+				var lName = value.lastName;
+				var pId = value.participantId;
+
+				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td>'
+										+ '<td><button class="showButton" name="addClass" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'",'+count+')>Lägg till klass</button>'
+										+ '<div class="hideButton" name="infoAddClass"><div id="noParticipants">Lägg till gren till vänster</div></div></td><td></td></table></div>';
+				count = count + 1;
 			});		
 			document.getElementById('confirmedDiv').innerHTML = dat_string;	
 		}
 	});
 });
-</script>
+function enableFunc(Id, fName, lName, counter) {
+		for (var i=0;i<count;i++) {
+			console.log(i);
+			var a =  document.getElementsByName("addClass")[i];
+			a.className = "showButton";
+			var b =  document.getElementsByName("infoAddClass")[i];
+			b.className = "hideButton";
+		}
+		console.log(count);
+		var a =  document.getElementsByName("addClass")[counter];
+		a.className = "hideButton";
+		var b =  document.getElementsByName("infoAddClass")[counter];
+		b.className = "showButton";
 
+		var firstName = document.getElementById("firstName");
+		firstName.value = fName;
+		firstName.disabled = true;
+		var lastName = document.getElementById("lastName");
+		lastName.value = lName;
+		lastName.disabled = true;
+		var yearOfBirth = document.getElementById("yearOfBirth");
+		yearOfBirth.value = "";
+		yearOfBirth.disabled = true;
+		var participantId = document.getElementById("participantId");
+		participantId.value = Id;
+}
+</script>
 <div id="rightPartOfApplication">
 	<h2>Dina anmälda tävlande</h2>
 	<div id="confirmedDiv">

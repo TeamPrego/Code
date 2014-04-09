@@ -6,7 +6,7 @@
 	echo $competition;
 	echo $count;
 
-	$dataCompetition = mysqli_query($con, "SELECT * FROM competition WHERE compName = '$competition'");
+	$dataCompetition = mysqli_query($con, "SELECT * FROM competition WHERE competitionName = '$competition'");
 	
 	if (!$dataCompetition) {
 	  die('Error: ' . mysqli_error($con));

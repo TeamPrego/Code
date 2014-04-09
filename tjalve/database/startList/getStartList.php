@@ -2,12 +2,12 @@
 	include "../config.php";
 	
 	$competitionId = $_GET['competitionId'];
-	$ageClass = $_GET['ageClass'];
+	$yearClass = $_GET['ageClass'];
 	$discipline = $_GET['discipline'];
 	$disc = [];
 
 	//Findning all classes and dicipilnes
-	$dataAgeClass = mysqli_query($con, "SELECT * FROM age_class WHERE compID = '$competitionId'");
+	$dataAgeClass = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId = '$competitionId'");
 	if (!$dataAgeClass) {
 	  die('Error: ' . mysqli_error($con));
 	}
@@ -15,10 +15,10 @@
 	while($rowAgeClass = $dataAgeClass->fetch_object()){
 		$ok = false;
 
-		if(($ageClass === "Alla" && $discipline === "Alla") ||
-			($rowAgeClass->ageClass === $ageClass && $discipline === "Alla") ||
-			($rowAgeClass->discipline === $discipline && $ageClass === "Alla") ||
-			($rowAgeClass->discipline === $discipline && $rowAgeClass->ageClass === $ageClass))
+		if(($yearClass === "Alla" && $discipline === "Alla") ||
+			($rowAgeClass->yearClass === $yearClass && $discipline === "Alla") ||
+			($rowAgeClass->discipline === $discipline && $yearClass === "Alla") ||
+			($rowAgeClass->discipline === $discipline && $rowAgeClass->yearClass === $yearClass))
 			$ok = true;
 
 		if($ok == true){
@@ -38,20 +38,20 @@
 
 				while($rowParticipant = $dataParticipant->fetch_object()){
 					$participantId = $rowParticipant->participantId;
-					$dataDiscipline = mysqli_query($con, "SELECT * FROM disciplines WHERE participantId = '$participantId'");
+					$dataDiscipline = mysqli_query($con, "SELECT * FROM participantdisciplines WHERE participantId = '$participantId'");
 
 					if (!$dataDiscipline) {
 					  die('Error: ' . mysqli_error($con));
 					}
 					while($rowDiscipline = $dataDiscipline->fetch_object()){
-						if($rowDiscipline->class === $rowAgeClass->ageClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
+						if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
 							$participants[] = [	'firstName'=> $rowParticipant->firstName,
 																	'lastName' => $rowParticipant->lastName,
-																	'club' => $rowContact->club];
+																	'club' => $rowContact->clubId];
 					}
 				}
 			}
-			$disc[] = [ 'className' => $rowAgeClass->ageClass,
+			$disc[] = [ 'className' => $rowAgeClass->yearClass,
 									'discipline' => $rowAgeClass->discipline,
 									'participants' => $participants];
 

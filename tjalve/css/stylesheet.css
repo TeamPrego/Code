@@ -70,12 +70,12 @@ tr.spaceOver > td {
 	width: 90%;
 }
 
-.firstTableList tr:nth-child() {
-background: #ebeeff
+.firstTableList tr:nth-child(n+2) {
+	background: #c2cbff
 }
 
-.firstTableList tr:nth-child() {
-background: ##c2cbff
+.firstTableList tr:nth-child(2n+2) {
+	background: #ebeeff
 }
 
 .firstTableList th {
@@ -201,7 +201,20 @@ background: ##c2cbff
 #confirmedParticipantTable td {
 	width: 20%;
 }
-ocal
+#confirmedParticipantTable tr:nth-child(n+2) {
+	background: #c2cbff
+}
+
+#confirmedParticipantTable tr:nth-child(2n+2) {
+	background: #ebeeff
+}
+
+#confirmedParticipantTable th {
+	background-color:#344cc2;
+	color:white;
+}
+
+
 #confirmedParticipantOneEach{
 	border: 3px solid #344cc2;
 	border-radius: 7px;
@@ -257,6 +270,10 @@ ocal
 	width: 100%;
 }*/
 
+.hideButton{
+	display: none;
+}
+
 #leftPartOfApplication{
 	width: 45%;
 	float: left;
@@ -284,7 +301,7 @@ ocal
   padding: 1% 0 1% 0;
 	/* outer shadows  (note the 10gba is red, green, blue, alpha) */
 	-webkit-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 20px 20px 20px rgba(23, 69, 88, .5);
+	-moz-box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4);
 	/* rounded corners */
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
@@ -299,6 +316,12 @@ ocal
 #noParticipants {
 	color: red;
 	text-align: center;
+	font-size: bold;
+}
+
+#participantTable{
+	margin-right: 5%;
+	width: 100%;
 }
 
 #result-button {
@@ -315,6 +338,9 @@ ocal
 	margin-right: 5%;
 }
 
+.showButton{
+	display: inline;
+}
 /* #whichDisciplines {
 	border-right: 3px solid #344cc2;
 	width: 100%;

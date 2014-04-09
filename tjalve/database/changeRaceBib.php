@@ -1,18 +1,45 @@
 <?php
 	include "config.php";
 
-	$query = "SELECT * FROM participant";
-	$data = mysqli_query($con, $query);
-	
-	if (!$data) {
+	$dataCheck = mysqli_query($con, "SELECT * FROM participant");
+	if (!$dataCheck) {
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$count = 0;
-	while($row = $data->fetch_object()) {
-		$bib = $row->participantId;
-		$queryUpdate = "UPDATE `participant` SET `bib` = '$_POST[$bib]' WHERE `participantId` = '$row->participantId'";
-		$fjong = mysqli_query($con, $queryUpdate);
+	$check = 1;
+	$checkBib = [];
+	while($rowCheck = $dataCheck->fetch_object()) {
+		$bib = $rowCheck->participantId;
+		echo $bib;
+		if(!empty($_POST["$bib"])) {
+			echo "Inte tom";
+			if(!in_array($_POST["$bib"], $checkBib)) {
+				array_push($checkBib, $_POST[$rowCheck->participantId]);
+				echo "Insert";
+			}
+			else {
+				$check = 0;
+				echo "STOPP";
+				break;
+			}
+		}
 	}
-	header("Location: ../setRaceBib.php");
+
+	if($check === 1) {
+		$data = mysqli_query($con, "SELECT * FROM participant");
+		
+		if (!$data) {
+		  die('Error: ' . mysqli_error($con));
+		}
+
+		while($row = $data->fetch_object()) {
+			$bibs = $row->participantId;
+			if(!empty($_POST["$bibs"])){
+				$queryUpdate = "UPDATE `participant` SET `bib` = '$_POST[$bibs]' WHERE `participantId` = '$row->participantId'";
+				$fjong = mysqli_query($con, $queryUpdate);
+			}
+		}
+	}
+	echo $check;
+	header("Location: ../setRaceBib.php?check=".$check."");
 ?>

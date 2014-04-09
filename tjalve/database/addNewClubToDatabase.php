@@ -1,7 +1,7 @@
 <?php
 	include "config.php";
 	
-	$sql = "INSERT INTO clubs (Name, Phonenumber, Adress, Zip, Email)
+	$sql = "INSERT INTO clubs (club, phone, address, zip, email)
 	VALUES
 	('$_POST[newClub]','$_POST[newClubNumber]','$_POST[newClubAdress]' ,'$_POST[newClubZipAdress]' ,'$_POST[newClubEmail]')";
 

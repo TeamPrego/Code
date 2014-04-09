@@ -2,7 +2,7 @@
 	$compID = $_GET['compID'];
 	include "config.php";
 	
-	$query = "SELECT * FROM age_class WHERE compId = '$compID'";
+	$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$compID'";
 	$data = mysqli_query($con, $query);
 
 	if (!$data) {
