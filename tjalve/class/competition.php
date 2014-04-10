@@ -6,7 +6,7 @@
 	public function __construct(){
     }
     
-    public function pushToDB($name, $arranger, $beginDate, $lastDate){
+    public function pushToDB($name, $arranger, $beginDate, $endDate, $lastDate){
 	  //http://www.w3schools.com/php/php_file_upload.asp
 			//copy image
 			if ($_FILES["file"]["error"] > 0)
@@ -67,8 +67,8 @@
       
       include "config.php";
 	  
-      $sql = "INSERT INTO competition (`compID`, `compName`, `compArr`, `compDate`, `compLastDate`, `compIcon`) 
-      VALUES (NULL,'$name','$arranger','$beginDate','$lastDate','$filePath')";
+      $sql = "INSERT INTO competition (`competitionId`, `competitionName`, `dateFrom`, `dateTo`, `lastDate`, `organizer`, `logo`) 
+      VALUES (NULL,'$name','$beginDate','$endDate','$lastDate','$arranger','$filePath')";
 	  
 	  $data = mysqli_query($con, $sql);
 	
@@ -78,7 +78,7 @@
 	mysqli_close($con);
 	
 	include "config.php";
-	$query = "SELECT * FROM competition WHERE compName = '$name'";
+	$query = "SELECT * FROM competition WHERE competitionName = '$name'";
 			$data2 = mysqli_query($con, $query);
 			
 			if (!$data2) {
@@ -87,28 +87,28 @@
 			$row = $data2->fetch_object();
 		//	echo $row->compID;
       mysqli_close($con);
-	  header("Location: createCompetitionStep2_classTest.php?compID=".$row->compID);
+	  header("Location: createCompetitionStep2.php?compID=".$row->competitionId);
     }
 	
 	public function getCompetition($compID) { //TABORT!???? eller kommer jag/vi behöva denna??!
 			
-			$query = "SELECT * FROM competition WHERE compID = '$compID'";
+			$query = "SELECT * FROM competition WHERE competitionId = '$compID'";
 			$data = mysqli_query($con, $query);
 			
 			if (!$data) {
 			  die('Error: ' . mysqli_error($con));
 			}
 			$row = $data->fetch_object();
-			echo "<div id='competition'><h1>" . $row->compName . "</h1></div>";	
+			echo "<div id='competition'><h1>" . $row->competitionName . "</h1></div>";	
 		  // echo "<div id='compLogoDiv'>";
 			echo "<table id='bronk'>";
-			echo "<tr><td>Arrangör: </td><td>" . $row->compArr . "</td></tr>";	
-			echo "<tr><td>Tävlingsdatum: </td><td>" . $row->compDate . "</td></tr>";	
-			echo "<tr><td>Sista anmälningsdag: </td><td>" . $row->compLastDate . "</td></tr>";	
+			echo "<tr><td>Arrangör: </td><td>" . $row->organizer . "</td></tr>";	
+			echo "<tr><td>Tävlingsdatum: </td><td>" . $row->dateFrom . " - " . $row->dateTo . "</td></tr>";	
+			echo "<tr><td>Sista anmälningsdag: </td><td>" . $row->lastDate . "</td></tr>";	
 			echo "</table>";
 		  // echo "</div>";
 		 
-			echo "<img id ='compLogo' src=". $row->compIcon ." alt ='Image' />";
+			echo "<img id ='compLogo' src=". $row->logo ." alt ='Image' />";
 				
 			mysqli_close($con);
     }
@@ -116,59 +116,127 @@
 	
 	public function getCompName($compID) {
       include "config.php";
-	  $query = "SELECT * FROM competition WHERE compID = '$compID'";
+	  $query = "SELECT * FROM competition WHERE competitionId = '$compID'";
 	  $data = mysqli_query($con, $query);
 	  if (!$data) {
 			  die('Error: ' . mysqli_error($con));
 			}
 		$row = $data->fetch_object();
-	  return $row->compName;
+	  return $row->competitionName;
     }
 
 	public function getCompOrganizer($compID) {
       include "config.php";
-	  $query = "SELECT * FROM competition WHERE compID = '$compID'";
+	  $query = "SELECT * FROM competition WHERE competitionId = '$compID'";
 	  $data = mysqli_query($con, $query);
 	  if (!$data) {
 			  die('Error: ' . mysqli_error($con));
 			}
 		$row = $data->fetch_object();
-	  return $row->compArr;
+	  return $row->organizer;
     }
 	
 	public function getCompDate($compID) {
       include "config.php";
-	  $query = "SELECT * FROM competition WHERE compID = '$compID'";
+	  $query = "SELECT * FROM competition WHERE competitionId = '$compID'";
 	  $data = mysqli_query($con, $query);
 	  if (!$data) {
 			  die('Error: ' . mysqli_error($con));
 			}
 		$row = $data->fetch_object();
-	  return $row->compDate;
+	  return $row->dateFrom . " - " . $row->dateTo;
     }
 	
 	public function getCompLastDate($compID) {
       include "config.php";
-	  $query = "SELECT * FROM competition WHERE compID = '$compID'";
+	  $query = "SELECT * FROM competition WHERE competitionId = '$compID'";
 	  $data = mysqli_query($con, $query);
 	  if (!$data) {
 			  die('Error: ' . mysqli_error($con));
 			}
 		$row = $data->fetch_object();
-	  return $row->compLastDate;
+	  return $row->lastDate;
     }
     
 	public function getCompFile($compID) {
       include "config.php";
-	  $query = "SELECT * FROM competition WHERE compID = '$compID'";
+	  $query = "SELECT * FROM competition WHERE competitionId = '$compID'";
 	  $data = mysqli_query($con, $query);
 	  if (!$data) {
 			  die('Error: ' . mysqli_error($con));
 			}
 		$row = $data->fetch_object();
-	  return $row->compIcon;
+	  return $row->logo;
+    }
+
+	public function getAllYearClasses() {
+	  include "config.php";
+      $query = "SELECT * FROM allyearclasses WHERE 1";
+	  $data = mysqli_query($con, $query);
+	  if (!$data) {
+			  die('Error: ' . mysqli_error($con));
+			}
+		$array=[];
+		while($row = $data->fetch_object()) {
+			if(!in_array($row->yearClass, $array)) {
+				array_push($array, $row->yearClass);
+			}
+		}
+		//sort($array, SORT_DESC);
+		mysqli_close($con); 
+		foreach ($array as $key => $value) {
+		  printf("\t<option value='%s'>%s</option>\n", $value, $value);
+		}
+	  
     }
 	
+	
+	public function getAllDisciplines($compID, $inp) {
+      include "config.php";
+		
+		$query = "SELECT * FROM alldisciplines";
+	$data = mysqli_query($con, $query);
+
+	if (!$data) {
+	  die('Error: ' . mysqli_error($con));
+	}
+	
+	$query2 = "SELECT discipline FROM competitiondisciplines WHERE competitionId = '$compID' && yearClass = '$inp'";
+	$data2 = mysqli_query($con, $query2);
+
+	if (!$data2) {
+	  die('Error: ' . mysqli_error($con));
+	}
+	
+	$disc=[];
+	while($row = $data->fetch_object()){
+	$disc[] = ['gren'=>$row->discipline];
+	}
+	
+	$compare=[];
+	while($row = $data2->fetch_object()){
+	$compare[] = ['gren'=>$row->discipline];
+	}
+	
+	$compareTmp=[];
+		foreach($disc as $aV){
+		$discTmp[] = $aV['gren'];
+		}
+		if(isset($compare)){
+			foreach($compare as $aV){
+				$compareTmp[] = $aV['gren'];
+			}
+		}
+		else{
+			$compareTmp[] = 'empty';
+		}
+		$result=[];
+		$result=array_diff($discTmp, $compareTmp);
+		return $result;
+	
+	
+	mysqli_close($con);
+    }
 	
 	
     public function changeName($newName) {
@@ -188,4 +256,21 @@
     }
     
   }
+?>
+
+<script type="text/javascript">	
+console.log("hey mom!!");
+</script>
+
+<?php
+
+if(isset($_GET['compID']) && isset($_GET['inp'])) {
+
+	 $compID = $_GET['compID'];
+   	 $inp	= $_GET['inp'];
+	 echo $inp;
+     $temp = new competition();
+     $result = $temp->getAllDisciplines($compID, $inp);
+	 echo json_encode($result);
+}
 ?>
