@@ -20,6 +20,7 @@ session_start();
 			<tr>
 				<td>Förnamn:</td>
 				<td><input type="text" name="fName" id="firstName" required/></td>
+				<td><input type="button" class="hideButton" name="addNewParticipant" value="Lägg till ny deltagare"/></td>
 			</tr>
 
 			<tr>
@@ -60,33 +61,37 @@ jQuery(document).ready(function() {
 		else
 			document.getElementById('dropDown').innerHTML = "För hjälp, klicka här";
 	});
-});	
-console.log($('#chooseClass'));
+});
 
 $('#chooseClass').change(function() {
 	var inp = $(this).find(":selected").text();
-	var contactId = getURLParameter('contactId');
-	console.log(inp);
-	$.ajax({
-		url: 'getAvailableDisciplines.php?class='+inp+'&contactId='+contactId,
-		success: function(content) {
-			console.log(content);
-			content = $.parseJSON(content);
-			var dat_string = '<table id="whichDisciplines">';
-			dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
-			$.each(content, function(index, value) {
-				dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
-								 + value.gren
-								 + '</td><td>'+inp+'</td><td>'
-								 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
-								 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
-			});
-			dat_string += '</table>';
-			dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
+	if(inp === " - Välj klass - ") {
+		document.getElementById('disciplines').innerHTML ="";
+	}
+	else {
+		var contactId = getURLParameter('contactId');
+		console.log(inp);
+		$.ajax({
+			url: 'getAvailableDisciplines.php?class='+inp+'&contactId='+contactId,
+			success: function(content) {
+				console.log(content);
+				content = $.parseJSON(content);
+				var dat_string = '<table id="whichDisciplines">';
+				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
+				$.each(content, function(index, value) {
+					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
+									 + value.gren
+									 + '</td><td>'+inp+'</td><td>'
+									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
+									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
+				});
+				dat_string += '</table>';
+				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
 
-			document.getElementById('disciplines').innerHTML = dat_string;
-		}
-	});
+				document.getElementById('disciplines').innerHTML = dat_string;
+			}
+		});
+	}
 });
 
 function getURLParameter(name) {
@@ -94,6 +99,7 @@ function getURLParameter(name) {
 }
 
 var count = 0;
+
 jQuery(document).ready(function() {
 	var inp = getURLParameter("contactId");
 	console.log(inp);
@@ -106,24 +112,57 @@ jQuery(document).ready(function() {
 			count = 0;
 			$.each(content, function(index, value) {
 				dat_string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable" cellspacing="0">';
-				dat_string += '<tr><th>' + value.lastName + ', ' + value.firstName + '</th><th>'+value.birthYear+'</th><th></th></tr>';
+				dat_string += '<tr><th>' + value.lastName + ', ' + value.firstName + '</th><th>Född: '+value.birthYear+'</th><th>SB</th><th>PB</th></tr>';
 				$.each(value.disciplines, function(ind, val) {	
-					dat_string += '<td></td><td>' + val.ageClass + '</td><td>' + val.discipline + '</td></tr>';
+					dat_string += '<td>' + val.ageClass + '</td><td>' + val.discipline + '</td><td>' + val.sb + '</td><td>' + val.pb + '</td></tr>';
 				});
 				var fName = value.firstName;
 				var lName = value.lastName;
 				var pId = value.participantId;
+				var bY = value.birthYear;
 
-				dat_string += '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td>'
-										+ '<td><button class="showButton" name="addClass" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'",'+count+')>Lägg till klass</button>'
-										+ '<div class="hideButton" name="infoAddClass"><div id="noParticipants">Lägg till gren till vänster</div></div></td><td></td></table></div>';
+				dat_string += '<td></td>'
+										+ '<td><button class="showButton" name="addClass" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'",'+count+',"'+bY+'")>Lägg till klass</button>'
+										+ '<div class="hideButton" name="infoAddClass"><div id="noParticipants">Lägg till gren till vänster</div></div></td><td></td>'
+										+ '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td></table></div>';
 				count = count + 1;
 			});		
 			document.getElementById('confirmedDiv').innerHTML = dat_string;	
 		}
 	});
 });
-function enableFunc(Id, fName, lName, counter) {
+
+$('input[name="addNewParticipant"]').click(function(){
+	for (var i=0;i<count;i++) {
+		console.log(i);
+		var a =  document.getElementsByName("addClass")[i];
+		a.className = "showButton";
+		var b =  document.getElementsByName("infoAddClass")[i];
+		b.className = "hideButton";
+	}
+
+	var c =  document.getElementsByName("addNewParticipant")[0];
+	c.className = "hideButton";
+
+	var firstName = document.getElementById("firstName");
+	firstName.value = "";
+	firstName.disabled = false;
+	var lastName = document.getElementById("lastName");
+	lastName.value = "";
+	lastName.disabled = false;
+	var yearOfBirth = document.getElementById("yearOfBirth");
+	yearOfBirth.value = "";
+	yearOfBirth.disabled = false;
+	var participantId = document.getElementById("participantId");
+	participantId.value = "";
+	$("select option").filter(function() {
+    //may want to use $.trim in here
+    return $(this).text() == " - Välj klass - "; 
+	}).prop('selected', true);
+	$('#chooseClass').trigger("change");
+});
+
+function enableFunc(Id, fName, lName, counter, birthYear) {
 		for (var i=0;i<count;i++) {
 			console.log(i);
 			var a =  document.getElementsByName("addClass")[i];
@@ -136,6 +175,8 @@ function enableFunc(Id, fName, lName, counter) {
 		a.className = "hideButton";
 		var b =  document.getElementsByName("infoAddClass")[counter];
 		b.className = "showButton";
+		var c =  document.getElementsByName("addNewParticipant")[0];
+		c.className = "showButton";
 
 		var firstName = document.getElementById("firstName");
 		firstName.value = fName;
@@ -144,12 +185,13 @@ function enableFunc(Id, fName, lName, counter) {
 		lastName.value = lName;
 		lastName.disabled = true;
 		var yearOfBirth = document.getElementById("yearOfBirth");
-		yearOfBirth.value = "";
+		yearOfBirth.value = birthYear;
 		yearOfBirth.disabled = true;
 		var participantId = document.getElementById("participantId");
 		participantId.value = Id;
 }
 </script>
+
 <div id="rightPartOfApplication">
 	<h2>Dina anmälda tävlande</h2>
 	<div id="confirmedDiv">

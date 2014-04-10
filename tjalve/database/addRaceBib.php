@@ -12,7 +12,7 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$competitionId = $dataCompetition->fetch_object()->compID;
+	$competitionId = $dataCompetition->fetch_object()->competitionId;
 	$dataContact = mysqli_query($con, "SELECT * FROM contact WHERE competitionId = '$competitionId'");
 	
 	if (!$dataContact) {

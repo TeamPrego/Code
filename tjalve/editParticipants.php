@@ -13,23 +13,47 @@ session_start();
 
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
+	<!--Drop down list med alla tävlingar som finns i klubben-->
+	<select id="getCompetitions">
+		<?php
+			include "database/config.php";
+			$competitionQuery = "SELECT competitionName, competitionId FROM competition";
+			$competitionData = mysqli_query($con, $competitionQuery);
+
+			if (!$competitionData) {
+			  die('Error: ' . mysqli_error($con));
+			}
+
+			while ($crow = $competitionData->fetch_object()) {
+				++$compId;
+				echo "<option id='" . $crow->competitionId . "'>" . $crow->competitionName . "</option>";
+			}
+			mysqli_close($con);
+		?>
+	</select>
 	
-		<select id="adminParticipants" size="20">
-			<?php
-				//Fetching and printing all the participants
-				include "database/config.php";
-				$query = "SELECT * FROM participant";
-				$data = mysqli_query($con, $query);
-				if (!$data) {
-				  die('Error: ' . mysqli_error($con));
-				}
-				while ($prow = $data->fetch_object()) {
-					++$idno;
-					echo "<option id='" . $prow->participantId . "'>" . $prow->participantId . " - " . $prow->firstName . " " . $prow->lastName . "</option>";
-				}
-				mysqli_close($con);
-			?>
-		</select>
+	<br>
+	
+	<select id="adminParticipants" size="20">
+	<!--Här slängs alla deltagare in för rätt tävling-->
+	</select>
+	<!--<select id="adminParticipants" size="20">-->
+		<?php
+			//Fetching and printing all the participants
+			/*include "database/config.php";			
+
+			$query = "SELECT * FROM participant p INNER JOIN participant  ";
+			$data = mysqli_query($con, $query);
+			if (!$data) {
+			  die('Error: ' . mysqli_error($con));
+			}
+			while ($prow = $data->fetch_object()) {
+				++$idno;
+				echo "<option id='" . $prow->participantId . "'>" . $prow->participantId . " - " . $prow->firstName . " " . $prow->lastName . "</option>";
+			}
+			mysqli_close($con);*/
+		?>
+	</select>
 </div>
 
 <div id="rightPartOfApplication">
@@ -42,11 +66,35 @@ session_start();
 
 
 <script type="text/javascript">
-	var disabl = "disabled";
+	//När man ändrat val av tävling ska även deltagarlistan uppdateras:
+	$('#getCompetitions').change(function() {
+		//hämtar personer från rätt tävling
+		var inp = $(this).find("option:selected").attr('id');
+		console.log(inp);
+		$.ajax({
+			url: 'database/EditParticipants/fetchParticipantByCompId.php?competitionId='+inp+'',
+			success: function(content) {
+				content = $.parseJSON(content);
+				var part_string = '';
+				$.each(content, function(index, value) {
+					if(index===0){
+						part_string += '<option id="'+value.pId+'" selected="selected">'+value.pId+' - '+value.fName+' '+value.lName+'</option>';
+					}
+					else {
+						part_string += '<option id="'+value.pId+'">'+value.pId+' - '+value.fName+' '+value.lName+'</option>';
+					}
+				});
+				document.getElementById('adminParticipants').innerHTML = part_string;
+			}
+		});
+	});
 
+
+
+	var disabl = "disabled";
 	$('#adminParticipants').change(function() {
 		var inp = $(this).find("option:selected").attr('id');
-		//console.log(inp);
+		console.log(inp);
 		$.ajax({
 			url: 'database/EditParticipants/fetchParticipantInfo.php?participantId='+inp+'',
 			//Content är vad jag har echo:at från url:en
@@ -77,7 +125,7 @@ session_start();
 					
 				});
 					
-			document.getElementById('confirmedDiv').innerHTML = dat_string;	
+				document.getElementById('confirmedDiv').innerHTML = dat_string;	
 			}
 		});
 		//OM REDIGERA ÄR KLICKAD, GÖR ALLA FÄLT ENABLED, CLUB SKA BLI EN DROPDOWN,
@@ -103,39 +151,13 @@ session_start();
 									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
 				});
 				dat_string += '</table>';
-				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
+				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>'
+							+ '<?php include database/apply/disciplineList.php ?>';
 
 				document.getElementById('disciplines').innerHTML = dat_string;
 			}
 		});
 	});
-
-
-/*
-	$('#chooseClass').change(function() {
-		var inp = $(this).find(":selected").text();
-		console.log(inp);
-		$.ajax({
-			url: 'getAvailableDisciplines.php?class='+inp+'',
-			success: function(content) {
-				console.log(content);
-				content = $.parseJSON(content);
-				var dat_string = '<table id="whichDisciplines">';
-				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
-				$.each(content, function(index, value) {
-					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
-									 + value.gren
-									 + '</td><td>'+inp+'</td><td>'
-									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
-									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
-				});
-				dat_string += '</table>';
-				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
-
-				document.getElementById('disciplines').innerHTML = dat_string;
-			}
-		});
-	});*/
 
 	function enableFunc(idno) {
 		var inputs = document.getElementsByClassName('update'+idno);
@@ -165,7 +187,9 @@ session_start();
  		document.getElementsByName("classButton")[0].className="showButton";
 
 	}
+
 	$('#adminParticipants').trigger("change");
+	$('#getCompetitions').trigger("change");
 </script>
 <?php
 

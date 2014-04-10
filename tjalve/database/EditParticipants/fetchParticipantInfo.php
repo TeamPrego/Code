@@ -30,7 +30,7 @@ ob_start();
 	$theClubData = mysqli_query($con, $clubQuery2);
 
 	if(!$theClubData) {
-		die('Errir: ' . mysqli_error($con));
+		die('Error: ' . mysqli_error($con));
 	}
 
 	$theClub = $theClubData->fetch_object()->club;
@@ -62,6 +62,7 @@ ob_start();
 				'club' => $theClub,
 				'disciplines' => $discDisciplines, 
 				'clubs' => $clubsArray,
+				'clubId' => $clubId,
 				'contactId' => $cId];
 
 	echo json_encode($part);
