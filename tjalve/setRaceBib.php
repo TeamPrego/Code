@@ -89,7 +89,6 @@
 	});
 
 	$('#chooseCompetition').trigger("change");
-
 </script>
 
 <div class=progressBar>

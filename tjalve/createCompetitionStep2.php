@@ -1,17 +1,24 @@
+
 <!--Create competition page-->
 <!--Granskad och godkänd 2014-03-04-->
 
 <?php
 include "templates/adminheader.php";
-?>
 
-<?php
-include "database/getCompetition.php";
-?>
-
-<?php 
+include "class/competition.php";
 $compID = $_GET['compID'];
-echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAgeClass.php?compID=".$compID."'>";
+$getCompInfo = new Competition();
+
+	echo "<div id='competition'><h1>" . $getCompInfo->getCompName($compID) . "</h1></div>";	
+	echo "<table id='bronk'>";
+	echo "<tr><td>Arrangör: </td><td>" . $getCompInfo->getCompOrganizer($compID) . "</td></tr>";	
+	echo "<tr><td>Tävlingsdatum: </td><td>" . $getCompInfo->getCompDate($compID) . "</td></tr>";	
+	echo "<tr><td>Sista anmälningsdag: </td><td>" . $getCompInfo->getCompLastDate($compID) . "</td></tr>";	
+	echo "</table>";
+	echo "<img id ='compLogo' src=". $getCompInfo->getCompFile($compID) ." alt ='Image' />";
+ 
+
+//echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAgeClass.php?compID=".$compID."'>";
 ?>
 <p id="chooseP">Välj åldesklass och resp. gren här:</p>
 
@@ -120,7 +127,6 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 </script>
 
 <div id="rightPartOfApplication">
-	<h2>Dina anmälda tävlande</h2>
 	<div id="confirmedDiv">
 	</form>
 	</div>
@@ -132,3 +138,16 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 <?php
 include "templates/adminfooter.php";
 ?>
+
+
+<!-- 	OBSOBS!!!!! gör om gör rätt!!!!
+		ändra detta nu eller när vi fixat classerna och allt funkar igen som de ska???
+
+		kunna lägga till nya grenar som inte finns i databasen.
+		i createCompetition: en extra ifyllning för datum om tvävlingen går över flera dagar alltså ifyllning för ett startdatum och en ifyllning för ett slutdatum.
+		skapany eller kopiera gammla tävling så den kopierade tävlingen får ett nytt tävlingsID.
+		sortera på rätt sätt både åldersklass och grenar OBS! även de grenar som läggs till i databasen ska kunna sorteras in på rätt plats
+		ska man kunna tabort gren som skapas?????? lås standard grenar (+200 häck) resten "egentilllagda grenar" ska man kunna ta bort tex om man lägger till "40 meter sprint baklänges" vill man inte ha kvar de efter plojtävlingen är avslutad.
+		internet explorer????? kanske ska tänka på om de är värt de... skulle kanske kunna funka på kolla resultat och anmäla sig till tävling 
+		
+		-->

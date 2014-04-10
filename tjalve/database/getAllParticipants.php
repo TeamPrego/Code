@@ -3,7 +3,7 @@
 	$competitionName = $_GET['competitionName'];
 
 	$dataCompetition = mysqli_query($con, "SELECT * FROM competition WHERE competitionName = '$competitionName'");
-	$competitionId = $dataCompetition->fetch_object()->compID;
+	$competitionId = $dataCompetition->fetch_object()->competitionId;
 
 	$queryContact = "SELECT * FROM contact WHERE competitionId = '$competitionId'";
 	$dataContact = mysqli_query($con, $queryContact);

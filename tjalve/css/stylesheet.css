@@ -56,11 +56,6 @@ tr.spaceOver > td {
   width:2em;
 }
 
-/* For the tables */
-.even{
-	background-color: #c2cbff; 
-}
-
 .firstTableList{
   font-family: Verdana;
   margin-left: 5%;
@@ -113,11 +108,6 @@ tr.spaceOver > td {
 /* In the footer */
 .left-links{
 	float:left;
-}
-
-/* For the tables */
-.odd{
-	background-color: #ebeeff;
 }
 
 .progress{
@@ -199,9 +189,25 @@ tr.spaceOver > td {
 }
 
 #confirmedParticipantTable td {
-	width: 20%;
+	width: 15%;
+	padding-left: 2.5%;
+	padding-right: 2.5%;
 }
-ocal
+#confirmedParticipantTable tr:nth-child(n+2) {
+	background: #c2cbff;
+}
+
+#confirmedParticipantTable tr:nth-child(2n+2) {
+	background: #ebeeff;
+}
+
+#confirmedParticipantTable th {
+	background-color:#344cc2;
+	color:white;
+	text-align: left;
+}
+
+
 #confirmedParticipantOneEach{
 	border: 3px solid #344cc2;
 	border-radius: 7px;
@@ -232,7 +238,6 @@ ocal
 	-moz-border-radius: 40px;
 }
 
-
 #drop-list {
 	background: #3d3d3d;
 	margin: 1em 20em 0 auto;	
@@ -249,23 +254,15 @@ ocal
   margin: 0 10% 0 90%;
 }
 
-/* The form för applications */
-/*#formDiv{
-	border-right: 3px solid #348cc2;
-	float: left;
-	text-align: left;
-	width: 100%;
-}*/
-
 .hideButton{
 	display: none;
 }
 
 #leftPartOfApplication{
-	width: 45%;
 	float: left;
 	margin-left: 5%;
 	margin-bottom: 5%;
+	width: 43%;
 }
 
 /* Infotext in the application-site*/
@@ -319,7 +316,8 @@ ocal
 }
 
 #rightPartOfApplication{
-	width: 45%;
+	border-left: medium solid black;
+	width: 43%;
 	float: right;
 	margin-bottom: 5%;
 	margin-right: 5%;
