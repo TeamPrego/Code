@@ -16,7 +16,7 @@ include "templates/adminheader.php";
           <a href="createCompetition.php"><button class="button">Skapa</button></a>
       </td>
 			<td><a href="editParticipants.php"><button class="button">Ändra</button></a></td>
-			<td><a href=""><button class="button">Fakturera</button></a></td>
+			<td><a href="invoicingData.php"><button class="button">Fakturera</button></a></td>
 		</tr>
     
 		<tr>

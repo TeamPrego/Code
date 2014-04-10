@@ -75,7 +75,7 @@ function Update() {
 					dat_string += '<tr class="spaceOver"><td style="background-color:white"></td></tr>';
 					dat_string += 	'<tr><th>'+ value.className + '</th><th> ' + value.discipline +'</th><th></th><th></th></tr><tr><th></th><th>Förnamn</th><th>Efternamn</th><th>Klubb</th></tr>';
 					$.each(value.participants, function(ind, val) {
-						if(val.prio === 1 || val.prio === 2) {
+						if(val.prio == "1" || val.prio == "2") {
 							dat_string += '<tr><td></td><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>' + val.club + '</td></tr>';
 							countParticipant++;
 						}
