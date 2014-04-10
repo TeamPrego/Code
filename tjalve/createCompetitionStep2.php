@@ -20,6 +20,7 @@ $getCompInfo = new Competition();
 
 //echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAgeClass.php?compID=".$compID."'>";
 ?>
+<form method="POST" id="firstForm" name="firstForm" action="createCompetitionStep2.php">
 <p id="chooseP">Välj åldesklass och resp. gren här:</p>
 
 <table class ="createcompTable">
@@ -31,36 +32,18 @@ $getCompInfo = new Competition();
 					<option> - Välj klass - </option>
 		 
 						<?php
-							
-							include "database/config.php";
-							$query2 = "SELECT * FROM classes";
-							
-							$data = mysqli_query($con, $query2);
-							
-							if (!$data) {
-							die('Error: ' . mysqli_error($con));
-							}
-							
-							$array=[];
-							while($row = $data->fetch_object()) {
-								if(!in_array($row->Klass, $array)) {
-									array_push($array, $row->Klass);
-								}
-							}
-							sort($array, SORT_DESC);
-							foreach ($array as $key => $value) {
-							  printf("\t<option value='%s'>%s</option>\n", $value, $value);
-							}
-							mysqli_close($con); 
+						$allyearclasses = new competition();
+						$allyearclasses->getAllYearClasses();
 						?>
 			</select>
 		  </td>
         </td>
 	 </tr>	 
 </table>
-
+<!-- Varför får jag inte tag i dropdown listans grejer...?? ska jag ha kvar ajax????-->
 
 <div id="leftPartOfApplication">
+
 </form>
 </div>
 
@@ -72,12 +55,13 @@ var js_IDvar = "<?php echo $_GET['compID']; ?>";
 	$('#chooseClass').change(function() {
 		inp = $(this).find(":selected").text();
 		
-		//console.log(inp);
+		console.log('class/competition.php?compID='+js_IDvar+ '&inp='+inp);
 		$.ajax({
 			data: {
-				'discipline': inp
+				//'discipline': inp
 			},
-			url: 'database/getAllDisciplines.php?compID='+js_IDvar+ '&inp='+inp,
+			
+			url: 'class/competition.php?compID='+js_IDvar+'&inp='+inp,
 			success: function(content) {
 				//console.log(content);
 				content = $.parseJSON(content);
@@ -99,7 +83,7 @@ var js_IDvar = "<?php echo $_GET['compID']; ?>";
 </script>
 
 <form method="POST" id="secForm" name="secForm" action="admin.php">
-<!--The Informationtext -->
+<!--The Informationtext 
 <script type="text/javascript">	
 var js_var = "<?php echo $_GET['compID']; ?>";
 	$(document).ready(function() {
@@ -124,7 +108,7 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 			}
 		}); 
 	});
-</script>
+</script>-->
 
 <div id="rightPartOfApplication">
 	<div id="confirmedDiv">
@@ -144,7 +128,7 @@ include "templates/adminfooter.php";
 		ändra detta nu eller när vi fixat classerna och allt funkar igen som de ska???
 
 		kunna lägga till nya grenar som inte finns i databasen.
-		i createCompetition: en extra ifyllning för datum om tvävlingen går över flera dagar alltså ifyllning för ett startdatum och en ifyllning för ett slutdatum.
+		
 		skapany eller kopiera gammla tävling så den kopierade tävlingen får ett nytt tävlingsID.
 		sortera på rätt sätt både åldersklass och grenar OBS! även de grenar som läggs till i databasen ska kunna sorteras in på rätt plats
 		ska man kunna tabort gren som skapas?????? lås standard grenar (+200 häck) resten "egentilllagda grenar" ska man kunna ta bort tex om man lägger till "40 meter sprint baklänges" vill man inte ha kvar de efter plojtävlingen är avslutad.
