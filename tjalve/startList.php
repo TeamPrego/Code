@@ -62,16 +62,27 @@ function Update() {
 	$.ajax({
 		url: 'database/startList/getStartList.php?ageClass='+ageClass+'&discipline='+discipline+'&competitionId='+competitionId+'',
 		success: function(content) {
-			console.log(content);
 			content = $.parseJSON(content);
 			var dat_string = 	'<table class ="firstTableList" cellspacing="0" cellpadding="0">';
+			var countParticipant = 0;
 			$.each(content, function(index, value) {
-				dat_string += '<tr class="spaceOver"><td style="background-color:white"></td></tr>';
-				dat_string += 	'<tr><th>'+ value.className + '</th><th> ' + value.discipline +'</th><th></th><th></th></tr><tr><th></th><th>Förnamn</th><th>Efternamn</th><th>Klubb</th></tr>';
+				var countParticipantDiscipline = 0;
 				$.each(value.participants, function(ind, val) {
-					dat_string += '<tr><td></td><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>' + val.club + '</td></tr>';
+					countParticipantDiscipline++;
+					if(val.prio == 0)	countParticipantDiscipline--; 
 				});
+				if(countParticipantDiscipline != 0) {
+					dat_string += '<tr class="spaceOver"><td style="background-color:white"></td></tr>';
+					dat_string += 	'<tr><th>'+ value.className + '</th><th> ' + value.discipline +'</th><th></th><th></th></tr><tr><th></th><th>Förnamn</th><th>Efternamn</th><th>Klubb</th></tr>';
+					$.each(value.participants, function(ind, val) {
+						if(val.prio === 1 || val.prio === 2) {
+							dat_string += '<tr><td></td><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>' + val.club + '</td></tr>';
+							countParticipant++;
+						}
+					});
+				}
 			});
+			if (countParticipant == 0) dat_string += '<tr><td class="importantTextRed"> Inga delagare anmälda till tävlingen</td></tr>'
 			dat_string += '</table>'
 			document.getElementById('startList').innerHTML = dat_string;
 		}

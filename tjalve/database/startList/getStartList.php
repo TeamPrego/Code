@@ -47,7 +47,8 @@
 						if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
 							$participants[] = [	'firstName'=> $rowParticipant->firstName,
 																	'lastName' => $rowParticipant->lastName,
-																	'club' => $rowContact->clubId];
+																	'club' => $rowContact->clubId,
+																	'prio' => $rowDiscipline->prio];
 					}
 				}
 			}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 09 apr 2014 kl 08:15
+-- Skapad: 10 apr 2014 kl 10:33
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
 
@@ -211,8 +211,8 @@ CREATE TABLE IF NOT EXISTS `competition` (
 --
 
 INSERT INTO `competition` (`competitionId`, `competitionName`, `date`, `lastDate`, `organizer`, `logo`) VALUES
-(1, 'HannesTävling', '2014-04-16', '2014-04-04', 'TjalveAB', ''),
-(2, 'EmmasTävling', '2014-04-02', '2014-03-28', 'Rolf', '');
+(1, 'HannesTävling', '2014-05-23', '2014-05-15', 'TjalveAB', ''),
+(2, 'EmmasTävling', '2014-05-17', '2014-03-21', 'Rolf', '');
 
 -- --------------------------------------------------------
 
@@ -238,7 +238,12 @@ INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `discipline`
 (1, 'P15', '200 m'),
 (2, 'P15', 'SpringHopp'),
 (2, 'P15', '1000 m'),
-(1, 'F12', 'Höjdhopp');
+(1, 'F12', 'Höjdhopp'),
+(2, 'F12', '100 m'),
+(2, 'F12', '200 m'),
+(2, 'F13', 'Kula'),
+(2, 'F13', 'Spjut'),
+(2, 'P19', '1000 m');
 
 -- --------------------------------------------------------
 
@@ -256,17 +261,14 @@ CREATE TABLE IF NOT EXISTS `contact` (
   PRIMARY KEY (`contactId`),
   KEY `competitionId` (`competitionId`),
   KEY `clubId` (`clubId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumpning av Data i tabell `contact`
 --
 
 INSERT INTO `contact` (`competitionId`, `contactId`, `clubId`, `name`, `phone`, `email`) VALUES
-(1, 2, 1, 'Maria Montazami', '07163871', 'Maria@mail.com'),
-(2, 3, 1, 'Yngve Malmsten', '5472615', 'Malmsten@hopp.se'),
-(1, 4, 2, 'Linnéa', '73737', 'lin@mail.com'),
-(1, 5, 1, 'Hannes', '82726', 'hannesingelhag@hotmail.com');
+(2, 6, 1, 'Maria Montazami', '123456', 'Maria@mail.com');
 
 -- --------------------------------------------------------
 
@@ -280,23 +282,17 @@ CREATE TABLE IF NOT EXISTS `participant` (
   `lastName` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `birthYear` int(4) NOT NULL,
   `bib` int(11) NOT NULL,
-  `prio` tinyint(1) NOT NULL,
   `contactId` int(11) NOT NULL,
   PRIMARY KEY (`participantId`),
   KEY `contactId` (`contactId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=16 ;
 
 --
 -- Dumpning av Data i tabell `participant`
 --
 
-INSERT INTO `participant` (`participantId`, `firstName`, `lastName`, `birthYear`, `bib`, `prio`, `contactId`) VALUES
-(1, 'Hannes', 'Ingelhag', 1990, 0, 1, 2),
-(5, 'Fredrik', 'Johnson', 1990, 0, 0, 3),
-(6, 'Linnéa', 'NÅ', 1990, 0, 1, 4),
-(7, 'Erik', 'Broberg', 1987, 0, 1, 4),
-(8, 'Emma', 'Korv', 1987, 0, 0, 5),
-(11, 'Emma', 'Pemma', 1901, 0, 0, 5);
+INSERT INTO `participant` (`participantId`, `firstName`, `lastName`, `birthYear`, `bib`, `contactId`) VALUES
+(15, 'Hannes', 'Ingelhag', 1990, 0, 6);
 
 -- --------------------------------------------------------
 
@@ -311,29 +307,18 @@ CREATE TABLE IF NOT EXISTS `participantdisciplines` (
   `discipline` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `SB` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `PB` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `prio` int(1) NOT NULL,
   PRIMARY KEY (`pIndex`),
   KEY `participantId` (`participantId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=44 ;
 
 --
 -- Dumpning av Data i tabell `participantdisciplines`
 --
 
-INSERT INTO `participantdisciplines` (`participantId`, `pIndex`, `yearClass`, `discipline`, `SB`, `PB`) VALUES
-(1, 1, 'P15', '100 m', '', ''),
-(1, 2, 'P15', '200 m', '', ''),
-(5, 8, 'P15', '100 m', '', ''),
-(5, 9, 'P15', '200 m', '', ''),
-(6, 10, 'P17', 'Spjut', '25', '30'),
-(6, 11, 'P17', 'Kula', '', ''),
-(7, 12, 'P15', '100 m', '', ''),
-(7, 13, 'P15', '200 m', '', ''),
-(8, 14, 'P17', 'Spjut', '', ''),
-(8, 15, 'P17', 'Kula', '', ''),
-(8, 28, 'F12', 'Höjdhopp', '', ''),
-(11, 29, 'P17', 'Spjut', '', ''),
-(11, 30, 'F12', 'Höjdhopp', '', ''),
-(8, 31, 'P15', '200 m', '', '');
+INSERT INTO `participantdisciplines` (`participantId`, `pIndex`, `yearClass`, `discipline`, `SB`, `PB`, `prio`) VALUES
+(15, 42, 'F13', 'Kula', '', '', 2),
+(15, 43, 'F13', 'Spjut', '', '', 0);
 
 --
 -- Restriktioner för dumpade tabeller

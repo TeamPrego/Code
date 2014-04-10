@@ -27,31 +27,21 @@ include "templates/adminheader.php";
 					console.log(content);
 					content = $.parseJSON(content);
 					console.log(content);
+					var count = 0;
 					var dat_string = '<form method="POST" id="firstForm" name="firstForm" action="database/acceptLateReg.php">'
-					dat_string += '<table class ="firstTableList">';
+					dat_string += '<table class ="firstTableList" cellspacing="0" cellpadding="0">';
 					dat_string += '<tr><th>Nummerlapp</th><th>Namn</th><th>Klubb</th>';
-					$count = 0;
-					$evenOrOdd = 0;
 					$.each(content, function(index, value) {
-						if(value.prio == false)
-						{
-							if($evenOrOdd % 2 === 0)
-								$which = "even";
-							else
-								$which = "odd"
-
-							dat_string 	+= '<tr class="'+$which+'"><td><input type = "checkbox" name = "participant[]" value="'
-													+ value.participantId+'">'
-													+ '</input> </td><td>'+value.lName+', '+value.fName+'</td><td>'+value.club+'</td></tr>';
-							$evenOrOdd++;
+						if(value.prio == 0) {
+							count ++;
+						 	dat_string += '<tr><td><input type = "checkbox" name = "participant[]" value="'+ value.pIndex+'"></input>'
+							+ ' </td><td>'+value.lName+', '+value.fName+'</td><td>'+value.club+'</td></tr>'
+							+ '<tr><td></td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td></tr>';
 						}
-						$count++;
 					});
 					dat_string += '</table>';
-					if($count === 0)
-						dat_string += '<div id="noParticipants"> Finns inga deltagare </div>';
-					else if($evenOrOdd === 0)
-						dat_string += '<div id="noParticipants"> Finns inga sena deltagare </div>';
+					if(!count)
+						dat_string += '<div class="importantTextRed" style="margin-left: 5%">Inga sena anmälningar ännu</div>';
 					else
 						dat_string += '<input type="submit" id="changeBib" value="Uppdatera"/>';				
 
