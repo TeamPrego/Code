@@ -93,6 +93,7 @@
       include 'database/config.php';
       $sql = "SELECT * FROM competition WHERE competitionId = '$compId'";
       $dataCompetition = mysqli_query($con, $sql);
+      
       while($row=$dataCompetition->fetch_object()) {
                 $id = $row->competitionId;
 								$name =  $row->competitionName;
@@ -101,6 +102,24 @@
 								$lastDate = $row->lastDate;
       }
       mysqli_close($con);	
+      
+    }
+    /*
+      Function below should return an array with competition objects, 
+      the array can then be used for exemple for outputting names of
+      the competitions.
+    */
+    public function getAllCompetitions(){
+      include 'database/config.php';
+      $sql = "SELECT * FROM competition WHERE 1";
+      $dataCompetition = mysqli_query($con, $sql);
+      $allCompetitions = [];
+      while($row=$dataCompetition->fetch_object()) {
+        $allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
+        //echo $allCompetitions[0]->name;
+      }
+      mysqli_close($con);
+      return $allCompetitions; 
     }
     
   }
