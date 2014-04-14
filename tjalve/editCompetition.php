@@ -18,12 +18,23 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   //$comp->getCompetitionByName("Flonk Close");
   
   $allCompetitions = $comp->getAllCompetitions();
-  
   //print_r($allCompetitions);
-  echo "<div  class='choice-bar'>";
+  //echo "tävling" . $allCompetitions[0]->name;
+  //print_r($allCompetitions);
+  /* echo "<div  class='choice-bar'>";
   $fatSelect="<select id='dope'><option>Tävlingsnamn</option>";
   foreach ($allCompetitions as $competition) {
     $fatSelect.= "<option>" . $competition['name'] . "</option>";
+  }
+  $fatSelect.="</select>";
+  echo $fatSelect;
+  echo "</div>"; */
+  
+  
+  echo "<div  class='choice-bar'>";
+  $fatSelect="<select id='dope'><option>Tävlingsnamn</option>";
+  foreach ($allCompetitions as $competition) {
+    $fatSelect.= "<option>" . $competition->name . "</option>";
   }
   $fatSelect.="</select>";
   echo $fatSelect;
@@ -36,7 +47,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   
   $fatTable="<table class=firstTableList><th>Tävlingsid</th><th>Tävlingsnamn</th><th>Tävlingsarrangör</th><th>Tävlingsstart</th><th>Sista Anmälningsdatum</th><tr>";
   foreach ($allCompetitions as $competition) {
-    $fatTable.= "<tr><td>" . $competition['id'] . "</td><td>" . $competition['name'] . "</td><td>" . $competition['arranger'] . "</td><td>" . $competition['beginDate'] . "</td><td>" . $competition['lastDate'] . "</td></tr>";
+    $fatTable.= "<tr><td>" . $competition->id . "</td><td>" . $competition->name . "</td><td>" . $competition->organizer    . "</td><td>" . $competition->date . "</td><td>" . $competition->lastDate . "</td></tr>";
     //$fatTable.= "<tr><td>GET SWOLE</td></tr>";
     //echo $competition['name'];
   }
@@ -65,45 +76,8 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  
-  //echo $comp->name;
-  //echo $comp->id;
-  //createTable($comp->id, $comp->name, $comp->beginDate, $comp->lastDate, $comp->arranger)
-  //echo "<input type='button' onclick='" . createTable($comp->id, $comp->name, $comp->beginDate, $comp->lastDate, $comp->arranger) . "' value='Funka!!!'>";
-    
-  /* function createTable($id, $namn, $begin, $last, $arr){
-    echo "<table class='firstTableList'><tr><td>" . $id . "</td><td>" . $namn . "</td><td>" . $begin . "</td><td>" . $last . "</td><td>" . $arr . "</td></tr></table>";
-  } */
-  //function doShit(){echo "alert('shit')";}
 
-/*
-$odd=0;
-include "database/config.php";
-//$contactId = $_GET['contactId'];
-	$query = "SELECT * FROM competition WHERE 1";
-	$data = mysqli_query($con, $query);
-	
-	if (!$data) {
-	  die('Error: ' . mysqli_error($con));
-	}
 
-	
-  echo"<div class='choice-bar'>";
-  //echo "<form action = '' method='post' class='choice-bar'>";
-  //echo "<select name='chooseCompetition' id='chooseCompetition'>";
-  
-  echo "<select name='createTable' id='createTable' value='createTable'>";
-  echo "<option value='noChoice'>Välj Tävling</option>";
-  while($row = $data->fetch_object()){
-   echo "<option value='" .$row->compName. "'>" .$row->compName. "</option>";
-  }
-  echo"</select>";
-  
-  //echo "<input type='button' name='createTable' id='createTable' value='createTable'>";
-  //echo "</form>";
-  echo "</div>";
-  
-	mysqli_close($con);	*/
 ?>
 <table class ="createcompTable">
 	

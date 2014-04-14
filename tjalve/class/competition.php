@@ -19,10 +19,35 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
   
   class Competition {
   
+  public $id=1;
+  public $name="strut";
+  public $organizer;
+  public $date;
+  public $lastDate;
+  
 	public function __construct(){
-    }
-    
-    public function pushToDB($name, $arranger, $beginDate, $endDate, $lastDate){
+  }
+  
+  public static function setComp($compId, $compName, $compOrganizer, $compDate, $compLastDate){
+    $this -> id = $compId;
+    $this -> name = $compName;
+    $this -> organizer = $compOrganizer;
+    $this -> date = $compDate;
+    $this -> lastDate = $compLastDate;
+  }
+  
+  public function setCompetition($compId, $compName, $compOrganizer, $compDate, $compLastDate){
+    $this -> id = $compId;
+    $this -> name = $compName;
+    $this -> organizer = $compOrganizer;
+    $this -> date = $compDate;
+    $this -> lastDate = $compLastDate;
+  }
+  
+  //Function that sends a new competition to the database
+  //gets input from for the competition. A lot of the code is for
+  //being able to upload image
+  public function pushToDB($name, $arranger, $beginDate, $endDate, $lastDate){
 	  //http://www.w3schools.com/php/php_file_upload.asp
 			//copy image
 			if ($_FILES["file"]["error"] > 0)
@@ -105,7 +130,10 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
       mysqli_close($con);
 	  header("Location: createCompetitionStep2.php?compID=".$row->competitionId);
     }
-	
+	/*
+    Id as argument. Gets competitions from database and
+    
+  */
 	public function getCompetition($compID) { //TABORT!???? eller kommer jag/vi behöva denna??!
 			
 			$query = "SELECT * FROM competition WHERE competitionId = '$compID'";
@@ -276,7 +304,11 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
       $dataCompetition = mysqli_query($con, $sql);
       $allCompetitions = [];
       while($row=$dataCompetition->fetch_object()) {
-        $allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
+        //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
+        
+        $temp = new Competition();
+        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $allCompetitions[] = $temp;
         //echo $allCompetitions[0]->name;
       }
       mysqli_close($con);
