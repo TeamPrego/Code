@@ -18,38 +18,30 @@
 		</tr>
 	</thead>	
 	<tr><td></td></tr>
-<?php
-
-	include "database/config.php";
+<?php	
 	date_default_timezone_set("Europe/Stockholm");
 	$date = date('Y-m-d ', time());
 	echo "The current time is: " . $date;
 
+	include "class/competition.php";
+	$comp = new Competition();
+	$allCompetitions = $comp->getAllCompetitions();
 
-	$query = "SELECT * FROM competition";
-	$data = mysqli_query($con, $query);
+	foreach ($allCompetitions as $competition) {
+		echo "<tr><td>" . $competition['name'] . "</td>".
+		"<td>". $competition['beginDate'] ."</td>".
+		"<td>". $competition['lastDate'] ."</td>";
+		if($competition['lastDate'] > $date)
+			echo "<td><a href='applyOne.php?competitionId=".$competition['id']."&prio=1'>Anmäl dig här</a></td>";
 
-	if (!$data) {
-	  die('Error: ' . mysqli_error($con));
-	}
-
-
-	while($row = $data->fetch_object()){
-		echo "<tr><td>" . $row->competitionName . "</td>".
-		"<td>". $row->date."</td>".
-		"<td>". $row->lastDate ."</td>";
-
-		if($row->lastDate > $date)
-			echo "<td><a href='applyOne.php?competitionId=".$row->competitionId."&prio=1'>Anmäl dig här</a></td>";
-
-		elseif($row->date > $date)
-			echo "<td><a href='applyOne.php?competitionId=".$row->competitionId."&prio=0'>Sen anmälan</a></td>";
+		elseif($competition['beginDate'] > $date)
+			echo "<td><a href='applyOne.php?competitionId=".$competition['id']."&prio=0'>Sen anmälan</a></td>";
 
 		else 
 			echo "<td>Too late</td>";
 
-		echo "<td><a href='startList.php?competitionId=".$row->competitionId."'>Klicka här</a></td>".
-		"<td><a href='resultat.php?competitionId=".$row->competitionId."'>Se resultat här</a></td></tr>";
+		echo "<td><a href='startList.php?competitionId=".$competition['id']."'>Klicka här</a></td>".
+		"<td><a href='resultat.php?competitionId=".$competition['id']."'>Se resultat här</a></td></tr>";
 	}
 ?>
 </table>
