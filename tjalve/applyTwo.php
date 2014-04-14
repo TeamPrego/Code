@@ -155,10 +155,11 @@ $('input[name="addNewParticipant"]').click(function(){
 	yearOfBirth.disabled = false;
 	var participantId = document.getElementById("participantId");
 	participantId.value = "";
+	
 	$("select option").filter(function() {
-    //may want to use $.trim in here
     return $(this).text() == " - Välj klass - "; 
 	}).prop('selected', true);
+
 	$('#chooseClass').trigger("change");
 });
 
