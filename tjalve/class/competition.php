@@ -439,7 +439,10 @@ The class should represent a competition:
 } 
 ?>
 
+
 <?php
+
+/*
 if(isset($_GET['compID']) && isset($_GET['inp'])) {
 
 	 $compID = $_GET['compID'];
@@ -459,6 +462,7 @@ if(isset($_GET['competitionId'])) {
    $result = $temp->getAllAvailableDisciplines($compID);
 	 echo json_encode($result);
 }
+*/
 
 /*
 if(isset($_GET['compName'])) {

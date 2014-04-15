@@ -153,4 +153,69 @@
     }
   }
 
+  // Gets all Participants from one club
+  // Input: The clubid
+  // Output: Array with participants
+  function getAllParticipantsFromClub($clubId) {
+    include "config.php";
+
+    $query = "SELECT pd.*, p.*
+              FROM participantdisciplines pd
+              INNER JOIN participant p ON pd.participantId = p.participantId
+              INNER JOIN contact c ON p.contactId = c.contactId
+              WHERE c.clubId = '$clubId'";
+    
+    $data = mysqli_query($con, $query);
+
+    if (!$data) {
+      die('Error: ' . mysqli_error($con));
+    }
+
+    $array = [];
+    while($row = $data->fetch_object()) {
+      $array[] = ['clubId' => $clubId,
+                  'firstName' => $row->firstName,
+                  'lastName' => $row->lastName,
+                  'birthYear' => $row->birthYear,
+                  'yearClass' => $row->yearClass,
+                  'discipline' => $row->discipline];
+    }
+    return($array);
+  }
+
+  // Gets all Participants from one competition by the competition name
+  // Input: Competition Name
+  // Output: An array with all participants
+  function getAllParticipantFromCompetition($competitionName) {
+    include "config.php";
+    $competitionName = $_GET['competitionName'];
+
+    $query = "SELECT pd.*, p.*, c.*
+              FROM participantdisciplines pd
+              INNER JOIN participant p ON pd.participantId = p.participantId
+              INNER JOIN contact c ON p.contactId = c.contactId
+              INNER JOIN competition comp ON c.competitionId = comp.competitionId
+              WHERE comp.competitionName = '$competitionName'";
+
+    $data = mysqli_query($con, $query);
+
+    if (!$data) {
+      die('Error: ' . mysqli_error($con));
+    }
+
+    $disc = [];
+    while($rowParticipant = $data->fetch_object()) {
+      $disc[] = ['fName' => $rowParticipant->firstName,
+                 'lName' => $rowParticipant->lastName,
+                 'discipline' =>  $rowParticipant->discipline,
+                 'yearClass' =>  $rowParticipant->yearClass,
+                 'bib' => $rowParticipant->bib,
+                 'club' => $rowParticipant ->clubId,
+                 'participantId' => $rowParticipant->participantId,
+                 'prio' => $rowParticipant->prio,
+                 'pIndex' => $rowParticipant->pIndex];
+    }
+    mysqli_close($con); 
+    return $disc;
+  }
 ?>

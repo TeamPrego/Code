@@ -5,10 +5,11 @@ include "templates/adminheader.php";
 	<h2>Välj Tävling</h2>
 	<select name='chooseCompetition' id='chooseCompetition' style='textalign: center'>
 	<?php
-		include "database/config.php";
-		$data = mysqli_query($con, 'SELECT * FROM competition');
-		while($row = $data->fetch_object()) {
-			echo "<option value='" .$row->competitionId. "'>" .$row->competitionName. "</option>";
+		include "class/competition.php";
+		$comp = new Competition();
+		$allCompetitions = $comp->getAllCompetitions();
+		foreach ($allCompetitions as $competition) {
+			echo "<option value='" .$competition['competitionId']. "'>" .$competition['competitionName']. "</option>";
 		}					
 	?>
 	</select>
@@ -22,7 +23,7 @@ include "templates/adminheader.php";
 	$('#chooseCompetition').change(function() {
 			var inp = $(this).find(":selected").text();
 			$.ajax({
-				url: 'database/getAllParticipants.php?competitionName='+inp+'',
+				url: 'Ajax/ajax.php?getAllParticipantFromCompetition=1&competitionName='+inp+'',
 				success: function(content) {
 					console.log(content);
 					content = $.parseJSON(content);
