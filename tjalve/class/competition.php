@@ -195,49 +195,106 @@
       include "config.php";
 		
 		$query = "SELECT * FROM alldisciplines";
-	$data = mysqli_query($con, $query);
+		$data = mysqli_query($con, $query);
 
-	if (!$data) {
-	  die('Error: ' . mysqli_error($con));
-	}
-	
-	$query2 = "SELECT discipline FROM competitiondisciplines WHERE competitionId = '$compID' && yearClass = '$inp'";
-	$data2 = mysqli_query($con, $query2);
-
-	if (!$data2) {
-	  die('Error: ' . mysqli_error($con));
-	}
-	
-	$disc=[];
-	while($row = $data->fetch_object()){
-	$disc[] = ['gren'=>$row->discipline];
-	}
-	
-	$compare=[];
-	while($row = $data2->fetch_object()){
-	$compare[] = ['gren'=>$row->discipline];
-	}
-	
-	$compareTmp=[];
-		foreach($disc as $aV){
-		$discTmp[] = $aV['gren'];
+		if (!$data) {
+		  die('Error: ' . mysqli_error($con));
 		}
-		if(isset($compare)){
-			foreach($compare as $aV){
-				$compareTmp[] = $aV['gren'];
+		
+		$query2 = "SELECT discipline FROM competitiondisciplines WHERE competitionId = '$compID' && yearClass = '$inp'";
+		$data2 = mysqli_query($con, $query2);
+
+		if (!$data2) {
+		  die('Error: ' . mysqli_error($con));
+		}
+		
+		$disc=[];
+		while($row = $data->fetch_object()){
+		$disc[] = ['gren'=>$row->discipline];
+		}
+		
+		$compare=[];
+		while($row = $data2->fetch_object()){
+		$compare[] = ['gren'=>$row->discipline];
+		}
+		
+		$compareTmp=[];
+			foreach($disc as $aV){
+			$discTmp[] = $aV['gren'];
 			}
-		}
-		else{
-			$compareTmp[] = 'empty';
-		}
-		$result=[];
-		$result=array_diff($discTmp, $compareTmp);
-		return $result;
-	
-	
-	mysqli_close($con);
+			if(isset($compare)){
+				foreach($compare as $aV){
+					$compareTmp[] = $aV['gren'];
+				}
+			}
+			else{
+				$compareTmp[] = 'empty';
+			}
+			$result=[];
+			$result=array_diff($discTmp, $compareTmp);
+			return $result;
+		mysqli_close($con);
     }
 	
+	public function getAllAvailableDisciplines($compID) {
+      include "config.php";
+	
+		$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$compID'";
+		$data = mysqli_query($con, $query);
+
+		if (!$data) {
+		  die('Error: ' . mysqli_error($con));
+		}
+		
+		$disc = [];
+		while($row = $data->fetch_object()) {
+			$disc[] = ['gren' => $row->discipline, 'klass' => $row->yearClass];
+		}
+		foreach ($disc as $key => $row) {
+		$gren[$key]  = $row['gren'];
+		$klass[$key] = $row['klass'];
+		}
+		
+		array_multisort($klass, SORT_ASC, $gren, SORT_ASC , $disc);
+		//sort($disc, SORT_REGULAR);
+		//sort($disc['gren']);
+		//return $disc;
+		echo json_encode($disc);
+		mysqli_close($con);
+    }
+	
+	public function addAgeClass($compID, $name, $ageClass) {
+      include "config.php";
+		
+		//kolla vilka grenar till resp ålder som redan finns i db så men inte kan lägga in dubbla...
+		$query2 = "SELECT discipline FROM competitiondisciplines WHERE competitionId = '$compID' && yearClass = '$ageClass'";
+		$data2 = mysqli_query($con, $query2);
+		
+		if (!$data2) {
+		  die('Error: ' . mysqli_error($con));
+		}
+		
+		$array=[];
+		foreach ($name as $grentyp) { 
+		while($row = $data2->fetch_object()){
+			array_push($array, $row->discipline);
+			echo 'name:  ' .$grentyp. '<br>';
+			echo '$row->disc:  ' .$row->discipline. '<br>';	
+		}
+		
+		
+			if(!in_array($grentyp, $array)) {
+				array_push($array, $grentyp);
+				$quary = "INSERT INTO competitiondisciplines (competitionId, yearClass, discipline)
+				VALUES ('$compID', '$_POST[chooseClass]', '$grentyp')";
+				if (!mysqli_query($con,$quary)) {
+				  die('Error: ' . mysqli_error($con));
+				}
+			}
+		}
+		mysqli_close($con);
+		header("Location: createCompetitionStep2.php?compID=".$compID);
+    }
 	
     public function changeName($newName) {
       $name=$newName;
@@ -258,19 +315,22 @@
   }
 ?>
 
-<script type="text/javascript">	
-console.log("hey mom!!");
-</script>
-
 <?php
-
 if(isset($_GET['compID']) && isset($_GET['inp'])) {
 
 	 $compID = $_GET['compID'];
    	 $inp	= $_GET['inp'];
-	 echo $inp;
      $temp = new competition();
      $result = $temp->getAllDisciplines($compID, $inp);
+	 echo json_encode($result);
+}
+
+
+if(isset($_GET['competitionId'])) {
+
+	 $compID = $_GET['competitionId'];
+     $temp = new competition();
+     $result = $temp->getAllAvailableDisciplines($compID);
 	 echo json_encode($result);
 }
 ?>
