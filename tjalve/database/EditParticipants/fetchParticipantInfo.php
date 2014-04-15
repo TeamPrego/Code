@@ -1,6 +1,8 @@
 <?php
 ob_start();
 	include "../config.php";
+
+	//***** Get everything about participant *****
 	$pId = $_GET['participantId'];
 	$query = "SELECT * FROM participant WHERE participantId = '$pId'";
 	$cData = mysqli_query($con, $query);
@@ -10,22 +12,27 @@ ob_start();
 	}
 
 	$participant = $cData->fetch_object();
-
 	$cId = $participant->contactId;
 	$firstName = $participant->firstName;
 	$lastName = $participant->lastName;
 	$birthYear = $participant->birthYear;
 	//echo($cId);
 
-	$clubquery = "SELECT clubId FROM contact WHERE contactId = '$cId'";
-	$clubData = mysqli_query($con, $clubquery);
+	//***** This club id & competition id from contact person *****
+	$contactQuery = "SELECT clubId, competitionId FROM contact WHERE contactId = '$cId'";
+	$contactData = mysqli_query($con, $contactQuery);
 
-	if (!$clubData) {
+	if (!$contactData) {
 	  die('Error: ' . mysqli_error($con));
 	}
-
-	$clubId = $clubData->fetch_object()->clubId;
-	//echo($club);
+	
+	$datadata = $contactData->fetch_row();
+	$clubId = $datadata[0];
+	$competitionId = $datadata[1];
+	
+	//echo "competition Id: " . $competitionId . "club id: " . $clubId;
+	
+	//***** Get this clubname *****
 	$clubQuery2 = "SELECT club FROM clubs WHERE clubId = '$clubId'";
 	$theClubData = mysqli_query($con, $clubQuery2);
 
@@ -35,16 +42,7 @@ ob_start();
 
 	$theClub = $theClubData->fetch_object()->club;
 
-	//Select all clubs
-	$allClubs = "SELECT club FROM clubs";
-	$allClubsData = mysqli_query($con, $allClubs);
-
-	$clubsArray = [];
-	while($clubRow = $allClubsData->fetch_object()) {
-		$clubsArray[] = ['clubName' => $clubRow->Name];
-	}
-
-	$part = [];
+	//***** Get which disciplines this participant has applied to *****
 	$disciplinesquery = "SELECT * FROM participantdisciplines WHERE participantId = '$pId'";
 	$data = mysqli_query($con, $disciplinesquery);
 
@@ -52,18 +50,35 @@ ob_start();
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$discDisciplines = [];
+	$partDisciplines = [];
 	while($discRow = $data->fetch_object()) {
-		$discDisciplines[] = ['pIndex' => $discRow->pIndex, 'discipline' => $discRow->discipline, 'ageClass' => $discRow->yearClass];
+		$partDisciplines[] = ['pIndex' => $discRow->pIndex, 'discipline' => $discRow->discipline, 'ageClass' => $discRow->yearClass];
 	}
+
+	//***** Disciplines for this competition *****
+	$competitionQuery = "SELECT * FROM competitiondisciplines WHERE competitionId = '$competitionId'";
+	$competitionData = mysqli_query($con, $competitionQuery);
+
+	if (!$competitionData) {
+	  die('Error: ' . mysqli_error($con));
+	}
+
+	$competition = [];
+	while($compRow = $competitionData->fetch_object()) {
+		$competition[] = ['ageClass' => $compRow->yearClass, 'discipline' => $compRow->discipline];
+	}
+
+	//***** Collect everything in array *****
+	$part = [];
 	$part[] = [	'firstName' => $firstName,
 				'lastName' => $lastName,
 				'birthYear' => $birthYear,
 				'club' => $theClub,
-				'disciplines' => $discDisciplines, 
-				'clubs' => $clubsArray,
+				'disciplines' => $partDisciplines, 
+				//'clubs' => $clubsArray,
 				'clubId' => $clubId,
-				'contactId' => $cId];
+				'contactId' => $cId,
+				'allDisciplines' => $competition];
 
 	echo json_encode($part);
 ?>

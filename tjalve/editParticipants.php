@@ -4,16 +4,16 @@ session_start();
 	include "templates/adminheader.php";
 ?>	
 
-<!--Headning -->
+<!-- Heading -->
 <h1>Redigera anmälan</h1>
-<!--Line -->
+<!-- Line -->
 <hr>
 
 <h5 id="lefth5">Välj deltagare att redigera</h5>
 
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
-	<!--Drop down list med alla tävlingar som finns i klubben-->
+	<!--Drop down list with all of the competition of the club-->
 	<select id="getCompetitions">
 		<?php
 			include "database/config.php";
@@ -35,32 +35,25 @@ session_start();
 	<br>
 	
 	<select id="adminParticipants" size="20">
-	<!--Här slängs alla valbara deltagare in för rätt tävling-->
+	<!-- All participants of chosen competition will appear here-->
 	</select>
 </div>
 
 <div id="rightPartOfApplication">
 	<h2>Redigera tävlande:</h2>
 	<div id="confirmedDiv">
-		<!--Här kommer deltagaruppgifter in från ajaxtjossan-->
-		<div id="disciplines">
-			<!-- Här kommer tävlingsgrenar in från ajax -->
-			<td><label for="select">Klass:</label></td>
-			<td>
-				<option> - Välj klass - </option>
-				<?php
-					include "database/EditParticipants/disciplines.php";
-				?>
-			</td>
-		</div>
+		<!-- Info about participant will appear here -->
+			
+	</div>
+	<div id="disciplines">
+		<!-- Classes and disciplines will appear here -->
 	</div>
 </div>
 
-<!-- ***** HÄMTAR ALLA DELTAGARE TILL VALD TÄVLING ***** -->
+
 <script type="text/javascript">
-	//När man ändrat val av tävling ska även deltagarlistan uppdateras:
 	$('#getCompetitions').change(function() {
-		//hämtar personer från rätt tävling
+		//Get participants from the correct competition
 		var inp = $(this).find("option:selected").attr('id');
 		console.log(inp);
 		$.ajax({
@@ -81,8 +74,6 @@ session_start();
 		});
 	});
 
-
-// ***** REDIGERA DELTAGAREN *****
 	var disabl = "disabled";
 	
 	$('#adminParticipants').change(function() {
@@ -107,25 +98,29 @@ session_start();
 					
 					var theClubId = value.clubId;
 
-					dat_string += '<tr><td><select name="clubsList" id = "clubsList" class="hideButton">';
-					dat_string += '<input type="hidden" name="newClubId" value="'+theClubId+'">';					
+					dat_string += '<tr><td><select name="clubsList" id = "clubsList" class="hideButton">';					
+					
 					$.ajax({
 						url: 'database/EditParticipants/getAllClubs.php',
 						success: function(club_content){
 							club_content = $.parseJSON(club_content);
 
 							$.each(club_content, function(theIndex, theValue) {
-								if (theValue.clubId == theClubId)
-									$("#clubsList").append('<option id="'+theValue.clubId+'" selected="selected">'+theValue.clubName+'</option>');
-								else
-									$("#clubsList").append('<option id="'+theValue.clubId+'">'+theValue.clubName+'</option>');
+								if (theValue.clubId == theClubId) {
+									//console.log(theValue.clubId);
+									$("#clubsList").append('<option value="'+theValue.clubId+'" selected="selected">'+theValue.clubName+'</option>');
+								}
+								else {
+									//console.log(theValue.clubId);
+									$("#clubsList").append('<option value="'+theValue.clubId+'">'+theValue.clubName+'</option>');
+								}
 							});
 							//Måste slänga med club id på den nya klubben till updateParticipant också... 
 						}
 					});
 
 					dat_string += '</select></td> <td></td> <td></td></tr>';
-					//***** Adding all applied classes & disciplines of this participant *****
+
 					$.each(value.disciplines, function(ind, val) {
 						//console.log(val.pIndex);
 						dat_string += '<tr><td>' + val.ageClass + '</td><td>' + val.discipline 
@@ -135,23 +130,18 @@ session_start();
 					+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td></tr>'
 					+ '<tr><td>Lägg till grenar</td></tr>'
 					+ '<input id="contactId" name="contactId" type=hidden value="' + value.contactId + '">';
-					
-					dat_string += '<tr><div id="competitionDisciplines" name="competitionDisciplines">'
-					+ '<select id="chooseClass"> ';
-					$.each(value.allClasses, function(indx, valz) {
-						$("#competitionDisciplines").append('<option id="'valz.yearClass'">'+valz.yearClass+'</option>');
-					});
-
-					</select></tr></table></form></div></div>'
+					dat_string +='<tr><div id="disciplines"> </tr></table></form></div></div>'
 					
 				});
 					
 				document.getElementById('confirmedDiv').innerHTML = dat_string;	
 			}
 		});
+		//OM REDIGERA ÄR KLICKAD, GÖR ALLA FÄLT ENABLED, CLUB SKA BLI EN DROPDOWN,
+		//OM LÄGG TILL KLASS ÄR KLICKAD, LÄGG IN DET SOM FINNS I APPLYTWO REDAN.
+
 	});
 
-// ***** LÄGG TILL GRENAR *****
 	$('#chooseClass').change(function() {
 		var inp = $(this).find(":selected").text();
 		var contactId = document.getElementById('contactId');	
@@ -179,7 +169,6 @@ session_start();
 		});
 	});
 
-// ***** FUNKTIONER *****
 	function enableFunc(idno) {
 		var inputs = document.getElementsByClassName('update'+idno);
  		for(i=0; i<inputs.length; i++){
@@ -215,7 +204,6 @@ session_start();
 
 	}
 
-// ***** TRIGGERS *****
 	$('#adminParticipants').trigger("change");
 	$('#getCompetitions').trigger("change");
 </script>
@@ -225,7 +213,7 @@ session_start();
 <!--The Progress Bar -->
 <div class=progressBar>
 	<div class=progress>50% klart</div>
-</div>
+</div
 
 	
 <?php
