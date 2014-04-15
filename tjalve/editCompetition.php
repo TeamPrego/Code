@@ -108,7 +108,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
       //Skapar tabellen för tävling
 			
       url: 'class/competition.php?compName='+competition+'',
-      //url: 'class/competition.php',
+      //url: 'class/competition.php?compName=Flonk Close',
 
       //data: 'TFC',
 
@@ -116,10 +116,10 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
       
       success: function(content){
         
-        //console.log("Yao!");
+        console.log("Yao!");
         //console.log(data);
       
-        console.log("Tja Bre");
+        //console.log("Tja Bre");
             
         //content = $.parseJSON(content); 
         console.log(content); 
@@ -128,20 +128,32 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
         
         var dat_string = '<table id="competitionTable" class="firstTableList">';
 				dat_string += '<tr> <th>ID</th> <th>Name</th><th>Date</th> <th>LastDate</th> <th>Arr</th> </tr>';
-        dat_string+='<tr><td>'+content.competitionId+'</td><td>'+content.competitionName+'</td><td>'+content.date+'</td><td>'+content.lastDate+'</td><td>'+content.organizer+'</td></tr>' 
-        
+         dat_string+='<tr><td>'+content[0].id+'</td><td>'+content[0].name+'</td><td>'+content[0].date+'</td><td>'+content[0].lastDate+'</td><td>'+content[0].organizer+'</td></tr>'
         dat_string += '</table>';
-        console.log(dat_string);
+        
         document.getElementById('table').innerHTML = dat_string;
         
+        console.log(content);
+        
+        var dat_string2 = '<table id="competitionTable" class="firstTableList">';
+        dat_string2 += '<tr> <th>ID</th> <th>Åldersklass</th><th>Gren</th> </tr>';
+        $.each(content[1], function(index, value) {
+          dat_string2+='<tr><td>'+value.competitionId+'</td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td></tr>'
+          //console.log(index);
+        });
+        dat_string2 += '</table>';
+        
+        document.getElementById('table2').innerHTML = dat_string2;
         
        
 			}
-      //document.getElementById('table').innerHTML = "Get Swole";
+      //document.getElementById('table2').innerHTML = "Get Swole";
 		});
+    
+   
     //document.getElementById('table').innerHTML = "Get Swole";
     //alert(competition);
-    alert("Kalla då");
+    alert("Käften");
     //showAgeClasses();
   });
   

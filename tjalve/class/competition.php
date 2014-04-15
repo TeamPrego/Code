@@ -2,21 +2,18 @@
 
 <?php
 /*2014-04-11
-Tanken är att klassen ska representera en tävling med parametrar:
+The class should represent a competition:
 -id
--namn
--startdatum
--slutdatum
--sista anmälnmingsdatum
--arrangör
-(-starter) -> Detta är inte klart men denna skulle kunna implementars som en egen klass som 
-definieras som en array av objekt i competition. 
-
-Funktioner för att hämta och sätta in info finnes. 
-SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA DE HADE VART SKULLE VARA SKRIVET PÅ ENGELSKA*/
+-name
+-staring date
+-ending date
+-last apply date
+-organizer
+(-events) -> Not done for some reason include "event.php" will not work.
+*/
   
   include "config.php";
-  
+  //include "event.php";
   class Competition {
   
   public $id;
@@ -381,14 +378,14 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
       $sql = "SELECT * FROM competition WHERE competitionName = '$compName'";
       //$sql = "SELECT * FROM competition WHERE competitionName = 'TFC'";
       $dataCompetition = mysqli_query($con, $sql);
-      $data = [];
+      $data;
       while($row=$dataCompetition->fetch_object()) {
-                $data = ['competitionId' => $row->competitionId,
-								'competitionName' => $row->competitionName,
-                'date' => $row->date,
-                'lastDate' => $row->lastDate,
-                'organizer' => $row->organizer,
-                ];
+        //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
+        
+        $temp = new Competition();
+        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $data = $temp;
+        //echo $allCompetitions[0]->name;
       }
       return $data;
       mysqli_close($con);	
@@ -410,7 +407,32 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
       mysqli_close($con);
       return $allDisciplines;
     }
+    
+    ////////////////////////
+  public function getEventById($id){
+      include "config.php";
+      $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
+      //$sql = "SELECT * FROM competitiondisciplines WHERE competitionId = 1";
+      $dataEvent = mysqli_query($con, $sql);
+      $data = [];
+      while($row=$dataEvent->fetch_object()) {
+                
+                $data[] = ['competitionId' => $row->competitionId,
+								'yearClass' => $row->yearClass,
+                'discipline' => $row->discipline,
+                ];
+      }
+      mysqli_close($con);	
+      return $data;
+      
   }
+  ///////////////////////
+    
+}
+  
+  
+  
+  
 ?>
 
 <?php
@@ -425,6 +447,7 @@ if(isset($_GET['compID']) && isset($_GET['inp'])) {
 }
 
 
+
 if(isset($_GET['competitionId'])) {
 
 	 $compID = $_GET['competitionId'];
@@ -433,19 +456,24 @@ if(isset($_GET['competitionId'])) {
 	 echo json_encode($result);
 	 }
 
+
 if(isset($_GET['compName'])) {
- 
-	 $compName = $_GET['compName'];
-     $temp = new competition();
-     $result = $temp->getCompetitionByName($compName);
-     /*$result = ['competitionId' => "1",
-								'competitionName' => "Flonks",
-                'date' => "2014",
-                'lastDate' => "2014",
-                'organizer' => "Jag",
-                ];*/
-    echo json_encode($result);
-    //echo $compName;
-    //echo "DOPE!";
+    //include "event.php";
+    $compName = $_GET['compName'];
+    $temp = new competition();
+    
+    $result1 = $temp->getCompetitionByName($compName);
+    
+    //$temp2 = new Event();
+    $result2 = $temp->getEventById($result1->id);
+    $resultTot = array($result1, $result2);
+    //$resultTot = array($result1);
+    
+    //echo json_encode($resultTot);
+    echo json_encode($resultTot);
+    
+    
 }
+
+
 ?>
