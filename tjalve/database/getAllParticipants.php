@@ -2,33 +2,31 @@
 	include "config.php";
 	$competitionName = $_GET['competitionName'];
 
-	$dataCompetition = mysqli_query($con, "SELECT * FROM competition WHERE competitionName = '$competitionName'");
-	$competitionId = $dataCompetition->fetch_object()->competitionId;
+	$query = "SELECT pd.*, p.*, c.*
+						FROM participantdisciplines pd
+						INNER JOIN participant p ON pd.participantId = p.participantId
+						INNER JOIN contact c ON p.contactId = c.contactId
+						INNER JOIN competition comp ON c.competitionId = comp.competitionId
+						WHERE comp.competitionName = '$competitionName'";
 
-	$queryContact = "SELECT * FROM contact WHERE competitionId = '$competitionId'";
-	$dataContact = mysqli_query($con, $queryContact);
-		if (!$dataContact) {
-		  die('Error: ' . mysqli_error($con));
-		}
-	$disc = [];
-	while($rowContact = $dataContact->fetch_object()) {
-		$dataContactId = $rowContact->contactId;
-		$queryParticipants = "SELECT * FROM participant WHERE contactId = '$dataContactId'";
-		$dataParticipant = mysqli_query($con, $queryParticipants);
+	$data = mysqli_query($con, $query);
 
-		if (!$dataParticipant) {
-		  die('Error: ' . mysqli_error($con));
-		}
-
-		while($rowParticipant = $dataParticipant->fetch_object()) {
-			$disc[] = ['fName' => $rowParticipant->firstName,
-								 'lName' => $rowParticipant->lastName,
-								 'bib' => $rowParticipant->bib,
-								 'club' => $rowContact ->clubId,
-								 'participantId' => $rowParticipant->participantId,
-								 'prio' => $rowParticipant->prio];
-		}
+	if (!$data) {
+	  die('Error: ' . mysqli_error($con));
 	}
-	mysqli_close($con);	
+
+	$disc = [];
+	while($rowParticipant = $data->fetch_object()) {
+		$disc[] = ['fName' => $rowParticipant->firstName,
+							 'lName' => $rowParticipant->lastName,
+							 'discipline' =>  $rowParticipant->discipline,
+							 'yearClass' =>  $rowParticipant->yearClass,
+							 'bib' => $rowParticipant->bib,
+							 'club' => $rowParticipant ->clubId,
+							 'participantId' => $rowParticipant->participantId,
+							 'prio' => $rowParticipant->prio,
+							 'pIndex' => $rowParticipant->pIndex];
+	}
 	echo json_encode($disc);
+	mysqli_close($con);	
 ?>

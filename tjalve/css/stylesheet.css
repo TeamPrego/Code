@@ -297,9 +297,8 @@ tr.spaceOver > td {
   vertical-align: middle;
 }
 
-#noParticipants {
+.importantTextRed {
 	color: red;
-	text-align: center;
 	font-size: bold;
 }
 

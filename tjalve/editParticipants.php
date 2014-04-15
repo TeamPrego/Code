@@ -92,6 +92,7 @@ session_start();
 
 
 	var disabl = "disabled";
+	
 	$('#adminParticipants').change(function() {
 		var inp = $(this).find("option:selected").attr('id');
 		console.log(inp);
@@ -100,7 +101,6 @@ session_start();
 			//Content är vad jag har echo:at från url:en
 			success: function(content) {
 				content = $.parseJSON(content);
-				//console.log(content);
 				
 				var dat_string = "";
 				$.each(content, function(index, value) {
@@ -111,16 +111,37 @@ session_start();
 					+ '<tr><td><input class=update'+inp+' name=fName type=text ' + disabl + ' value="' + value.firstName + '"></td>' 
 					+ '<td><input class=update'+inp+' name=lName type=text ' + disabl + ' value="' + value.lastName + '"></td></tr>'
 					+ '<tr><td><input class=update'+inp+' name=bYear type=text ' + disabl + ' value="' + value.birthYear + '"></td></tr>'
-					+ '<tr><td>' + value.club + '</td> <td></td> <td></td></tr>';
+					+ '<tr><td> <div name="oneClub" class="showButton">' + value.club + '</div></td> <td></td> <td></td></tr>';
+					
+					var theClubId = value.clubId;
+
+					dat_string += '<tr><td><select name="clubsList" id = "clubsList" class="hideButton">';					
+					$.ajax({
+						url: 'database/EditParticipants/getAllClubs.php',
+						success: function(club_content){
+							club_content = $.parseJSON(club_content);
+
+							$.each(club_content, function(theIndex, theValue) {
+								if (theValue.clubId == theClubId)
+									$("#clubsList").append('<option id="'+theValue.clubId+'" selected="selected">'+theValue.clubName+'</option>');
+								else
+									$("#clubsList").append('<option id="'+theValue.clubId+'">'+theValue.clubName+'</option>');
+							});
+							//Måste slänga med club id på den nya klubben till updateParticipant också... 
+						}
+					});
+
+					dat_string += '</select></td> <td></td> <td></td></tr>';
+
 					$.each(value.disciplines, function(ind, val) {
 						//console.log(val.pIndex);
 						dat_string += '<tr><td>' + val.ageClass + '</td><td>' + val.discipline 
 						+ '</td><td> <a href="database/EditParticipants/deleteParticipantClass.php?pIndex='+val.pIndex+'" > <button id="delButton">X</button> </a> </td></tr>';
 					});
-					dat_string += '<tr><td><input type=button name="editButton" id="showButton" value="Redigera" onclick="enableFunc('+inp+')"> '
+					dat_string += '<tr><td><input type=button name="editButton" class="showButton" value="Redigera" onclick="enableFunc('+inp+')"> '
 					+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td></tr>'
 					+ '<tr><td>Lägg till grenar</td></tr>'
-					+ '<input id=contactId name=contactId type=hidden value="' + value.contactId + '">';
+					+ '<input id="contactId" name="contactId" type=hidden value="' + value.contactId + '">';
 					dat_string +='<tr><div id="disciplines"> </tr></table></form></div></div>'
 					
 				});
@@ -165,10 +186,14 @@ session_start();
  			inputs[i].disabled = false;
  		}
  		document.getElementsByName("saveButton")[0].className="showButton";
+ 		
 
  		var editB = document.getElementsByName("editButton")[0];
  		editB.className="hideButton";
  		editB.setAttribute( "onClick", "javascript: saveFunc("+idno+");" );
+
+ 		document.getElementsByName("oneClub")[0].className="hideButton";
+ 		document.getElementsByName("clubsList")[0].className="showButton";
 	}
 
 	function saveFunc(idno) {
@@ -177,7 +202,9 @@ session_start();
  			inputs[i].disabled = true;
  		}
  		document.getElementsByName("saveButton")[0].className="hideButton";
-
+ 		document.getElementsByName("oneClub")[0].className="showButton";
+ 		document.getElementsByName("clubsList")[0].className="hideButton";
+ 		
  		var editB = document.getElementsByName("editButton")[0];
 		editB.className="showButton";
  		editB.setAttribute( "onClick", "javascript: enableFunc("+idno+");" );
@@ -197,7 +224,7 @@ session_start();
 <!--The Progress Bar -->
 <div class=progressBar>
 	<div class=progress>50% klart</div>
-</div
+</div>
 
 	
 <?php

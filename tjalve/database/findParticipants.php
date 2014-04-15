@@ -27,7 +27,6 @@
 								'lastName' => $row->lastName,
 								'disciplines' => $discDisciplines,
 								'participantId' => $row->participantId,
-								'prio' => $row->prio,
 								'birthYear' => $row->birthYear];
 	}
 	echo json_encode($disc);

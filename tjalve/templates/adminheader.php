@@ -9,7 +9,7 @@
 			 Tjalve - Administratör
 		</title>
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="css/admin.css" />
 		
 	</head>
 	<body>
