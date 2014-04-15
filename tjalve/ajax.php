@@ -1,4 +1,9 @@
+<!-- 
+	This file contains all ajaxcalls
+-->
+
 <?php 
+
 	include "class/competition.php";
 	if(isset($_GET['compID'])){
 		$temp =  new Competition();

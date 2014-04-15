@@ -26,7 +26,7 @@ include "templates/adminheader.php";
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		$.ajax({
-			url: 'database/getAllCompetitions.php',
+			url: 'Ajax/ajax.php?getAllCompetitions=1',
 			success: function(content) {
 				content = $.parseJSON(content);
 				var string = "";

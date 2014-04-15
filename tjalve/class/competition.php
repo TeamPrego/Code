@@ -285,7 +285,7 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
     }
 	
 	public function getAllAvailableDisciplines($compID) {
-      include "config.php";
+    include "config.php";
 	
 		$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$compID'";
 		$data = mysqli_query($con, $query);
@@ -309,7 +309,7 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
 		//return $disc;
 		echo json_encode($disc);
 		mysqli_close($con);
-    }
+  }
 	
 	public function addAgeClass($compID, $name, $ageClass) {
       include "config.php";
@@ -359,22 +359,23 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
     public function changeArranger($newArranger) {
       $arranger=$newArranger;
     }
+
     public function getAllCompetitions(){
-      include 'database/config.php';
-      $sql = "SELECT * FROM competition WHERE 1";
+      include 'config.php';
+      $sql = "SELECT * FROM competition";
       $dataCompetition = mysqli_query($con, $sql);
-      $allCompetitions = [];
-      while($row=$dataCompetition->fetch_object()) {
-        //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
-        
-        $temp = new Competition();
-        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
-        $allCompetitions[] = $temp;
-        //echo $allCompetitions[0]->name;
+      $array = [];
+      while($row=$dataCompetition->fetch_object()) {      
+	    	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+											'competitionName' 			=> 	$row->competitionName,
+											'competitionOrganizer' 	=> 	$row->organizer,
+											'competitionDate' 			=> 	$row->date,
+											'competitionLastDate' 	=> 	$row->lastDate];  
       }
       mysqli_close($con);
-      return $allCompetitions; 
+      return $array;
     }
+
     public function getCompetitionByName($compName){
       
       include 'config.php';
@@ -393,7 +394,18 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
       return $data;
       mysqli_close($con);	
     }
+
+    public function toArray() {
+    	$array = 	[	'competitionId' 				=>	$this->id,
+    							'competitionName' 			=> 	$this->name,
+    							'competitionOrganizer' 	=> 	$this->organizer,
+    							'competitionDate' 			=> 	$this->date,
+    							'competitionLastDate' 	=> 	$this->lastDate,
+    						];
+    	return $array;
+    }
     
+    /*
     public function getAllAvailableDisciplines(){
       include 'config.php';
       
@@ -409,7 +421,7 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
       
       mysqli_close($con);
       return $allDisciplines;
-    }
+    }*/
   }
 ?>
 
@@ -417,10 +429,10 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
 if(isset($_GET['compID']) && isset($_GET['inp'])) {
 
 	 $compID = $_GET['compID'];
-   	 $inp	= $_GET['inp'];
+ 	 $inp	= $_GET['inp'];
 
-     $temp = new competition();
-     $result = $temp->getAllDisciplines($compID, $inp);
+   $temp = new competition();
+   $result = $temp->getAllDisciplines($compID, $inp);
 	 echo json_encode($result);
 }
 
@@ -428,22 +440,22 @@ if(isset($_GET['compID']) && isset($_GET['inp'])) {
 if(isset($_GET['competitionId'])) {
 
 	 $compID = $_GET['competitionId'];
-     $temp = new competition();
-     $result = $temp->getAllAvailableDisciplines($compID);
+   $temp = new competition();
+   $result = $temp->getAllAvailableDisciplines($compID);
 	 echo json_encode($result);
-	 }
+}
 
 if(isset($_GET['compName'])) {
  
 	 $compName = $_GET['compName'];
-     $temp = new competition();
-     $result = $temp->getCompetitionByName($compName);
-     /*$result = ['competitionId' => "1",
-								'competitionName' => "Flonks",
-                'date' => "2014",
-                'lastDate' => "2014",
-                'organizer' => "Jag",
-                ];*/
+   $temp = new competition();
+   $result = $temp->getCompetitionByName($compName);
+   /*$result = ['competitionId' => "1",
+							'competitionName' => "Flonks",
+              'date' => "2014",
+              'lastDate' => "2014",
+              'organizer' => "Jag",
+              ];*/
     echo json_encode($result);
     //echo $compName;
     //echo "DOPE!";
