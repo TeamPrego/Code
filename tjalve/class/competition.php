@@ -391,7 +391,7 @@ The class should represent a competition:
       mysqli_close($con);	
     }
     
-    public function getAllAvailableDisciplines(){
+    public function getAllAvailableDisciplines2(){
       include 'config.php';
       
       $sql = "SELECT * FROM alldisciplines WHERE 1";
@@ -456,7 +456,7 @@ if(isset($_GET['competitionId'])) {
 	 echo json_encode($result);
 	 }
 
-
+/*
 if(isset($_GET['compName'])) {
     //include "event.php";
     $compName = $_GET['compName'];
@@ -474,6 +474,6 @@ if(isset($_GET['compName'])) {
     
     
 }
-
+*/
 
 ?>

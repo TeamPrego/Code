@@ -1,18 +1,20 @@
-<!--Filen ska representera en start/event med dennes åldersklass och gren-->
+
 <?php 
-  include "config.php";
+  //include "config.php";
+  
   class Event {
-    public $id;
+    
+   /* public $id;
     public $discipline;
-    public $ageClass;
+    public $ageClass;*/
     
     public function __construct(){
     }
     
-    public function setEvent($eventDisc, $eventAgeC){
+    /*public function setEvent($eventDisc, $eventAgeC){
       $this->discipline = $eventDisc;
       $this->ageClass = $eventAgeC;
-    }
+    }*/
     
    /* public function getEventById($id){
       include "config.php";
@@ -32,7 +34,7 @@
       
     }*/
     
-    public function getAllEvents($id){
+    /*public function getAllEvents($id){
       include "config.php";
       $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
       $dataEvent = mysqli_query($con, $sql);
@@ -53,6 +55,6 @@
     
     public function setAgeClass($newAgeClass){
       $this->ageClass = $newAgeClass;
-    }
+    }*/
   }
 ?>

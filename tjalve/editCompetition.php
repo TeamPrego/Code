@@ -55,7 +55,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   echo $fatTable;
  
   $compDisciplines = new Competition();
-  $allDisciplines = $compDisciplines->getAllAvailableDisciplines();
+  $allDisciplines = $compDisciplines->getAllAvailableDisciplines2();
   $discTable="<table class=firstTableList><th>Disciplin</th><tr>";
   foreach ($allDisciplines as $discipline) {
     $discTable.= "<tr><td><input type='checkbox'>" . $discipline['discipline'] . "</td></tr>";
@@ -107,8 +107,8 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
       //async: false,
       //Skapar tabellen för tävling
 			
-      url: 'class/competition.php?compName='+competition+'',
-      //url: 'class/competition.php?compName=Flonk Close',
+      //url: 'class/competition.php?compName='+competition+'',
+      url: 'Ajax/ajax.php?compName='+competition+'',
 
       //data: 'TFC',
 
