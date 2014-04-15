@@ -35,36 +35,28 @@ session_start();
 	<br>
 	
 	<select id="adminParticipants" size="20">
-	<!--Här slängs alla deltagare in för rätt tävling-->
-	</select>
-	<!--<select id="adminParticipants" size="20">-->
-		<?php
-			//Fetching and printing all the participants
-			/*include "database/config.php";			
-
-			$query = "SELECT * FROM participant p INNER JOIN participant  ";
-			$data = mysqli_query($con, $query);
-			if (!$data) {
-			  die('Error: ' . mysqli_error($con));
-			}
-			while ($prow = $data->fetch_object()) {
-				++$idno;
-				echo "<option id='" . $prow->participantId . "'>" . $prow->participantId . " - " . $prow->firstName . " " . $prow->lastName . "</option>";
-			}
-			mysqli_close($con);*/
-		?>
+	<!--Här slängs alla valbara deltagare in för rätt tävling-->
 	</select>
 </div>
 
 <div id="rightPartOfApplication">
 	<h2>Redigera tävlande:</h2>
 	<div id="confirmedDiv">
-		<!--Här kommer allt in från ajaxtjossan-->
-			
+		<!--Här kommer deltagaruppgifter in från ajaxtjossan-->
+		<div id="disciplines">
+			<!-- Här kommer tävlingsgrenar in från ajax -->
+			<td><label for="select">Klass:</label></td>
+			<td>
+				<option> - Välj klass - </option>
+				<?php
+					include "database/EditParticipants/disciplines.php";
+				?>
+			</td>
+		</div>
 	</div>
 </div>
 
-
+<!-- ***** HÄMTAR ALLA DELTAGARE TILL VALD TÄVLING ***** -->
 <script type="text/javascript">
 	//När man ändrat val av tävling ska även deltagarlistan uppdateras:
 	$('#getCompetitions').change(function() {
@@ -90,7 +82,7 @@ session_start();
 	});
 
 
-
+// ***** REDIGERA DELTAGAREN *****
 	var disabl = "disabled";
 	
 	$('#adminParticipants').change(function() {
@@ -115,7 +107,8 @@ session_start();
 					
 					var theClubId = value.clubId;
 
-					dat_string += '<tr><td><select name="clubsList" id = "clubsList" class="hideButton">';					
+					dat_string += '<tr><td><select name="clubsList" id = "clubsList" class="hideButton">';
+					dat_string += '<input type="hidden" name="newClubId" value="'+theClubId+'">';					
 					$.ajax({
 						url: 'database/EditParticipants/getAllClubs.php',
 						success: function(club_content){
@@ -132,7 +125,7 @@ session_start();
 					});
 
 					dat_string += '</select></td> <td></td> <td></td></tr>';
-
+					//***** Adding all applied classes & disciplines of this participant *****
 					$.each(value.disciplines, function(ind, val) {
 						//console.log(val.pIndex);
 						dat_string += '<tr><td>' + val.ageClass + '</td><td>' + val.discipline 
@@ -142,17 +135,23 @@ session_start();
 					+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td></tr>'
 					+ '<tr><td>Lägg till grenar</td></tr>'
 					+ '<input id="contactId" name="contactId" type=hidden value="' + value.contactId + '">';
-					dat_string +='<tr><div id="disciplines"> </tr></table></form></div></div>'
+					
+					dat_string += '<tr><div id="competitionDisciplines" name="competitionDisciplines">'
+					+ '<select id="chooseClass"> ';
+					$.each(value.allClasses, function(indx, valz) {
+						$("#competitionDisciplines").append('<option id="'valz.yearClass'">'+valz.yearClass+'</option>');
+					});
+
+					</select></tr></table></form></div></div>'
 					
 				});
 					
 				document.getElementById('confirmedDiv').innerHTML = dat_string;	
 			}
 		});
-		//OM REDIGERA ÄR KLICKAD, GÖR ALLA FÄLT ENABLED, CLUB SKA BLI EN DROPDOWN,
-		//OM LÄGG TILL KLASS ÄR KLICKAD, LÄGG IN DET SOM FINNS I APPLYTWO REDAN.
-
 	});
+
+// ***** LÄGG TILL GRENAR *****
 	$('#chooseClass').change(function() {
 		var inp = $(this).find(":selected").text();
 		var contactId = document.getElementById('contactId');	
@@ -180,6 +179,7 @@ session_start();
 		});
 	});
 
+// ***** FUNKTIONER *****
 	function enableFunc(idno) {
 		var inputs = document.getElementsByClassName('update'+idno);
  		for(i=0; i<inputs.length; i++){
@@ -215,6 +215,7 @@ session_start();
 
 	}
 
+// ***** TRIGGERS *****
 	$('#adminParticipants').trigger("change");
 	$('#getCompetitions').trigger("change");
 </script>
