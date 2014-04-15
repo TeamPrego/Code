@@ -93,17 +93,7 @@
     }
     
     public function getcontactId(){
-      include "config.php";
-
-      $sql = mysqli_query($con, "SELECT contactId FROM contact WHERE phone = '$this->contactPhone'");  //hämta kontaktID
-
-      if (!$sql) {
-        die('Error: ' . mysqli_error($con));
-      } 
-      while($row = $sql->fetch_object()){
-        return $row->contactId;
-      }
-      mysqli_close($con);
+        return $this->contactId;
     }
     
     public function pushContacttoDB(){
@@ -115,17 +105,51 @@
       if (!$sql) {
         die('Error: ' . mysqli_error($con));
       }
+      $this->contactId = $con->insert_id;
       mysqli_close($con);
     }
   }
   class ParticipantDisciplines {
     private $participantId;
     private $yearClass=array();
-    private $discipline;
-    private $SB;
-    private $PB;
+    private $discipline=array();
+    private $SB=array();
+    private $PB=array();
 
     public function __construct(){
+    }
+
+    public function setParticipantId($Id){
+      $this->participantId = $Id;
+    }
+
+    public function addYearClass($class){
+      $this->yearClass[]=$class;
+    }
+
+    public function addDiscipline($disp){
+      $this->discipline[]=$disp;
+    }
+
+    public function addSB($sb){
+      $this->SB[]=$sb;
+    }
+
+    public function addPB($pb){
+      $this->PB[]=$pb;
+    }
+
+    public function pushParticipantDisciplinestoDB(){
+      include "config.php";
+      for ($x=0; $x<=(sizeof($this->yearClass))-1; $x++){
+        $sql = mysqli_query($con, "INSERT INTO participantdisciplines(participantId, pIndex, yearClass, discipline, SB, PB)
+              VALUES ('$this->participantId', NULL, '$this->yearClass[$x]', '$this->discipline[$x]', '$this->SB[$x]', '$this->PB[$x]')");
+      
+        if (!$sql) {
+          die('Error: ' . mysqli_error($con));
+        }
+      }
+      mysqli_close($con);
     }
   }
 
