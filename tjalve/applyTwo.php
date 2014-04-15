@@ -5,7 +5,13 @@ session_start();
 ?>	
 
 <!--Headning -->
-<h1>Anmälan till "tävlingsnamn"</h1>
+<h1>Anmälan till
+	<?php
+		include "class/competition.php";
+		$comp = new Competition();
+		echo $comp->getCompNameByContactId($_GET['contactId']);
+	?>
+</h1>
 <!--Line -->
 <hr>
 
@@ -155,10 +161,11 @@ $('input[name="addNewParticipant"]').click(function(){
 	yearOfBirth.disabled = false;
 	var participantId = document.getElementById("participantId");
 	participantId.value = "";
+	
 	$("select option").filter(function() {
-    //may want to use $.trim in here
     return $(this).text() == " - Välj klass - "; 
 	}).prop('selected', true);
+
 	$('#chooseClass').trigger("change");
 });
 

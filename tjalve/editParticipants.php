@@ -225,7 +225,7 @@ session_start();
 <!--The Progress Bar -->
 <div class=progressBar>
 	<div class=progress>50% klart</div>
-</div
+</div>
 
 	
 <?php
