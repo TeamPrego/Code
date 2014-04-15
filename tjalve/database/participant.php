@@ -109,6 +109,7 @@
       mysqli_close($con);
     }
   }
+  
   class ParticipantDisciplines {
     private $participantId;
     private $yearClass=array();
