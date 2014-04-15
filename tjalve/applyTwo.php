@@ -5,7 +5,13 @@ session_start();
 ?>	
 
 <!--Headning -->
-<h1>Anmälan till "tävlingsnamn"</h1>
+<h1>Anmälan till
+	<?php
+		include "class/competition.php";
+		$comp = new Competition();
+		echo $comp->getCompNameByContactId($_GET['contactId']);
+	?>
+</h1>
 <!--Line -->
 <hr>
 

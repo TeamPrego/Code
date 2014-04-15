@@ -16,9 +16,15 @@ $getCompInfo = new Competition();
 	echo "<tr><td>Sista anmälningsdag: </td><td>" . $getCompInfo->getCompLastDate($compID) . "</td></tr>";	
 	echo "</table>";
 	echo "<img id ='compLogo' src=". $getCompInfo->getCompFile($compID) ." alt ='Image' />";
- 
-
-//echo "<form method='POST' id='firstForm' name='firstForm' action='database/addAgeClass.php?compID=".$compID."'>";
+	
+	//if(isset($_POST['submit'])){
+	//echo $_GET['hidden'];
+	//echo $test;
+	//echo "ÄT SKIIIIT!!!!";
+		//header("Location: createCompetitionStep2.php?compID=".$_GET['compID']);
+		//$addAgeClass = new Competition();
+		//echo "<form method='POST' id='firstForm' name='firstForm' action='".$addAgeClass->addAgeClass($compID)."'>";
+	//}
 ?>
 <form method="POST" id="firstForm" name="firstForm" action="createCompetitionStep2.php">
 <p id="chooseP">Välj åldesklass och resp. gren här:</p>
@@ -40,7 +46,6 @@ $getCompInfo = new Competition();
         </td>
 	 </tr>	 
 </table>
-<!-- Varför får jag inte tag i dropdown listans grejer...?? ska jag ha kvar ajax????-->
 
 <div id="leftPartOfApplication">
 
@@ -50,68 +55,65 @@ $getCompInfo = new Competition();
 <!--The Informationtext -->
 <script type="text/javascript">	
 var js_IDvar = "<?php echo $_GET['compID']; ?>";
-	//console.log($('#chooseClass'));
 	var inp = "";
 	$('#chooseClass').change(function() {
 		inp = $(this).find(":selected").text();
-		
-		console.log('class/competition.php?compID='+js_IDvar+ '&inp='+inp);
 		$.ajax({
 			data: {
-				//'discipline': inp
+				
 			},
-			
 			url: 'class/competition.php?compID='+js_IDvar+'&inp='+inp,
 			success: function(content) {
-				//console.log(content);
 				content = $.parseJSON(content);
 				var dat_string = '<table id="whichDisciplines">';
 				dat_string += '<tr><td><td> <p id ="discP">Gren</th> </p>';
 				$.each(content, function(index, value) {
-					//console.log(index);
 					console.log(value);
 					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value+'"></td><td>'
 								+ value;
 				});
-				dat_string += '<tr><td colspan="2"><input type="submit" id="addAgeClass" value="Lägg till Åldersklass"/></td></tr></form>';
-				//dat_string += '<input type="hidden" name="hiddenClass" id="hiddenClass" value="'+inp+'">';
+				dat_string += '<tr><td colspan="2"><input type="submit" name = "submit" id="addAgeClass" value="Lägg till Åldersklass"/></td></tr></form>';
 				dat_string += '</table>';
 				document.getElementById('leftPartOfApplication').innerHTML = dat_string;
+				document.cookie = "compID = " +js_IDvar;
 			}
 		});
 	});
 </script>
 
-<form method="POST" id="secForm" name="secForm" action="admin.php">
-<!--The Informationtext 
-<script type="text/javascript">	
-var js_var = "<?php echo $_GET['compID']; ?>";
-	$(document).ready(function() {
-		
-		$.ajax({
-			url:'database/getAllAvailableDisciplines.php?compID='+js_var,
-			success: function(content2){
-				
-				content2 = $.parseJSON(content2);
-				var dat2_string = '<table id="selectedDisciplines">';
-				dat2_string += '<tr><td colspan="3"><p id ="selectedDiscP">Valda grenar till resp. åldersklass </p></td></tr>';
-				$.each(content2, function(index, value) {
-				console.log(value);
-				console.log(index);
-					dat2_string += '<tr><td>' +value.klass+ '</td><td>'
-								+ value.gren+ '</td><td><button id="deleteButton"><a id="aTagDeleteDisp" href="database/deleteDiscipline.php?compID=' + js_var + '&gren=' +value.gren+ '&klass=' +value.klass+ '">Radera</a></button></td> </tr>';
-				});
-				dat2_string += '<tr><td><td><td><input type="submit" id="done" value="Klar"/></td></td></td></tr></form>';
-				dat2_string += '</table>';
-
-				document.getElementById('rightPartOfApplication').innerHTML = dat2_string;
-			}
-		}); 
-	});
-</script>-->
-
 <div id="rightPartOfApplication">
 	<div id="confirmedDiv">
+	<form method="POST" id="secForm" name="secForm" action="createCompetitionStep2.php">
+
+		<!--The Informationtext -->
+		<script type="text/javascript">	
+		var js_IDvar = "<?php echo $_GET['compID']; ?>";
+		console.log("hejhejehj");
+			$(document).ready(function() {
+				$.ajax({
+					data: {
+						
+					},
+						url: 'ajax.php?compID='+js_IDvar,
+						success: function(content) {
+						content = $.parseJSON(content);
+						var dat2_string = '<table id="selectedDisciplines">';
+						dat2_string += '<tr><td colspan="3"><p id ="selectedDiscP">Valda grenar till resp. åldersklass </p></td></tr>';
+						$.each(content, function(index, value) {
+							console.log(value);
+							dat2_string += '<tr><td>' +value.klass+ '</td><td>'
+										+ value.gren+ '</td><td>här var det en gång en knapp..</td> </tr>';
+						});
+						dat2_string += '<tr><td><td><td><input type="submit" id="done" value="Klar"/></td></td></td></tr></form>';
+						dat2_string += '</table>';
+
+						document.getElementById('rightPartOfApplication').innerHTML = dat2_string;
+					}
+			});
+		});
+			console.log("hejhejehj");
+		</script>
+		<!--<button id="deleteButton"><a id="aTagDeleteDisp" href="database/deleteDiscipline.php?compID=' + js_var + '&gren=' +value.gren+ '&klass=' +value.klass+ '">Radera</a></button>-->
 	</form>
 	</div>
 </div>
@@ -122,6 +124,15 @@ var js_var = "<?php echo $_GET['compID']; ?>";
 <?php
 include "templates/adminfooter.php";
 ?>
+
+
+<?php
+	if(isset($_POST['submit'])){
+		$temp = new Competition();
+		$temp->addAgeClass($_COOKIE['compID'], $_POST['gren'], $_POST['chooseClass']);
+	}
+?>
+
 
 
 <!-- 	OBSOBS!!!!! gör om gör rätt!!!!

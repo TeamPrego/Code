@@ -4,7 +4,13 @@
 <!--Granskad och godkänd 2014-03-04-->
 
 <!--Headning -->
-<h1> Anmälan till <?php include "database/startList/getCompetitionName.php" ?> </h1>
+<h1> Anmälan till 
+	<?php 
+		include "class/competition.php";
+		$comp = new Competition();
+		echo $comp->getCompName($_GET['competitionId']); 
+	?> 
+</h1>
 <!--Line -->
 <hr>
 <!--Div for the form -->
@@ -23,11 +29,12 @@
 				<td>
 					<select name="chooseClub" id="chooseClub">
 						<?php
-							include "database/config.php";
-							$data = mysqli_query($con, "SELECT club FROM clubs");
-							while($row = $data->fetch_object()) {
-								echo "<option value='" .$row->club. "'>" .$row->club. "</option>";
-							}					
+							include "class/Club.php";
+							$club = new Club();
+							$allClubs = $club->getAllClubs();
+							foreach ($allClubs as $theclub) {
+								echo "<option value='" .$theclub->club. "'>" .$theclub->club. "</option>";
+							}			
 						?>
 					</select>
 					Saknas din förening?
