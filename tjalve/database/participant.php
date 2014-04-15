@@ -7,16 +7,10 @@
     private $lastName;
     private $birthYear;
     private $prio;
-    private $disp_class = array(); //array med disciplines och klasser för tävlande
-    private $competitionId;
-    private $club;
-    private $contactPerson;
-    private $contactEmail;
-    private $contactPhone;
        
     public function __construct(){
     }
-    
+
     public function setfirstName($name){
       $this->firstName = $name;
     }
@@ -32,9 +26,54 @@
     public function setPrio($nr){
       $this->prio = $nr;
     }
+
+    public function setContactId($Id){
+      $this->contactId = $Id;
+    }
+    
+    public function getParticipantId(){
+      return $this->participantId;
+    }
+
+    public function pushParticipanttoDB(){
+      include "config.php";
+       
+      $sql = mysqli_query($con, "INSERT INTO participant(participantId, firstName, lastName, birthYear, contactId)
+              VALUES (NULL, '$this->firstName', '$this->lastName', '$this->birthYear', '$this->contactId')");
+              
+      if (!$sql) {
+        die('Error: ' . mysqli_error($con));
+      }
+      $this->participantId = $con->insert_id;
+
+      mysqli_close($con);
+    }
+  }
+  class Contact {
+    private $contactId;
+    private $competitionId;
+    private $club;
+    private $clubId;
+    private $contactPerson;
+    private $contactEmail;
+    private $contactPhone;
+       
+    public function __construct(){
+    }
     
     public function setClub($clubarg){
+      include "config.php";
       $this->club = $clubarg;
+
+      $sql = mysqli_query($con, "SELECT clubId FROM clubs WHERE club = '$this->club'");  //hämta klubbID
+
+      if (!$sql) {
+        die('Error: ' . mysqli_error($con));
+      } 
+      while($row = $sql->fetch_object()){
+        $this->clubId = $row->clubId;
+      }
+      mysqli_close($con);
     }
     
     public function setcontactPerson($contact){
@@ -55,51 +94,39 @@
     
     public function getcontactId(){
       include "config.php";
-  
-      
-      $sql = mysqli_query($con, "SELECT `contactId` FROM contact WHERE `phone` = '$this->contactPhone'");  //hämta kontaktID
-      $contactId;
-      
-      while($row = $sql->fetch_object()){     //spara sålänge det finns att hämta
-        $contactId = $row->contactId;
+
+      $sql = mysqli_query($con, "SELECT contactId FROM contact WHERE phone = '$this->contactPhone'");  //hämta kontaktID
+
+      if (!$sql) {
+        die('Error: ' . mysqli_error($con));
+      } 
+      while($row = $sql->fetch_object()){
+        return $row->contactId;
       }
-      
       mysqli_close($con);
-      
-      return $contactId;
     }
     
     public function pushContacttoDB(){
       include "config.php";
-      /*
-      $sql = mysqli_query($con, "INSERT INTO `contact`(`competitionId`, `contactId`, `clubId`, `name`, `phone`, `email`)
-              VALUES ('$this->competitionId', NULL, '1', '$this->contactPerson', '$this->contactEmail', '$this->contactPhone')");
-      */
-      /*if (!mysqli_query($con,$sql)) {
-        die('Error: ' . mysqli_error($con));        ONÖDIGT
-      }*/
-      $sql = mysqli_query($con, "INSERT INTO `tjalve`.`contact` (`competitionId`, `contactId`, `clubId`, `name`, `phone`, `email`)
-                                VALUES ('" . $this->competitionId . "', NULL, '1', 'Bosse', '14523', 'hej@hej.com')");
       
+      $sql = mysqli_query($con, "INSERT INTO contact(competitionId, contactId, clubId, name, email, phone)
+              VALUES ('$this->competitionId', NULL, '$this->clubId', '$this->contactPerson', '$this->contactEmail', '$this->contactPhone')");
+      
+      if (!$sql) {
+        die('Error: ' . mysqli_error($con));
+      }
       mysqli_close($con);
-      
-      echo "hej";
-      echo $this->competitionId;
     }
+  }
+  class ParticipantDisciplines {
+    private $participantId;
+    private $yearClass=array();
+    private $discipline;
+    private $SB;
+    private $PB;
 
-    
-    public function pushParticipanttoDB(){
-      include "config.php";
-       
-      $contactId = $this->getcontactId();
-      
-       
-      $sql = mysqli_query($con, "INSERT INTO `participant`(`participantId`, `firstName`, `lastName`, `birthYear`, `contactId`)
-              VALUES (NULL, '$this->firstName', '$this->lastName', '$this->birthYear', '$this->contactId')");
-      
-      mysqli_close($con);
+    public function __construct(){
     }
-    
-    }
-  
+  }
+
 ?>

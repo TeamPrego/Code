@@ -1,24 +1,18 @@
 <?php
 	ob_start();
-	include "config.php";
-	$sql1 = "SELECT * FROM clubs WHERE club = '$_POST[chooseClub]'";
-	$data = mysqli_query($con,$sql1);
-
-	if (!$data) {
-	  die('Error: ' . mysqli_error($con));
-	}
-	$clubId = $data->fetch_object()->clubId;
-
-	
-	$sql = "INSERT INTO contact (competitionId ,clubId ,name, email, phone)
-	VALUES
-	('$_POST[competitionId]', '$clubId','$_POST[contactPerson]','$_POST[contactEmail]','$_POST[contactPhone]')";
-	
-
-	if (!mysqli_query($con,$sql)) {
-	  die('Error: ' . mysqli_error($con));
-	}
-	$contactId = $con->insert_id;
+	include "participant.php";
+	$temp = new Contact();
+	//$compId = intval($_POST['competitionId']);
+	//echo $compId;
+	//echo gettype($compId);
+	//$temp->setContact($compId, $_POST['chooseClub'],$_POST['contactPerson'],$_POST['contactEmail'],$_POST['contactPhone']);
+	$temp->setcompetitionId(intval($_POST['competitionId']));
+	$temp->setcontactPerson($_POST['contactPerson']);
+	$temp->setcontactEmail($_POST['contactEmail']);
+	$temp->setcontactPhone($_POST['contactPhone']);
+	$temp->setClub($_POST['chooseClub']);
+	$temp->pushContacttoDB();
+	$contactId = $temp->getcontactId();
 
 	mysqli_close($con);
 	header("Location: ../applyTwo.php?contactId=".$contactId."&prio=".$_POST['prio']);

@@ -1,41 +1,28 @@
 <?php
 	include "config.php";
+	include "participant.php";
 
-	$id = $_POST['participantId'];
+	$temp = new Participant();
+
+	$temp->setContactId($_POST['contactId']);
+	$temp->setfirstName($_POST['fName']);
+	$temp->setlastName($_POST['lName']);
+	$temp->setBirthYear($_POST['bYear']);
+	$temp->setPrio($_POST['prio']);
+	$temp->pushParticipanttoDB();
+	$Id = $temp->getParticipantId();
 	
-	if($id === "") {
-		$sql = "INSERT INTO participant (contactId, firstName, lastName, birthYear)
-		VALUES
-		('$_POST[contactId]', '$_POST[fName]','$_POST[lName]','$_POST[bYear]')";
-
-		if (!mysqli_query($con,$sql)) {
-		  die('Error: ' . mysqli_error($con));
-		}
-		$id = $con->insert_id;
-	}
-	else {
-		$checkDiscipline = []; 
-		$sqlDiscipline = mysqli_query($con, "SELECT * FROM participantdisciplines WHERE participantId = '$id'");
-
-		while($row = $sqlDiscipline->fetch_object()) {
-			$checkDiscipline[] = $row->discipline;
-		}
-	}
-
+	
 	$name = $_POST['gren'];
 	foreach ($name as $grentyp) { 
-		if(!in_array($grentyp, $checkDiscipline)) {
-			array_push($checkDiscipline, $grentyp);
-			$SB = "SB" . $grentyp;
-			$PB = "PB" . $grentyp;
-			$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB, prio)
-			VALUES ('$id', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]', '$_POST[prio]')";
+		$SB = "SB" . $grentyp;
+		$PB = "PB" . $grentyp;
+		$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB)
+		VALUES ('$id', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]')";
 
-			if (!mysqli_query($con,$quary)) {
-			  die('Error: ' . mysqli_error($con));
-			}
+		if (!mysqli_query($con,$quary)) {
+		  die('Error: ' . mysqli_error($con));
 		}
 	}
-
 	mysqli_close($con);
 	header("Location: ../applyTwo.php?contactId=".$_POST['contactId']."&prio=".$_POST['prio']);
