@@ -34,16 +34,6 @@
 			mysqli_close($con);
 	  }
 
-	  // Get club from ClubId and return a Club-object
-	  public function getClub($clubId) {
-	  	include "config.php";
-	  	$data = mysqli_query($con, "SELECT * FROM clubs WHERE clubId = '$clubId'");
-	  	$row = $data->fetch_object();
-			$club = new Club();
-			$club->setClub($row->clubId, $row->club, $row->address, $row->zip, $row->phone, $row->email);
-			return $club;
-	  }
-
 	  // Get all clubs, return an array with all Clubs available in the DB
 	  public function getAllClubs() {
 	  	include "config.php";
@@ -85,4 +75,18 @@
 			return $array;
 	  }
 	}
+	// Get club from ClubId and return a Club-object
+	function getClub($clubId) {
+		include "config.php";
+		$data = mysqli_query($con, "SELECT * FROM clubs WHERE clubId = '$clubId'");
+		$row = $data->fetch_object();
+		$club = [	'clubId' 	=> $row->clubId,
+							'club' 		=> $row->club,
+							'address' => $row->address,
+							'zip' 		=> $row->zip,
+							'phone' 	=> $row->phone,
+							'email' 	=> $row->email];
+		return $club;
+	}
+?>
 

@@ -13,10 +13,11 @@
 			<td> 
 				<select name='chooseCompetition' id='chooseCompetition'>
 				<?php
-				include "database/config.php";
-				$data = mysqli_query($con, 'SELECT * FROM competition');
-				while($row = $data->fetch_object()) {
-					echo "<option value='" .$row->competitionId. "'>" .$row->competitionName. "</option>";
+				include "class/competition.php";
+				$comp = new Competition();
+				$allCompetitions = $comp->getAllCompetitions();
+				foreach ($allCompetitions as $competition) {
+					echo "<option value='" .$competition['competitionId']. "'>" .$competition['competitionName']. "</option>";
 				}					
 				?>
 				</select>
@@ -48,10 +49,10 @@
 <script type="text/javascript">
 
 	$('#Update').click(function() {
-		var competition =  $('#chooseCompetition').find(":selected").text();
+		var competitionName =  $('#chooseCompetition').find(":selected").text();
 		var startNumber = $('#bibBegin').val();
 		$.ajax({
-			url: 'database/addRaceBib.php?competition='+competition+'&startNumber='+startNumber+'',
+			url: 'Ajax/ajax.php?competitionName='+competitionName+'&startNumber='+startNumber+'',
 			success: function(content){
 				console.log("success");
 				$('#chooseCompetition').trigger("change");
@@ -63,12 +64,12 @@
 	$('#chooseCompetition').change(function() {
 		var inp = $(this).find(":selected").text();
 		$.ajax({
-			url: 'database/getAllParticipants.php?competitionName='+inp+'',
+			url: 'Ajax/ajax.php?getAllParticipantCompetition=1&competitionName='+inp+'',
 			success: function(content) {
 				console.log(content);
 				content = $.parseJSON(content);
 				console.log(content);
-				var dat_string = '<form method="POST" id="firstForm" name="firstForm" action="database/changeRaceBib.php">'
+				var dat_string = '<form method="POST" id="firstForm" name="firstForm" action="forms/changeRaceBib.php">'
 				dat_string += '<table class ="firstTableList" cellspacing="0" cellpadding="0">';
 				dat_string += '<tr><th>Nummerlapp</th><th>Namn</th><th>Klubb</th>';
 				$count = 0;

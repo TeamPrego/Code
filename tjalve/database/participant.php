@@ -186,8 +186,8 @@
 
   // Gets all Participants from one competition by the competition name
   // Input: Competition Name
-  // Output: An array with all participants
-  function getAllParticipantFromCompetition($competitionName) {
+  // Output: An array with all participants and their desciplines
+  function getAllParticipantAndDesciplinesFromCompetition($competitionName) {
     include "config.php";
     $competitionName = $_GET['competitionName'];
 
@@ -206,7 +206,8 @@
 
     $disc = [];
     while($rowParticipant = $data->fetch_object()) {
-      $disc[] = ['fName' => $rowParticipant->firstName,
+      $disc[] = ['id' => $rowParticipant->participantId,
+                 'fName' => $rowParticipant->firstName,
                  'lName' => $rowParticipant->lastName,
                  'discipline' =>  $rowParticipant->discipline,
                  'yearClass' =>  $rowParticipant->yearClass,
@@ -218,5 +219,56 @@
     }
     mysqli_close($con); 
     return $disc;
+  }
+
+  // Gets all Participants from one competition by the competition name
+  // Input: Competition Name
+  // Output: An array with all participants and their desciplines
+  function getAllParticipantFromCompetition($competitionName) {
+    include "config.php";
+    $competitionName = $_GET['competitionName'];
+
+    $query = "SELECT p.*, c.*
+              FROM participant p
+              INNER JOIN contact c ON p.contactId = c.contactId
+              INNER JOIN competition comp ON c.competitionId = comp.competitionId
+              WHERE comp.competitionName = '$competitionName'";
+
+    $data = mysqli_query($con, $query);
+
+    if (!$data) {
+      die('Error: ' . mysqli_error($con));
+    }
+
+    $disc = [];
+    while($rowParticipant = $data->fetch_object()) {
+      $clubName = getClub($rowParticipant->clubId)['club'];
+
+      $disc[] = ['id'             => $rowParticipant->participantId,
+                 'fName'          => $rowParticipant->firstName,
+                 'lName'          => $rowParticipant->lastName,
+                 'bib'            => $rowParticipant->bib,
+                 'club'           => $clubName,
+                 'participantId'  => $rowParticipant->participantId];
+    }
+    mysqli_close($con); 
+    return $disc;
+  }
+
+  // Adds racebib to all participants in one competition.
+  // Starts with the variable $startNumber and iterates throuth all participants
+  function addRaceBibToAllParticipants($competitionName,$startNumber) {
+    include "config.php";
+    $allParticipants = getAllParticipantFromCompetition($competitionName);
+    foreach ($allParticipants as $participant) {
+      $participantId = $participant['participantId'];
+      $query = "UPDATE participant p
+                INNER JOIN contact c ON p.contactId = c.contactId
+                INNER JOIN competition comp ON c.competitionId = comp.competitionId
+                SET p.bib = '$startNumber'
+                WHERE comp.competitionName = '$competitionName' AND p.participantId = '$participantId'";
+      $update = mysqli_query($con, $query);
+      $startNumber=$startNumber+1;
+    }
   }
 ?>
