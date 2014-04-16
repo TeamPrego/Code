@@ -58,9 +58,9 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   $allDisciplines = $compDisciplines->getAllAvailableDisciplines2();
   $discTable="<table class=firstTableList><th>Disciplin</th><tr>";
   foreach ($allDisciplines as $discipline) {
-    $discTable.= "<tr><td><input type='checkbox'>" . $discipline['discipline'] . "</td></tr>";
+    $discTable.= "<tr><td><input type='checkbox' id='disciplineBox' name=discipline[] value='" . $discipline['discipline'] . "'>" . $discipline['discipline'] . "</td></tr>";
   }
-  $discTable.="</tr></table>";
+  $discTable.="<td><input type='submit' name = 'submitDiscipline' id='addEvent' value='Lägg till Start'/></td></tr></table>";
   //echo $discTable;
   
  
