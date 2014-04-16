@@ -71,6 +71,20 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 
 
 ?>
+
+<table id="innerBody">
+  <td id="leftPartOfApplication">
+    <td id="table">Här ska skit dyka upp</td>
+    <td id="table2">Här ska skit dyka upp</td>
+  </td>
+  <td id="rightPartOfApplication">
+    <td id="select">Här ska skit dyka upp</td>
+    <td id="table3">
+      Här ska skit dyka upp
+    </td>
+  </td>
+</table>
+
 <table class ="createcompTable">
 	
       <td>Åldersklass:</td>
@@ -91,12 +105,13 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 
 
 <script type="text/javascript">
+var ID=1;
   $( "#dope" ).change(function() {
     var competition =  $("#dope").find(":selected").text();
     //var competition = "TFC";
     //alert("Hallå");
     $.ajax({
-      //async: false,
+      async: false,
       //Skapar tabellen för tävling
 			
       //url: 'class/competition.php?compName='+competition+'',
@@ -125,7 +140,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
         
         document.getElementById('table').innerHTML = dat_string;
         
-        console.log(content);
+        //console.log(content);
         
         var dat_string2 = '<table id="competitionTable" class="firstTableList">';
         dat_string2 += '<tr> <th>ID</th> <th>Åldersklass</th><th>Gren</th> </tr>';
@@ -134,7 +149,8 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
           //console.log(index);
         });
         dat_string2 += '</table>';
-        
+        var ID = content[0].id;
+        alert(ID);
         document.getElementById('table2').innerHTML = dat_string2;
  
 			}  
@@ -144,28 +160,35 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   $(function(){ 
     $( "#addEvent" ).click(function() {
       alert("Tja brush brush!!!");
-      
+      async: false;
       //var checkboxes = document.getElementById('discipline');
       //var checkboxes =  $("#discipline").find(":checked").text();
       var checkboxes = $('input[type=checkbox]:checked');
       //alert(checkboxes[1].value);
-      var vals = "";
+      
+      var chosenClass = $("#chooseClass").find(":selected").text();
+      /*var id = '<?php 
+      echo $comp->id; 
+      ?>';*/
+      
       for (var i=0, n=checkboxes.length; i<n;i++) {
         if (checkboxes[i].checked) 
         {
           //vals += ","+checkboxes[i].value;
-          alert(checkboxes[i].value);
+          alert("Id: "+ ID +" Klass: "+chosenClass+"  Gren: "+checkboxes[i].value);
         }
       }
-
+      
+      
       //alert("flonks "+vals);
-      /*
+      
       $.ajax({
-        //async: false,
+        async: false,
         //Skapar tabellen för tävling
-        
-        //url: 'class/competition.php?compName='+competition+'',
-        url: 'Ajax/ajax.php?compName='+competition+'',
+        //alert(ID);
+        //console.log(ID);
+        url: 'Ajax/ajax.php?compID='+ID+'&discipline='+checkboxes+'&class'+chosenClass,
+        //url: 'class/competition.php?compID='+js_IDvar+'&inp='+inp,
 
         //data: 'TFC',
 
@@ -173,12 +196,12 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
         
         success: function(content){
           
-           
+          console.log(content); 
           
           
    
         } 
-      });*/
+      });
     });
   });
 </script>
@@ -193,18 +216,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 
 
 
-<table id="innerBody">
-  <td id="leftPartOfApplication">
-    <td id="table">Här ska skit dyka upp</td>
-    <td id="table2">Här ska skit dyka upp</td>
-  </td>
-  <td id="rightPartOfApplication">
-    <td id="select">Här ska skit dyka upp</td>
-    <td id="table3">
-      Här ska skit dyka upp
-    </td>
-  </td>
-</table>
+
 
 <?php
 include "templates/adminfooter.php";

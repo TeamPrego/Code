@@ -58,4 +58,8 @@
 	if(isset($_GET['getAllParticipantCompetition']) && isset($_GET['competitionName'])) {
 		echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
 	}
+  
+  if(isset($_GET['compID']) && isset($_GET['discipline']) && $_GET['class']) {
+		//echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
+	}
 ?>
