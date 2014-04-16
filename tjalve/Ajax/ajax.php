@@ -17,8 +17,8 @@
     
     $result1 = $temp->getCompetitionByName($compName);
     
-    //$temp2 = new Event();
-    $result2 = $temp->getEventById($result1->id);
+    $temp2 = new Event();
+    $result2 = $temp2->getEventById($result1->id);
     $resultTot = array($result1, $result2);
     //$resultTot = array($result1);
     //$resultTot[] = ("foo", "spliff"); 
@@ -43,8 +43,23 @@
 		echo json_encode(getAllParticipantsFromClub($_GET['clubId']));
 	}
 
-	// Gets all participant from one competition and returns JSON
-	if(isset($_GET['getAllParticipantFromCompetition']) && isset($_GET['competitionName'])) {
+	// Gets all participant and their disciplines from one competition and returns JSON
+	if(isset($_GET['getAllParticipantAndDesciplinesFromCompetition']) && isset($_GET['competitionName'])) {
+		echo json_encode(getAllParticipantAndDesciplinesFromCompetition($_GET['competitionName']));
+	}
+
+	//Updates the bibnumbers on all participant in one competition.
+	//Uses a startnumber and go throw all with an increasing number.
+	if(isset($_GET['competitionName']) && isset($_GET['startNumber'])) {
+		addRaceBibToAllParticipants($_GET['competitionName'], $_GET['startNumber']);
+	}
+
+// Gets all participant from one competition and returns JSON
+	if(isset($_GET['getAllParticipantCompetition']) && isset($_GET['competitionName'])) {
 		echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
+	}
+  
+  if(isset($_GET['compID']) && isset($_GET['discipline']) && $_GET['class']) {
+		//echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
 	}
 ?>

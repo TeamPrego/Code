@@ -363,11 +363,14 @@ The class should represent a competition:
       $dataCompetition = mysqli_query($con, $sql);
       $array = [];
       while($row=$dataCompetition->fetch_object()) {      
-	    	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+	    	/*$array[] = 	[	'competitionId' 				=>	$row->competitionId,
 											'competitionName' 			=> 	$row->competitionName,
 											'competitionOrganizer' 	=> 	$row->organizer,
 											'competitionDate' 			=> 	$row->date,
-											'competitionLastDate' 	=> 	$row->lastDate];  
+											'competitionLastDate' 	=> 	$row->lastDate];*/
+        $temp = new Competition();
+        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $array[] = $temp;  
       }
       mysqli_close($con);
       return $array;
@@ -402,8 +405,8 @@ The class should represent a competition:
     	return $array;
     }
     
-    /*
-    public function getAllAvailableDisciplines(){
+    
+    public function getAllAvailableDisciplines2(){
       include 'config.php';
       
       $sql = "SELECT * FROM alldisciplines WHERE 1";
@@ -418,7 +421,7 @@ The class should represent a competition:
       
       mysqli_close($con);
       return $allDisciplines;
-    }*/
+    }
     
   public function getEventById($id){
       include "config.php";

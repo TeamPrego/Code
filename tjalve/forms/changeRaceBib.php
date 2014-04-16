@@ -1,5 +1,5 @@
 <?php
-	include "config.php";
+	include "../database/config.php";
 
 	$dataCheck = mysqli_query($con, "SELECT * FROM participant");
 	if (!$dataCheck) {

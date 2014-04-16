@@ -23,7 +23,7 @@ include "templates/adminheader.php";
 	$('#chooseCompetition').change(function() {
 			var inp = $(this).find(":selected").text();
 			$.ajax({
-				url: 'Ajax/ajax.php?getAllParticipantFromCompetition=1&competitionName='+inp+'',
+				url: 'Ajax/ajax.php?getAllParticipantAndDesciplinesFromCompetition=1&competitionName='+inp+'',
 				success: function(content) {
 					console.log(content);
 					content = $.parseJSON(content);

@@ -4,22 +4,22 @@
   
   class Event {
     
-   /* public $id;
+    public $id;
     public $discipline;
-    public $ageClass;*/
+    public $ageClass;
     
     public function __construct(){
     }
     
-    /*public function setEvent($eventDisc, $eventAgeC){
+    public function setEvent($eventDisc, $eventAgeC){
       $this->discipline = $eventDisc;
       $this->ageClass = $eventAgeC;
-    }*/
+    }
     
-   /* public function getEventById($id){
+    public function getEventById($id){
       include "config.php";
-      //$sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
-      $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = 1";
+      $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
+      //$sql = "SELECT * FROM competitiondisciplines WHERE competitionId = 1";
       $dataEvent = mysqli_query($con, $sql);
       $data = [];
       while($row=$dataEvent->fetch_object()) {
@@ -32,9 +32,9 @@
       mysqli_close($con);	
       return $data;
       
-    }*/
+    }
     
-    /*public function getAllEvents($id){
+    public function getAllEvents($id){
       include "config.php";
       $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
       $dataEvent = mysqli_query($con, $sql);
@@ -49,12 +49,20 @@
       return $allEvents; 
     }
     
+    public function addEvents($id, $disciplines, $ageClass){
+      include "config.php";
+      $sql = "INSERT INTO `tjalve`.`competitiondisciplines` (`competitionId`, `yearClass`, `discipline`) VALUES ('3', 'M65', 'Kula')";
+      $dataEvent = mysqli_query($con, $sql);
+      mysqli_close($con);
+      return 0;
+    }
+    
     public function setDiscipline($newDiscipline){
       $this->discipline = $newDiscipline;
     }
     
     public function setAgeClass($newAgeClass){
       $this->ageClass = $newAgeClass;
-    }*/
+    }
   }
 ?>
