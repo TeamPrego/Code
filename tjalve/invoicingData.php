@@ -26,7 +26,7 @@ include "templates/adminheader.php";
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		$.ajax({
-			url: 'database/getAllCompetitions.php',
+			url: 'Ajax/ajax.php?getAllCompetitions=1',
 			success: function(content) {
 				content = $.parseJSON(content);
 				var string = "";
@@ -45,13 +45,13 @@ include "templates/adminheader.php";
 	$('#competitionsInvoicing').change(function() {
 		var competitionId = $(this).find("option:selected").attr('id');
 			$.ajax({
-			url: 'database/getAllClubsFromCompetitionById.php?competitionId='+competitionId,
+			url: 'Ajax/ajax.php?getAllClubsFromCompetition=1&competitionId='+competitionId,
 			success: function(content) {
 				content = $.parseJSON(content);
 				var string ="";
 				var substring = "";
 				$.each(content, function(index, value) {
-					string += '<option id="'+value.clubId+'">'+value.clubId+'</option>';
+					string += '<option id="'+value.clubId+'">'+value.clubId+' - '+ value.club +'</option>';
 					substring = value.clubId;
 				});
 				document.getElementById('clubInvoicing').innerHTML = string;
@@ -63,7 +63,7 @@ include "templates/adminheader.php";
 	$('#clubInvoicing').change(function() {
 		var clubId = $(this).find("option:selected").attr('id');
 		$.ajax({
-			url: 'database/getAllParticipantsFromClubByClubId.php?clubId='+clubId,
+			url: 'Ajax/ajax.php?getAllParticipantFromClub=1&clubId='+clubId,
 			success: function(content) {
 				content = $.parseJSON(content);
 				var string = "";

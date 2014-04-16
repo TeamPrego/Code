@@ -282,7 +282,7 @@ The class should represent a competition:
     }
 	
 	public function getAllAvailableDisciplines($compID) {
-      include "config.php";
+    include "config.php";
 	
 		$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$compID'";
 		$data = mysqli_query($con, $query);
@@ -306,7 +306,7 @@ The class should represent a competition:
 		//return $disc;
 		echo json_encode($disc);
 		mysqli_close($con);
-    }
+  }
 	
 	public function addAgeClass($compID, $name, $ageClass) {
       include "config.php";
@@ -356,22 +356,23 @@ The class should represent a competition:
     public function changeArranger($newArranger) {
       $arranger=$newArranger;
     }
+
     public function getAllCompetitions(){
-      include 'database/config.php';
-      $sql = "SELECT * FROM competition WHERE 1";
+      include 'config.php';
+      $sql = "SELECT * FROM competition";
       $dataCompetition = mysqli_query($con, $sql);
-      $allCompetitions = [];
-      while($row=$dataCompetition->fetch_object()) {
-        //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
-        
-        $temp = new Competition();
-        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
-        $allCompetitions[] = $temp;
-        //echo $allCompetitions[0]->name;
+      $array = [];
+      while($row=$dataCompetition->fetch_object()) {      
+	    	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+											'competitionName' 			=> 	$row->competitionName,
+											'competitionOrganizer' 	=> 	$row->organizer,
+											'competitionDate' 			=> 	$row->date,
+											'competitionLastDate' 	=> 	$row->lastDate];  
       }
       mysqli_close($con);
-      return $allCompetitions; 
+      return $array;
     }
+
     public function getCompetitionByName($compName){
       
       include 'config.php';
@@ -390,8 +391,19 @@ The class should represent a competition:
       return $data;
       mysqli_close($con);	
     }
+
+    public function toArray() {
+    	$array = 	[	'competitionId' 				=>	$this->id,
+    							'competitionName' 			=> 	$this->name,
+    							'competitionOrganizer' 	=> 	$this->organizer,
+    							'competitionDate' 			=> 	$this->date,
+    							'competitionLastDate' 	=> 	$this->lastDate,
+    						];
+    	return $array;
+    }
     
-    public function getAllAvailableDisciplines2(){
+    /*
+    public function getAllAvailableDisciplines(){
       include 'config.php';
       
       $sql = "SELECT * FROM alldisciplines WHERE 1";
@@ -406,9 +418,8 @@ The class should represent a competition:
       
       mysqli_close($con);
       return $allDisciplines;
-    }
+    }*/
     
-    ////////////////////////
   public function getEventById($id){
       include "config.php";
       $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
@@ -424,25 +435,21 @@ The class should represent a competition:
       }
       mysqli_close($con);	
       return $data;
-      
   }
-  ///////////////////////
-    
-}
-  
-  
-  
-  
+} 
 ?>
 
+
 <?php
+
+/*
 if(isset($_GET['compID']) && isset($_GET['inp'])) {
 
 	 $compID = $_GET['compID'];
-   	 $inp	= $_GET['inp'];
+ 	 $inp	= $_GET['inp'];
 
-     $temp = new competition();
-     $result = $temp->getAllDisciplines($compID, $inp);
+   $temp = new competition();
+   $result = $temp->getAllDisciplines($compID, $inp);
 	 echo json_encode($result);
 }
 
@@ -451,10 +458,11 @@ if(isset($_GET['compID']) && isset($_GET['inp'])) {
 if(isset($_GET['competitionId'])) {
 
 	 $compID = $_GET['competitionId'];
-     $temp = new competition();
-     $result = $temp->getAllAvailableDisciplines($compID);
+   $temp = new competition();
+   $result = $temp->getAllAvailableDisciplines($compID);
 	 echo json_encode($result);
-	 }
+}
+*/
 
 /*
 if(isset($_GET['compName'])) {
@@ -471,8 +479,6 @@ if(isset($_GET['compName'])) {
     
     //echo json_encode($resultTot);
     echo json_encode($resultTot);
-    
-    
 }
 */
 

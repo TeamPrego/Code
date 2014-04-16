@@ -58,5 +58,31 @@
 	  	}
 			return $allClubs;
 	  }
+
+	  // Gets all clubs from one competition[Input=competitionId, output=array with all clubs]
+	  public function getAllClubsFromCompetition($competitionId) {
+  		include "config.php";
+			$query = "SELECT c.*
+								FROM clubs c
+								INNER JOIN contact co ON c.clubId = co.clubId
+								WHERE co.competitionId = '$competitionId'";
+
+			$data = mysqli_query($con, $query);
+
+			if (!$data) {
+			  die('Error: ' . mysqli_error($con));
+			}
+
+			$array = [];
+			while($row = $data->fetch_object()) {
+				$array[] = ['clubId' 	=> $row->clubId,
+										'club' 		=> $row->club,
+										'address' => $row->address,
+										'zip' 		=> $row->zip,
+										'phone' 	=> $row->phone,
+										'email' 	=> $row->email];
+			}
+			return $array;
+	  }
 	}
 

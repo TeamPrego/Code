@@ -12,7 +12,6 @@
 	$temp->pushParticipanttoDB();
 	$Id = $temp->getParticipantId();
 	
-	
 	$name = $_POST['gren'];
 	foreach ($name as $grentyp) { 
 		$SB = "SB" . $grentyp;
