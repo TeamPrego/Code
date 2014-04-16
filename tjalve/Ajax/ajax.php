@@ -14,8 +14,8 @@
     
     $result1 = $temp->getCompetitionByName($compName);
     
-    //$temp2 = new Event();
-    $result2 = $temp->getEventById($result1->id);
+    $temp2 = new Event();
+    $result2 = $temp2->getEventById($result1->id);
     $resultTot = array($result1, $result2);
     //$resultTot = array($result1);
     //$resultTot[] = ("foo", "spliff"); 
