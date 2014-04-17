@@ -1,5 +1,3 @@
-
-
 <?php
 /*2014-04-11
 The class should represent a competition:
@@ -363,14 +361,16 @@ The class should represent a competition:
       $dataCompetition = mysqli_query($con, $sql);
       $array = [];
       while($row=$dataCompetition->fetch_object()) {      
-	    	/*$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+	    	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
 											'competitionName' 			=> 	$row->competitionName,
 											'competitionOrganizer' 	=> 	$row->organizer,
 											'competitionDate' 			=> 	$row->date,
-											'competitionLastDate' 	=> 	$row->lastDate];*/
+											'competitionLastDate' 	=> 	$row->lastDate];
+        /* 	Ska helst inte skicka tillbaka en array med tävlingar till "vanlig kod" då man ska inte komma åt variablerna i koden
+						Bättre att skicka tillbaka en array med keys.
         $temp = new Competition();
-        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
-        $array[] = $temp;  
+        $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $array[] = $temp;*/
       }
       mysqli_close($con);
       return $array;

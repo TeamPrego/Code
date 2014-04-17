@@ -9,7 +9,6 @@
 			 Tjalve
 		</title>
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
-		<link rel="stylesheet" type="text/css" href="css/jquery.multiselect.css"/>
 		<link rel="stylesheet" type="text/css" href="css/dropdown.css"/>
 		<!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css"/>-->
 		
