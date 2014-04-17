@@ -2,9 +2,8 @@
 include "../config.php";
 
 $cId = $_GET['competitionId'];
-$yearClass = $_GET['yearClass'];
 
-$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$cId' AND yearClass = '$yearClass' ";
+$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$cId'";
 $data = mysqli_query($con, $query);
 
 if (!$data) {
@@ -13,8 +12,9 @@ if (!$data) {
 
 $array=[];
 while($row = $data->fetch_object()) {
-	array_push($array, $row->discipline);
-	//$array = ['discipline'=> $row->yearClass];
+	if (!in_array($row->yearClass, $array)){
+			array_push($array, $row->yearClass);
+	}
 }
 echo json_encode($array);
 ?>

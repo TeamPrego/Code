@@ -26,6 +26,13 @@ ob_start();
 	}
 
 	$clubId = $whichData->fetch_object();
+
+	//Denna borde fungera på riktigt istället om man vill testa........
+	UPDATE contact co
+	INNER JOIN clubs c ON c.club = '$updClub'
+	SET co.clubId = c.clubId 
+	WHERE co.contactId = '$cId'
+
 */
 	$clubQuery = "UPDATE contact SET clubId = '$updClubId' WHERE contactId = '$cId'";
 

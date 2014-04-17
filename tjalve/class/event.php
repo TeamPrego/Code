@@ -49,6 +49,14 @@
       return $allEvents; 
     }
     
+    public function addEvents($id, $disciplines, $ageClass){
+      include "config.php";
+      $sql = "INSERT INTO `tjalve`.`competitiondisciplines` (`competitionId`, `yearClass`, `discipline`) VALUES ('3', 'M65', 'Kula')";
+      $dataEvent = mysqli_query($con, $sql);
+      mysqli_close($con);
+      return 0;
+    }
+    
     public function setDiscipline($newDiscipline){
       $this->discipline = $newDiscipline;
     }
