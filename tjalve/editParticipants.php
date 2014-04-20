@@ -45,39 +45,70 @@ session_start();
 		<!-- Info about participant will appear here -->
 			
 	</div>
-	<div id="disciplines">
-		<!-- Classes and disciplines will appear here -->
+	
+	<select id="classList">
+		<!-- Classes will appear here -->
+	</select>
+	<div id="classDisciplines">
+		<!-- Disciplines will appear here -->
 	</div>
 </div>
 
 
 <script type="text/javascript">
+	//***** When competition drop down list is changed do: ******
 	$('#getCompetitions').change(function() {
 		//Get participants from the correct competition
-		var inp = $(this).find("option:selected").attr('id');
+		var inp = $(this).find("option:selected").attr('id');//This is competition id
 		console.log(inp);
 		$.ajax({
 			url: 'database/EditParticipants/fetchParticipantByCompId.php?competitionId='+inp+'',
 			success: function(content) {
 				content = $.parseJSON(content);
 				var part_string = '';
+				var substring = '';
 				$.each(content, function(index, value) {
 					if(index===0){
 						part_string += '<option id="'+value.pId+'" selected="selected">'+value.pId+' - '+value.fName+' '+value.lName+'</option>';
+						substring = value.pId + ' - ' + value.fName + ' ' + value.lName;
 					}
 					else {
 						part_string += '<option id="'+value.pId+'">'+value.pId+' - '+value.fName+' '+value.lName+'</option>';
 					}
 				});
 				document.getElementById('adminParticipants').innerHTML = part_string;
+				$('#adminParticipants').val(substring);
+				$('#adminParticipants').trigger("change");
+			}
+		});
+
+		// ***** Creating the drop down list with classes *****
+		$.ajax({
+			url: 'database/EditParticipants/yearClasses.php?competitionId='+inp+'',
+
+			success: function(content){
+				content = $.parseJSON(content);
+
+				var competition_string = "";
+
+				$.each(content, function(index,yearClass){
+					competition_string += '<option id="'+yearClass+'"> '+yearClass+' </option>';
+					substring = yearClass;
+				});
+
+				competition_string += '</select>'
+				document.getElementById('classList').innerHTML = competition_string;
+				$('#classList').val(substring);
+				$('#classList').trigger("change");
 			}
 		});
 	});
 
+	//***** When participant is chosen from the list do: ******
 	var disabl = "disabled";
 	
 	$('#adminParticipants').change(function() {
-		var inp = $(this).find("option:selected").attr('id');
+		var inp = $(this).find("option:selected").attr('id'); //This is the participant id
 		console.log(inp);
 		$.ajax({
 			url: 'database/EditParticipants/fetchParticipantInfo.php?participantId='+inp+'',
@@ -142,29 +173,34 @@ session_start();
 
 	});
 
-	$('#chooseClass').change(function() {
-		var inp = $(this).find(":selected").text();
-		var contactId = document.getElementById('contactId');	
-		console.log(inp);
+	// ***** When class is chosen from drop down list, do: *****
+	$('#classList').change(function(){
+		//var inp = $(this).find("option:selected").attr('id');//This is competition id
+		var yClass = $(this).find("option:selected").attr('id');
+		var compId = $(getCompetitions).find("option:selected").attr('id');
+		//var compId = document.getElementById("getCompetitions");
+		console.log(yClass + ' och ' + compId);
+		
 		$.ajax({
-			url: 'getAvailableDisciplines.php?class='+inp+'&contactId='+contactId,
-			success: function(content) {
-				//console.log(content);
+			url: 'database/EditParticipants/disciplines.php?yearClass='+yClass+'&competitionId='+compId,
+			success: function(content){
 				content = $.parseJSON(content);
-				var dat_string = '<table id="whichDisciplines">';
-				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
-				$.each(content, function(index, value) {
-					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
-									 + value.gren
-									 + '</td><td>'+inp+'</td><td>'
-									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
-									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
-				});
-				dat_string += '</table>';
-				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>'
-							+ '<?php include database/apply/disciplineList.php ?>';
 
-				document.getElementById('disciplines').innerHTML = dat_string;
+				var disc_string = '<table id="whichDisciplines">';
+				disc_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
+				$.each(content, function(index, theDiscipline) {
+					disc_string += 	'<tr><td><input type = "checkbox" name = "disciplineArray" value="'+theDiscipline+'"/></td><td>'
+									 + theDiscipline
+									 + '</td><td>'+yClass+'</td><td>'
+									 + '<input type="text" name="PB'+theDiscipline+'" id="personBest"/></td>'
+									 + '<td><input type="text" name="SB'+theDiscipline+'" id="seasonBest"/></td></tr>'
+				});
+				disc_string += '</table>';
+				disc_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till gren"/>';
+							//+ '<?php include database/apply/disciplineList.php ?>';
+
+				document.getElementById('classDisciplines').innerHTML = disc_string;
+				$('#classDisciplines').trigger("change");
 			}
 		});
 	});
@@ -203,8 +239,7 @@ session_start();
  		document.getElementsByName("classButton")[0].className="showButton";
 
 	}
-
-	$('#adminParticipants').trigger("change");
+	
 	$('#getCompetitions').trigger("change");
 </script>
 <?php

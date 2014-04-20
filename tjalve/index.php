@@ -32,7 +32,7 @@
 		"<td>". $competition['competitionDate'] ."</td>".
 		"<td>". $competition['competitionLastDate'] ."</td>";
 		if($competition['competitionLastDate'] > $date)
-			echo "<td><a href='applyOne.php?competitionI=".$competition['competitionId']."&prio=1'>Anmäl dig här</a></td>";
+			echo "<td><a href='applyOne.php?competitionId=".$competition['competitionId']."&prio=1'>Anmäl dig här</a></td>";
 
 		elseif($competition['competitionDate'] > $date)
 			echo "<td><a href='applyOne.php?competitionId=".$competition['competitionId']."&prio=0'>Sen anmälan</a></td>";
