@@ -9,7 +9,7 @@
 		$temp->getAllAvailableDisciplines($_GET['compID']);
 	}
   
- if(isset($_GET['compName'])) {
+if(isset($_GET['compName'])) {
     //include "../class/competition.php";
     //include "event.php";
     $compName = $_GET['compName'];
@@ -58,8 +58,20 @@
 	if(isset($_GET['getAllParticipantCompetition']) && isset($_GET['competitionName'])) {
 		echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
 	}
+//add event to database  
   
-  if(isset($_GET['compID']) && isset($_GET['discipline']) && $_GET['class']) {
-		//echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
-	}
+  
+  
+  if(isset($_GET['ID']) && isset($_GET['disciplines']) && isset($_GET['chosenClass'])){
+    $class = $_GET['chosenClass'];
+    $id = $_GET['ID'];
+    $disciplines = $_GET['disciplines'];
+    $discArray = explode(".", $disciplines);
+    $event = new Event();
+    $event->addEvents($id, $discArray, $class);
+    //echo $id;
+    //$flonk = "t";
+    //$drint = array_map(utf8_encode, $flonk);
+    echo json_encode($event);
+  }
 ?>

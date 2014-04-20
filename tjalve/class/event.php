@@ -51,7 +51,11 @@
     
     public function addEvents($id, $disciplines, $ageClass){
       include "config.php";
-      $sql = "INSERT INTO `tjalve`.`competitiondisciplines` (`competitionId`, `yearClass`, `discipline`) VALUES ('3', 'M65', 'Kula')";
+      echo $disciplines;
+      $sql = "INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `discipline`) VALUES ('$id', '$ageClass', '$disciplines[0]')";
+      for ($i = 1; $i < count($disciplines)-1; $i++) {
+        $sql .= ", ('$id','$ageClass','$disciplines[$i]')";
+      }
       $dataEvent = mysqli_query($con, $sql);
       mysqli_close($con);
       return 0;
