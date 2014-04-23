@@ -56,9 +56,11 @@
       for ($i = 1; $i < count($disciplines)-1; $i++) {
         $sql .= ", ('$id','$ageClass','$disciplines[$i]')";
       }
-      $dataEvent = mysqli_query($con, $sql);
+      //$dataEvent = mysqli_query($con, $sql);
+      if (!mysqli_query($con,$sql)) {
+			  die('Error: ' . mysqli_error($con));
+			}
       mysqli_close($con);
-      return 0;
     }
     
     public function setDiscipline($newDiscipline){

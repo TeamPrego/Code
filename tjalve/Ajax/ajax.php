@@ -72,10 +72,11 @@ if(isset($_GET['compName'])) {
     $disciplines = $_GET['disciplines'];
     $discArray = explode(".", $disciplines);
     $event = new Event();
+    
     $event->addEvents($id, $discArray, $class);
-    //echo $id;
-    //$flonk = "t";
-    //$drint = array_map(utf8_encode, $flonk);
-    echo json_encode($event);
+    
+    /*$temp2 = new Event();
+    $result2 = $temp2->getEventById($id);
+    echo json_encode($result2);*/
   }
 ?>

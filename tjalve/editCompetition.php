@@ -48,6 +48,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   $compDisciplines = new Competition();
   $allDisciplines = $compDisciplines->getAllAvailableDisciplines2();
   $discTable="<table class=firstTableList><th>Disciplin</th><tr>";
+  //$discTable="<table class=firstTableList><th>Disciplin</th><tr>";
   foreach ($allDisciplines as $discipline) {
     //$discTable.= "<tr><td><input type='checkbox' id='discipline' name='discipline[]' value='" . $discipline['discipline'] . "'>" . $discipline['discipline'] . "</td></tr>";
     $discTable.= "<tr><td><input type='checkbox' id='discipline' name='discipline[]' value='" . $discipline['discipline'] . "'>" . $discipline['discipline'] . "</td></tr>";
@@ -105,7 +106,8 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 
 
 <script type="text/javascript">
-var ID=1;
+var ID;
+$(function(){
   $( "#dope" ).change(function() {
     var competition =  $("#dope").find(":selected").text();
     //var competition = "TFC";
@@ -123,15 +125,10 @@ var ID=1;
       
       success: function(content){
         
-        console.log("Yao!");
+        //console.log("Nån valde tävling!");
         //console.log(data);
-      
-        //console.log("Tja Bre");
-            
-        //content = $.parseJSON(content); 
-        console.log(content); 
+        //alert("en tävling bre");
         
-        //console.log("Fuck you!");  
         
         var dat_string = '<table id="competitionTable" class="firstTableList">';
 				dat_string += '<tr> <th>ID</th> <th>Name</th><th>Date</th> <th>LastDate</th> <th>Arr</th> </tr>';
@@ -140,72 +137,65 @@ var ID=1;
         
         document.getElementById('table').innerHTML = dat_string;
         
-        //console.log(content);
+        //ID saved for adding events to database
+        ID = content[0].id;
         
         var dat_string2 = '<table id="competitionTable" class="firstTableList">';
         dat_string2 += '<tr> <th>ID</th> <th>Åldersklass</th><th>Gren</th> </tr>';
         $.each(content[1], function(index, value) {
           dat_string2+='<tr><td>'+value.competitionId+'</td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td></tr>'
-          //console.log(index);
+          
         });
         dat_string2 += '</table>';
-        var ID = content[0].id;
+        
         alert(ID);
         document.getElementById('table2').innerHTML = dat_string2;
  
 			}  
 		});
   });
+ }); 
   
-  $(function(){ 
+</script>
+
+
+
+<script>
+
+$(function(){ 
     $( "#addEvent" ).click(function() {
-      alert("Tja brush brush!!!");
-      async: false;
-      //var checkboxes = document.getElementById('discipline');
-      //var checkboxes =  $("#discipline").find(":checked").text();
+      alert("Nån vill lägga till event");
+     $(content).remove();
       var checkboxes = $('input[type=checkbox]:checked');
-      //alert(checkboxes[1].value);
-      
       var chosenClass = $("#chooseClass").find(":selected").text();
-      /*var id = '<?php 
-      echo $comp->id; 
-      ?>';*/
       
+      var boxString="";
       for (var i=0, n=checkboxes.length; i<n;i++) {
         if (checkboxes[i].checked) 
         {
-          //vals += ","+checkboxes[i].value;
           alert("Id: "+ ID +" Klass: "+chosenClass+"  Gren: "+checkboxes[i].value);
+          boxString+=checkboxes[i].value+".";
         }
       }
       
-      
-      //alert("flonks "+vals);
-      
+      alert(ID+" "+checkboxes[0].value+" "+chosenClass);
       $.ajax({
         async: false,
-        //Skapar tabellen för tävling
-        //alert(ID);
-        //console.log(ID);
-        url: 'Ajax/ajax.php?compID='+ID+'&discipline='+checkboxes+'&class'+chosenClass,
-        //url: 'class/competition.php?compID='+js_IDvar+'&inp='+inp,
-
-        //data: 'TFC',
-
-        dataType: 'json', 
         
-        success: function(content){
-          
-          console.log(content); 
-          
-          
-   
+        url: 'Ajax/ajax.php?ID='+ ID +'&disciplines='+boxString+'&chosenClass='+chosenClass,
+        
+        //Detta borde stämma skapligt!!!
+        //Fösök att spara alla event och uppdatera tabellen. 
+        //Kan hämta event och bara lägga till
+        
+        success: function(){
+          $("#dope").change();
         } 
+        
       });
     });
   });
 </script>
-
 <?php
   echo $discTable;
 ?>
