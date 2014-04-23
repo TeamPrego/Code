@@ -42,9 +42,16 @@ session_start();
 			<tr>
 				<td><label for="select">Klass:</label></td>
 				<td>
-					<?php
-						include "database/apply/disciplineList.php";
-					?>
+						<select name="chooseClass" id="chooseClass" required>
+						<option> - Välj klass - </option>
+							<?php
+								$competitionId = getCompetitionIdFromContactId($_GET['contactId']);
+								$classes = getAllClassesFromCompetition($competitionId); 
+								foreach ($classes as $theClass) {
+									echo "<option value='" .$theClass. "'>" .$theClass. "</option>";
+								}
+							?>
+						</select>
 				</td>
 			</tr>
 		</table>
