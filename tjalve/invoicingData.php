@@ -24,6 +24,7 @@ include "templates/adminheader.php";
 </div>
 
 <script type="text/javascript">
+var competitionName = "";
 	jQuery(document).ready(function() {
 		$.ajax({
 			url: 'Ajax/ajax.php?getAllCompetitions=1',
@@ -32,7 +33,7 @@ include "templates/adminheader.php";
 				var string = "";
 				var substring = "";
 				$.each(content, function(index, value) {
-					string += '<option id="'+value.competitionId+'">'+value.competitionId+' - '+value.competitionName+'</option>';
+					string += '<option id="'+value.competitionId+'"name="'+value.competitionName+'">'+value.competitionId+' - '+value.competitionName+'</option>';
 					substring = value.competitionId + ' - ' + value.competitionName;
 				});
 				document.getElementById('competitionsInvoicing').innerHTML = string;
@@ -44,6 +45,7 @@ include "templates/adminheader.php";
 
 	$('#competitionsInvoicing').change(function() {
 		var competitionId = $(this).find("option:selected").attr('id');
+		competitionName = $(this).find("option:selected").attr('name');
 			$.ajax({
 			url: 'Ajax/ajax.php?getAllClubsFromCompetition=1&competitionId='+competitionId,
 			success: function(content) {
@@ -71,7 +73,7 @@ include "templates/adminheader.php";
 				var count = 0;
 				$.each(content, function(index, value) {
 					if (index == 0 ) {
-						string += '<div style="text-align: center">Kostander för ' + value.clubId + ' i Tävlingsnamn</div>';
+						string += '<div style="text-align: center">Kostander för ' + value.clubId + ' i '+competitionName+'</div>';
 						string += '<table class ="firstTableList" id="invoicingTable" cellspacing="0" cellpadding="0">';
 					}
 						string += '<tr><th>'+value.firstName+'</th><th>'+value.lastName+'</th><th></th><th></th></tr>'
