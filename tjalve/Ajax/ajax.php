@@ -58,10 +58,13 @@ if(isset($_GET['compName'])) {
 	if(isset($_GET['getAllParticipantCompetition']) && isset($_GET['competitionName'])) {
 		echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
 	}
+
+	if(isset($_GET['competitionId']) && isset($_GET['ageClass'])  && isset($_GET['discipline'])) {
+		echo json_encode(getStartlist($_GET['competitionId'], $_GET['ageClass'], $_GET['discipline']));
+	}
+
+
 //add event to database  
-  
-  
-  
   if(isset($_GET['ID']) && isset($_GET['disciplines']) && isset($_GET['chosenClass'])){
     $class = $_GET['chosenClass'];
     $id = $_GET['ID'];

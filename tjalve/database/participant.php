@@ -171,10 +171,11 @@
     if (!$data) {
       die('Error: ' . mysqli_error($con));
     }
+    $clubName = getClub($clubId)['club'];
 
     $array = [];
     while($row = $data->fetch_object()) {
-      $array[] = ['clubId' => $clubId,
+      $array[] = ['clubId' => $clubName,
                   'firstName' => $row->firstName,
                   'lastName' => $row->lastName,
                   'birthYear' => $row->birthYear,
