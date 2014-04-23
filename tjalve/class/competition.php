@@ -504,7 +504,7 @@ The class should represent a competition:
 					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
 						$participants[] = [	'firstName'=> $rowDiscipline->firstName,
 																'lastName' => $rowDiscipline->lastName,
-																'club' => $rowDiscipline->clubId,
+																'club' => getClub($rowDiscipline->clubId)['club'],
 																'prio' => $rowDiscipline->prio];
 
 			}
