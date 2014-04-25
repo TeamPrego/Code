@@ -73,6 +73,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 
 ?>
 
+
 <table id="innerBody">
   <td id="leftPartOfApplication">
     <td id="table">Här ska skit dyka upp</td>
@@ -109,6 +110,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 var ID;
 $(function(){
   $( "#dope" ).change(function() {
+  
     var competition =  $("#dope").find(":selected").text();
     //var competition = "TFC";
     //alert("Hallå");
@@ -143,25 +145,24 @@ $(function(){
         var dat_string2 = '<table id="competitionTable" class="firstTableList">';
         dat_string2 += '<tr> <th>ID</th> <th>Åldersklass</th><th>Gren</th> </tr>';
         $.each(content[1], function(index, value) {
-          dat_string2+='<tr><td>'+value.competitionId+'</td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td></tr>'
-          
+          /* dat_string2+='<tr><td>'+value.competitionId+'</td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td><td><button id="mybutton" onclick="deleteEvent('+"'"+value.yearClass+"'"+", '"+value.discipline+"'"+')">Button</button></td></tr>' */
+          dat_string2+='<tr><td>'+value.competitionId+'</td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td><td><button id="mybutton" onclick="deleteEvent('+"'"+value.competitionId+"'"+", '"+value.yearClass+"'"+", '"+value.discipline+"'"+')">x</button></td></tr>'
+
         });
         dat_string2 += '</table>';
         
-        alert(ID);
+        message = "Clicked Button";
+        
         document.getElementById('table2').innerHTML = dat_string2;
+        //document.getElementById('table3').innerHTML = '<button id="mybutton" onclick="deleteEvent()">Button</button>';
  
 			}  
 		});
   });
  }); 
   
-</script>
 
-
-
-<script>
-
+  
 $(function(){ 
     $( "#addEvent" ).click(function() {
       alert("Nån vill lägga till event");
@@ -195,6 +196,23 @@ $(function(){
       });
     });
   });
+  
+  /*$(function(){
+    
+   $( "#deleteEvent" ).click(function() {
+      alert("Ta bort ta bort ta bort!!!");
+    });
+  });*/
+  function deleteEvent(id, yearClass, discipline){
+    //alert(id+" "+yearClass+" "+discipline);
+    $.ajax({
+      url: 'Ajax/ajax.php?deleteId='+id+'&deleteYearClass='+yearClass+'&deleteDiscipline='+discipline,
+      success: function(){
+          $("#dope").change();
+      }
+    });
+  }
+  
 </script>
 <?php
   echo $discTable;

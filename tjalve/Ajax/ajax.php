@@ -78,4 +78,14 @@ if(isset($_GET['compName'])) {
     $result2 = $temp2->getEventById($id);
     echo json_encode($result2);*/
   }
+  
+  //add event to database  
+  if(isset($_GET['deleteId']) && isset($_GET['deleteYearClass']) && isset($_GET['deleteDiscipline'])){
+    $id = $_GET['deleteId'];
+    $yearClass = $_GET['deleteYearClass'];
+    $discipline = $_GET['deleteDiscipline'];
+    $event = new Event();
+    $event->deleteEvent($id, $discipline, $yearClass);
+    
+  }
 ?>

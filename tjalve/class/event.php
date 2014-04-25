@@ -63,6 +63,15 @@
       mysqli_close($con);
     }
     
+    public function deleteEvent($id, $discipline, $ageClass){
+      include "config.php";
+      $sql = "DELETE FROM `competitiondisciplines` WHERE `competitionId`='$id' AND `yearClass`='$ageClass' AND `discipline`='$discipline'";
+      if (!mysqli_query($con,$sql)) {
+			  die('Error: ' . mysqli_error($con));
+			}
+      mysqli_close($con);
+    }
+    
     public function setDiscipline($newDiscipline){
       $this->discipline = $newDiscipline;
     }
