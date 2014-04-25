@@ -1,7 +1,7 @@
 <?php
+	// Include the normal header
 	include "templates/header.php";
 ?>	
-<!--Granskad och godkänd 2014-03-04-->
 
 <!--Headning -->
 <h1> Anmälan till 
@@ -13,7 +13,7 @@
 </h1>
 <!--Line -->
 <hr>
-<!--Div for the form -->
+<!--Div for the form, left side of the page -->
 <div id="leftPartOfApplication">
 	<h2>Skriv in kontaktpersons-uppgifter</h2>
 	<table id ="formDiv">
@@ -21,11 +21,7 @@
 			<input type="hidden" value=<?php echo $_GET['competitionId']?> name="competitionId">
 			<input type="hidden" value=<?php echo $_GET['prio']?> name="prio">
 			<tr>
-				<td>
-					<label for="select">
-						Välj klubb:
-					</label>
-				</td>
+				<td><label>Välj klubb:</label></td>
 				<td>
 					<select name="chooseClub" id="chooseClub">
 						<?php
@@ -83,6 +79,7 @@
 		});
 	});	
 </script>
+s
 <div id="rightPartOfApplication">
 	<a id="dropDown" href="#" class="cthrough">För hjälp, klicka här</a>
 	<div id="infoText">

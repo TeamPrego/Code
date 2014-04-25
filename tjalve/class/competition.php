@@ -443,7 +443,30 @@ The class should represent a competition:
 ?>
 
 
+
 <?php
+
+				if (!$dataDiscipline) {
+				  die('Error: ' . mysqli_error($con));
+				}
+				while($rowDiscipline = $dataDiscipline->fetch_object()){
+					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
+						$participants[] = [	'firstName'=> $rowDiscipline->firstName,
+																'lastName' => $rowDiscipline->lastName,
+																'club' => getClub($rowDiscipline->clubId)['club'],
+																'prio' => $rowDiscipline->prio];
+
+			}
+			if($participants != null) {
+				$disc[] = [ 'className' => $rowAgeClass->yearClass,
+									'discipline' => $rowAgeClass->discipline,
+									'participants' => $participants];
+			}
+		}
+	}
+	return $disc;
+}
+
 
 /*
 if(isset($_GET['compID']) && isset($_GET['inp'])) {

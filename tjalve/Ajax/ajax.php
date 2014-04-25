@@ -59,6 +59,7 @@ if(isset($_GET['compName'])) {
 		echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
 	}
 
+	// Gets the Startlist for o competition - filerd by ageclass and discipline
 	if(isset($_GET['competitionId']) && isset($_GET['ageClass'])  && isset($_GET['discipline'])) {
 		echo json_encode(getStartlist($_GET['competitionId'], $_GET['ageClass'], $_GET['discipline']));
 	}
