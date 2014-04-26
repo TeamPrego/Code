@@ -144,6 +144,16 @@ The class should represent a competition:
 		mysqli_close($con);
 	}
 	
+  //public function updateCompetition($id, $name, $date, $lastDate, $organizer){
+  public function updateCompetition($id, $name, $date, $lastDate, $organizer){
+    include "config.php";
+    //$sql = "UPDATE  `competition` SET  `competitionName` =  STRUT,`date` =  '$date',`lastDate` =  '$lastDate',`organizer` =  '$organizer',`logo` =  '' WHERE  `competition`.`competitionId` = '$id'";
+    $sql = "UPDATE  competition SET  competitionName =  '$name', date = '$date', lastDate='$lastDate', organizer='$organizer' WHERE  competitionId = '$id'";
+    if (!mysqli_query($con,$sql)) {
+			  die('Error: ' . mysqli_error($con));
+		}
+    mysqli_close($con);
+  }
 	
 	public function getCompName($competitionId) {
 	  include "config.php";
@@ -445,7 +455,7 @@ The class should represent a competition:
 
 
 <?php
-
+/*
 				if (!$dataDiscipline) {
 				  die('Error: ' . mysqli_error($con));
 				}

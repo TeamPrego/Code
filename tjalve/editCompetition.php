@@ -21,20 +21,20 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   
   
   
-  echo "<div  class='choice-bar'>";
+  /*echo "<div  class='choice-bar'>";
   $fatSelect="<select id='dope'><option>Tävlingsnamn</option>";
   foreach ($allCompetitions as $competition) {
     $fatSelect.= "<option>" . $competition->name . "</option>";
   }
   $fatSelect.="</select>";
   echo $fatSelect;
-  echo "</div>";
+  echo "</div>";*/
   
   
   
  
   
-  
+  /*
   $fatTable="<table class=firstTableList><th>Tävlingsid</th><th>Tävlingsnamn</th><th>Tävlingsarrangör</th><th>Tävlingsstart</th><th>Sista Anmälningsdatum</th><tr>";
   foreach ($allCompetitions as $competition) {
     $fatTable.= "<tr><td>" . $competition->id . "</td><td>" . $competition->name . "</td><td>" . $competition->organizer    . "</td><td>" . $competition->date . "</td><td>" . $competition->lastDate . "</td></tr>";
@@ -42,7 +42,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
     //echo $competition['name'];
   }
   $fatTable.="</tr></table>";
-  echo $fatTable;
+  echo $fatTable;*/
  
   //Here you are supposed to choose the disciplines for one or several events.
   $compDisciplines = new Competition();
@@ -54,26 +54,27 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
     $discTable.= "<tr><td><input type='checkbox' id='discipline' name='discipline[]' value='" . $discipline['discipline'] . "'>" . $discipline['discipline'] . "</td></tr>";
   }
   $discTable.="<td><input type='button' name = 'submitDiscipline' id='addEvent' value='Lägg till Start'/></td></tr></table>";
-  //echo $discTable;
-  
  
-  //include "class/competition.php";
-  //$comp1 = new Competition();
-  //$comp1->getAllYearClasses();
-  
-
-  
-
- 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 ?>
+<table>
+<td id="rightPartOfApplication">
+    <td id="table3"> Här ska skit dyka upp</td>
+</td>
+</table>
+<table id="innerBody">
+  <td id="leftPartOfApplication">
+    <td id="table">Här ska skit dyka upp</td>
+  </td>
+  <td id="rightPartOfApplication">
+    <td id="table2"> Här ska skit dyka upp</td>
+  </td>
+  
+</table>
 
-
+<!--
 <table id="innerBody">
   <td id="leftPartOfApplication">
     <td id="table">Här ska skit dyka upp</td>
@@ -86,7 +87,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
     </td>
   </td>
 </table>
-
+-->
 <table class ="createcompTable">
 	
       <td>Åldersklass:</td>
@@ -106,35 +107,90 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
 </table>
 
 
+
 <script type="text/javascript">
 var ID;
+createSelect();
+function createSelect(){
+  $.ajax({
+    url: 'Ajax/ajax.php?getAllCompetitions=generic',
+    
+    success: function(content){
+      
+      dat_string = "<select id='dope'><option>Tävlingsnamn</option>";
+      
+      dataType: 'json',
+      content = JSON.parse(content);
+      $.each(content, function(index, value) {
+          
+          dat_string+='<option>'+value.name+'</option>'
+          console.log(value.name);
+      });
+      dat_string+="</select>";
+      document.getElementById('table3').innerHTML = dat_string;
+      alert(dat_string);
+    }
+  });
+}
+
+
 $(function(){
-  $( "#dope" ).change(function() {
+  $("#updateCompetition").live('click', function (){ 
+  var id = $('#idField').val();
+  var name = $('#nameField').val();
+  var date = $('#dateField').val();
+  var lastDate = $('#lastDateField').val();
+  var organizer = $('#organizerField').val();
+
   
+  alert("Ett gäng ambitiösa strutande strutsar");
+  alert(id+" "+name+" "+date+" "+lastDate+" "+organizer+" ");
+  
+  $.ajax({
+    async:false,
+    //var name = $("#namefield").val();
+    url: 'Ajax/ajax.php?updateId='+id+'&updateName='+name+'&updateDate='+date+'&updateLastDate='+lastDate+'&updateOrganizer='+organizer,
+    success: function(){
+      alert("yai");
+      //var competition =  $("#dope").find(":selected").text();
+      //$("#chooseClass option:selected").html("New Text");
+      //alert($("#chooseClass").find(":selected").text());
+      //$("._statusDDL").val('2');
+      createSelect();
+    }
+  });
+});
+});
+
+$(function(){
+  //$( "#dope" ).change(function() {
+  $( "#dope" ).live('change', function() {
+   
+   var competition = $('#nameField').val();
+   alert(competition);
+   if(competition==null){
     var competition =  $("#dope").find(":selected").text();
-    //var competition = "TFC";
-    //alert("Hallå");
+   }
     $.ajax({
       async: false,
       //Skapar tabellen för tävling
 			
-      //url: 'class/competition.php?compName='+competition+'',
+      
       url: 'Ajax/ajax.php?compName='+competition+'',
 
-      //data: 'TFC',
-
+      
 			dataType: 'json', 
       
       success: function(content){
         
-        //console.log("Nån valde tävling!");
-        //console.log(data);
-        //alert("en tävling bre");
+        
         
         
         var dat_string = '<table id="competitionTable" class="firstTableList">';
-				dat_string += '<tr> <th>ID</th> <th>Name</th><th>Date</th> <th>LastDate</th> <th>Arr</th> </tr>';
-         dat_string+='<tr><td>'+content[0].id+'</td><td>'+content[0].name+'</td><td>'+content[0].date+'</td><td>'+content[0].lastDate+'</td><td>'+content[0].organizer+'</td></tr>'
+				dat_string += '<tr> <th>ID</th> <th>Namn</th><th>Datum</th> <th>Sista anmälningsdatum</th> <th>Arrangör</th> </tr>';
+         dat_string+='<tr><td><input type="text" id="idField" value="'+content[0].id+'" disabled /></td><td><input type="text" id="nameField" value="'+content[0].name+'"/></td><td><input type="date" id="dateField" class="input-medium search-query" value="'+content[0].date+'"/></td><td><input type="date" id="lastDateField" class="input-medium search-query" value="'+content[0].lastDate+'"/></td><td><input type="text" id="organizerField" value="'+content[0].organizer+'"/></td></tr>'
+        //dat_string+='<tr><td><input type="button" id="updateCompetition" onclick="updateCompetition('+"'"+content[0].id+"'"+", '"+$("#namefield").val()+"'"+", '"+content[0].date+"'"+", '"+content[0].lastDate+"'"+", '"+content[0].organizer+"'"+')" value="Uppdatera"></td></tr>';
+        dat_string+='<tr><td><input type="button" id="updateCompetition" value="Uppdatera"></td></tr>';
         dat_string += '</table>';
         
         document.getElementById('table').innerHTML = dat_string;
@@ -166,7 +222,8 @@ $(function(){
 $(function(){ 
     $( "#addEvent" ).click(function() {
       alert("Nån vill lägga till event");
-     $(content).remove();
+     //$(content).remove();
+     alert("kvar efter remove");
       var checkboxes = $('input[type=checkbox]:checked');
       var chosenClass = $("#chooseClass").find(":selected").text();
       
@@ -190,6 +247,7 @@ $(function(){
         //Kan hämta event och bara lägga till
         
         success: function(){
+          
           $("#dope").change();
         } 
         
@@ -204,14 +262,17 @@ $(function(){
     });
   });*/
   function deleteEvent(id, yearClass, discipline){
-    //alert(id+" "+yearClass+" "+discipline);
+    alert("Ta bort ta bort ta bort!!!");
+    alert(id+" "+yearClass+" "+discipline);
     $.ajax({
       url: 'Ajax/ajax.php?deleteId='+id+'&deleteYearClass='+yearClass+'&deleteDiscipline='+discipline,
       success: function(){
+      
           $("#dope").change();
       }
     });
   }
+  
   
 </script>
 <?php
