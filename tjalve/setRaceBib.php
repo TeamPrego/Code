@@ -1,29 +1,36 @@
 <!--Primary admin page-->
-<!--Granskad och godkänd 2014-03-04-->
+
 <?php
+	// Include the header for admin-page
 	include "templates/adminheader.php";
 ?>
+
+<!--Header for the page-->
 <h1>Bestäm nummerlapp</h1>
 
+<!-- 	The left part of the page
+			Will include opetions for the adminuser-->
 <div id = "leftPartOfApplication">
 	<h2>Nummerlappsinformation</h2>
 	<table>
 		<tr>
 			<td>Välj tävling:</td> 
 			<td> 
+				<!--Make a dropdown-list this all competitions-->
 				<select name='chooseCompetition' id='chooseCompetition'>
-				<?php
-				include "class/competition.php";
-				$comp = new Competition();
-				$allCompetitions = $comp->getAllCompetitions();
-				foreach ($allCompetitions as $competition) {
-					echo "<option value='" .$competition['competitionId']. "'>" .$competition['competitionName']. "</option>";
-				}					
-				?>
+					<?php
+						include "class/competition.php";
+						$comp = new Competition();
+						$allCompetitions = $comp->getAllCompetitions();
+						foreach ($allCompetitions as $competition) {
+							echo "<option value='" .$competition['competitionId']. "'>" .$competition['competitionName']. "</option>";
+						}					
+					?>
 				</select>
 			</td>
 		</tr>
 		<tr>
+			<!--If all race bib:s are in a row the admin can use this function-->
 			<td>Startnummer: </td>
 			<td><input id='bibBegin' name='bibBegin' value='10'></input></td>
 		</tr>
@@ -31,18 +38,24 @@
 	<input type='button' name='addParticipator' id='Update' value='Uppdatera'/>
 </div>
 
+<!--	This is the right part of the page
+			This will contain all Participants in a competition-->
 <div id = "rightPartOfApplication">
 	<h2>Tävlingsdeltagare</h2>
 	<div style="margin-left:5%">
 		<?php
+			// If someone tried to change racebib
 			if(isset($_GET['check'])) {
+				// If something was wrong
 				if($_GET['check'] == 0)
 					echo "<div id='noParticipants'>Fel: Finns en eller flera med samma nummerlapp, kolla igenom så ingen deltagare har samma nummerlapp</div>";
+				// If everything was correct
 				else
 					echo "<div id='noParticipants'>Ändrat</div>";
 			}
 		?>
 	</div>
+	<!--This will contain all Participants in a competition-->
 	<div id="getParticipantBibDiv"></div>
 </div>
 
@@ -50,12 +63,15 @@
 
 	//When the Update-button is clicked the DB will be updated.
 	$('#Update').click(function() {
+		// Get some variables
 		var competitionName =  $('#chooseCompetition').find(":selected").text();
 		var startNumber = $('#bibBegin').val();
+		// Update database with ajax
 		$.ajax({
 			url: 'Ajax/ajax.php?competitionName='+competitionName+'&startNumber='+startNumber+'',
 			success: function(content){
 				console.log("success");
+				// Trigger a change in the competition-dropdownlist
 				$('#chooseCompetition').trigger("change");
 			}
 		});
@@ -89,7 +105,8 @@
 			}
 		});
 	});
-
+	
+	// When everything is loaded - make a trigger on a change in the competition-dropdownlist
 	$('#chooseCompetition').trigger("change");
 </script>
 
@@ -98,5 +115,6 @@
 </div>
 
 <?php
+	// Include the footer for admins-pages.
 	include "templates/adminfooter.php";
 ?>
