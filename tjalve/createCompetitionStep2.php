@@ -56,21 +56,22 @@ $getCompInfo = new Competition();
 <script type="text/javascript">	
 var js_IDvar = "<?php echo $_GET['compID']; ?>";
 	var inp = "";
+	console.log("hay");
 	$('#chooseClass').change(function() {
 		inp = $(this).find(":selected").text();
 		$.ajax({
 			data: {
 				
 			},
-			url: 'class/competition.php?compID='+js_IDvar+'&inp='+inp,
+			url: 'Ajax/ajax.php?competitionID='+js_IDvar+'&inp='+inp,
 			success: function(content) {
 				content = $.parseJSON(content);
 				var dat_string = '<table id="whichDisciplines">';
 				dat_string += '<tr><td><td> <p id ="discP">Gren</th> </p>';
 				$.each(content, function(index, value) {
 					console.log(value);
-					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value+'"></td><td>'
-								+ value;
+					dat_string += '<tr><td><input type = "checkbox" id = "selectBox" name = "gren[]" value="'+value.gren+'"></td><td>'
+								+ value.gren;
 				});
 				dat_string += '<tr><td colspan="2"><input type="submit" name = "submit" id="addAgeClass" value="Lägg till Åldersklass"/></td></tr></form>';
 				dat_string += '</table>';
@@ -78,6 +79,7 @@ var js_IDvar = "<?php echo $_GET['compID']; ?>";
 				document.cookie = "compID = " +js_IDvar;
 			}
 		});
+			console.log("hay");
 	});
 </script>
 
@@ -94,16 +96,17 @@ var js_IDvar = "<?php echo $_GET['compID']; ?>";
 					data: {
 						
 					},
-						url: 'ajax.php?compID='+js_IDvar,
+						url: 'Ajax/ajax.php?compID='+js_IDvar,
 						success: function(content) {
 						content = $.parseJSON(content);
 						var dat2_string = '<table id="selectedDisciplines">';
 						dat2_string += '<tr><td colspan="3"><p id ="selectedDiscP">Valda grenar till resp. åldersklass </p></td></tr>';
 						$.each(content, function(index, value) {
 							console.log(value);
+							var link = 'Ajax/ajax.php?compId=' + js_IDvar + '&gren=' +value.gren+ '&klass=' +value.klass;
 							dat2_string += '<tr><td>' +value.klass+ '</td><td>'
-										+ value.gren+ '</td><td>här var det en gång en knapp..</td> </tr>';
-						});
+										+ value.gren + '</td><td><button id="deleteButton"><a id="aTagDeleteDisp" href='+link+'>Radera</a></button></td> </tr>';
+						});				
 						dat2_string += '<tr><td><td><td><input type="submit" id="done" value="Klar"/></td></td></td></tr></form>';
 						dat2_string += '</table>';
 
@@ -113,7 +116,8 @@ var js_IDvar = "<?php echo $_GET['compID']; ?>";
 		});
 			console.log("hejhejehj");
 		</script>
-		<!--<button id="deleteButton"><a id="aTagDeleteDisp" href="database/deleteDiscipline.php?compID=' + js_var + '&gren=' +value.gren+ '&klass=' +value.klass+ '">Radera</a></button>-->
+		<!--<button id="deleteButton"><a id="aTagDeleteDisp" href="Ajax/ajax.php?compId=' + js_var + '&gren=' +value.gren+ '&klass=' +value.klass+ '">Radera</a></button>-->
+		<!--<FORM METHOD='+link+' ACTION="createCompetitionStep2.php"><INPUT TYPE="submit" id="deleteButton" VALUE="Radera"></FORM>-->
 	</form>
 	</div>
 </div>
