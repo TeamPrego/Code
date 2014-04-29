@@ -10,7 +10,8 @@
        
     public function __construct(){
     }
-
+    
+    //A bunch of set functions of class Participant are used along with a push-to-database function
     public function setfirstName($name){
       $this->firstName = $name;
     }
@@ -34,7 +35,8 @@
     public function getParticipantId(){
       return $this->participantId;
     }
-
+    
+    // Adds a participant to the database with the acquired variables from the set functions of class participant
     public function pushParticipanttoDB(){
       include "config.php";
        
@@ -49,6 +51,7 @@
       mysqli_close($con);
     }
   }
+  
   class Contact {
     private $contactId;
     private $competitionId;
@@ -60,7 +63,9 @@
        
     public function __construct(){
     }
-    
+
+    // Gets the id of a club with a given name and then associates the contact with the clubId
+    // Input: Clubarg  (name of the club)
     public function setClub($clubarg){
       include "config.php";
       $this->club = $clubarg;
@@ -76,6 +81,7 @@
       mysqli_close($con);
     }
     
+    //A bunch of set functions of class Contact are used along with a push-to-database function
     public function setcontactPerson($contact){
       $this->contactPerson = $contact;
     }
@@ -96,6 +102,7 @@
         return $this->contactId;
     }
     
+    // Adds a contact to the database with the acquired variables from the set functions of class contact
     public function pushContacttoDB(){
       include "config.php";
       
@@ -111,7 +118,7 @@
   }
   
   class ParticipantDisciplines {
-    private $participantId;
+    private $participantId;       //göra participantId global istället?
     private $yearClass=array();
     private $discipline=array();
     private $SB=array();
@@ -140,6 +147,8 @@
       $this->PB[]=$pb;
     }
 
+    // A function to push information about which disciplines a participant is attending and their associated year classes.
+    // Since one participant can attend more than one discipline and year class, the variables of these are stored in arrays using a for loop
     public function pushParticipantDisciplinestoDB(){
       include "config.php";
       for ($x=0; $x<=(sizeof($this->yearClass))-1; $x++){
@@ -184,11 +193,11 @@
     }
     return($array);
   }
-
+  
   // Gets all Participants from one competition by the competition name
   // Input: Competition Name
   // Output: An array with all participants and their desciplines
-  function getAllParticipantAndDesciplinesFromCompetition($competitionName) {
+  function getAllParticipantAndDisciplinesFromCompetition($competitionName) {
     include "config.php";
     $competitionName = $_GET['competitionName'];
 
