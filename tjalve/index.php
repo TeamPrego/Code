@@ -28,20 +28,20 @@
 	$allCompetitions = $comp->getAllCompetitions();
 
 	foreach ($allCompetitions as $competition) {
-		echo "<tr><td>" . $competition->name . "</td>".
-		"<td>". $competition->date ."</td>".
-		"<td>". $competition->lastDate ."</td>";
-		if($competition->lastDate > $date)
-			echo "<td><a href='applyOne.php?competitionId=".$competition->id."&prio=1'>Anmäl dig här</a></td>";
+		echo "<tr><td>" . $competition['competitionName'] . "</td>".
+		"<td>". $competition['competitionDate'] ."</td>".
+		"<td>". $competition['competitionLastDate'] ."</td>";
+		if($competition['competitionLastDate'] > $date)
+			echo "<td><a href='applyOne.php?competitionId=".$competition['competitionId']."&prio=1'>Anmäl dig här</a></td>";
 
-		elseif($competition->date > $date)
-			echo "<td><a href='applyOne.php?competitionId=".$competition->id."&prio=0'>Sen anmälan</a></td>";
+		elseif($competition['competitionDate'] > $date)
+			echo "<td><a href='applyOne.php?competitionId=".$competition['competitionId']."&prio=0'>Sen anmälan</a></td>";
 
 		else 
 			echo "<td>Too late</td>";
 
-		echo "<td><a href='startList.php?competitionId=".$competition->id."'>Klicka här</a></td>".
-		"<td><a href='resultat.php?competitionId=".$competition->id."'>Se resultat här</a></td></tr>";
+		echo "<td><a href='startList.php?competitionId=".$competition['competitionId']."'>Klicka här</a></td>".
+		"<td><a href='resultat.php?competitionId=".$competition['competitionId']."'>Se resultat här</a></td></tr>";
 	}
 ?>
 </table>

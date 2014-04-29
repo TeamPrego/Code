@@ -1,11 +1,12 @@
 <?php
-	include "config.php";
+	include "../database/config.php";
 
 	$dataCheck = mysqli_query($con, "SELECT * FROM participant");
 	if (!$dataCheck) {
 	  die('Error: ' . mysqli_error($con));
 	}
 
+	// Check if every racebib is unic
 	$check = 1;
 	$checkBib = [];
 	while($rowCheck = $dataCheck->fetch_object()) {
@@ -15,11 +16,9 @@
 			echo "Inte tom";
 			if(!in_array($_POST["$bib"], $checkBib)) {
 				array_push($checkBib, $_POST[$rowCheck->participantId]);
-				echo "Insert";
 			}
 			else {
 				$check = 0;
-				echo "STOPP";
 				break;
 			}
 		}

@@ -6,27 +6,42 @@ ob_start();
 	$updFName = $_POST['fName'];
 	$updLName = $_POST['lName'];
 	$updBYear = $_POST['bYear'];
-	$updClub = $_POST['clubsList'];
+	$updClubId = $_POST['clubsList'];
 	$cId = $_POST['contactId'];
-	echo $pId . " " . $updFName . "" . $updLName . " " . $pId . " " . $updBYear . " " . $updClub . " " . $cId;
+
+	//echo $updFName . " " . $updLName . " participantId " . $pId . " birth year: " . $updBYear . " klubb id: " . $updClubId . " kontakt id: " . $cId . " 	HEJ";
 	
 	$queryUpdate = "UPDATE participant SET firstName = '$updFName', lastName = '$updLName', birthYear = '$updBYear' WHERE participantId = '$pId'";
 	$data = mysqli_query($con, $queryUpdate);
 	
 	if (!mysqli_query($con,$queryUpdate)) {
-	  echo "Heja";
+	  die('Error: ' . mysqli_error($con));
+	}
+/*
+	$whichClub = "SELECT clubId FROM clubs WHERE club = '$updClub'"
+	$whichData = mysqli_query($con, $whichClub);
+
+	if (!mysqli_query($con,$whichClub)) {
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$clubUpdate = "UPDATE clubs SET club = '$updClub' WHERE contactId = '$cId'";
-	$data = mysqli_query($con, $clubUpdate);
-	
-	if (!mysqli_query($con,$clubUpdate)) {
-	  echo "Tjoho";
+	$clubId = $whichData->fetch_object();
+
+	//Denna borde fungera på riktigt istället om man vill testa........
+	UPDATE contact co
+	INNER JOIN clubs c ON c.club = '$updClub'
+	SET co.clubId = c.clubId 
+	WHERE co.contactId = '$cId'
+
+*/
+	$clubQuery = "UPDATE contact SET clubId = '$updClubId' WHERE contactId = '$cId'";
+
+	$clubData = mysqli_query($con, $clubQuery);
+
+	if (!mysqli_query($con,$clubData)) {
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	echo "klart";
 	header("Location: ../../editParticipants.php");
 	mysqli_close($con);
 ob_flush();

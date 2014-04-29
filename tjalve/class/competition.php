@@ -1,4 +1,5 @@
 
+
 <?php
 
 if(isset($_GET['competitionId'])) {
@@ -25,25 +26,20 @@ if(isset($_GET['compName'])) {
     //echo "DOPE!";
 }
 ?>
-
-
 <?php
 /*2014-04-11
-Tanken är att klassen ska representera en tävling med parametrar:
+The class should represent a competition:
 -id
--namn
--startdatum
--slutdatum
--sista anmälnmingsdatum
--arrangör
-(-starter) -> Detta är inte klart men denna skulle kunna implementars som en egen klass som 
-definieras som en array av objekt i competition. 
-
-Funktioner för att hämta och sätta in info finnes. 
-SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA DE HADE VART SKULLE VARA SKRIVET PÅ ENGELSKA*/
+-name
+-staring date
+-ending date
+-last apply date
+-organizer
+(-events) -> Not done for some reason include "event.php" will not work.
+*/
   
   include "config.php";
-  
+  //include "event.php";
   class Competition {
   
   public $id;
@@ -176,6 +172,16 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
 		mysqli_close($con);
 	}
 	
+  //public function updateCompetition($id, $name, $date, $lastDate, $organizer){
+  public function updateCompetition($id, $name, $date, $lastDate, $organizer){
+    include "config.php";
+    //$sql = "UPDATE  `competition` SET  `competitionName` =  STRUT,`date` =  '$date',`lastDate` =  '$lastDate',`organizer` =  '$organizer',`logo` =  '' WHERE  `competition`.`competitionId` = '$id'";
+    $sql = "UPDATE  competition SET  competitionName =  '$name', date = '$date', lastDate='$lastDate', organizer='$organizer' WHERE  competitionId = '$id'";
+    if (!mysqli_query($con,$sql)) {
+			  die('Error: ' . mysqli_error($con));
+		}
+    mysqli_close($con);
+  }
 	
 	public function getCompName($competitionId) {
 	  include "config.php";
@@ -309,6 +315,9 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
  "FROM family, food ".
 	"WHERE family.Position = food.Position";*/
 		
+    include "config.php";
+	
+		$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$compID'";
 		$data = mysqli_query($con, $query);
 		
 		if (!$data) {
@@ -322,7 +331,7 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
 		
 		echo json_encode($nameOfDisciplines);
 		mysqli_close($con);
-    }
+  }
 	
 	
 	public function addAgeClass($compID, $gren, $ageClass) {
@@ -405,44 +414,72 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
     public function changeArranger($newArranger) {
       $arranger=$newArranger;
     }
-	
+
     public function getAllCompetitions(){
-      include 'database/config.php';
-      $sql = "SELECT * FROM competition WHERE 1";
+      include 'config.php';
+      $sql = "SELECT * FROM competition";
       $dataCompetition = mysqli_query($con, $sql);
-      $allCompetitions = [];
-      while($row=$dataCompetition->fetch_object()) {
-        //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
-        
+      $array = [];
+      while($row=$dataCompetition->fetch_object()) {      
+	    	/*$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+											'competitionName' 			=> 	$row->competitionName,
+											'competitionOrganizer' 	=> 	$row->organizer,
+											'competitionDate' 			=> 	$row->date,
+											'competitionLastDate' 	=> 	$row->lastDate];
+         	Ska helst inte skicka tillbaka en array med tävlingar till "vanlig kod" då man ska inte komma åt variablerna i koden
+						Bättre att skicka tillbaka en array med keys.*/
         $temp = new Competition();
-        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
-        $allCompetitions[] = $temp;
-        //echo $allCompetitions[0]->name;
+        $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $array[] = $temp;
       }
       mysqli_close($con);
-      return $allCompetitions; 
+      return $array;
     }
-	
+
     public function getCompetitionByName($compName){
       
       include 'config.php';
       $sql = "SELECT * FROM competition WHERE competitionName = '$compName'";
       //$sql = "SELECT * FROM competition WHERE competitionName = 'TFC'";
       $dataCompetition = mysqli_query($con, $sql);
-      $data = [];
+      $data;
       while($row=$dataCompetition->fetch_object()) {
+
                 $data = ['competitionId' => $row->competitionId,
 						'competitionName' => $row->competitionName,
 					'date' => $row->date,
 					'lastDate' => $row->lastDate,
 					'organizer' => $row->organizer,
 					];
+
+        //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
+        
+        $temp = new Competition();
+        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $data = $temp;
+        //echo $allCompetitions[0]->name;
+
       }
       return $data;
       mysqli_close($con);	
     }
+
+    public function toArray() {
+    	$array = 	[	'competitionId' 				=>	$this->id,
+    							'competitionName' 			=> 	$this->name,
+    							'competitionOrganizer' 	=> 	$this->organizer,
+    							'competitionDate' 			=> 	$this->date,
+    							'competitionLastDate' 	=> 	$this->lastDate,
+    						];
+    	return $array;
+    }
     
+    
+
     /*public function getAllAvailableDisciplines(){
+
+    public function getAllAvailableDisciplines2(){
+>>>>>>> 4ac828a223f28067dc989e9a905fde21abdcffee
       include 'config.php';
       
       $sql = "SELECT * FROM alldisciplines WHERE 1";
@@ -457,6 +494,97 @@ SKIT DETTA SKULLE VISST HA VARIT PÅ ENGELSKA KAN INTE BARA ALLA SNACKA SVENSKA 
       
       mysqli_close($con);
       return $allDisciplines;
+<<<<<<< HEAD
     }*/
  }
+
+
+    
+    
+  public function getEventById($id){
+      include "config.php";
+      $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
+      //$sql = "SELECT * FROM competitiondisciplines WHERE competitionId = 1";
+      $dataEvent = mysqli_query($con, $sql);
+      $data = [];
+      while($row=$dataEvent->fetch_object()) {
+                
+                $data[] = ['competitionId' => $row->competitionId,
+								'yearClass' => $row->yearClass,
+                'discipline' => $row->discipline,
+                ];
+      }
+      mysqli_close($con);	
+      return $data;
+  }
+} 
 ?>
+
+
+
+<?php
+/*
+				if (!$dataDiscipline) {
+				  die('Error: ' . mysqli_error($con));
+				}
+				while($rowDiscipline = $dataDiscipline->fetch_object()){
+					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
+						$participants[] = [	'firstName'=> $rowDiscipline->firstName,
+																'lastName' => $rowDiscipline->lastName,
+																'club' => getClub($rowDiscipline->clubId)['club'],
+																'prio' => $rowDiscipline->prio];
+
+			}
+			if($participants != null) {
+				$disc[] = [ 'className' => $rowAgeClass->yearClass,
+									'discipline' => $rowAgeClass->discipline,
+									'participants' => $participants];
+			}
+		}
+	}
+	return $disc;
+}
+
+
+/*
+if(isset($_GET['compID']) && isset($_GET['inp'])) {
+
+	 $compID = $_GET['compID'];
+ 	 $inp	= $_GET['inp'];
+
+   $temp = new competition();
+   $result = $temp->getAllDisciplines($compID, $inp);
+	 echo json_encode($result);
+}
+
+
+
+if(isset($_GET['competitionId'])) {
+
+	 $compID = $_GET['competitionId'];
+   $temp = new competition();
+   $result = $temp->getAllAvailableDisciplines($compID);
+	 echo json_encode($result);
+}
+*/
+
+/*
+if(isset($_GET['compName'])) {
+    //include "event.php";
+    $compName = $_GET['compName'];
+    $temp = new competition();
+    
+    $result1 = $temp->getCompetitionByName($compName);
+    
+    //$temp2 = new Event();
+    $result2 = $temp->getEventById($result1->id);
+    $resultTot = array($result1, $result2);
+    //$resultTot = array($result1);
+    
+    //echo json_encode($resultTot);
+    echo json_encode($resultTot);
+}
+*/
+
+?>
+
