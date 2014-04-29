@@ -65,7 +65,7 @@
     }
 
     // Gets the id of a club with a given name and then associates the contact with the clubId
-    // Input: Clubarg (name of the club)
+    // Input: Clubarg  (name of the club)
     public function setClub($clubarg){
       include "config.php";
       $this->club = $clubarg;
@@ -193,7 +193,7 @@
     }
     return($array);
   }
-
+  
   // Gets all Participants from one competition by the competition name
   // Input: Competition Name
   // Output: An array with all participants and their desciplines
