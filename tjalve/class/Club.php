@@ -75,6 +75,7 @@
 			return $array;
 	  }
 	}
+	
 	// Get club from ClubId and return a Club-object
 	function getClub($clubId) {
 		include "config.php";

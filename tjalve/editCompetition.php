@@ -8,15 +8,38 @@ change said competition. The code is organized with ajax calls to ajax.php and f
 competition- and event-class. 
 -->
 
-
-
-
 <?php
   
   include "class/competition.php";
   $comp = new Competition();  
   $allCompetitions = $comp->getAllCompetitions();
+
+
   
+  
+  /*echo "<div  class='choice-bar'>";
+  $fatSelect="<select id='dope'><option>Tävlingsnamn</option>";
+  foreach ($allCompetitions as $competition) {
+    $fatSelect.= "<option>" . $competition->name . "</option>";
+  }
+  $fatSelect.="</select>";
+  echo $fatSelect;
+  echo "</div>";*/
+  
+  
+  
+ 
+  
+  /*
+  $fatTable="<table class=firstTableList><th>Tävlingsid</th><th>Tävlingsnamn</th><th>Tävlingsarrangör</th><th>Tävlingsstart</th><th>Sista Anmälningsdatum</th><tr>";
+  foreach ($allCompetitions as $competition) {
+    $fatTable.= "<tr><td>" . $competition->id . "</td><td>" . $competition->name . "</td><td>" . $competition->organizer    . "</td><td>" . $competition->date . "</td><td>" . $competition->lastDate . "</td></tr>";
+    //$fatTable.= "<tr><td>GET SWOLE</td></tr>";
+    //echo $competition['name'];
+  }
+  $fatTable.="</tr></table>";
+  echo $fatTable;*/
+
  
   /* Here you are supposed to choose the disciplines for one or several events.
   The disciplines are loaded into a table with checkboxes. This table is supposed to be used
