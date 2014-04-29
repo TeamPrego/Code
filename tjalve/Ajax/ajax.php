@@ -79,4 +79,27 @@ if(isset($_GET['compName'])) {
     $result2 = $temp2->getEventById($id);
     echo json_encode($result2);*/
   }
+  
+  //delete event from database  
+  if(isset($_GET['deleteId']) && isset($_GET['deleteYearClass']) && isset($_GET['deleteDiscipline'])){
+    $id = $_GET['deleteId'];
+    $yearClass = $_GET['deleteYearClass'];
+    $discipline = $_GET['deleteDiscipline'];
+    $event = new Event();
+    $event->deleteEvent($id, $discipline, $yearClass);
+    
+  }
+  
+  //update competition
+  if(isset($_GET['updateId']) && isset($_GET['updateName']) && isset($_GET['updateDate']) && isset($_GET['updateLastDate']) && isset($_GET['updateOrganizer'])){
+    $id = $_GET['updateId'];
+    $name = $_GET['updateName'];
+    $date = $_GET['updateDate'];
+    $lastDate = $_GET['updateLastDate'];
+    $organizer = $_GET['updateOrganizer'];
+    $comp = new Competition();
+    //$comp->updateCompetition($id, $name, $date, $lastDate, $organizer);
+    $comp->updateCompetition($id, $name, $date, $lastDate, $organizer);
+    
+  }
 ?>

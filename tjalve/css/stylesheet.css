@@ -291,6 +291,13 @@ tr.spaceOver > td {
 	-moz-border-radius: 7px; 
 }
 
+#leftPartOfApplication{
+	float: left;
+	margin-left: 5%;
+	margin-bottom: 5%;
+	width: 43%;
+}
+
 #logga{
 	padding: 5px;
 	text-align:center;
