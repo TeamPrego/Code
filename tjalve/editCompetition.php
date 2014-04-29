@@ -8,9 +8,6 @@ Tanken är att man ska kunna skapa ett objekt som man arbetar med.
 Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet. 
 -->
 
-
-
-
 <?php
   
   include "class/competition.php";
@@ -18,7 +15,7 @@ Initialt skapas ett objekt genom getCompetition där man skickar in bara namnet.
   //$comp->getCompetitionByName("Flonk Close");
   
   $allCompetitions = $comp->getAllCompetitions();
-  
+
   
   
   /*echo "<div  class='choice-bar'>";
