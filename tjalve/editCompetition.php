@@ -17,28 +17,10 @@ competition- and event-class.
 
   
   
-  /*echo "<div  class='choice-bar'>";
-  $fatSelect="<select id='dope'><option>Tävlingsnamn</option>";
-  foreach ($allCompetitions as $competition) {
-    $fatSelect.= "<option>" . $competition->name . "</option>";
-  }
-  $fatSelect.="</select>";
-  echo $fatSelect;
-  echo "</div>";*/
-  
+ 
   
   
  
-  
-  /*
-  $fatTable="<table class=firstTableList><th>Tävlingsid</th><th>Tävlingsnamn</th><th>Tävlingsarrangör</th><th>Tävlingsstart</th><th>Sista Anmälningsdatum</th><tr>";
-  foreach ($allCompetitions as $competition) {
-    $fatTable.= "<tr><td>" . $competition->id . "</td><td>" . $competition->name . "</td><td>" . $competition->organizer    . "</td><td>" . $competition->date . "</td><td>" . $competition->lastDate . "</td></tr>";
-    //$fatTable.= "<tr><td>GET SWOLE</td></tr>";
-    //echo $competition['name'];
-  }
-  $fatTable.="</tr></table>";
-  echo $fatTable;*/
 
  
   /* Here you are supposed to choose the disciplines for one or several events.
@@ -57,9 +39,11 @@ competition- and event-class.
 
 
 ?>
+
 <!--
 Tables are created for showing content on the page. 
 -->
+
 <table>
 <td id="rightPartOfApplication">
     <td id="table3"> Här ska skit dyka upp</td>
@@ -79,6 +63,7 @@ Tables are created for showing content on the page.
 This is the table which displays the general info about 
 the chosen competition. Namely competition name, date and last date for applying.
 -->
+
 <table class ="createcompTable">
 	
       <td>Åldersklass:</td>
@@ -98,13 +83,17 @@ the chosen competition. Namely competition name, date and last date for applying
 </table>
 
 
-<!--
-Function below is for creating a drop list for selecting 
-competition. Generic is sent to ajax as a string but is never used.  
--->
+
 <script type="text/javascript">
 var ID;
 createSelect();
+
+/*
+Function below is for creating a drop list for selecting 
+competition. Generic is sent to ajax as a string but is never used.  
+*/
+
+
 function createSelect(){
   $.ajax({
     url: 'Ajax/ajax.php?getAllCompetitions=generic',
@@ -162,20 +151,22 @@ Function updates the displayed tables.
 Requires the name of the competition.
 */
    function updateTables(competition){
+    alert("Uppdatera dumfan: "+competition);
     $.ajax({
       
       async: false,
       url: 'Ajax/ajax.php?compName='+competition+'',
-			dataType: 'json', 
+			//url: 'Ajax/ajax.php?updateId=1 &updateName=BronkSpelarna dateDate=2014-05-01 &updateLastDate=2014-04-30 &updateOrganizer=Jag',
+      dataType: 'json', 
       
       success: function(content){
         
-        
-        
+        console.log("Stronk");
+        alert("success");
         
         var dat_string = '<table id="competitionTable" class="firstTableList">';
 				dat_string += '<tr> <th>ID</th> <th>Namn</th><th>Datum</th> <th>Sista anmälningsdatum</th> <th>Arrangör</th> </tr>';
-        dat_string+='<tr><td><input type="text" id="idField" value="'+content[0].id+'" disabled /></td><td><input type="text" id="nameField" value="'+content[0].name+'"/></td><td><input type="date" id="dateField" class="input-medium search-query" value="'+content[0].date+'"/></td><td><input type="date" id="lastDateField" class="input-medium search-query" value="'+content[0].lastDate+'"/></td><td><input type="text" id="organizerField" value="'+content[0].organizer+'"/></td></tr>'
+        dat_string+='<tr><td><input type="text" id="idField" value="'+content[0].id+'" disabled /></td><td><input type="text" id="nameField" value="'+content[0].name+'"/></td><td><input type="date" id="dateField" class="input-medium search-query" value="'+content[0].date+'"/></td><td><input type="date" id="lastDateField" class="input-medium search-query" value="'+content[0].lastDate+'"/></td><td><input type="text" id="organizerField" value="'+content[0].organizer+'"/></td></tr>';
         dat_string+='<tr><td><input type="button" id="updateCompetition" value="Uppdatera"></td></tr>';
         dat_string += '</table>';
         
@@ -254,6 +245,7 @@ $(function(){
 <!--
 The table of disciplines is displayed at the bottom of the page.
 -->
+
 <?php
   echo $discTable;
 ?>

@@ -9,7 +9,7 @@ if(isset($_GET['competitionId'])) {
      $result = $temp->getAllAvailableDisciplines($compID);
 	 echo json_encode($result);
 	 }
-
+/*
 if(isset($_GET['compName'])) {
  
 	 $compName = $_GET['compName'];
@@ -20,11 +20,11 @@ if(isset($_GET['compName'])) {
                 'date' => "2014",
                 'lastDate' => "2014",
                 'organizer' => "Jag",
-                ];*/
+                ];
     echo json_encode($result);
     //echo $compName;
     //echo "DOPE!";
-}
+}*/
 ?>
 <?php
 /*2014-04-11
@@ -421,17 +421,17 @@ The class should represent a competition:
       $dataCompetition = mysqli_query($con, $sql);
       $array = [];
       while($row=$dataCompetition->fetch_object()) {      
-	    	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+	    	/*$array[] = 	[	'competitionId' 				=>	$row->competitionId,
 											'competitionName' 			=> 	$row->competitionName,
 											'competitionOrganizer' 	=> 	$row->organizer,
 											'competitionDate' 			=> 	$row->date,
 											'competitionLastDate' 	=> 	$row->lastDate];
 											/*
          	Ska helst inte skicka tillbaka en array med tävlingar till "vanlig kod" då man ska inte komma åt variablerna i koden
-						Bättre att skicka tillbaka en array med keys.
+						Bättre att skicka tillbaka en array med keys.*/
         $temp = new Competition();
         $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
-        $array[] = $temp;*/
+        $array[] = $temp;
       }
       mysqli_close($con);
       return $array;
@@ -446,12 +446,12 @@ The class should represent a competition:
       $data;
       while($row=$dataCompetition->fetch_object()) {
 
-                $data = ['competitionId' => $row->competitionId,
+            /*    $data = ['competitionId' => $row->competitionId,
 						'competitionName' => $row->competitionName,
 					'date' => $row->date,
 					'lastDate' => $row->lastDate,
 					'organizer' => $row->organizer,
-					];
+					];*/
 
         //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
         
@@ -477,10 +477,10 @@ The class should represent a competition:
     
     
 
-    /*public function getAllAvailableDisciplines(){
+    /*public function getAllAvailableDisciplines(){*/
 
     public function getAllAvailableDisciplines2(){
->>>>>>> 4ac828a223f28067dc989e9a905fde21abdcffee
+
       include 'config.php';
       
       $sql = "SELECT * FROM alldisciplines WHERE 1";
@@ -495,9 +495,9 @@ The class should represent a competition:
       
       mysqli_close($con);
       return $allDisciplines;
-<<<<<<< HEAD
-    }*/
- }
+
+    }
+ //}
 
 
     
