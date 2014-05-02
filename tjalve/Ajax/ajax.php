@@ -43,8 +43,7 @@ if(isset($_GET['compName'])) {
 
 	//This will give all competitions from the DB
 	if(isset($_GET['getAllCompetitions'])) {
-		$comp = new Competition();
-		echo json_encode($comp->getAllCompetitions());
+		echo json_encode(getAllCompetitionsToArray());
 	}
 
 	// Gets all clubs from one competition and returns JSON

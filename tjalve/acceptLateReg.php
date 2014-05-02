@@ -13,8 +13,7 @@ include "templates/adminheader.php";
 	<select name='chooseCompetition' id='chooseCompetition' style='textalign: center'>
 	<?php
 		include "class/competition.php";
-		$comp = new Competition();
-		$allCompetitions = $comp->getAllCompetitions();
+		$allCompetitions = getAllCompetitionsToArray();
 		foreach ($allCompetitions as $competition) {
 			echo "<option value='" .$competition['competitionId']. "'>" .$competition['competitionName']. "</option>";
 		}					

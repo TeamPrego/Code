@@ -1,7 +1,7 @@
 
 
 <?php
-
+/*
 if(isset($_GET['competitionId'])) {
 
 	 $compID = $_GET['competitionId'];
@@ -9,7 +9,6 @@ if(isset($_GET['competitionId'])) {
      $result = $temp->getAllAvailableDisciplines($compID);
 	 echo json_encode($result);
 	 }
-/*
 if(isset($_GET['compName'])) {
  
 	 $compName = $_GET['compName'];
@@ -267,9 +266,8 @@ The class should represent a competition:
 		mysqli_close($con); 
 		foreach ($array as $key => $value) {
 		  printf("\t<option value='%s'>%s</option>\n", $value, $value);
-		}
-	  
-    }
+		}  
+  }
 	
 	
 	public function getAllDisciplines($compID, $inp) {
@@ -421,14 +419,6 @@ The class should represent a competition:
       $dataCompetition = mysqli_query($con, $sql);
       $array = [];
       while($row=$dataCompetition->fetch_object()) {      
-	    	/*$array[] = 	[	'competitionId' 				=>	$row->competitionId,
-											'competitionName' 			=> 	$row->competitionName,
-											'competitionOrganizer' 	=> 	$row->organizer,
-											'competitionDate' 			=> 	$row->date,
-											'competitionLastDate' 	=> 	$row->lastDate];
-											/*
-         	Ska helst inte skicka tillbaka en array med tävlingar till "vanlig kod" då man ska inte komma åt variablerna i koden
-						Bättre att skicka tillbaka en array med keys.*/
         $temp = new Competition();
         $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
         $array[] = $temp;
@@ -474,8 +464,6 @@ The class should represent a competition:
     						];
     	return $array;
     }
-    
-    
 
     /*public function getAllAvailableDisciplines(){*/
 
@@ -497,11 +485,7 @@ The class should represent a competition:
       return $allDisciplines;
 
     }
- //}
 
-
-    
-    
   public function getEventById($id){
       include "config.php";
       $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
@@ -509,16 +493,16 @@ The class should represent a competition:
       $dataEvent = mysqli_query($con, $sql);
       $data = [];
       while($row=$dataEvent->fetch_object()) {
-                
-                $data[] = ['competitionId' => $row->competitionId,
-								'yearClass' => $row->yearClass,
-                'discipline' => $row->discipline,
-                ];
+                $data[] = [	'competitionId' => $row->competitionId,
+														'yearClass' => $row->yearClass,
+						                'discipline' => $row->discipline];
       }
       mysqli_close($con);	
       return $data;
   }
-} 
+}// End of class
+
+
 	// Check which competitionid belongs to a contact id.
 	// Input: Contact Id
 	// Return: Competition Id
@@ -605,10 +589,26 @@ The class should represent a competition:
 		}
 		return $disc;
 	}
+
+	// Gets all competition
+	// Input: Nothing
+	// Output: All competitions in an array
+	function getAllCompetitionsToArray(){
+      include 'config.php';
+      $sql = "SELECT * FROM competition";
+      $dataCompetition = mysqli_query($con, $sql);
+      $array = [];
+      while($row=$dataCompetition->fetch_object()) {      
+	    	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+											'competitionName' 			=> 	$row->competitionName,
+											'competitionOrganizer' 	=> 	$row->organizer,
+											'competitionDate' 			=> 	$row->date,
+											'competitionLastDate' 	=> 	$row->lastDate];
+      }
+      mysqli_close($con);
+      return $array;
+    }
 ?>
-
-
-
 <?php
 /*
 if(isset($_GET['compID']) && isset($_GET['inp'])) {
