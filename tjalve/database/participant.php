@@ -106,16 +106,16 @@
 
     $disc = [];
     while($rowParticipant = $data->fetch_object()) {
-      $disc[] = ['id' => $rowParticipant->participantId,
-                 'fName' => $rowParticipant->firstName,
-                 'lName' => $rowParticipant->lastName,
-                 'discipline' =>  $rowParticipant->discipline,
-                 'yearClass' =>  $rowParticipant->yearClass,
-                 'bib' => $rowParticipant->bib,
-                 'club' => $rowParticipant ->clubId,
-                 'participantId' => $rowParticipant->participantId,
-                 'prio' => $rowParticipant->prio,
-                 'pIndex' => $rowParticipant->pIndex];
+      $disc[] = ['id'             => $rowParticipant->participantId,
+                 'fName'          => $rowParticipant->firstName,
+                 'lName'          => $rowParticipant->lastName,
+                 'discipline'     => $rowParticipant->discipline,
+                 'yearClass'      => $rowParticipant->yearClass,
+                 'bib'            => $rowParticipant->bib,
+                 'club'           => $rowParticipant->clubId,
+                 'participantId'  => $rowParticipant->participantId,
+                 'prio'           => $rowParticipant->prio,
+                 'pIndex'         => $rowParticipant->pIndex];
     }
     mysqli_close($con); 
     return $disc;
@@ -130,7 +130,7 @@
 
     $query = "SELECT p.*, c.*
               FROM participant p
-              INNER JOIN contact c ON p.contactId = c.contactId
+              INNER JOIN contact c        ON p.contactId = c.contactId
               INNER JOIN competition comp ON c.competitionId = comp.competitionId
               WHERE comp.competitionName = '$competitionName'";
 
@@ -163,7 +163,7 @@
     foreach ($allParticipants as $participant) {
       $participantId = $participant['participantId'];
       $query = "UPDATE participant p
-                INNER JOIN contact c ON p.contactId = c.contactId
+                INNER JOIN contact c        ON p.contactId = c.contactId
                 INNER JOIN competition comp ON c.competitionId = comp.competitionId
                 SET p.bib = '$startNumber'
                 WHERE comp.competitionName = '$competitionName' AND p.participantId = '$participantId'";
@@ -171,5 +171,4 @@
       $startNumber=$startNumber+1;
     }
   }
-
 ?>
