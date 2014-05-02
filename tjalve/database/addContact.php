@@ -1,6 +1,6 @@
 <?php
 	ob_start();
-	include "participant.php";
+	include_once "../class/contact.php";
 	$temp = new Contact();
 	//$compId = intval($_POST['competitionId']);
 	//echo $compId;
