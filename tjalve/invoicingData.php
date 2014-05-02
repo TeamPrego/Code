@@ -109,15 +109,15 @@ var competitionName = "";
 						string += '<div style="text-align: center">Kostander för ' + value.clubId + ' i '+competitionName+'</div>';
 						string += '<table class ="firstTableList" id="invoicingTable" cellspacing="0" cellpadding="0">';
 					}
-						string += '<tr><th>'+value.firstName+'</th><th>'+value.lastName+'</th><th></th><th></th></tr>'
-										+ '<tr><td></td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td><td>1</td></tr>';
+						string += '<tr><th>'+(count+1)+ '.</th><th> '+ value.firstName+'</th><th>'+value.lastName+'</th><th></th><th></th></tr>'
+										+ '<tr><td></td><td>'+value.yearClass+'</td><td>'+value.discipline+'</td><td>'+value.cost+'kr</td></tr>';
 						// Add the sum and the count
-						sum++;
+						sum+=value.cost;
 						count++;
 				});
 				// If it exist some partcipants
 				if(count > 0) {
-					string += '<td></td><td></td><td>Total Kostnad:</td><td>'+sum+'</td></table>'
+					string += '<td></td><td></td><td>Total Kostnad:</td><td>'+sum+'kr</td></table>'
 					document.getElementById('rightPartOfApplication').innerHTML = string;
 				}
 				// If no participant exists

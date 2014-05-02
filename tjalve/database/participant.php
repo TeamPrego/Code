@@ -73,12 +73,13 @@
 
     $array = [];
     while($row = $data->fetch_object()) {
-      $array[] = ['clubId' => $clubName,
-                  'firstName' => $row->firstName,
-                  'lastName' => $row->lastName,
-                  'birthYear' => $row->birthYear,
-                  'yearClass' => $row->yearClass,
-                  'discipline' => $row->discipline];
+      $array[] = ['clubId'      => $clubName,
+                  'firstName'   => $row->firstName,
+                  'lastName'    => $row->lastName,
+                  'birthYear'   => $row->birthYear,
+                  'yearClass'   => $row->yearClass,
+                  'discipline'  => $row->discipline,
+                  'cost'        => 50];
     }
     return($array);
   }
@@ -170,4 +171,5 @@
       $startNumber=$startNumber+1;
     }
   }
+
 ?>

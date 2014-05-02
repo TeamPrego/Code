@@ -594,20 +594,20 @@ The class should represent a competition:
 	// Input: Nothing
 	// Output: All competitions in an array
 	function getAllCompetitionsToArray(){
-      include 'config.php';
-      $sql = "SELECT * FROM competition";
-      $dataCompetition = mysqli_query($con, $sql);
-      $array = [];
-      while($row=$dataCompetition->fetch_object()) {      
-	    	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
-											'competitionName' 			=> 	$row->competitionName,
-											'competitionOrganizer' 	=> 	$row->organizer,
-											'competitionDate' 			=> 	$row->date,
-											'competitionLastDate' 	=> 	$row->lastDate];
-      }
-      mysqli_close($con);
-      return $array;
-    }
+	  include 'config.php';
+	  $sql = "SELECT * FROM competition";
+	  $dataCompetition = mysqli_query($con, $sql);
+	  $array = [];
+	  while($row=$dataCompetition->fetch_object()) {      
+	  	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+										'competitionName' 			=> 	$row->competitionName,
+										'competitionOrganizer' 	=> 	$row->organizer,
+										'competitionDate' 			=> 	$row->date,
+										'competitionLastDate' 	=> 	$row->lastDate];
+	  }
+	  mysqli_close($con);
+	  return $array;
+	}
 ?>
 <?php
 /*

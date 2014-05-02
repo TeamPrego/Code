@@ -58,8 +58,8 @@ if(isset($_GET['compName'])) {
 	}
 
 	// Gets all participant and their disciplines from one competition and returns JSON
-	if(isset($_GET['getAllParticipantAndDesciplinesFromCompetition']) && isset($_GET['competitionName'])) {
-		echo json_encode(getAllParticipantAndDesciplinesFromCompetition($_GET['competitionName']));
+	if(isset($_GET['getAllParticipantAndDisciplinesFromCompetition']) && isset($_GET['competitionName'])) {
+		echo json_encode(getAllParticipantAndDisciplinesFromCompetition($_GET['competitionName']));
 	}
 
 	//Updates the bibnumbers on all participant in one competition.
