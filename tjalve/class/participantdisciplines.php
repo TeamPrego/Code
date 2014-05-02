@@ -1,5 +1,4 @@
 <?php 
-
   class ParticipantDisciplines {
     private $participantId;       //göra participantId global istället?
     private $yearClass=array();
@@ -45,5 +44,4 @@
       mysqli_close($con);
     }
   }
-
 ?>
