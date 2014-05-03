@@ -37,23 +37,31 @@ competition- and event-class.
  
 
 
-
+  
+  
+  
 ?>
 
 <!--
 Tables are created for showing content on the page. 
 -->
 
+
+
+<table id="logoTable" id="choice-bar">
+  
+</table> 
+
 <table>
 <td id="rightPartOfApplication">
     <td id="table3"> Här ska skit dyka upp</td>
 </td>
 </table>
-<table id="innerBody">
-  <td id="leftPartOfApplication">
+<table>
+  <td>
     <td id="table">Här ska skit dyka upp</td>
   </td>
-  <td id="rightPartOfApplication">
+  <td>
     <td id="table2"> Här ska skit dyka upp</td>
   </td>
   
@@ -93,6 +101,51 @@ Function below is for creating a drop list for selecting
 competition. Generic is sent to ajax as a string but is never used.  
 */
 
+//$(function(){
+  $("#updateLogo").live('click', function(){
+    alert("Funkar");
+    var id = $('#idField').val();
+    //var fileName = $('#file').val();
+    var fileName = $('#file').val().replace(/C:\\fakepath\\/i, '');
+    alert("id för update: "+id);
+    alert("filnamn för update: "+fileName);
+    $.ajax({
+      
+      url: "Ajax/ajax.php?updateLogoId="+id+"&updateLogoPath=upload/"+fileName,
+      
+      success:function(){
+        alert("success");
+        displayLogo();
+      }
+    });
+  });
+  function displayLogo(){
+    var id = $('#idField').val();
+    
+    $.ajax({
+      
+      url: "Ajax/ajax.php?logoId="+id,
+     
+      
+      success: function(content){
+        alert("finns id? "+id);
+        var dat_img="<td>Tävlingslogga:</td>";
+        //contentType: 'image/jpg',
+        
+        content = JSON.parse(content),
+        
+        alert("here comes shit");
+        alert(content);
+        
+        dat_img+="<tr><td><img src= '" + content + "' alt ='Error' /></td></tr>";
+        dat_img+="<td><label for='file'>Filename:</label><input type='file' name='file' id='file'><td>";
+				dat_img+="<input type='submit'  id='updateLogo' name='submit' value='Uppdatera Loggaaaaa!!!!!!!!!!!'></td></td>";
+        document.getElementById('logoTable').innerHTML=dat_img;
+      }
+    });
+        
+  }
+//});
 
 function createSelect(){
   $.ajax({
@@ -116,7 +169,7 @@ function createSelect(){
 }
 
 /*
-Information about the  competition is update thwough the table
+Information about the  competition is updated through the table
 generated when loading competition data.
 */
 $(function(){
@@ -151,7 +204,7 @@ Function updates the displayed tables.
 Requires the name of the competition.
 */
    function updateTables(competition){
-    alert("Uppdatera dumfan: "+competition);
+    //alert("Uppdatera dumfan: "+competition);
     $.ajax({
       
       async: false,
@@ -162,7 +215,7 @@ Requires the name of the competition.
       success: function(content){
         
         console.log("Stronk");
-        alert("success");
+        //alert("success");
         
         var dat_string = '<table id="competitionTable" class="firstTableList">';
 				dat_string += '<tr> <th>ID</th> <th>Namn</th><th>Datum</th> <th>Sista anmälningsdatum</th> <th>Arrangör</th> </tr>';
@@ -185,7 +238,8 @@ Requires the name of the competition.
         message = "Clicked Button";
         
         document.getElementById('table2').innerHTML = dat_string2;
- 
+        alert("Trigga då!");
+        displayLogo();
 			}  
 		});
   }
@@ -201,6 +255,16 @@ $(function(){
     $( "#addEvent" ).click(function() {
       var checkboxes = $('input[type=checkbox]:checked');
       var chosenClass = $("#chooseClass").find(":selected").text();
+      //alert(chosenClass);
+      if(chosenClass == " - Välj klass - " ) {
+        alert("OBS! Välj en klass");
+        return;
+      }
+      
+      if(checkboxes == "" ) {
+        alert("OBS! Minst en gren ska väljas");
+        return;
+      }
       
       var boxString="";
       for (var i=0, n=checkboxes.length; i<n;i++) {

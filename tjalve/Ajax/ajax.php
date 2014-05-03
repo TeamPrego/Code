@@ -15,6 +15,20 @@
 		$temp =  new Competition();
 		$temp->deleteDiscipline($_GET['compId'], $_GET['gren'], $_GET['klass']);
 	}
+  
+  if(isset($_GET['logoId'])){
+    $logoId = $_GET['logoId'];
+		$temp =  new Competition();
+		$logo = $temp->getCompFile($logoId);
+    echo json_encode($logo);
+	}
+  
+  if(isset($_GET['updateLogoId']) && isset($_GET['updateLogoPath'])){
+    $logoId = $_GET['updateLogoId'];
+    $logoPath=$_GET['updateLogoPath'];
+		$temp =  new Competition();
+		$logo = $temp->updateCompetitionLogo($logoId, $logoPath);
+	}
 	
 	if(isset($_GET['competitionID']) && isset($_GET['inp'])) {
 

@@ -1,31 +1,4 @@
 
-
-<?php
-
-if(isset($_GET['competitionId'])) {
-
-	 $compID = $_GET['competitionId'];
-     $temp = new competition();
-     $result = $temp->getAllAvailableDisciplines($compID);
-	 echo json_encode($result);
-	 }
-/*
-if(isset($_GET['compName'])) {
- 
-	 $compName = $_GET['compName'];
-     $temp = new competition();
-     $result = $temp->getCompetitionByName($compName);
-     /*$result = ['competitionId' => "1",
-								'competitionName' => "Flonks",
-                'date' => "2014",
-                'lastDate' => "2014",
-                'organizer' => "Jag",
-                ];
-    echo json_encode($result);
-    //echo $compName;
-    //echo "DOPE!";
-}*/
-?>
 <?php
 /*2014-04-11
 The class should represent a competition:
@@ -250,6 +223,15 @@ The class should represent a competition:
 	  return $row->logo;
   }
 
+  public function updateCompetitionLogo($id, $logo){
+    include "config.php";
+    $sql = "UPDATE  competition SET  logo =  '$logo' WHERE  competitionId = '$id'";
+    if (!mysqli_query($con,$sql)) {
+			  die('Error: ' . mysqli_error($con));
+		}
+    mysqli_close($con);
+  }
+  
 	public function getAllYearClasses() {
 	  include "config.php";
       $query = "SELECT * FROM allyearclasses WHERE 1";
