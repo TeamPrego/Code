@@ -28,8 +28,7 @@
 
 	// Include competitionsclass to get all competitions.
 	include "class/competition.php";
-	$comp = new Competition();
-	$allCompetitions = $comp->getAllCompetitions();
+	$allCompetitions = getAllCompetitionsToArray();
 
 	// For every competitions write out the informations
 	foreach ($allCompetitions as $competition) {

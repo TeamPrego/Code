@@ -57,10 +57,15 @@ if(isset($_GET['compName'])) {
 
 	//This will give all competitions from the DB
 	if(isset($_GET['getAllCompetitions'])) {
-		$comp = new Competition();
-		echo json_encode($comp->getAllCompetitions());
+		echo json_encode(getAllCompetitionsToArray());
 	}
-
+  
+  if(isset($_GET['getAllCompetitionObjects'])) {
+    $comp = new Competition();
+    $temp = $comp->getAllCompetitions();
+		echo json_encode($temp);
+	}
+  
 	// Gets all clubs from one competition and returns JSON
 	if(isset($_GET['getAllClubsFromCompetition']) && isset($_GET['competitionId'])) {
 		$clubs = new Club();
@@ -73,8 +78,8 @@ if(isset($_GET['compName'])) {
 	}
 
 	// Gets all participant and their disciplines from one competition and returns JSON
-	if(isset($_GET['getAllParticipantAndDesciplinesFromCompetition']) && isset($_GET['competitionName'])) {
-		echo json_encode(getAllParticipantAndDesciplinesFromCompetition($_GET['competitionName']));
+	if(isset($_GET['getAllParticipantAndDisciplinesFromCompetition']) && isset($_GET['competitionName'])) {
+		echo json_encode(getAllParticipantAndDisciplinesFromCompetition($_GET['competitionName']));
 	}
 
 	//Updates the bibnumbers on all participant in one competition.

@@ -13,10 +13,11 @@ include "templates/adminheader.php";
 	<select name='chooseCompetition' id='chooseCompetition' style='textalign: center'>
 	<?php
 		include "class/competition.php";
-		$comp = new Competition();
-		$allCompetitions = $comp->getAllCompetitions();
+		$allCompetitions = getAllCompetitionsToArray();
+		$lastClub = "";
 		foreach ($allCompetitions as $competition) {
 			echo "<option value='" .$competition['competitionId']. "'>" .$competition['competitionName']. "</option>";
+
 		}					
 	?>
 	</select>
@@ -39,11 +40,11 @@ include "templates/adminheader.php";
 	$('#chooseCompetition').change(function() {
 			var inp = $(this).find(":selected").text();
 			$.ajax({
-				url: 'Ajax/ajax.php?getAllParticipantAndDesciplinesFromCompetition=1&competitionName='+inp+'',
+				url: 'Ajax/ajax.php?getAllParticipantAndDisciplinesFromCompetition=1&competitionName='+inp,
 				success: function(content) {
 					content = $.parseJSON(content);
 					var count = 0;
-					var theString= '<form method="POST" id="firstForm" name="firstForm" action="database/acceptLateReg.php">'
+					var theString= '<form method="POST" id="firstForm" name="firstForm" action="forms/acceptLateReg.php">'
 					theString += '<table class ="firstTableList" cellspacing="0" cellpadding="0">';
 					theString += '<tr><th>Nummerlapp</th><th>Namn</th><th>Klubb</th>';
 					$.each(content, function(index, value) {
@@ -71,6 +72,8 @@ include "templates/adminheader.php";
 
 	//When the page are loaded - trigger a change in the scrolldownlist so information will be shown.
 	$('#chooseCompetition').trigger("change");
+
+	chooseCompetition.SelectedIndex = chooseCompetition.Items.Count-1;
 
 </script>
 

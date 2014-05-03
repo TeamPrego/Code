@@ -149,7 +149,7 @@ competition. Generic is sent to ajax as a string but is never used.
 
 function createSelect(){
   $.ajax({
-    url: 'Ajax/ajax.php?getAllCompetitions=generic',
+    url: 'Ajax/ajax.php?getAllCompetitionObjects=generic',
     
     success: function(content){
       
