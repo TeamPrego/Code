@@ -1,7 +1,7 @@
 <!--Create competition page-->
 <!--Granskad och godkänd 2014-03-04-->
 <?php
-include "templates/adminheader.php";
+  include "templates/adminheader.php";
 ?>
 <h1> Skapa tävling </h1>
 
@@ -37,15 +37,14 @@ include "templates/adminheader.php";
 </table>
 
 <?php
-if(isset($_POST['compName'])!="" && $_POST['organizer']!="" && $_POST['dateFrom']!="" && $_POST['dateTo']!="" && $_POST['lastDay']!=""){
-	if(!isset($_POST['file'])){
-		$_POST['file'] = NULL;
-	}
-  include "class/competition.php";
-  $temp = new Competition();
-  //echo "hello ".$_POST['compName'];
-  $temp->pushToDB($_POST['compName'], $_POST['organizer'], $_POST['dateFrom'], $_POST['dateTo'], $_POST['lastDay'], $_POST['file']);
-}
+  if(isset($_POST['compName'])!="" && $_POST['organizer']!="" && $_POST['dateFrom']!="" && $_POST['dateTo']!="" && $_POST['lastDay']!=""){
+    if(!isset($_POST['file'])){
+      $_POST['file'] = NULL;
+    }
+    include "class/competition.php";
+    $temp = new Competition();
+    $temp->pushToDB($_POST['compName'], $_POST['organizer'], $_POST['dateFrom'], $_POST['dateTo'], $_POST['lastDay'], $_POST['file']);
+  }
 ?>
 <!--The Progress Bar -->
 <div class=progressBar>
@@ -53,5 +52,5 @@ if(isset($_POST['compName'])!="" && $_POST['organizer']!="" && $_POST['dateFrom'
 </div>	
 
 <?php
-include "templates/adminfooter.php";
+  include "templates/adminfooter.php";
 ?>

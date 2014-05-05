@@ -1,6 +1,6 @@
 <?php
 
-include "participantdisciplines.php";
+include "participant.php";
 
 	$temp2 = new ParticipantDisciplines();
 	$temp2->setParticipantId(29);
