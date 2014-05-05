@@ -11,9 +11,9 @@
 	}
 
 	
-	if(isset($_GET['compId']) && isset($_GET['gren']) && isset($_GET['klass'])){
+	if(isset($_GET['compId']) && isset($_GET['grenId']) && isset($_GET['klass'])){
 		$temp =  new Competition();
-		$temp->deleteDiscipline($_GET['compId'], $_GET['gren'], $_GET['klass']);
+		$temp->deleteDiscipline($_GET['compId'], $_GET['grenId'], $_GET['klass']);
 	}
 	
 	if(isset($_GET['competitionID']) && isset($_GET['inp'])) {
