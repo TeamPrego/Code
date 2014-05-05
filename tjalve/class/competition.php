@@ -2,13 +2,13 @@
 
 <?php
 
-if(isset($_GET['competitionId'])) {
+// if(isset($_GET['competitionId'])) {
 
-	 $compID = $_GET['competitionId'];
-     $temp = new competition();
-     $result = $temp->getAllAvailableDisciplines($compID);
-	 echo json_encode($result);
-	 }
+// 	 $compID = $_GET['competitionId'];
+//      $temp = new competition();
+//      $result = $temp->getAllAvailableDisciplines($compID);
+// 	 echo json_encode($result);
+// 	 }
 /*
 if(isset($_GET['compName'])) {
  
