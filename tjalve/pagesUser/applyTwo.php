@@ -7,7 +7,7 @@ session_start();
 <!--Headning -->
 <h1>Anmälan till
 	<?php
-		include "class/competition.php";
+		include "../class/competition.php";
 		$comp = new Competition();
 		echo $comp->getCompNameByContactId($_GET['contactId']);
 	?>
@@ -18,7 +18,7 @@ session_start();
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
 	<h2>Skriv in deltagarinformation</h2>
-	<form method="post" id="firstForm" name="firstForm" action="forms/addParticipant.php"> 
+	<form method="post" id="firstForm" name="firstForm" action="../forms/addParticipant.php"> 
 		<table id ="formDiv">
 			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
 			<input type="hidden" value= <?php echo $_GET['prio'] ?> name="prio">
@@ -85,7 +85,7 @@ $('#chooseClass').change(function() {
 		var contactId = getURLParameter('contactId');
 		console.log(inp);
 		$.ajax({
-			url: 'getAvailableDisciplines.php?class='+inp+'&contactId='+contactId,
+			url: '../Ajax/ajax.php?getAvalibleDisciplinesFromYearclassInCompetition=1&class='+inp+'&contactId='+contactId,
 			success: function(content) {
 				console.log(content);
 				content = $.parseJSON(content);
@@ -117,7 +117,7 @@ jQuery(document).ready(function() {
 	var contactId = getURLParameter("contactId");
 	participantId.value = "";
 	$.ajax({
-		url: 'Ajax/ajax.php?getAllParticipantsAndDisciplinesFromContactId=1&contactId='+contactId+'',
+		url: '../Ajax/ajax.php?getAllParticipantsAndDisciplinesFromContactId=1&contactId='+contactId+'',
 		success: function(content) {
 			content = $.parseJSON(content);
 			var string = "";
@@ -128,6 +128,7 @@ jQuery(document).ready(function() {
 				string += '<tr><th>' + value.lastName + ', ' + value.firstName + '</th><th>Född: '+value.birthYear+'</th><th>SB</th><th>PB</th></tr>';
 				$.each(value.disciplines, function(ind, val) {	
 					string += '<td>' + val.yearClass + '</td><td>' + val.discipline + '</td><td>' + val.SB + '</td><td>' + val.PB + '</td></tr>';
+					prio = val.prio;
 				});
 				var fName = value.firstName;
 				var lName = value.lastName;
@@ -137,7 +138,7 @@ jQuery(document).ready(function() {
 				string += '<td></td>'
 										+ '<td><button class="showButton" name="addClass" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'",'+count+',"'+bY+'")>Lägg till klass</button>'
 										+ '<div class="hideButton" name="infoAddClass"><div id="noParticipants">Lägg till gren till vänster</div></div></td><td></td>'
-										+ '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td></table></div>';
+										+ '<td><a href="../database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + prio + '"><button id="deleteButton">Radera</button></a></td></table></div>';
 				count = count + 1;
 			});		
 			document.getElementById('confirmedDiv').innerHTML = string;	

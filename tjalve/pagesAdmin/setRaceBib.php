@@ -19,7 +19,7 @@
 				<!--Make a dropdown-list this all competitions-->
 				<select name='chooseCompetition' id='chooseCompetition'>
 					<?php
-						include "class/competition.php";
+						include "../class/competition.php";
 						$comp = new Competition();
 						$allCompetitions = getAllCompetitionsToArray();
 						foreach ($allCompetitions as $competition) {
@@ -68,7 +68,7 @@
 		var startNumber = $('#bibBegin').val();
 		// Update database with ajax
 		$.ajax({
-			url: 'Ajax/ajax.php?competitionName='+competitionName+'&startNumber='+startNumber+'',
+			url: '../Ajax/ajax.php?competitionName='+competitionName+'&startNumber='+startNumber+'',
 			success: function(content){
 				console.log("success");
 				// Trigger a change in the competition-dropdownlist
@@ -82,10 +82,10 @@
 	$('#chooseCompetition').change(function() {
 		var inp = $(this).find(":selected").text();
 		$.ajax({
-			url: 'Ajax/ajax.php?getAllParticipantCompetition=1&competitionName='+inp+'',
+			url: '../Ajax/ajax.php?getAllParticipantCompetition=1&competitionName='+inp+'',
 			success: function(content) {
 				content = $.parseJSON(content);
-				var dat_string = 	'<form method="POST" id="firstForm" name="firstForm" action="forms/changeRaceBib.php">'
+				var dat_string = 	'<form method="POST" id="firstForm" name="firstForm" action="../forms/changeRaceBib.php">'
 				dat_string += 		'<table class ="firstTableList" cellspacing="0" cellpadding="0">';
 				dat_string += 		'<tr><th>Nummerlapp</th><th>Namn</th><th>Klubb</th>';
 				$count = 0;

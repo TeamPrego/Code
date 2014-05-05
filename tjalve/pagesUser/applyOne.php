@@ -6,7 +6,7 @@
 <!--Headning -->
 <h1> Anmälan till 
 	<?php 
-		include "class/competition.php";
+		include "../class/competition.php";
 		$comp = new Competition();
 		echo $comp->getCompName($_GET['competitionId']); 
 	?> 
@@ -17,7 +17,7 @@
 <div id="leftPartOfApplication">
 	<h2>Skriv in kontaktpersons-uppgifter</h2>
 	<table id ="formDiv">
-		<form id="firstForm" name="firstForm" method="post" action="forms/addContact.php"> 
+		<form id="firstForm" name="firstForm" method="post" action="../forms/addContact.php"> 
 			<input type="hidden" value=<?php echo $_GET['competitionId']?> name="competitionId">
 			<input type="hidden" value=<?php echo $_GET['prio']?> name="prio">
 			<tr>
@@ -25,7 +25,7 @@
 				<td>
 					<select name="chooseClub" id="chooseClub">
 						<?php
-							include "class/Club.php";
+							include "../class/Club.php";
 							$club = new Club();
 							$allClubs = $club->getAllClubs();
 							foreach ($allClubs as $theclub) {

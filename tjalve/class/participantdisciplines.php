@@ -63,5 +63,33 @@
     return $array;
   }
 
-  function addDisciplineToDB($discipline, participantId, yearClass, )
+  function getDisciplineByDisciplineId($disciplineId) {
+    include "config.php";
+    $query = "SELECT * FROM alldisciplines WHERE disciplineId = '$disciplineId'";
+    $discipline = mysqli_query($con, $query);
+    return $discipline->fetch_object()->discipline;
+  }
+
+  function getAvalibleDisciplinesFromYearclassInCompetition($class,$contactId) {
+    include "config.php";
+
+    $data = mysqli_query($con, "SELECT competitionId FROM contact WHERE contactId = '$contactId'");
+    $competitionid = $data->fetch_object()->competitionId;
+
+    $query = "SELECT * FROM competitiondisciplines WHERE yearClass = '$class' AND competitionId = '$competitionid'";
+    $data = mysqli_query($con, $query);
+
+    if (!$data) {
+      die('Error: ' . mysqli_error($con));
+    }
+
+    $disc = [];
+    while($row = $data->fetch_object()) {
+      $disc[] = [ 'gren' => getDisciplineByDisciplineId($row->disciplineId), 
+                  'klass' => $row->yearClass];
+    }
+    mysqli_close($con);
+
+    return $disc;
+  }
 ?>

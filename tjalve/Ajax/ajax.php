@@ -159,6 +159,7 @@ if(isset($_GET['compName'])) {
     echo json_encode(getDisciplinesByParticipantId($_GET['participantId']));
   }
 
+  // Gets all clubs avaible in the DB
   if(isset($_GET['getAllClubs'])){
     echo json_encode(getAllClubs());
   }
@@ -167,6 +168,14 @@ if(isset($_GET['compName'])) {
     echo json_encode(getAllDisciplinesByCompId($_GET['competitionId'], $_GET['yearClass']));
   }
   //Gets all partcipants from one contact
+  //Function getAllParticipantsAndDisciplinesFromContactId => Participant.php
   if(isset($_GET['getAllParticipantsAndDisciplinesFromContactId']) && isset($_GET['contactId'])) {
     echo json_encode(getAllParticipantsAndDisciplinesFromContactId($_GET['contactId']));
+  }
+
+  // Gets all avaible disciplines from one yearClass in a competition =)
+  // Function getAvalibleDisciplinesFromYearclassInCompetition is located in participantdisciplines.php
+  if(isset($_GET['getAvalibleDisciplinesFromYearclassInCompetition']) && isset($_GET['class']) && isset($_GET['contactId'])) {
+    echo json_encode(getAvalibleDisciplinesFromYearclassInCompetition($_GET['class'],$_GET['contactId']));
+  }
 ?>

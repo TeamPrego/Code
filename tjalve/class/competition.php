@@ -489,7 +489,10 @@ The class should represent a competition:
 	// Output: An array with all disciplines
 	function getAllDisciplinesFromCompetition($competitionId) {
 		include "config.php";
-		$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
+		$data = mysqli_query($con, "SELECT a.*
+																FROM alldisciplines a
+																INNER JOIN competitiondisciplines cd ON a.disciplineId = cd.disciplineId
+																WHERE cd.competitionId = 10");
 		$array=[];
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->discipline, $array)) {
@@ -514,10 +517,11 @@ The class should represent a competition:
 		}
 
 		while($rowAgeClass = $dataAgeClass->fetch_object()) {
+			$rawDiscipline = getDisciplineByDisciplineId($rowAgeClass->disciplineId);
 			if(($yearClass === "Alla" && $discipline === "Alla") ||
 			($rowAgeClass->yearClass === $yearClass && $discipline === "Alla") ||
-			($rowAgeClass->discipline === $discipline && $yearClass === "Alla") ||
-			($rowAgeClass->discipline === $discipline && $rowAgeClass->yearClass === $yearClass)) {
+			($rawDiscipline === $discipline && $yearClass === "Alla") ||
+			($rawDiscipline === $discipline && $rowAgeClass->yearClass === $yearClass)) {
 				$participants = [];
 				$query = "SELECT p.*, c.*, pd.*
 		              FROM participantdisciplines pd
@@ -531,8 +535,7 @@ The class should represent a competition:
 				  die('Error: ' . mysqli_error($con));
 				}
 				while($rowDiscipline = $dataDiscipline->fetch_object()){
-					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
-
+					if($rowDiscipline->yearClass == $rowAgeClass->yearClass && $rowDiscipline->discipline == $rawDiscipline)
 						$participants[] = [	'firstName'	=> $rowDiscipline->firstName,
 																'lastName' 	=> $rowDiscipline->lastName,
 																'club' 			=> getClub($rowDiscipline->clubId)['club'],
@@ -540,7 +543,7 @@ The class should represent a competition:
 				}
 				if($participants != null) {
 					$disc[] = [ 'className' 		=> $rowAgeClass->yearClass,
-											'discipline' 		=> $rowAgeClass->discipline,
+											'discipline' 		=> $rawDiscipline,
 											'participants' 	=> $participants];
 				}
 			}
@@ -560,7 +563,8 @@ The class should represent a competition:
 	  	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
 										'competitionName' 			=> 	$row->competitionName,
 										'competitionOrganizer' 	=> 	$row->organizer,
-										'competitionDate' 			=> 	$row->date,
+										'competitionDateFrom' 	=> 	$row->dateFrom,
+										'competitionDateTo' 		=> 	$row->dateTo,
 										'competitionLastDate' 	=> 	$row->lastDate];
 	  }
 	  mysqli_close($con);

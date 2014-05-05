@@ -12,7 +12,7 @@ include "templates/adminheader.php";
 	<!--A scrolldownnlist with all competitons -->
 	<select name='chooseCompetition' id='chooseCompetition' style='textalign: center'>
 	<?php
-		include "class/competition.php";
+		include "./class/competition.php";
 		$allCompetitions = getAllCompetitionsToArray();
 		$lastClub = "";
 		foreach ($allCompetitions as $competition) {
@@ -40,11 +40,11 @@ include "templates/adminheader.php";
 	$('#chooseCompetition').change(function() {
 			var inp = $(this).find(":selected").text();
 			$.ajax({
-				url: 'Ajax/ajax.php?getAllParticipantAndDisciplinesFromCompetition=1&competitionName='+inp,
+				url: '../Ajax/ajax.php?getAllParticipantAndDisciplinesFromCompetition=1&competitionName='+inp,
 				success: function(content) {
 					content = $.parseJSON(content);
 					var count = 0;
-					var theString= '<form method="POST" id="firstForm" name="firstForm" action="forms/acceptLateReg.php">'
+					var theString= '<form method="POST" id="firstForm" name="firstForm" action="../forms/acceptLateReg.php">'
 					theString += '<table class ="firstTableList" cellspacing="0" cellpadding="0">';
 					theString += '<tr><th>Nummerlapp</th><th>Namn</th><th>Klubb</th>';
 					$.each(content, function(index, value) {

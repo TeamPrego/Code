@@ -7,7 +7,7 @@
 <h1>Startlista för 
 	<?php 
 		// Get the competitionName
-		include "class/competition.php";
+		include "../class/competition.php";
 		$comp = new Competition();
 		echo $comp->getCompName($_GET['competitionId']); 
 	?>
@@ -73,7 +73,7 @@ function Update() {
 
 	// Get all infomation with Ajax
 	$.ajax({
-		url: 'Ajax/ajax.php?ageClass='+ageClass+'&discipline='+discipline+'&competitionId='+competitionId+'',
+		url: '../Ajax/ajax.php?ageClass='+ageClass+'&discipline='+discipline+'&competitionId='+competitionId+'',
 		success: function(content) {
 			content = $.parseJSON(content);
 			console.log(content);

@@ -23,5 +23,5 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	mysqli_close($con);
-	header("Location: ../applyTwo.php?contactId=".$contactId."&prio=".$_GET['prio']);
+	header("Location: ../pagesUser/applyTwo.php?contactId=".$contactId."&prio=".$_GET['prio']);
 ?>

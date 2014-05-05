@@ -4,6 +4,7 @@
 	include_once "../class/participantdisciplines.php";
 
 	$participantId = $_POST['participantId'];
+	$prio = $_POST['prio'];
 
 	if($participantId == 0) {
 		$temp = new Participant();
@@ -11,7 +12,6 @@
 		$temp->setfirstName($_POST['fName']);
 		$temp->setlastName($_POST['lName']);
 		$temp->setBirthYear($_POST['bYear']);
-		$temp->setPrio($_POST['prio']);
 		$temp->pushParticipanttoDB();
 		$participantId = $temp->getParticipantId();		
 	}
@@ -28,8 +28,8 @@
 		if($check) {
 			$SB = "SB" . $grentyp;
 			$PB = "PB" . $grentyp;
-			$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB)
-			VALUES ('$participantId', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]')";
+			$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB, prio)
+			VALUES ('$participantId', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]', '$prio')";
 
 			if (!mysqli_query($con,$quary)) {
 			  die('Error: ' . mysqli_error($con));
@@ -37,4 +37,4 @@
 		}
 	}
 	mysqli_close($con);
-	header("Location: ../applyTwo.php?contactId=".$_POST['contactId']."&prio=".$_POST['prio']);
+	header("Location: ../pagesUser/applyTwo.php?contactId=".$_POST['contactId']."&prio=".$_POST['prio']);

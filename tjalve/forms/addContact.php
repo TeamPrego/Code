@@ -11,6 +11,6 @@
 	$contactId = $temp->getcontactId();
 
 	mysqli_close($con);
-	header("Location: ../applyTwo.php?contactId=".$contactId."&prio=".$_POST['prio']);
+	header("Location: ../pagesUser/applyTwo.php?contactId=".$contactId."&prio=".$_POST['prio']);
 	ob_end_flush();
 ?>

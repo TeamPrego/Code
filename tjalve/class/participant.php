@@ -6,7 +6,6 @@
     private $firstName;
     private $lastName;
     private $birthYear;
-    private $prio;
        
     public function __construct(){
     }
@@ -22,10 +21,6 @@
 
     public function setBirthYear($year){
       $this->birthYear = $year;
-    }
-    
-    public function setPrio($nr){
-      $this->prio = $nr;
     }
 
     public function setContactId($Id){

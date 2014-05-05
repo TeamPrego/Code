@@ -41,7 +41,7 @@ var competitionName = "";
 	// Load all competitions in the dropdownlist
 	jQuery(document).ready(function() {
 		$.ajax({
-			url: 'Ajax/ajax.php?getAllCompetitions=1',
+			url: '../Ajax/ajax.php?getAllCompetitions=1',
 			success: function(content) {
 				content = $.parseJSON(content);
 				var string = "";
@@ -69,7 +69,7 @@ var competitionName = "";
 
 			// time to get all clubs who is reg in one competition
 			$.ajax({
-			url: 'Ajax/ajax.php?getAllClubsFromCompetition=1&competitionId='+competitionId,
+			url: '../Ajax/ajax.php?getAllClubsFromCompetition=1&competitionId='+competitionId,
 			success: function(content) {
 				// parse the content
 				content = $.parseJSON(content);
@@ -93,7 +93,7 @@ var competitionName = "";
 		var clubId = $(this).find("option:selected").attr('id');
 		// Gets all participants from one club
 		$.ajax({
-			url: 'Ajax/ajax.php?getAllParticipantFromClub=1&clubId='+clubId,
+			url: '../Ajax/ajax.php?getAllParticipantFromClub=1&clubId='+clubId,
 			success: function(content) {
 				content = $.parseJSON(content);
 

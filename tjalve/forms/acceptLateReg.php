@@ -6,5 +6,5 @@
 		$queryUpdate = "UPDATE `participantdisciplines` SET `prio` = '2' WHERE `pIndex` = '$pIndex'";
 		mysqli_query($con, $queryUpdate);
 	}
-	header("Location: ../acceptLateReg.php");
+	header("Location: ../pagesAdmin/acceptLateReg.php");
 ?>
