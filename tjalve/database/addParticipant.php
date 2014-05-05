@@ -1,6 +1,6 @@
 <?php
 	include "config.php";
-	include "participant.php";
+	include_once "../class/participant.php";
 
 	$temp = new Participant();
 

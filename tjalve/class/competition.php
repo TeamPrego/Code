@@ -36,18 +36,18 @@ The class should represent a competition:
   public function pushToDB($name, $arranger, $beginDate, $endDate, $lastDate){
   include "config.php";
 	  //http://www.w3schools.com/php/php_file_upload.asp
-			//copy image
-			if ($_FILES["file"]["error"] > 0)
-			  {
-			  echo "Error: " . $_FILES["file"]["error"] . "<br>";
-			  }
-			else
-			  {
-			  echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-			  echo "Type: " . $_FILES["file"]["type"] . "<br>";
-			  echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-			  echo "Stored in: " . $_FILES["file"]["tmp_name"];
-			  }
+		//copy image
+		if ($_FILES["file"]["error"] > 0)
+		  {
+		  echo "Error: " . $_FILES["file"]["error"] . "<br>";
+		  }
+		else
+		  {
+		  echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+		  echo "Type: " . $_FILES["file"]["type"] . "<br>";
+		  echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+		  echo "Stored in: " . $_FILES["file"]["tmp_name"];
+		  }
 			  
 			//save image on server
 			$allowedExts = array("gif", "jpeg", "jpg", "png");
@@ -111,7 +111,9 @@ The class should represent a competition:
 			  die('Error: ' . mysqli_error($con));
 			}
 			$row = $data2->fetch_object();
+
       mysqli_close($con);
+
 	  header("Location: createCompetitionStep2.php?compID=".$row->competitionId);
     }
 	/*
@@ -152,18 +154,18 @@ The class should represent a competition:
 	}
 
 	public function getCompOrganizer($compID) {
-     include "config.php";
-		  $query = "SELECT * FROM competition WHERE competitionId = '$compID'";
-		  $data = mysqli_query($con, $query);
-		  if (!$data) {
-			  die('Error: ' . mysqli_error($con));
-			}
-			$row = $data->fetch_object();
-		  return $row->organizer;
-    }
-	
+		include "config.php";
+		$query = "SELECT * FROM competition WHERE competitionId = '$compID'";
+		$data = mysqli_query($con, $query);
+		if (!$data) {
+			die('Error: ' . mysqli_error($con));
+		}
+		$row = $data->fetch_object();
+		return $row->organizer;
+	}
+
 	public function getCompDate($compID) {
-     include "config.php";
+    include "config.php";
 	  $query = "SELECT * FROM competition WHERE competitionId = '$compID'";
 	  $data = mysqli_query($con, $query);
 	  if (!$data) {
@@ -195,13 +197,22 @@ The class should represent a competition:
 	  return $row->logo;
   }
 
+  public function updateCompetitionLogo($id, $logo){
+    include "config.php";
+    $sql = "UPDATE  competition SET  logo =  '$logo' WHERE  competitionId = '$id'";
+    if (!mysqli_query($con,$sql)) {
+			  die('Error: ' . mysqli_error($con));
+		}
+    mysqli_close($con);
+  }
+  
 	public function getAllYearClasses() {
 	  include "config.php";
-      $query = "SELECT * FROM allyearclasses WHERE 1";
+    $query = "SELECT * FROM allyearclasses WHERE 1";
 	  $data = mysqli_query($con, $query);
 	  if (!$data) {
-			  die('Error: ' . mysqli_error($con));
-			}
+		  die('Error: ' . mysqli_error($con));
+		}
 		$array=[];
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->yearClass, $array)) {
@@ -215,7 +226,7 @@ The class should represent a competition:
 		}
 	  
     }
-
+	
 	public function getAllDisciplines($compID, $inp) {
 	include "config.php";
 	$query = "SELECT disciplineId
@@ -276,6 +287,7 @@ The class should represent a competition:
     }
 	
 	public function getAllAvailableDisciplines($compID) {
+  
 	  include "config.php";
 	  $query = "SELECT allDisciplines.discipline, competitiondisciplines.yearClass, allDisciplines.disciplineId
 		FROM allDisciplines, competitiondisciplines 
@@ -300,6 +312,7 @@ The class should represent a competition:
 	//echo '<pre>'; print_r($nameOfDisciplines); echo '<pre/>';
 	
 	public function addAgeClass($compID, $gren, $ageClass) {
+  
 	include "config.php";
 	  foreach($gren as $key){
 		$query = "INSERT INTO competitiondisciplines(competitionId, yearClass, disciplineId)
@@ -323,13 +336,26 @@ The class should represent a competition:
 	
 		$sql = "DELETE FROM competitiondisciplines WHERE competitionId = $compID && yearClass = '$class' && disciplineId = '$grenId'";
 
+
 			if (!mysqli_query($con,$sql)) {
 			  die('Error: ' . mysqli_error($con));
 			}
 			mysqli_close($con);
-		header("Location: ../createCompetitionStep2.php?compID=".$compID);
+			header("Location: ../createCompetitionStep2.php?compID=".$compID);
     }
 	
+
+	/*public function getDisciplineNameById($disciplineId) {
+      include "config.php";
+	  $query = "SELECT discipline FROM competitiondisciplines WHERE disciplineId = '$disciplineId'";
+	  $data = mysqli_query($con, $query);
+	  if (!$data) {
+		  die('Error: ' . mysqli_error($con));
+		}
+		$row = $data->fetch_object();
+	  return $row;
+    }*/
+
 	
     public function changeBeginDate($newDate) {
       $beginDate=$newDate;
@@ -350,13 +376,6 @@ The class should represent a competition:
       $dataCompetition = mysqli_query($con, $sql);
       $array = [];
       while($row=$dataCompetition->fetch_object()) {      
-	    	/*$array[] = 	[	'competitionId' 				=>	$row->competitionId,
-											'competitionName' 			=> 	$row->competitionName,
-											'competitionOrganizer' 	=> 	$row->organizer,
-											'competitionDate' 			=> 	$row->date,
-											'competitionLastDate' 	=> 	$row->lastDate];
-         	Ska helst inte skicka tillbaka en array med tävlingar till "vanlig kod" då man ska inte komma åt variablerna i koden
-						Bättre att skicka tillbaka en array med keys.*/
         $temp = new Competition();
         $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
         $array[] = $temp;
@@ -373,17 +392,17 @@ The class should represent a competition:
       $data;
       while($row=$dataCompetition->fetch_object()) {
 
-                $data = ['competitionId' => $row->competitionId,
+            /*    $data = ['competitionId' => $row->competitionId,
 						'competitionName' => $row->competitionName,
 					'date' => $row->date,
 					'lastDate' => $row->lastDate,
 					'organizer' => $row->organizer,
-					];
+					];*/
 
         //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
         
         $temp = new Competition();
-        $temp->setCompetition($row -> competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
         $data = $temp;
         //echo $allCompetitions[0]->name;
 
@@ -401,23 +420,152 @@ The class should represent a competition:
     						];
     	return $array;
     }
+
+
+    /*public function getAllAvailableDisciplines(){*/
+
+  public function getAllAvailableDisciplines2(){
+
+    include 'config.php';
     
+    $sql = "SELECT * FROM alldisciplines WHERE 1";
+    $dataDisciplines = mysqli_query($con, $sql);
+    $allDisciplines = [];
+    
+    while($row=$dataDisciplines->fetch_object()) {
+      $allDisciplines[] = [	'id' 					=> $row->disciplineId, 
+      											'discipline' 	=> $row->discipline];
+    }
+    
+    mysqli_close($con);
+    return $allDisciplines;
+  }
+
+
   public function getEventById($id){
       include "config.php";
       $sql = "SELECT * FROM competitiondisciplines WHERE competitionId = '$id'";
-      //$sql = "SELECT * FROM competitiondisciplines WHERE competitionId = 1";
       $dataEvent = mysqli_query($con, $sql);
       $data = [];
       while($row=$dataEvent->fetch_object()) {
-                
-                $data[] = ['competitionId' => $row->competitionId,
-								'yearClass' => $row->yearClass,
-                'discipline' => $row->discipline,
-                ];
+                $data[] = [	'competitionId' => $row->competitionId,
+														'yearClass' => $row->yearClass,
+						                'discipline' => $row->discipline];
       }
       mysqli_close($con);	
       return $data;
   }
-}
+
+}// End of class
+
+
+	// Check which competitionid belongs to a contact id.
+	// Input: Contact Id
+	// Return: Competition Id
+	function getCompetitionIdFromContactId($contactId) {
+		include "config.php";
+    $competitionId = mysqli_query($con, "SELECT competitionId FROM contact WHERE contactId = '$contactId'");
+    mysqli_close($con);	
+		return $competitionId->fetch_object()->competitionId;
+	}
+
+	// Gets all Classes from one competition
+	// Input: CompetitionId
+	// Output: An array with all classes
+	function getAllClassesFromCompetition($competitionId) {
+		include "config.php";
+		$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
+		$array=[];
+		while($row = $data->fetch_object()) {
+			if(!in_array($row->yearClass, $array)) {
+				array_push($array, $row->yearClass);
+			}
+		}
+		mysqli_close($con);	
+		return $array;
+	}
+
+	// Gets all disciplines from one competition
+	// Input: CompetitionId
+	// Output: An array with all disciplines
+	function getAllDisciplinesFromCompetition($competitionId) {
+		include "config.php";
+		$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
+		$array=[];
+		while($row = $data->fetch_object()) {
+			if(!in_array($row->discipline, $array)) {
+				array_push($array, $row->discipline);
+			}
+		}
+		mysqli_close($con);	
+		return $array;
+	}
+
+	// Gets all participants to the startlist
+	// Input: CompetitionId, yearClass and Discipline
+	// Output: Array with a lot of information about the
+	function getStartlist($competitionId, $yearClass, $discipline) {
+		include "config.php";
+		$disc =[];
+
+		//Findning all classes and dicipilnes
+		$dataAgeClass = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId = '$competitionId'");
+		if (!$dataAgeClass) {
+		  die('Error: ' . mysqli_error($con));
+		}
+
+		while($rowAgeClass = $dataAgeClass->fetch_object()) {
+			if(($yearClass === "Alla" && $discipline === "Alla") ||
+			($rowAgeClass->yearClass === $yearClass && $discipline === "Alla") ||
+			($rowAgeClass->discipline === $discipline && $yearClass === "Alla") ||
+			($rowAgeClass->discipline === $discipline && $rowAgeClass->yearClass === $yearClass)) {
+				$participants = [];
+				$query = "SELECT p.*, c.*, pd.*
+		              FROM participantdisciplines pd
+		              INNER JOIN participant p 		ON pd.participantId = p.participantId
+		              INNER JOIN contact c 				ON p.contactId = c.contactId
+		              INNER JOIN competition comp ON c.competitionId = comp.competitionId
+		              WHERE comp.competitionId = '$competitionId'";
+			  $dataDiscipline = mysqli_query($con, $query);
+
+				if (!$dataDiscipline) {
+				  die('Error: ' . mysqli_error($con));
+				}
+				while($rowDiscipline = $dataDiscipline->fetch_object()){
+					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
+						$participants[] = [	'firstName'	=> $rowDiscipline->firstName,
+																'lastName' 	=> $rowDiscipline->lastName,
+																'club' 			=> $rowDiscipline->clubId,
+																'prio' 			=> $rowDiscipline->prio];
+				}
+				if($participants != null) {
+					$disc[] = [ 'className' 		=> $rowAgeClass->yearClass,
+											'discipline' 		=> $rowAgeClass->discipline,
+											'participants' 	=> $participants];
+				}
+			}
+		}
+		return $disc;
+	}
+
+	// Gets all competition
+	// Input: Nothing
+	// Output: All competitions in an array
+	function getAllCompetitionsToArray() {
+	  include 'config.php';
+	  $sql = "SELECT * FROM competition";
+	  $dataCompetition = mysqli_query($con, $sql);
+	  $array = [];
+	  while($row=$dataCompetition->fetch_object()) {      
+	  	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
+										'competitionName' 			=> 	$row->competitionName,
+										'competitionOrganizer' 	=> 	$row->organizer,
+										'competitionDate' 			=> 	$row->date,
+										'competitionLastDate' 	=> 	$row->lastDate];
+	  }
+	  mysqli_close($con);
+	  return $array;
+	}
+
 ?>
 

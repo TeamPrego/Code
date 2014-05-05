@@ -3,6 +3,7 @@
 include "templates/adminheader.php";
 ?>
 
+<!--Make a table with all options the admin could do-->
 <table class ="adminTable">
 	<thead>
 		<tr>
@@ -34,5 +35,6 @@ include "templates/adminheader.php";
 </table>
 
 <?php
-include "templates/adminfooter.php";
+	// Include the footer for the admin-pages
+	include "templates/adminfooter.php";
 ?>

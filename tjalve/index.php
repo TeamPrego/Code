@@ -5,7 +5,10 @@
 <!-- Headning -->
 <h1>Tjalve Friidrott</h1>
 
+<!--A line-->
 <hr>
+
+<!--Make a table with all competitions-->
 <table class ="firstTableList" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
@@ -19,33 +22,41 @@
 	</thead>	
 	<tr><td></td></tr>
 <?php	
+	// Set the time to Europe/Stockholm time
 	date_default_timezone_set("Europe/Stockholm");
 	$date = date('Y-m-d ', time());
-	echo "The current time is: " . $date;
 
+	// Include competitionsclass to get all competitions.
 	include "class/competition.php";
-	$comp = new Competition();
-	$allCompetitions = $comp->getAllCompetitions();
+	$allCompetitions = getAllCompetitionsToArray();
 
+	// For every competitions write out the informations
 	foreach ($allCompetitions as $competition) {
 		echo "<tr><td>" . $competition['competitionName'] . "</td>".
 		"<td>". $competition['competitionDate'] ."</td>".
 		"<td>". $competition['competitionLastDate'] ."</td>";
+		// If the last reg-date are later. Prio sets to one
 		if($competition['competitionLastDate'] > $date)
 			echo "<td><a href='applyOne.php?competitionId=".$competition['competitionId']."&prio=1'>Anmäl dig här</a></td>";
 
+		// If the date is between competitionsdate and last reg-date the prio sets to 0 and the participant is reg as late.
 		elseif($competition['competitionDate'] > $date)
 			echo "<td><a href='applyOne.php?competitionId=".$competition['competitionId']."&prio=0'>Sen anmälan</a></td>";
 
+		// If the competitions allready has taken place
 		else 
 			echo "<td>Too late</td>";
 
-		echo "<td><a href='startList.php?competitionId=".$competition['competitionId']."'>Klicka här</a></td>".
-		"<td><a href='resultat.php?competitionId=".$competition['competitionId']."'>Se resultat här</a></td></tr>";
+		// Link to the Startlist for this competition
+		echo "<td><a href='startList.php?competitionId=".$competition['competitionId']."'>Klicka här</a></td>";
+
+		// Link to the results for this competition
+		echo "<td><a href='resultat.php?competitionId=".$competition['competitionId']."'>Se resultat här</a></td></tr>";
 	}
 ?>
 </table>
 
 <?php
+	// Include the footers for user-pages.
 	include "templates/footer.php";
 ?>
