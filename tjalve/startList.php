@@ -76,6 +76,7 @@ function Update() {
 		url: 'Ajax/ajax.php?ageClass='+ageClass+'&discipline='+discipline+'&competitionId='+competitionId+'',
 		success: function(content) {
 			content = $.parseJSON(content);
+			console.log(content);
 
 			// This string will contain all HTML-code
 			var string = 	'<table class ="firstTableList" cellspacing="0" cellpadding="0">';

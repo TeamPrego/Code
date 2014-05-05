@@ -44,4 +44,24 @@
       mysqli_close($con);
     }
   }
+
+  function getAllDisciplinesByParticipantId($participantId) {
+    include "config.php";
+    $query = "SELECT * FROM participantdisciplines WHERE participantId = '$participantId'";
+    $allDisciplines = mysqli_query($con, $query);
+
+    $array = [];
+    while($discipline = $allDisciplines->fetch_object()) {
+      $array[] = ['pIndex'          => $discipline->pIndex,
+                  'discipline'      => $discipline->discipline,
+                  'participantId'   => $discipline->participantId,
+                  'yearClass'       => $discipline->yearClass,
+                  'SB'              => $discipline->SB,
+                  'PB'              => $discipline->PB,
+                  'prio'            => $discipline->prio];
+    }
+    return $array;
+  }
+
+  function addDisciplineToDB($discipline, participantId, yearClass, )
 ?>

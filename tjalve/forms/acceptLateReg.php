@@ -1,5 +1,5 @@
 <?php
-	include "config.php";
+	include "../class/config.php";
 	
 	$index = $_POST['participant'];
 	foreach ($index as $pIndex) { 

@@ -17,7 +17,7 @@
 <div id="leftPartOfApplication">
 	<h2>Skriv in kontaktpersons-uppgifter</h2>
 	<table id ="formDiv">
-		<form id="firstForm" name="firstForm" method="post" action="database/addContact.php"> 
+		<form id="firstForm" name="firstForm" method="post" action="forms/addContact.php"> 
 			<input type="hidden" value=<?php echo $_GET['competitionId']?> name="competitionId">
 			<input type="hidden" value=<?php echo $_GET['prio']?> name="prio">
 			<tr>

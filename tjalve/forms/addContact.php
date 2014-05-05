@@ -2,10 +2,6 @@
 	ob_start();
 	include_once "../class/contact.php";
 	$temp = new Contact();
-	//$compId = intval($_POST['competitionId']);
-	//echo $compId;
-	//echo gettype($compId);
-	//$temp->setContact($compId, $_POST['chooseClub'],$_POST['contactPerson'],$_POST['contactEmail'],$_POST['contactPhone']);
 	$temp->setcompetitionId(intval($_POST['competitionId']));
 	$temp->setcontactPerson($_POST['contactPerson']);
 	$temp->setcontactEmail($_POST['contactEmail']);

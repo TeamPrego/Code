@@ -18,7 +18,7 @@ session_start();
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
 	<h2>Skriv in deltagarinformation</h2>
-	<form method="post" id="firstForm" name="firstForm" action="database/addParticipant.php"> 
+	<form method="post" id="firstForm" name="firstForm" action="forms/addParticipant.php"> 
 		<table id ="formDiv">
 			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
 			<input type="hidden" value= <?php echo $_GET['prio'] ?> name="prio">
@@ -114,33 +114,33 @@ function getURLParameter(name) {
 var count = 0;
 
 jQuery(document).ready(function() {
-	var inp = getURLParameter("contactId");
-	console.log(inp);
+	var contactId = getURLParameter("contactId");
+	participantId.value = "";
 	$.ajax({
-		url: 'database/findParticipants.php?contactId='+inp+'',
+		url: 'Ajax/ajax.php?getAllParticipantsAndDisciplinesFromContactId=1&contactId='+contactId+'',
 		success: function(content) {
-			console.log(content);
 			content = $.parseJSON(content);
-			var dat_string = "";
+			var string = "";
+			var prio;
 			count = 0;
 			$.each(content, function(index, value) {
-				dat_string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable" cellspacing="0">';
-				dat_string += '<tr><th>' + value.lastName + ', ' + value.firstName + '</th><th>Född: '+value.birthYear+'</th><th>SB</th><th>PB</th></tr>';
+				string += '<div id="confirmedParticipantOneEach"><table id="confirmedParticipantTable" cellspacing="0">';
+				string += '<tr><th>' + value.lastName + ', ' + value.firstName + '</th><th>Född: '+value.birthYear+'</th><th>SB</th><th>PB</th></tr>';
 				$.each(value.disciplines, function(ind, val) {	
-					dat_string += '<td>' + val.ageClass + '</td><td>' + val.discipline + '</td><td>' + val.sb + '</td><td>' + val.pb + '</td></tr>';
+					string += '<td>' + val.yearClass + '</td><td>' + val.discipline + '</td><td>' + val.SB + '</td><td>' + val.PB + '</td></tr>';
 				});
 				var fName = value.firstName;
 				var lName = value.lastName;
 				var pId = value.participantId;
 				var bY = value.birthYear;
 
-				dat_string += '<td></td>'
+				string += '<td></td>'
 										+ '<td><button class="showButton" name="addClass" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'",'+count+',"'+bY+'")>Lägg till klass</button>'
 										+ '<div class="hideButton" name="infoAddClass"><div id="noParticipants">Lägg till gren till vänster</div></div></td><td></td>'
 										+ '<td><a href="database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + value.prio + '"><button id="deleteButton">Radera</button></a></td></table></div>';
 				count = count + 1;
 			});		
-			document.getElementById('confirmedDiv').innerHTML = dat_string;	
+			document.getElementById('confirmedDiv').innerHTML = string;	
 		}
 	});
 });
@@ -178,13 +178,12 @@ $('input[name="addNewParticipant"]').click(function(){
 
 function enableFunc(Id, fName, lName, counter, birthYear) {
 		for (var i=0;i<count;i++) {
-			console.log(i);
 			var a =  document.getElementsByName("addClass")[i];
 			a.className = "showButton";
 			var b =  document.getElementsByName("infoAddClass")[i];
 			b.className = "hideButton";
 		}
-		console.log(count);
+		
 		var a =  document.getElementsByName("addClass")[counter];
 		a.className = "hideButton";
 		var b =  document.getElementsByName("infoAddClass")[counter];
@@ -203,6 +202,8 @@ function enableFunc(Id, fName, lName, counter, birthYear) {
 		yearOfBirth.disabled = true;
 		var participantId = document.getElementById("participantId");
 		participantId.value = Id;
+
+		console.log(participantId.value);
 }
 </script>
 

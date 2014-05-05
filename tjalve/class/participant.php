@@ -73,12 +73,13 @@
 
     $array = [];
     while($row = $data->fetch_object()) {
-      $array[] = ['clubId' => $clubName,
-                  'firstName' => $row->firstName,
-                  'lastName' => $row->lastName,
-                  'birthYear' => $row->birthYear,
-                  'yearClass' => $row->yearClass,
-                  'discipline' => $row->discipline];
+      $array[] = ['clubId'      => $clubName,
+                  'firstName'   => $row->firstName,
+                  'lastName'    => $row->lastName,
+                  'birthYear'   => $row->birthYear,
+                  'yearClass'   => $row->yearClass,
+                  'discipline'  => $row->discipline,
+                  'cost'        => 50];
     }
     return($array);
   }
@@ -122,7 +123,7 @@
 
   // Gets all Participants from one competition by the competition name
   // Input: Competition Name
-  // Output: An array with all participants and their desciplines
+  // Output: An array with all participants
   function getAllParticipantFromCompetition($competitionName) {
     include "config.php";
     $competitionName = $_GET['competitionName'];
@@ -169,5 +170,23 @@
       $update = mysqli_query($con, $query);
       $startNumber=$startNumber+1;
     }
+  }
+
+  function getAllParticipantsAndDisciplinesFromContactId($contactId) {
+    include "config.php";
+    $query = "SELECT * FROM participant WHERE contactId = '$contactId'";
+    $allParticipants = mysqli_query($con, $query);
+
+    $array = [];
+    while($participant = $allParticipants->fetch_object()) {
+      $array[] = ['firstName'     => $participant->firstName,
+                  'lastName'      => $participant->lastName,
+                  'contactId'     => $participant->contactId,
+                  'birthYear'     => $participant->birthYear,
+                  'bib'           => $participant->bib,
+                  'participantId' => $participant->participantId,
+                  'disciplines'   => getAllDisciplinesByParticipantId($participant->participantId)];
+    }
+    return $array;
   }
 ?>

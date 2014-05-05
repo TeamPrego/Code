@@ -2,7 +2,8 @@
 	include_once "../class/competition.php";
 	include_once "../class/Club.php";
   include_once "../class/event.php";
-  include_once "../database/participant.php";
+  include_once "../class/participant.php";
+  include_once "../class/participantdisciplines.php";
 
 
 	if(isset($_GET['compID'])){
@@ -134,7 +135,11 @@ if(isset($_GET['compName'])) {
     $comp = new Competition();
     //$comp->updateCompetition($id, $name, $date, $lastDate, $organizer);
     $comp->updateCompetition($id, $name, $date, $lastDate, $organizer);
-    
+  }
+
+  //Gets all partcipants from one contact
+  if(isset($_GET['getAllParticipantsAndDisciplinesFromContactId']) && isset($_GET['contactId'])) {
+    echo json_encode(getAllParticipantsAndDisciplinesFromContactId($_GET['contactId']));
   }
 
 ?>
