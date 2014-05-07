@@ -5,15 +5,32 @@
   class Event {
     
     public $id;
-    public $discipline;
-    public $ageClass;
+    public $discipline = "100 m";
+    public $ageClass = "H22";
+    public $eventId;
+    
     
     public function __construct(){
     }
     
-    public function setEvent($eventDisc, $eventAgeC){
-      $this->discipline = $eventDisc;
-      $this->ageClass = $eventAgeC;
+    //public function setEvent($eventId, $eventDisc, $eventAgeC){
+    public function setEvent($competitionId, $eventAgeC, $eventDisc, $eventId){
+      $this -> id = $competitionId;
+      $this -> discipline = $eventDisc;
+      $this -> ageClass = $eventAgeC;
+      $this -> eventId  = $eventId;
+    }
+    
+    public function getSingleEventById($eventId){
+      include "config.php";
+      $sql = "SELECT * FROM competitiondisciplines WHERE eventId =  2";
+      $dataEvent = mysqli_query($con, $sql);
+      $temp = new Event();
+      $row = $dataEvent -> fetch_object();
+      $temp -> setEvent($row->competitionId, $row->discipline, $row->yearClass, $row->eventId);
+      
+      mysqli_close($con);
+      return $temp;
     }
     
     public function getEventById($id){
@@ -27,6 +44,7 @@
                 $data[] = ['competitionId' => $row->competitionId,
 								'yearClass' => $row->yearClass,
                 'discipline' => $row->discipline,
+                'eventId' => $row->eventId,
                 ];
       }
       mysqli_close($con);	
@@ -41,7 +59,7 @@
       $allEvents = [];
       while($row=$dataEvent->fetch_object()) {
         $tempEvent = new Event();
-        $tempEvent->setEvent($row->competitionId, $row->yearClass, $row->discipline);
+        $tempEvent->setEvent($row->competitionId, $row->yearClass, $row->discipline, $row->eventId);
         $allEvents[] = $tempEvent;
         
       }

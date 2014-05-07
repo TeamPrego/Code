@@ -46,7 +46,11 @@ competition- and event-class.
 Tables are created for showing content on the page. 
 -->
 
-
+<form action="editCompetition.php" method="post" enctype="multipart/form-data">
+  <label for="file">Filename:</label>
+  <input type="file" name="imgFile" id="imgFile"><br>
+  <input type="submit" name="submit" value="Submit">
+</form>
 
 <table id="logoTable" id="choice-bar">
   
@@ -316,7 +320,17 @@ The table of disciplines is displayed at the bottom of the page.
 
 
 
-
+<?php
+  if(isset($_POST['submit'])){
+    //echo "strut" . $_POST['file'] . "";
+    var_dump($_POST);
+    if(!isset($_POST['imgFile'])){
+      include "class/competition.php";
+      $temp = new Competition();
+      $temp->updateCompetitionLogo("1", $_POST['imgFile']);
+    }
+  }
+?>
 
 
 

@@ -56,6 +56,10 @@ tr.spaceOver > td {
   width:2em;
 }
 
+.fail-btn{
+  width: 15%;
+}
+
 .firstTableList{
   font-family: Verdana;
   margin-left: 5%;
@@ -110,6 +114,10 @@ tr.spaceOver > td {
 	float:left;
 }
 
+.pass-btn{
+  width: 15%;
+}
+
 .progress{
   border: 1px solid #344cc2;
   background-color: #344cc2;
@@ -137,6 +145,10 @@ tr.spaceOver > td {
   margin-right:10%;
 }
 
+.vert-field{
+  text-align: center;
+  width:30%;
+}
 
 
 #addParticipator{

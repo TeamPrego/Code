@@ -45,6 +45,41 @@
 
       mysqli_close($con);
     }
+    
+    public function getParticipantsByEventId($eventId){
+    include "config.php";
+    $query = "SELECT * FROM participantdisciplines WHERE eventId = '$eventId'";
+    $allParticipants = mysqli_query($con, $query);
+    $array = [];
+    
+    while($participant = $allParticipants->fetch_object()){
+      $array[] = ['participantId'     => $participant->participantId,];
+    }
+    mysqli_close($con);
+    return $array;
+    }
+    
+    public function getParticipantById($id){
+    include "config.php";
+    $query = "SELECT * FROM participant WHERE participantId = '$id'";
+    $allParticipants = mysqli_query($con, $query);
+    $array = [];
+    
+    while($participant = $allParticipants->fetch_object()){
+      $array[] = 
+      ['participantId'     => $participant->participantId,
+      'firstName'     => $participant->firstName,
+      'lastName'     => $participant->lastName,
+      'birthYear'     => $participant->birthYear,
+      'bib'     => $participant->bib,
+      'prio'     => $participant->prio,
+      'contactId'     => $participant->contactId,
+      ];
+    }
+    mysqli_close($con);
+    return $array;
+    }
+    
   }
 
   // Gets all Participants from one club
@@ -184,4 +219,6 @@
     }
     return $array;
   }
+  
+  
 ?>
