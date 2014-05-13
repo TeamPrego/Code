@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 05 maj 2014 kl 15:17
+-- Skapad: 13 maj 2014 kl 10:39
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
 
@@ -31,7 +31,8 @@ USE `tjalve`;
 CREATE TABLE IF NOT EXISTS `alldisciplines` (
   `disciplineId` int(11) NOT NULL,
   `discipline` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
-  PRIMARY KEY (`disciplineId`)
+  PRIMARY KEY (`disciplineId`),
+  KEY `disciplineId` (`disciplineId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
@@ -182,15 +183,14 @@ CREATE TABLE IF NOT EXISTS `clubs` (
   `phone` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`clubId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumpning av Data i tabell `clubs`
 --
 
 INSERT INTO `clubs` (`clubId`, `club`, `address`, `zip`, `phone`, `email`) VALUES
-(1, 'Tjalve IK', 'Villagatan 18', '60247 Norrköping', '07366221', 'kontakt@tjalve.se'),
-(3, 'Nynäshamnn HK', '97162916', 'Villagatan 18', 'Villagatan 18', 'ny@nas.se');
+(4, 'Tjalve IK', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -207,14 +207,14 @@ CREATE TABLE IF NOT EXISTS `competition` (
   `organizer` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   `logo` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`competitionId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=13 ;
 
 --
 -- Dumpning av Data i tabell `competition`
 --
 
 INSERT INTO `competition` (`competitionId`, `competitionName`, `dateFrom`, `dateTo`, `lastDate`, `organizer`, `logo`) VALUES
-(10, 'Tjalve-open', '2014-07-05', '2014-07-06', '2014-05-20', 'Tjalve IK', 'upload/');
+(12, 'Tjalve-open', '2014-06-03', '2014-06-02', '2014-05-21', 'Tjalve IK', 'upload/');
 
 -- --------------------------------------------------------
 
@@ -226,20 +226,26 @@ CREATE TABLE IF NOT EXISTS `competitiondisciplines` (
   `competitionId` int(11) NOT NULL,
   `yearClass` varchar(10) COLLATE utf8_swedish_ci NOT NULL,
   `disciplineId` int(4) NOT NULL,
-  KEY `competitionId` (`competitionId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+  `competitionDisciplineId` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`competitionDisciplineId`),
+  KEY `competitionId` (`competitionId`),
+  KEY `disciplineId` (`disciplineId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumpning av Data i tabell `competitiondisciplines`
 --
 
-INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `disciplineId`) VALUES
-(10, 'P11', 150),
-(10, 'P11', 160),
-(10, 'P11', 170),
-(10, 'M22', 30),
-(10, 'M22', 40),
-(10, 'M22', 50);
+INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `disciplineId`, `competitionDisciplineId`) VALUES
+(12, 'P7', 10, 1),
+(12, 'P7', 20, 2),
+(12, 'P7', 30, 3),
+(12, 'P8', 10, 4),
+(12, 'P8', 20, 5),
+(12, 'P8', 30, 6),
+(12, 'P9', 10, 7),
+(12, 'P9', 20, 8),
+(12, 'P9', 30, 9);
 
 -- --------------------------------------------------------
 
@@ -257,16 +263,15 @@ CREATE TABLE IF NOT EXISTS `contact` (
   PRIMARY KEY (`contactId`),
   KEY `competitionId` (`competitionId`),
   KEY `clubId` (`clubId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumpning av Data i tabell `contact`
 --
 
 INSERT INTO `contact` (`competitionId`, `contactId`, `clubId`, `name`, `phone`, `email`) VALUES
-(10, 8, 3, 'Lars Ohly', '1337', 'lars@ohly.riksdagen.se'),
-(10, 9, 1, 'Nico', '7766551', 'Nico@hotmail.com'),
-(10, 10, 1, 'Captial Captain', '4433225', 'CaptialCaptain@gmail.com');
+(12, 12, 4, 'Anna', '07322112', 'anna@mail.com'),
+(12, 13, 4, 'Fredrik Johnson', '082716239', 'fredrik@fredrik.com');
 
 -- --------------------------------------------------------
 
@@ -283,14 +288,17 @@ CREATE TABLE IF NOT EXISTS `participant` (
   `contactId` int(11) NOT NULL,
   PRIMARY KEY (`participantId`),
   KEY `contactId` (`contactId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=25 ;
 
 --
 -- Dumpning av Data i tabell `participant`
 --
 
 INSERT INTO `participant` (`participantId`, `firstName`, `lastName`, `birthYear`, `bib`, `contactId`) VALUES
-(17, 'Frasse', 'Frisse', 1989, 11, 10);
+(21, 'hannes', 'Ingelhag', 1990, 0, 12),
+(22, 'Emma', 'Arvidsson', 1990, 0, 13),
+(23, 'Peter', 'Niklas', 1989, 0, 13),
+(24, 'Hitler', 'Adolf', 1990, 0, 13);
 
 -- --------------------------------------------------------
 
@@ -301,22 +309,30 @@ INSERT INTO `participant` (`participantId`, `firstName`, `lastName`, `birthYear`
 CREATE TABLE IF NOT EXISTS `participantdisciplines` (
   `participantId` int(11) NOT NULL,
   `pIndex` int(11) NOT NULL AUTO_INCREMENT,
-  `yearClass` varchar(10) COLLATE utf8_swedish_ci NOT NULL,
-  `discipline` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `SB` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `PB` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `prio` int(1) NOT NULL,
+  `competitionDisciplineId` int(255) NOT NULL,
   PRIMARY KEY (`pIndex`),
-  KEY `participantId` (`participantId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=49 ;
+  KEY `participantId` (`participantId`),
+  KEY `competitionDisciplineId` (`competitionDisciplineId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=71 ;
 
 --
 -- Dumpning av Data i tabell `participantdisciplines`
 --
 
-INSERT INTO `participantdisciplines` (`participantId`, `pIndex`, `yearClass`, `discipline`, `SB`, `PB`, `prio`) VALUES
-(17, 47, 'P11', '5000 m', '', '', 1),
-(17, 48, 'P11', '10000 m', '', '', 2);
+INSERT INTO `participantdisciplines` (`participantId`, `pIndex`, `SB`, `PB`, `prio`, `competitionDisciplineId`) VALUES
+(21, 61, '11', '10', 1, 1),
+(21, 62, '13', '12', 1, 2),
+(21, 63, '18', '16', 1, 6),
+(22, 64, '21', '20', 1, 4),
+(22, 65, '23', '22', 1, 5),
+(22, 66, '25', '24', 1, 6),
+(23, 67, '89', '88', 1, 1),
+(23, 68, '91', '90', 1, 2),
+(24, 69, '8989', '898', 1, 7),
+(24, 70, '686432', '8998', 1, 8);
 
 --
 -- Restriktioner för dumpade tabeller
@@ -326,6 +342,7 @@ INSERT INTO `participantdisciplines` (`participantId`, `pIndex`, `yearClass`, `d
 -- Restriktioner för tabell `competitiondisciplines`
 --
 ALTER TABLE `competitiondisciplines`
+  ADD CONSTRAINT `competitiondisciplines_ibfk_2` FOREIGN KEY (`disciplineId`) REFERENCES `alldisciplines` (`disciplineId`),
   ADD CONSTRAINT `competitiondisciplines_ibfk_1` FOREIGN KEY (`competitionId`) REFERENCES `competition` (`competitionId`);
 
 --
@@ -345,7 +362,8 @@ ALTER TABLE `participant`
 -- Restriktioner för tabell `participantdisciplines`
 --
 ALTER TABLE `participantdisciplines`
-  ADD CONSTRAINT `participantdisciplines_ibfk_1` FOREIGN KEY (`participantId`) REFERENCES `participant` (`participantId`);
+  ADD CONSTRAINT `participantdisciplines_ibfk_1` FOREIGN KEY (`participantId`) REFERENCES `participant` (`participantId`),
+  ADD CONSTRAINT `participantdisciplines_ibfk_2` FOREIGN KEY (`competitionDisciplineId`) REFERENCES `competitiondisciplines` (`competitionDisciplineId`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
