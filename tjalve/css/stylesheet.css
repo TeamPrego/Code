@@ -140,6 +140,13 @@ tr.spaceOver > td {
   width:70%;
 }
 
+.result-btn{
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 40%;
+  
+}
+
 .right-links{
 	float:right;
   margin-right:10%;
