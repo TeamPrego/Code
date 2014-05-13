@@ -12,30 +12,31 @@
 		echo $comp->getCompName($_GET['competitionId']); 
 	?>
 </h1>
+<div class="selectBox">
+	<!--This is an dropdown-list this all different classes in the competition-->
+	<label>Välj klass: </label>
+	<select name="chooseClass" id="chooseClass" required>
+		<option value="all">Alla</option>
+		<?php
+			$competitionId = $_GET['competitionId'];
+			$classes = getAllClassesFromCompetition($competitionId); 
+			foreach ($classes as $theClass)
+				echo "<option value='" .$theClass. "'>" .$theClass. "</option>";
+		?>
+	</select>
 
-<!--This is an dropdown-list this all different classes in the competition-->
-<label>Välj klass: </label>
-<select name="chooseClass" id="chooseClass" required>
-	<option value="all">Alla</option>
-	<?php
-		$competitionId = $_GET['competitionId'];
-		$classes = getAllClassesFromCompetition($competitionId); 
-		foreach ($classes as $theClass)
-			echo "<option value='" .$theClass. "'>" .$theClass. "</option>";
-	?>
-</select>
-
-<!--This is an dropdown-list this all different disciplnes in the competition-->
-<label>Välj gren: </label>
-<select name="chooseDiscipline" id="chooseDiscipline" required>
-	<option value="all">Alla</option>
-	<?php
-		$competitionId = $_GET['competitionId'];
-		$discilines = getAllDisciplinesFromCompetition($competitionId); 
-		foreach ($discilines as $theDisciline)
-			echo "<option value='" .$theDisciline. "'>" .$theDisciline. "</option>";
-	?>
-</select>
+	<!--This is an dropdown-list this all different disciplnes in the competition-->
+	<label>Välj gren: </label>
+	<select name="chooseDiscipline" id="chooseDiscipline" required>
+		<option value="all">Alla</option>
+		<?php
+			$competitionId = $_GET['competitionId'];
+			$discilines = getAllDisciplinesFromCompetition($competitionId); 
+			foreach ($discilines as $theDisciline)
+				echo "<option value='" .$theDisciline. "'>" .$theDisciline. "</option>";
+		?>
+	</select>
+</div>
 
 <!--This div will contain the whole startlist-->
 <div id="startList">

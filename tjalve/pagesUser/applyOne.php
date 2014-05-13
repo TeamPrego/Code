@@ -107,7 +107,7 @@
 
 <!--The Progress Bar -->
 <div class=progressBar>
-	0% klart
+	<div class="importantTextRed">Steg 1/2</div>
 </div>
 	
 <?php

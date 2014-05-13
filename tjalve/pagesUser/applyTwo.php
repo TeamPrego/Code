@@ -242,7 +242,7 @@ function enableFunc(Id, fName, lName, counter, birthYear) {
 
 <!--The Progress Bar -->
 <div class=progressBar>
-	<div class=progress>50% klart</div>
+	<div class="importantTextRed">Steg 2/2</div>
 </div
 	
 <?php

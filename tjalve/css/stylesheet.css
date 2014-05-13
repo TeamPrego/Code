@@ -152,6 +152,10 @@ tr.spaceOver > td {
   margin-right:10%;
 }
 
+.selectBox{
+	text-align: center;
+}
+
 .vert-field{
   text-align: center;
   width:30%;
@@ -374,7 +378,6 @@ tr.spaceOver > td {
 #continues,
 #yearOfBirth,
 #firstName,
-#lastName,
-#chooseClass{
+#lastName{
 	border-radius: 7px;
 }
