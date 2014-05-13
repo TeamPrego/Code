@@ -79,7 +79,6 @@
 		});
 	});	
 </script>
-s
 <div id="rightPartOfApplication">
 	<a id="dropDown" href="#" class="cthrough">För hjälp, klicka här</a>
 	<div id="infoText">

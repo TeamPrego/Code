@@ -52,13 +52,18 @@
 
     $array = [];
     while($discipline = $allDisciplines->fetch_object()) {
-      $array[] = ['pIndex'          => $discipline->pIndex,
-                  'discipline'      => $discipline->discipline,
-                  'participantId'   => $discipline->participantId,
-                  'yearClass'       => $discipline->yearClass,
-                  'SB'              => $discipline->SB,
-                  'PB'              => $discipline->PB,
-                  'prio'            => $discipline->prio];
+      $disciplineId = getDisciplineIdByCompetitionDisciplineId($discipline->competitionDisciplineId);
+      $disicplineName = getDisciplineByDisciplineId($disciplineId);
+      $yearClass = getYearClassByCompetitionDisciplineId($discipline->competitionDisciplineId);
+
+      $array[] = ['pIndex'                        => $discipline->pIndex,
+                  'competitionDisciplineId'       => $discipline->competitionDisciplineId,
+                  'discipline'                    => $disicplineName,
+                  'yearClass'                     => $yearClass,
+                  'participantId'                 => $discipline->participantId,
+                  'SB'                            => $discipline->SB,
+                  'PB'                            => $discipline->PB,
+                  'prio'                          => $discipline->prio];
     }
     return $array;
   }
@@ -70,6 +75,9 @@
     return $discipline->fetch_object()->discipline;
   }
 
+  // Gets all disciplines in one yearclass in a competition
+  // Input: yearClass and contactId
+  // Output: An array with information
   function getAvalibleDisciplinesFromYearclassInCompetition($class,$contactId) {
     include "config.php";
 
@@ -85,11 +93,27 @@
 
     $disc = [];
     while($row = $data->fetch_object()) {
-      $disc[] = [ 'gren' => getDisciplineByDisciplineId($row->disciplineId), 
-                  'klass' => $row->yearClass];
+      $disciplineId = getDisciplineIdByCompetitionDisciplineId($row->competitionDisciplineId);
+      $disicplineName = getDisciplineByDisciplineId($disciplineId);
+      
+      $disc[] = [ 'competitionDisciplineId'   => $row->competitionDisciplineId,
+                  'discipline'                => $disicplineName,
+                  'yearClass'                 => $row->yearClass];
     }
     mysqli_close($con);
 
     return $disc;
+  }
+
+  //Returns disciplineId from competitionDiscplineId
+  function getDisciplineIdByCompetitionDisciplineId($competitionDisciplineId) {
+    include "config.php";
+    $data = mysqli_query($con, "SELECT disciplineId FROM competitiondisciplines WHERE competitionDisciplineId = '$competitionDisciplineId'");
+    return $data->fetch_object()->disciplineId;
+  }
+    function getYearClassByCompetitionDisciplineId($competitionDisciplineId) {
+    include "config.php";
+    $data = mysqli_query($con, "SELECT yearClass FROM competitiondisciplines WHERE competitionDisciplineId = '$competitionDisciplineId'");
+    return $data->fetch_object()->yearClass;
   }
 ?>

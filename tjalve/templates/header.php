@@ -8,14 +8,12 @@
 		<title>
 			 Tjalve
 		</title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
-		<!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css"/>-->
-		
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>		
 	</head>
 	<body>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-		<div id = "innerBody">
-			<div id = "logga">
-        <a href="index.php"><img src="pic/logga.jpg" alt="sidans logga" /></a>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<div id="innerBody">
+			<div id="logga">
+        <a href=""><img src="pic/logga.jpg" alt="sidans logga" /></a>
       		</div>
 		<hr>

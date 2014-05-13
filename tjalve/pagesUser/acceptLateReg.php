@@ -77,10 +77,6 @@ include "templates/adminheader.php";
 
 </script>
 
-<!--This is just temporary ... -->
-<div class=progressBar>
-	0% klart
-</div>
 <?php
 //include our adminfooter
 include "templates/adminfooter.php";

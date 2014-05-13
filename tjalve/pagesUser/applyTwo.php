@@ -92,11 +92,11 @@ $('#chooseClass').change(function() {
 				var dat_string = '<table id="whichDisciplines">';
 				dat_string += '<tr><td></td> <th>Gren</th> <th>Åldersklass</th> <th>PB</th> <th>SB</th> </tr>';
 				$.each(content, function(index, value) {
-					dat_string += 	'<tr><td><input type = "checkbox" name = "gren[]" value="'+value.gren+'"/></td><td>'
-									 + value.gren
+					dat_string += 	'<tr><td><input type = "checkbox" name="competitionDisciplineId[]" value="'+value.competitionDisciplineId+'"/></td><td>'
+									 + value.discipline
 									 + '</td><td>'+inp+'</td><td>'
-									 + '<input type="text" name="PB'+value.gren+'" id="personBest"/></td>'
-									 + '<td><input type="text" name="SB'+value.gren+'" id="seasonBest"/></td></tr>'
+									 + '<input type="text" name="PB'+value.competitionDisciplineId+'" id="personBest"/></td>'
+									 + '<td><input type="text" name="SB'+value.competitionDisciplineId+'" id="seasonBest"/></td></tr>'
 				});
 				dat_string += '</table>';
 				dat_string += '<input type="submit" name="addParticipator" id="addParticipator" value="Lägg till deltagare"/></form>';
@@ -138,7 +138,7 @@ jQuery(document).ready(function() {
 				string += '<td></td>'
 										+ '<td><button class="showButton" name="addClass" onclick=enableFunc("'+pId+'","'+fName+'","'+lName+'",'+count+',"'+bY+'")>Lägg till klass</button>'
 										+ '<div class="hideButton" name="infoAddClass"><div id="noParticipants">Lägg till gren till vänster</div></div></td><td></td>'
-										+ '<td><a href="../database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + prio + '"><button id="deleteButton">Radera</button></a></td></table></div>';
+										+ '<td><a href="../database/deleteParticipants.php?participantId=' + value.participantId + '&prio=' + prio + '"><button>Radera</button></a></td></table></div>';
 				count = count + 1;
 			});		
 			document.getElementById('confirmedDiv').innerHTML = string;	

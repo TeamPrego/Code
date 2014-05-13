@@ -3,7 +3,7 @@
 <!--granskad och godkänd 2014-03-03-->
 <html>
 	<head>
-		<link href="pic/tjalve_t_icon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link href="../pic/tjalve_t_icon.ico" rel="shortcut icon" type="image/x-icon" />
 		<meta charset="UTF-8">
 		<title>
 			 Tjalve
@@ -13,9 +13,9 @@
 		
 	</head>
 	<body>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<div id = "innerBody">
 			<div id = "logga">
-        <a href="../index.php"><img src="../pic/logga.jpg" alt="sidans logga" /></a>
+        <a href="../"><img src="../pic/logga.jpg" alt="sidans logga" /></a>
       		</div>
 		<hr>

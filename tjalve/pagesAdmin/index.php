@@ -25,7 +25,7 @@ include "templates/adminheader.php";
 		
 		<tr>
 			<td><a href=""><button class="button">Resultat</button></a></td>
-			<td><a href="setRaceBib.php"><button class="button">Tävlingsnummer</button></a></td>
+			<td><a href="setRaceBib.php"><button class="button">Nummerlapp</button></a></td>
 		</tr>
 		
 		<tr>

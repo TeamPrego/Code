@@ -492,7 +492,7 @@ The class should represent a competition:
 		$data = mysqli_query($con, "SELECT a.*
 																FROM alldisciplines a
 																INNER JOIN competitiondisciplines cd ON a.disciplineId = cd.disciplineId
-																WHERE cd.competitionId = 10");
+																WHERE cd.competitionId = $competitionId");
 		$array=[];
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->discipline, $array)) {
@@ -518,32 +518,39 @@ The class should represent a competition:
 
 		while($rowAgeClass = $dataAgeClass->fetch_object()) {
 			$rawDiscipline = getDisciplineByDisciplineId($rowAgeClass->disciplineId);
-			if(($yearClass === "Alla" && $discipline === "Alla") ||
-			($rowAgeClass->yearClass === $yearClass && $discipline === "Alla") ||
-			($rawDiscipline === $discipline && $yearClass === "Alla") ||
-			($rawDiscipline === $discipline && $rowAgeClass->yearClass === $yearClass)) {
+			if(	($yearClass == "Alla" 									&& $discipline == "Alla") 	||
+					($rowAgeClass->yearClass == $yearClass 	&& $discipline == "Alla") 	||
+					($rawDiscipline == $discipline 					&& $yearClass == "Alla") 	||
+					($rawDiscipline == $discipline 					&& $rowAgeClass->yearClass === $yearClass)) {
+				
 				$participants = [];
-				$query = "SELECT p.*, c.*, pd.*
-		              FROM participantdisciplines pd
-		              INNER JOIN participant p 		ON pd.participantId = p.participantId
-		              INNER JOIN contact c 				ON p.contactId = c.contactId
-		              INNER JOIN competition comp ON c.competitionId = comp.competitionId
-		              WHERE comp.competitionId = '$competitionId'";
+				$query = "SELECT p.*, c.*, pd.*, cd.*, ad.*
+									FROM alldisciplines ad
+									INNER JOIN competitiondisciplines cd	ON ad.disciplineId = cd.disciplineId
+									INNER JOIN participantdisciplines pd 	ON cd.competitionDisciplineId = pd.competitionDisciplineId
+									INNER JOIN participant p 							ON pd.participantId = p.participantId
+									INNER JOIN contact c 									ON p.contactId = c.contactId
+									INNER JOIN competition comp 					ON c.competitionId = comp.competitionId
+									WHERE comp.competitionId = '$competitionId'";
 			  $dataDiscipline = mysqli_query($con, $query);
+			  $theDiscipline="";
 
 				if (!$dataDiscipline) {
 				  die('Error: ' . mysqli_error($con));
 				}
-				while($rowDiscipline = $dataDiscipline->fetch_object()){
-					if($rowDiscipline->yearClass == $rowAgeClass->yearClass && $rowDiscipline->discipline == $rawDiscipline)
+				
+				while($rowDiscipline = $dataDiscipline->fetch_object()) {
+					if($rowDiscipline->competitionDisciplineId == $rowAgeClass->competitionDisciplineId) {
 						$participants[] = [	'firstName'	=> $rowDiscipline->firstName,
 																'lastName' 	=> $rowDiscipline->lastName,
 																'club' 			=> getClub($rowDiscipline->clubId)['club'],
 																'prio' 			=> $rowDiscipline->prio];
+						$theDiscipline = $rowDiscipline->discipline;
+					}
 				}
 				if($participants != null) {
 					$disc[] = [ 'className' 		=> $rowAgeClass->yearClass,
-											'discipline' 		=> $rawDiscipline,
+											'discipline' 		=> $theDiscipline,
 											'participants' 	=> $participants];
 				}
 			}

@@ -14,22 +14,26 @@
 		$temp->setBirthYear($_POST['bYear']);
 		$temp->pushParticipanttoDB();
 		$participantId = $temp->getParticipantId();		
+		echo "ParticipantId: ".$participantId;
 	}
 
 	$allDisciplines = getAllDisciplinesByParticipantId($participantId);
-	$name = $_POST['gren'];
-	foreach ($name as $grentyp) { 
+	$AllCompetitionDisciplineId = $_POST['competitionDisciplineId'];
+	
+	foreach ($AllCompetitionDisciplineId as $competitionDisciplineId) { 
 		$check = true;
+
+		//Check if the participant allready has applyed to this discipline
 		foreach($allDisciplines as $eachDisciplines) {
-			if($grentyp == $eachDisciplines['discipline'] && $_POST['chooseClass'] == $eachDisciplines['yearClass'])
+			if($competitionDisciplineId == $eachDisciplines['competitionDisciplineId'])
 				$check = false;
 		}
 
 		if($check) {
-			$SB = "SB" . $grentyp;
-			$PB = "PB" . $grentyp;
-			$quary = "INSERT INTO participantdisciplines (participantId, yearClass, discipline, SB, PB, prio)
-			VALUES ('$participantId', '$_POST[chooseClass]', '$grentyp', '$_POST[$SB]', '$_POST[$PB]', '$prio')";
+			$SB = "SB" . $competitionDisciplineId;
+			$PB = "PB" . $competitionDisciplineId;
+			$quary = "INSERT INTO participantdisciplines (participantId,competitionDisciplineId, SB, PB, prio)
+			VALUES ('$participantId', '$competitionDisciplineId', '$_POST[$SB]', '$_POST[$PB]', '$prio')";
 
 			if (!mysqli_query($con,$quary)) {
 			  die('Error: ' . mysqli_error($con));
