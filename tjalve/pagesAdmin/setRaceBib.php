@@ -42,16 +42,16 @@
 			This will contain all Participants in a competition-->
 <div id = "rightPartOfApplication">
 	<h2>Tävlingsdeltagare</h2>
-	<div style="margin-left:5%">
+	<div id="up" style="margin-left:5%">
 		<?php
 			// If someone tried to change racebib
 			if(isset($_GET['check'])) {
 				// If something was wrong
 				if($_GET['check'] == 0)
-					echo "<div id='noParticipants'>Fel: Finns en eller flera med samma nummerlapp, kolla igenom så ingen deltagare har samma nummerlapp</div>";
+					echo "<div class='importantTextRed'>Fel: Finns en eller flera med samma nummerlapp, kolla igenom så ingen deltagare har samma nummerlapp</div>";
 				// If everything was correct
 				else
-					echo "<div id='noParticipants'>Ändrat</div>";
+					echo "<div class='importantTextRed'>Ändrat</div>";
 			}
 		?>
 	</div>
@@ -63,6 +63,8 @@
 
 	//When the Update-button is clicked the DB will be updated.
 	$('#Update').click(function() {
+
+		document.getElementById('up').innerHTML ="<div class='importantTextRed'>Ändrat</div>";
 		// Get some variables
 		var competitionName =  $('#chooseCompetition').find(":selected").text();
 		var startNumber = $('#bibBegin').val();
@@ -80,6 +82,7 @@
 	//When the dropdown list with all competitions is changed
 	//Update the form to the right where all participants is shown
 	$('#chooseCompetition').change(function() {
+		//document.getElementById('up').innerHTML ="";
 		var inp = $(this).find(":selected").text();
 		$.ajax({
 			url: '../Ajax/ajax.php?getAllParticipantCompetition=1&competitionName='+inp+'',

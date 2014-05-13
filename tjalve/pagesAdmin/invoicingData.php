@@ -93,7 +93,7 @@ var competitionName = "";
 		var clubId = $(this).find("option:selected").attr('id');
 		// Gets all participants from one club
 		$.ajax({
-			url: '../Ajax/ajax.php?getAllParticipantFromClub=1&clubId='+clubId,
+			url: '../Ajax/ajax.php?getAllParticipantsFromClub=1&clubId='+clubId,
 			success: function(content) {
 				content = $.parseJSON(content);
 

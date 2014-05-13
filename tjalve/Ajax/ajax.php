@@ -74,7 +74,7 @@ if(isset($_GET['compName'])) {
 	}
 
 	// Gets all participant from one club and returns JSON
-	if(isset($_GET['getAllParticipantFromClub']) && isset($_GET['clubId'])) {
+	if(isset($_GET['getAllParticipantsFromClub']) && isset($_GET['clubId'])) {
 		echo json_encode(getAllParticipantsFromClub($_GET['clubId']));
 	}
 
