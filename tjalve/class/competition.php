@@ -578,5 +578,27 @@ The class should represent a competition:
 	  return $array;
 	}
 
+	//Gets all classes for competition with competition id
+	//Input: Competition Id
+	//Output: Array with all year classes
+	function getYearClassesByCompId($cId){
+		include "config.php";
+
+		$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$cId'";
+		$data = mysqli_query($con, $query);
+
+		if (!$data) {
+			  die('Error: ' . mysqli_error($con));
+		}
+
+		$array=[];
+		while($row = $data->fetch_object()) {
+			if (!in_array($row->yearClass, $array)){
+					array_push($array, $row->yearClass);
+			}
+		}
+		return $array;
+	}
+
 ?>
 

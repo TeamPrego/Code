@@ -2,7 +2,6 @@
 <?php
 session_start();
 	include "templates/adminheader.php";
-	include "class/participantTest.php";
 ?>	
 
 <!-- Heading -->
@@ -17,7 +16,8 @@ session_start();
 	<!--Drop down list with all of the competition of the club-->
 	<select id="getCompetitions">
 		<?php
-		$competition = getAllCompetitions(); 
+		include "../class/competition.php";
+		$competition = getAllCompetitionsToArray(); 
 		foreach ($competition as $theCompetition)
 			echo "<option id='" .$theCompetition['competitionId']. "'>" .$theCompetition['competitionName']. "</option>";
 		?>
@@ -35,8 +35,10 @@ session_start();
 	<h2>Redigera tävlande:</h2>
 	<div id="confirmedDiv">
 		<!-- Info about participant will appear here through ajax-->
-	</div>
-	
+	</div>	
+		<div id="anna">
+		<!-- Info about participant will appear here through ajax-->
+	</div>	
 	<select id="classList">
 		<!-- Classes will appear here -->
 	</select>
@@ -55,7 +57,7 @@ session_start();
 		var competitionId = $(this).find("option:selected").attr('id');//This is competition id
 		console.log(competitionId);
 		$.ajax({
-			url: 'Ajax/ajax.php?fetchParticipantsByCompId=1&competitionId='+competitionId,
+			url: '../Ajax/ajax.php?fetchParticipantsByCompId=1&competitionId='+competitionId,
 			success: function(content) {
 				content = $.parseJSON(content);
 				var part_string = '';
@@ -80,7 +82,7 @@ session_start();
 	// ***** Creating the drop down list with classes, this is used when adding new discipline to participant *****
 	function getYearClasses(competitionId){
 		$.ajax({
-			url: 'Ajax/ajax.php?getYearClassesByCompId=1&competitionId='+competitionId,
+			url: '../Ajax/ajax.php?getYearClassesByCompId=1&competitionId='+competitionId,
 			success: function(content){
 				content = $.parseJSON(content);
 				var competition_string = "";
@@ -88,8 +90,6 @@ session_start();
 					competition_string += '<option id="'+yearClass+'"> '+yearClass+' </option>';
 					substring = yearClass;
 				});
-
-				competition_string += '</select>'
 				document.getElementById('classList').innerHTML = competition_string;
 				$('#classList').val(substring);
 				$('#classList').trigger("change");
@@ -101,78 +101,78 @@ session_start();
 	//Print all info about the participant
 	$('#adminParticipants').change(function() {
 		var participantId = $(this).find("option:selected").attr('id'); //This is the participant id
-		console.log(participantId);
-		var dat_string = "";
-		var theClubId = "";
-		var contactId = parseInt("");
 		$.ajax({
-			url: 'Ajax/ajax.php?fetchParticipantByParticipantId=1&participantId='+participantId,
+			url: '../Ajax/ajax.php?fetchParticipantByParticipantId=1&participantId='+participantId,
 			success: function(content) {
 				content = $.parseJSON(content);
+
+				var dat_string = "";
 				$.each(content, function(index, value) {
 					dat_string += '<div id="confirmedParticipantOneEach">'
 					+ '<form method="POST" id="updateForm" name="updateForm" action="forms/updateParticipant.php?participantId='+participantId+'">'
-					//+ '<input type="hidden" name="pId" value="'+participantId+'">'
 					+ '<table id="participantTable">'
 					+ '<tr><td><input class=update'+participantId+' name=fName type=text ' + disabl + ' value="' + value.firstName + '"></td>' 
 					+ '<td><input class=update'+participantId+' name=lName type=text ' + disabl + ' value="' + value.lastName + '"></td></tr>'
 					+ '<tr><td><input class=update'+participantId+' name=bYear type=text ' + disabl + ' value="' + value.birthYear + '"></td></tr>'
 					+ '<tr><td> <div name="oneClub" class="showButton">' + value.club + '</div></td> <td></td> <td></td></tr>';
-					theClubId = value.clubId;
-					contactId = parseInt(value.contactId);
-					contactId = parseInt('förnamn '+value.firstName);
+					dat_string += getAllClubs(value.clubId);
+					dat_string += getDisciplinesByParticipantId(participantId);
+					console.log(dat_string);
+					document.getElementById('confirmedDiv').innerHTML = dat_string;
 				});
 			}
-		});
+		});	 	
+	});
 
-		//Create a drop down list for all the clubs available. 
-		dat_string += '<tr><td><select name="clubsList" id = "clubsList" class="hideButton">';					
+	function getAllClubs(theClubId) {		
+		var string = '<tr><td><select name="clubsList" id ="clubsList" class="hideButton">';	
 		$.ajax({
-			url: 'Ajax/ajax.php/getAllClubs=1',
+			url: '../Ajax/ajax.php?getAllClubs=1',
+			async: false,
 			success: function(club_content){
 				club_content = $.parseJSON(club_content);
 
 				$.each(club_content, function(theIndex, theValue) {
 					if (theValue.clubId == theClubId) {
-						//console.log(theValue.clubId);
-						$("#clubsList").append('<option value="'+theValue.clubId+'" selected="selected">'+theValue.clubName+'</option>');
+						string += '<option value="'+theValue.clubId+'" selected="selected">'+theValue.clubName+'</option>';
 					}
 					else {
-						//console.log(theValue.clubId);
-						$("#clubsList").append('<option value="'+theValue.clubId+'">'+theValue.clubName+'</option>');
+						string += '<option value="'+theValue.clubId+'">'+theValue.clubName+'</option>';
 					}
-				});
-				//Måste slänga med club id på den nya klubben till updateParticipant också... 
+				});		
+				string += '</select></td></tr>';
 			}
 		});
+		return string;
+	}
 
+	function getDisciplinesByParticipantId(participantId){
 		//Gets all disciplines the participant has applied to 
-		dat_string += '</select></td> <td></td> <td></td></tr>';
-		$.ajax({
-			url: 'Ajax/ajax.php?getDisciplinesByParticipantId=1&participantId='+participantId,
-			success: function(discipline_content) {
-				discipline_content = $.parseJSON(discipline_content);
+		var string = "";
+		var contactId;
 
-				$.each(discipline_content, function(ind, val) {
-					//console.log(val.pIndex);
-					dat_string += '<tr><td>' + val.ageClass + '</td><td>' + val.discipline 
-					+ '</td><td> <a href="database/EditParticipants/deleteParticipantClass.php?pIndex='+val.pIndex+'" > <button id="delButton">X</button> </a> </td></tr>';
+		$.ajax({
+			url: '../Ajax/ajax.php?getDisciplinesByParticipantId=1&participantId='+participantId,
+			async: false,
+			success: function(discipline_content) {
 				
-					dat_string += '<tr><td><input type=button name="editButton" class="showButton" value="Redigera" onclick="enableFunc('+participantId+')"> '
-					+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td></tr>'
-					+ '<tr><td>Lägg till grenar</td></tr>'
-					+ '<input id="contactId" name="contactId" type=hidden value="' + val.contactId + '">';
-					//console.log('kontaktid ' + val.contactId);
+				discipline_content = $.parseJSON(discipline_content);
+				$.each(discipline_content, function(ind, val) {
+					string += '<tr><td>' + val.ageClass + '</td><td>' + val.discipline 
+					+ '</td><td> <a href="database/EditParticipants/deleteParticipantClass.php?pIndex='+val.pIndex+'" > <button id="delButton">X</button> </a> </td></tr>';
+					contactId = val.contactId
 				});
-				dat_string +='<tr><div id="disciplines"> </tr></table></form></div></div>';
+				string += '<tr><td><input type=button name="editButton" class="showButton" value="Redigera" onclick="enableFunc('+participantId+')"> '
+				+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td></tr>'
+				+ '<tr><td>Lägg till grenar</td></tr>'
+				+ '<input id="contactId" name="contactId" type=hidden value="' + contactId + '">';
+				string +='<tr><div id="disciplines"></tr></table></form></div></div>';
 			}
 		});
+		return string;
+	}
 
-	 	document.getElementById('confirmedDiv').innerHTML = dat_string;	
-		//OM REDIGERA ÄR KLICKAD, GÖR ALLA FÄLT ENABLED, CLUB SKA BLI EN DROPDOWN,
-		//OM LÄGG TILL KLASS ÄR KLICKAD, LÄGG IN DET SOM FINNS I APPLYTWO REDAN.
-	});
-
+	/*
 	// ***** When class is chosen from drop down list, do: *****
 	$('#classList').change(function(){
 		//var competitionId = $(this).find("option:selected").attr('id');//This is competition id
@@ -202,9 +202,9 @@ session_start();
 
 				document.getElementById('classDisciplines').innerHTML = disc_string;
 	 			$('#classDisciplines').trigger("change");
-				}
-			});
+			}
 		});
+	})*/
 
 	function enableFunc(idno) {
 		var inputs = document.getElementsByClassName('update'+idno);

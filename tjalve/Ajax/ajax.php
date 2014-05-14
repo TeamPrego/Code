@@ -4,8 +4,6 @@
   include_once "../class/event.php";
   include_once "../class/participant.php";
   include_once "../class/participantdisciplines.php";
- //  include_once "../database/participant.php";
-   include_once "../class/participantTest.php";
 
 	if(isset($_GET['compID'])){
 		$temp =  new Competition();

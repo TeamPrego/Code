@@ -53,7 +53,7 @@
     $array = [];
     
     while($participant = $allParticipants->fetch_object()){
-      $array[] = ['participantId'     => $participant->participantId,];
+      $array[] = ['participantId'     => $participant->participantId];
     }
     mysqli_close($con);
     return $array;
@@ -66,14 +66,13 @@
     $array = [];
     
     while($participant = $allParticipants->fetch_object()){
-      $array[] = 
-      ['participantId'     => $participant->participantId,
-      'firstName'     => $participant->firstName,
-      'lastName'     => $participant->lastName,
-      'birthYear'     => $participant->birthYear,
-      'bib'     => $participant->bib,
-      'prio'     => $participant->prio,
-      'contactId'     => $participant->contactId,
+      $array[] = ['participantId' => $participant->participantId,
+                  'firstName'     => $participant->firstName,
+                  'lastName'      => $participant->lastName,
+                  'birthYear'     => $participant->birthYear,
+                  'bib'           => $participant->bib,
+                  'prio'          => $participant->prio,
+                  'contactId'     => $participant->contactId,
       ];
     }
     mysqli_close($con);
@@ -90,10 +89,10 @@
 
     $query = "SELECT pd.*, p.*, ad.*, cd.*
               FROM alldisciplines ad
-              INNER JOIN competitiondisciplines cd ON ad.disciplineId = cd.disciplineId
-              INNER JOIN participantdisciplines pd ON cd.competitionDisciplineId = pd.competitionDisciplineId
-              INNER JOIN participant p ON pd.participantId = p.participantId
-              INNER JOIN contact c ON p.contactId = c.contactId
+              INNER JOIN competitiondisciplines cd  ON ad.disciplineId = cd.disciplineId
+              INNER JOIN participantdisciplines pd  ON cd.competitionDisciplineId = pd.competitionDisciplineId
+              INNER JOIN participant p              ON pd.participantId = p.participantId
+              INNER JOIN contact c                  ON p.contactId = c.contactId
               WHERE c.clubId = '$clubId'";
     
     $data = mysqli_query($con, $query);
@@ -164,8 +163,8 @@
 
     $query = "SELECT p.*, c.*
               FROM participant p
-              INNER JOIN contact c ON p.contactId = c.contactId
-              INNER JOIN competition comp ON c.competitionId = comp.competitionId
+              INNER JOIN contact c          ON p.contactId = c.contactId
+              INNER JOIN competition comp   ON c.competitionId = comp.competitionId
               WHERE comp.competitionName = '$competitionName'";
 
     $data = mysqli_query($con, $query);
@@ -196,9 +195,9 @@
     $allParticipants = getAllParticipantFromCompetition($competitionName);
     foreach ($allParticipants as $participant) {
       $participantId = $participant['participantId'];
-      $query = "UPDATE participant p
-                INNER JOIN contact c ON p.contactId = c.contactId
-                INNER JOIN competition comp ON c.competitionId = comp.competitionId
+      $query = "UPDATE      participant p
+                INNER JOIN  contact c         ON p.contactId = c.contactId
+                INNER JOIN  competition comp  ON c.competitionId = comp.competitionId
                 SET p.bib = '$startNumber'
                 WHERE comp.competitionName = '$competitionName' AND p.participantId = '$participantId'";
       $update = mysqli_query($con, $query);
@@ -222,6 +221,61 @@
                   'disciplines'   => getAllDisciplinesByParticipantId($participant->participantId)];
     }
     return $array;
+  }
+
+  //Gets all participant for competition with competition id
+  //Input: Competition Id
+  //Output: Array with participants id, first name and last name
+  function fetchParticipantsByCompId($cId){
+    include "config.php";
+    $query = "SELECT p.participantId, p.firstName, p.lastName, c.competitionId
+              FROM participant p
+              INNER JOIN contact co ON p.contactId = co.contactId
+              INNER JOIN competition c ON c.competitionId = co.competitionId
+              WHERE c.competitionId = '$cId'";
+
+    $data = mysqli_query($con, $query);
+
+    if (!$data) {
+      die('Error: ' . mysqli_error($con));
+    }
+
+    $participantArray = [];
+    while($prow = $data->fetch_object()) {
+      $participantArray[] = [ 'pId'   => $prow->participantId, 
+                              'fName' => $prow->firstName, 
+                              'lName' => $prow->lastName];
+    }
+    return $participantArray;
+  }
+
+  //Gets all info about chosen participant
+  //Input: Participant Id
+  //Output: Array with first name, last name, birth date, club, disciplines, klubb, contact id and all classes and disciplines of competition 
+  function fetchParticipantByParticipantId($pId){
+    include "config.php";
+
+    //***** Get everything about participant *****
+    $query = "SELECT p.*, cl.club, cl.clubId
+              FROM participant p
+              INNER JOIN contact c ON p.contactId = c.contactId
+              INNER JOIN clubs cl ON cl.clubId = c.clubId
+              WHERE p.participantId = '$pId'";
+    $cData = mysqli_query($con, $query);
+
+    if (!$cData) {
+      die('Error: ' . mysqli_error($con));
+    }
+    $participant = $cData->fetch_object();
+
+    $part[]  = ['firstName'  => $participant->firstName,
+                'lastName'   => $participant->lastName,
+                'birthYear'  => $participant->birthYear,
+                'contactId'  => $participant->contactId,
+                'club'       => $participant->club,
+                'clubId'     => $participant->clubId];
+
+    return $part;
   }
   
   

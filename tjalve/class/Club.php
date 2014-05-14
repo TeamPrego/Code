@@ -13,12 +13,12 @@
 	  }
 
 	  // Set a club
-	  public function setClub($theId, $theClub, $theAddress, $theZip, $thePhone, $theEmail) {
+	  public function setClub($theId, $theClub, $thePhone, $theAddress, $theZip, $theEmail) {
 	  	$this -> id = $theId;
 	  	$this -> club = $theClub;
 	  	$this -> address = $theAddress;
 	  	$this -> zip = $theZip;
-	  	$this -> phone = $theZip;
+	  	$this -> phone = $thePhone;
 	  	$this -> email = $theEmail;
 	  }
 
@@ -88,6 +88,28 @@
 							'phone' 	=> $row->phone,
 							'email' 	=> $row->email];
 		return $club;
+	}
+
+	//Gets all clubs
+	//Input: 
+	//Output: Array with club name and club id
+	function getAllClubs(){
+		include "config.php";
+
+		$query = "SELECT * FROM clubs";
+		$data = mysqli_query($con, $query);
+
+		if (!$data) {
+		  die('Error: ' . mysqli_error($con));
+		}
+
+		$allClubs = [];
+		while($clubInfo = $data->fetch_object()) {
+			$allClubs[] = [	'clubName' 	=> $clubInfo->club, 
+											'clubId' 		=> $clubInfo->clubId];
+		}
+		
+		return $allClubs;
 	}
 ?>
 

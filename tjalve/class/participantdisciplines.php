@@ -116,4 +116,55 @@
     $data = mysqli_query($con, "SELECT yearClass FROM competitiondisciplines WHERE competitionDisciplineId = '$competitionDisciplineId'");
     return $data->fetch_object()->yearClass;
   }
+
+  //Gets all disciplines for participant by participant id 
+  //Input: Participant Id & Contact Id
+  //Output: Array with pIndex, disciplines, year class, contact id
+  function getDisciplinesByParticipantId($pId){
+    include "config.php";
+    $disciplinesquery = " SELECT pd.*, p.*, ad.*, cd.*
+                          FROM alldisciplines ad
+                          INNER JOIN competitiondisciplines cd  ON ad.disciplineId = cd.disciplineId
+                          INNER JOIN participantdisciplines pd  ON cd.competitionDisciplineId = pd.competitionDisciplineId
+                          INNER JOIN participant p              ON pd.participantId = p.participantId
+                          WHERE p.participantId = '$pId'";
+    $data = mysqli_query($con, $disciplinesquery);
+
+    if (!$data) {
+      die('Error: ' . mysqli_error($con));
+    }
+
+    $partDisciplines = [];
+    while($discRow = $data->fetch_object()) {
+      $partDisciplines[] = ['pIndex'     => $discRow->pIndex, 
+                            'discipline' => $discRow->discipline, 
+                            'ageClass'   => $discRow->yearClass,
+                            'contactId'  => $discRow->contactId];
+    }
+    return $partDisciplines;
+  }
+
+  //Gets all disciplines of competition by competition id and year class
+  //Input: Competition id and year class
+  //Output: Array with discipline
+  function getAllDisciplinesByCompId($cId, $yearClass){
+    include "config.php";
+
+    $cId = $_GET['competitionId'];
+    $yearClass = $_GET['yearClass'];
+
+    $query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$cId' AND yearClass = '$yearClass' ";
+    $data = mysqli_query($con, $query);
+
+    if (!$data) {
+        die('Error: ' . mysqli_error($con));
+    }
+
+    $array=[];
+    while($row = $data->fetch_object()) {
+      array_push($array, $row->discipline);
+      //$array = ['discipline'=> $row->yearClass];
+    }
+    return $array;
+  }
 ?>
