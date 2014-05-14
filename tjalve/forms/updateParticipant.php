@@ -9,6 +9,7 @@ ob_start();
 	$updClubId = $_POST['clubsList'];
 	$cId = $_POST['contactId'];
 
+	
 	$queryUpdate = "UPDATE participant SET firstName = '$updFName', lastName = '$updLName', birthYear = '$updBYear' WHERE participantId = '$pId'";
 	$data = mysqli_query($con, $queryUpdate);
 	
@@ -16,15 +17,14 @@ ob_start();
 	  die('Error: ' . mysqli_error($con));
 	}
 
-	$clubQuery = "UPDATE contact SET clubId = '$updClubId' WHERE contactId = '$cId'";
+	$clubData = mysqli_query($con, "UPDATE contact SET clubId = '$updClubId' WHERE contactId = '$cId'");
 
-	$clubData = mysqli_query($con, $clubQuery);
-
-	if (!mysqli_query($con,$clubData)) {
+	if (!$clubData) {
 	  die('Error: ' . mysqli_error($con));
 	}
-
-	header("Location: ../editParticipantTest.php");
 	mysqli_close($con);
-ob_flush();
+	ob_flush();
+	header("Location: ../pagesAdmin/editParticipant.php");
+	
+
 ?>

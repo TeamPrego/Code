@@ -109,7 +109,7 @@ session_start();
 				var dat_string = "";
 				$.each(content, function(index, value) {
 					dat_string += '<div id="confirmedParticipantOneEach">'
-					+ '<form method="POST" id="updateForm" name="updateForm" action="forms/updateParticipant.php?participantId='+participantId+'">'
+					+ '<form method="POST" id="updateForm" name="updateForm" action="../forms/updateParticipant.php?participantId='+participantId+'">'
 					+ '<table id="participantTable">'
 					+ '<tr><td><input class=update'+participantId+' name=fName type=text ' + disabl + ' value="' + value.firstName + '"></td>' 
 					+ '<td><input class=update'+participantId+' name=lName type=text ' + disabl + ' value="' + value.lastName + '"></td></tr>'
@@ -117,7 +117,6 @@ session_start();
 					+ '<tr><td> <div name="oneClub" class="showButton">' + value.club + '</div></td> <td></td> <td></td></tr>';
 					dat_string += getAllClubs(value.clubId);
 					dat_string += getDisciplinesByParticipantId(participantId);
-					console.log(dat_string);
 					document.getElementById('confirmedDiv').innerHTML = dat_string;
 				});
 			}
@@ -159,7 +158,7 @@ session_start();
 				discipline_content = $.parseJSON(discipline_content);
 				$.each(discipline_content, function(ind, val) {
 					string += '<tr><td>' + val.ageClass + '</td><td>' + val.discipline 
-					+ '</td><td> <a href="database/EditParticipants/deleteParticipantClass.php?pIndex='+val.pIndex+'" > <button id="delButton">X</button> </a> </td></tr>';
+					+ '</td><td><a href="../forms/deleteParticipantClass.php?pIndex='+val.pIndex+'">X</a></td></tr>';
 					contactId = val.contactId
 				});
 				string += '<tr><td><input type=button name="editButton" class="showButton" value="Redigera" onclick="enableFunc('+participantId+')"> '
