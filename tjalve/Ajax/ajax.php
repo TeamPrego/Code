@@ -2,16 +2,15 @@
 	include_once "../class/competition.php";
 	include_once "../class/Club.php";
   include_once "../class/event.php";
-  include_once "../database/participant.php";
-
+  include_once "../class/participant.php";
+  include_once "../class/participantdisciplines.php";
 
 	if(isset($_GET['compID'])){
 		$temp =  new Competition();
 		$temp->getAllAvailableDisciplines($_GET['compID']);
 	}
 
-	
-	if(isset($_GET['compId']) && isset($_GET['grenId']) && isset($_GET['klass'])){
+	if(isset($_GET['compId']) && isset($_GET['gren']) && isset($_GET['klass'])){
 		$temp =  new Competition();
 		$temp->deleteDiscipline($_GET['compId'], $_GET['grenId'], $_GET['klass']);
 	}
@@ -82,7 +81,7 @@ if(isset($_GET['compName'])) {
 	}
 
 	// Gets all participant from one club and returns JSON
-	if(isset($_GET['getAllParticipantFromClub']) && isset($_GET['clubId'])) {
+	if(isset($_GET['getAllParticipantsFromClub']) && isset($_GET['clubId'])) {
 		echo json_encode(getAllParticipantsFromClub($_GET['clubId']));
 	}
 
@@ -143,7 +142,47 @@ if(isset($_GET['compName'])) {
     $comp = new Competition();
     //$comp->updateCompetition($id, $name, $date, $lastDate, $organizer);
     $comp->updateCompetition($id, $name, $date, $lastDate, $organizer);
-    
   }
 
+  if(isset($_GET['fetchParticipantsByCompId']) && isset($_GET['competitionId'])){
+    echo json_encode(fetchParticipantsByCompId($_GET['competitionId']));
+  }
+
+  if(isset($_GET['getYearClassesByCompId']) && isset($_GET['competitionId'])){
+    echo json_encode(getYearClassesByCompId($_GET['competitionId']));
+  }
+
+ if(isset($_GET['fetchParticipantInfo']) && isset($_GET['participantId'])){
+    //echo 'blubb';
+    echo json_encode(fetchParticipantInfo($_GET['participantId']));
+  }
+
+  if(isset($_GET['fetchParticipantByParticipantId']) && isset($_GET['participantId'])){
+    echo json_encode(fetchParticipantByParticipantId($_GET['participantId']));
+  }
+
+  if(isset($_GET['getDisciplinesByParticipantId']) && isset($_GET['participantId'])){
+    //echo 'plupp';
+    echo json_encode(getDisciplinesByParticipantId($_GET['participantId']));
+  }
+
+  // Gets all clubs avaible in the DB
+  if(isset($_GET['getAllClubs'])){
+    echo json_encode(getAllClubs());
+  }
+
+  if(isset($_GET['getAllDisciplinesByCompId']) && isset($_GET['competitionId']) && isset($_GET['yearClass'])){
+    echo json_encode(getAllDisciplinesByCompId($_GET['competitionId'], $_GET['yearClass']));
+  }
+  //Gets all partcipants from one contact
+  //Function getAllParticipantsAndDisciplinesFromContactId => Participant.php
+  if(isset($_GET['getAllParticipantsAndDisciplinesFromContactId']) && isset($_GET['contactId'])) {
+    echo json_encode(getAllParticipantsAndDisciplinesFromContactId($_GET['contactId']));
+  }
+
+  // Gets all avaible disciplines from one yearClass in a competition =)
+  // Function getAvalibleDisciplinesFromYearclassInCompetition is located in participantdisciplines.php
+  if(isset($_GET['getAvalibleDisciplinesFromYearclassInCompetition']) && isset($_GET['class']) && isset($_GET['contactId'])) {
+    echo json_encode(getAvalibleDisciplinesFromYearclassInCompetition($_GET['class'],$_GET['contactId']));
+  }
 ?>

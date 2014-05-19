@@ -1,4 +1,3 @@
-
 <?php
 /*2014-04-11
 The class should represent a competition:
@@ -487,7 +486,10 @@ The class should represent a competition:
 	// Output: An array with all disciplines
 	function getAllDisciplinesFromCompetition($competitionId) {
 		include "config.php";
-		$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
+		$data = mysqli_query($con, "SELECT a.*
+																FROM alldisciplines a
+																INNER JOIN competitiondisciplines cd ON a.disciplineId = cd.disciplineId
+																WHERE cd.competitionId = $competitionId");
 		$array=[];
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->disciplineId, $array)) {
@@ -513,28 +515,48 @@ The class should represent a competition:
 		}
 
 		while($rowAgeClass = $dataAgeClass->fetch_object()) {
+<<<<<<< HEAD
 			if(($yearClass === "Alla" && $discipline === "Alla") ||
 			($rowAgeClass->yearClass === $yearClass && $discipline === "Alla") ||
 			($rowAgeClass->disciplineId === $discipline && $yearClass === "Alla") ||
 			($rowAgeClass->disciplineId === $discipline && $rowAgeClass->yearClass === $yearClass)) {
+=======
+			$rawDiscipline = getDisciplineByDisciplineId($rowAgeClass->disciplineId);
+			if(	($yearClass == "Alla" 									&& $discipline == "Alla") 	||
+					($rowAgeClass->yearClass == $yearClass 	&& $discipline == "Alla") 	||
+					($rawDiscipline == $discipline 					&& $yearClass == "Alla") 	||
+					($rawDiscipline == $discipline 					&& $rowAgeClass->yearClass === $yearClass)) {
+				
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 				$participants = [];
-				$query = "SELECT p.*, c.*, pd.*
-		              FROM participantdisciplines pd
-		              INNER JOIN participant p 		ON pd.participantId = p.participantId
-		              INNER JOIN contact c 				ON p.contactId = c.contactId
-		              INNER JOIN competition comp ON c.competitionId = comp.competitionId
-		              WHERE comp.competitionId = '$competitionId'";
+				$query = "SELECT p.*, c.*, pd.*, cd.*, ad.*
+									FROM alldisciplines ad
+									INNER JOIN competitiondisciplines cd	ON ad.disciplineId = cd.disciplineId
+									INNER JOIN participantdisciplines pd 	ON cd.competitionDisciplineId = pd.competitionDisciplineId
+									INNER JOIN participant p 							ON pd.participantId = p.participantId
+									INNER JOIN contact c 									ON p.contactId = c.contactId
+									INNER JOIN competition comp 					ON c.competitionId = comp.competitionId
+									WHERE comp.competitionId = '$competitionId'";
 			  $dataDiscipline = mysqli_query($con, $query);
+			  $theDiscipline="";
 
 				if (!$dataDiscipline) {
 				  die('Error: ' . mysqli_error($con));
 				}
+<<<<<<< HEAD
 				while($rowDiscipline = $dataDiscipline->fetch_object()){
 					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->disciplineId === $rowAgeClass->disciplineId)
+=======
+				
+				while($rowDiscipline = $dataDiscipline->fetch_object()) {
+					if($rowDiscipline->competitionDisciplineId == $rowAgeClass->competitionDisciplineId) {
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 						$participants[] = [	'firstName'	=> $rowDiscipline->firstName,
 																'lastName' 	=> $rowDiscipline->lastName,
-																'club' 			=> $rowDiscipline->clubId,
+																'club' 			=> getClub($rowDiscipline->clubId)['club'],
 																'prio' 			=> $rowDiscipline->prio];
+						$theDiscipline = $rowDiscipline->discipline;
+					}
 				}
 				if($participants != null) {
         include "participantdisciplines.php";
@@ -542,7 +564,11 @@ The class should represent a competition:
         $tmp = $rowAgeClass->disciplineId;
         $result = $temp->getDisciplineByDisciplineId($tmp);
 					$disc[] = [ 'className' 		=> $rowAgeClass->yearClass,
+<<<<<<< HEAD
 											'discipline' 		=> $temp,
+=======
+											'discipline' 		=> $theDiscipline,
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 											'participants' 	=> $participants];
 				
 				 
@@ -564,13 +590,41 @@ The class should represent a competition:
 	  	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
 										'competitionName' 			=> 	$row->competitionName,
 										'competitionOrganizer' 	=> 	$row->organizer,
+<<<<<<< HEAD
 										'competitionDateFrom' 			=> 	$row->dateFrom,
                     'competitionDateTo' 			=> 	$row->dateTo,
 										'competitionLastDate' 	=> 	$row->lastDate,
                     'competitionLogo' 	=> 	$row->logo];
+=======
+										'competitionDateFrom' 	=> 	$row->dateFrom,
+										'competitionDateTo' 		=> 	$row->dateTo,
+										'competitionLastDate' 	=> 	$row->lastDate];
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 	  }
 	  mysqli_close($con);
 	  return $array;
+	}
+
+	//Gets all classes for competition with competition id
+	//Input: Competition Id
+	//Output: Array with all year classes
+	function getYearClassesByCompId($cId){
+		include "config.php";
+
+		$query = "SELECT * FROM competitiondisciplines WHERE competitionId = '$cId'";
+		$data = mysqli_query($con, $query);
+
+		if (!$data) {
+			  die('Error: ' . mysqli_error($con));
+		}
+
+		$array=[];
+		while($row = $data->fetch_object()) {
+			if (!in_array($row->yearClass, $array)){
+					array_push($array, $row->yearClass);
+			}
+		}
+		return $array;
 	}
 
 ?>

@@ -10,7 +10,7 @@
 <!--Make a form with information about the club, send this to forms/addNewClubToDB.php -->
 <table id="createNewClubForm">
 	<?php
-	echo "<form method='post' action='forms/addNewClubToDB.php?competitionId=". $_GET['competitionId']."&prio=".$_GET['prio']."'>";
+	echo "<form method='post' action='../forms/addNewClubToDB.php?competitionId=". $_GET['competitionId']."&prio=".$_GET['prio']."'>";
 	?>
 		<tr>
 			<td>Klubb:</td>

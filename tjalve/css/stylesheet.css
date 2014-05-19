@@ -56,6 +56,10 @@ tr.spaceOver > td {
   width:2em;
 }
 
+.fail-btn{
+  width: 15%;
+}
+
 .firstTableList{
   font-family: Verdana;
   margin-left: 5%;
@@ -110,6 +114,10 @@ tr.spaceOver > td {
 	float:left;
 }
 
+.pass-btn{
+  width: 15%;
+}
+
 .progress{
   border: 1px solid #344cc2;
   background-color: #344cc2;
@@ -132,11 +140,26 @@ tr.spaceOver > td {
   width:70%;
 }
 
+.result-btn{
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 40%;
+  
+}
+
 .right-links{
 	float:right;
   margin-right:10%;
 }
 
+.selectBox{
+	text-align: center;
+}
+
+.vert-field{
+  text-align: center;
+  width:30%;
+}
 
 
 #addParticipator{
@@ -355,7 +378,6 @@ tr.spaceOver > td {
 #continues,
 #yearOfBirth,
 #firstName,
-#lastName,
-#chooseClass{
+#lastName{
 	border-radius: 7px;
 }

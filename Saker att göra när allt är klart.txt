@@ -1,1 +1,0 @@
-* Visa olika saker på sidorna beroende på om man är inloggad eller inte

@@ -12,6 +12,7 @@
 			<td><input name="compName" id="compName" size="31%" ></input></td>
 			<td>Arrangör:</td>
 			<td><input name="organizer" id="organizer" ></input></td>
+			<td></td>
 		</tr>
 		
 		<tr>
@@ -28,7 +29,11 @@
 				<input type="file" name="file" id="file">
 			
 			<td>
+<<<<<<< HEAD
 				<input type="submit" name="submit" value="Fortsätt">
+=======
+				<input type="submit" name="submit" value="Spara">
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 			</td>
 		</td>
 		</tr>	

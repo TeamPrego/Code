@@ -40,5 +40,5 @@
 		}
 	}
 	echo $check;
-	header("Location: ../setRaceBib.php?check=".$check."");
+	header("Location: ../pagesAdmin/setRaceBib.php?check=".$check."");
 ?>
