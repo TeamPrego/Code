@@ -37,10 +37,21 @@
 	 echo json_encode($result);
 }
 
+if(isset($_GET['competName'])) {
+    $compName = $_GET['competName'];
+    //header("Location: ../createStartListStep2.php?");
+	}
+
+if(isset($_GET['competitionName'])) {
+    $compName = $_GET['competitionName'];
+    $temp = new competition();
+    
+    $result1 = $temp->getCompetitionByName($compName);
+    echo json_encode($result1->id);
+	}
+
   
 if(isset($_GET['compName'])) {
-    //include "../class/competition.php";
-    //include "event.php";
     $compName = $_GET['compName'];
     $temp = new competition();
     
@@ -49,9 +60,7 @@ if(isset($_GET['compName'])) {
     $temp2 = new Event();
     $result2 = $temp2->getEventById($result1->id);
     $resultTot = array($result1, $result2);
-    //$resultTot = array($result1);
-    //$resultTot[] = ("foo", "spliff"); 
-    //echo json_encode($resultTot);
+ 
     echo json_encode($resultTot);
 	}
 

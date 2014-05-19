@@ -9,15 +9,14 @@
 	<form id="compForm" name="compForm" method="post" enctype="multipart/form-data" action="createCompetition.php">
 		<tr>
 			<td>Tävlingsnamn:</td>
-			<td><input name="compName" id="compName" ></input></td>
+			<td><input name="compName" id="compName" size="31%" ></input></td>
 			<td>Arrangör:</td>
 			<td><input name="organizer" id="organizer" ></input></td>
 		</tr>
 		
 		<tr>
 			<td>Datum:</td>
-			<td><input name="dateFrom" id="dateFrom" placeholder="ÅÅÅÅ-MM-DD" ></input></td>
-			<td><input name="dateTo" id="dateTo" placeholder="ÅÅÅÅ-MM-DD" ></input></td>
+			<td><input name="dateFrom" id="dateFrom" placeholder="ÅÅÅÅ-MM-DD" size="12%"></input>-<input name="dateTo" id="dateTo" placeholder="ÅÅÅÅ-MM-DD" size="12%" ></input></td>
 			<td>Sista anmäl.dag:</td>
 			<td><input name="lastDay" id="lastDay" placeholder="ÅÅÅÅ-MM-DD" ></input></td>
 		</tr>
@@ -29,7 +28,7 @@
 				<input type="file" name="file" id="file">
 			
 			<td>
-				<input type="submit" name="submit" value="Spara!!!!!!!!!!!">
+				<input type="submit" name="submit" value="Fortsätt">
 			</td>
 		</td>
 		</tr>	

@@ -16,18 +16,22 @@ The class should represent a competition:
   public $id;
   public $name;
   public $organizer;
-  public $date;
+  public $dateFrom;
+  public $dateTo;
   public $lastDate;
+  public $logo;
   
 	public function __construct(){
   }
   
-  public function setCompetition($compId, $compName, $compOrganizer, $compDate, $compLastDate){
+  public function setCompetition($compId, $compName, $compOrganizer, $compDateFrom, $compDateTo, $compLastDate, $compLogo){
     $this -> id = $compId;
     $this -> name = $compName;
     $this -> organizer = $compOrganizer;
-    $this -> date = $compDate;
+    $this -> dateFrom = $compDateFrom;
+    $this -> dateTo = $compDateTo;
     $this -> lastDate = $compLastDate;
+    $this -> logo = $compLogo;
   }
   
   //Function that sends a new competition to the database
@@ -377,34 +381,25 @@ The class should represent a competition:
       $array = [];
       while($row=$dataCompetition->fetch_object()) {      
         $temp = new Competition();
-        $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $temp->setCompetition($row->competitionId, $row->competitionName, $row->dateFrom, $row->dateTo, $row->lastDate, $row->organizer, $row->logo);
         $array[] = $temp;
+        
       }
       mysqli_close($con);
+      //echo'<pre>'; print_r($array); echo '<pre/>';
       return $array;
     }
 
     public function getCompetitionByName($compName){
       include 'config.php';
       $sql = "SELECT * FROM competition WHERE competitionName = '$compName'";
-      //$sql = "SELECT * FROM competition WHERE competitionName = 'TFC'";
       $dataCompetition = mysqli_query($con, $sql);
       $data;
       while($row=$dataCompetition->fetch_object()) {
 
-            /*    $data = ['competitionId' => $row->competitionId,
-						'competitionName' => $row->competitionName,
-					'date' => $row->date,
-					'lastDate' => $row->lastDate,
-					'organizer' => $row->organizer,
-					];*/
-
-        //$allCompetitions[] = ['id' => $row->competitionId, 'name' => $row->competitionName, 'arranger' => $row->organizer, 'beginDate' => $row->date, 'lastDate' => $row->lastDate];
-        
         $temp = new Competition();
-        $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->date, $row->lastDate);
+        $temp->setCompetition($row->competitionId, $row->competitionName, $row->organizer, $row->dateFrom, $row->dateTo, $row->lastDate, $row->logo);
         $data = $temp;
-        //echo $allCompetitions[0]->name;
 
       }
       return $data;
@@ -415,8 +410,10 @@ The class should represent a competition:
     	$array = 	[	'competitionId' 				=>	$this->id,
     							'competitionName' 			=> 	$this->name,
     							'competitionOrganizer' 	=> 	$this->organizer,
-    							'competitionDate' 			=> 	$this->date,
+    							'competitionDateFrom' 			=> 	$this->dateFrom,
+    							'competitionDateTo' 			=> 	$this->dateTo,
     							'competitionLastDate' 	=> 	$this->lastDate,
+    							'competitionLogo' 			=> 	$this->logo,
     						];
     	return $array;
     }
@@ -493,8 +490,8 @@ The class should represent a competition:
 		$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
 		$array=[];
 		while($row = $data->fetch_object()) {
-			if(!in_array($row->discipline, $array)) {
-				array_push($array, $row->discipline);
+			if(!in_array($row->disciplineId, $array)) {
+				array_push($array, $row->disciplineId);
 			}
 		}
 		mysqli_close($con);	
@@ -506,6 +503,7 @@ The class should represent a competition:
 	// Output: Array with a lot of information about the
 	function getStartlist($competitionId, $yearClass, $discipline) {
 		include "config.php";
+    
 		$disc =[];
 
 		//Findning all classes and dicipilnes
@@ -517,8 +515,8 @@ The class should represent a competition:
 		while($rowAgeClass = $dataAgeClass->fetch_object()) {
 			if(($yearClass === "Alla" && $discipline === "Alla") ||
 			($rowAgeClass->yearClass === $yearClass && $discipline === "Alla") ||
-			($rowAgeClass->discipline === $discipline && $yearClass === "Alla") ||
-			($rowAgeClass->discipline === $discipline && $rowAgeClass->yearClass === $yearClass)) {
+			($rowAgeClass->disciplineId === $discipline && $yearClass === "Alla") ||
+			($rowAgeClass->disciplineId === $discipline && $rowAgeClass->yearClass === $yearClass)) {
 				$participants = [];
 				$query = "SELECT p.*, c.*, pd.*
 		              FROM participantdisciplines pd
@@ -532,17 +530,23 @@ The class should represent a competition:
 				  die('Error: ' . mysqli_error($con));
 				}
 				while($rowDiscipline = $dataDiscipline->fetch_object()){
-					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->discipline === $rowAgeClass->discipline)
+					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->disciplineId === $rowAgeClass->disciplineId)
 						$participants[] = [	'firstName'	=> $rowDiscipline->firstName,
 																'lastName' 	=> $rowDiscipline->lastName,
 																'club' 			=> $rowDiscipline->clubId,
 																'prio' 			=> $rowDiscipline->prio];
 				}
 				if($participants != null) {
+        include "participantdisciplines.php";
+        $temp = new ParticipantDisciplines();
+        $tmp = $rowAgeClass->disciplineId;
+        $result = $temp->getDisciplineByDisciplineId($tmp);
 					$disc[] = [ 'className' 		=> $rowAgeClass->yearClass,
-											'discipline' 		=> $rowAgeClass->discipline,
+											'discipline' 		=> $temp,
 											'participants' 	=> $participants];
-				}
+				
+				 
+        }
 			}
 		}
 		return $disc;
@@ -560,8 +564,10 @@ The class should represent a competition:
 	  	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
 										'competitionName' 			=> 	$row->competitionName,
 										'competitionOrganizer' 	=> 	$row->organizer,
-										'competitionDate' 			=> 	$row->date,
-										'competitionLastDate' 	=> 	$row->lastDate];
+										'competitionDateFrom' 			=> 	$row->dateFrom,
+                    'competitionDateTo' 			=> 	$row->dateTo,
+										'competitionLastDate' 	=> 	$row->lastDate,
+                    'competitionLogo' 	=> 	$row->logo];
 	  }
 	  mysqli_close($con);
 	  return $array;
