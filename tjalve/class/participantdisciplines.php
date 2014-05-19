@@ -160,7 +160,7 @@
         die('Error: ' . mysqli_error($con));
     }
 
-    $array=[];
+    $array=array();
     while($row = $data->fetch_object()) {
       array_push($array, $row->discipline);
       //$array = ['discipline'=> $row->yearClass];

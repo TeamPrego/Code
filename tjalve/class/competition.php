@@ -216,7 +216,7 @@ The class should represent a competition:
 	  if (!$data) {
 		  die('Error: ' . mysqli_error($con));
 		}
-		$array=[];
+		$array=array();
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->yearClass, $array)) {
 				array_push($array, $row->yearClass);
@@ -250,12 +250,12 @@ The class should represent a competition:
 		  die('Error: ' . mysqli_error($con));
 		}
 		
-		$allId=[];
+		$allId=array();
 		while($row = $data->fetch_object()){
 		$allId[] = $row->disciplineId;
 		}
 		
-		$chosenId=[];
+		$chosenId=array();
 		while($row = $data2->fetch_object()){
 		$chosenId[] = $row->disciplineId;
 		}
@@ -266,7 +266,7 @@ The class should represent a competition:
 		else{
 			$result = $allId;
 		}
-		$leftoverDisciplineNames=[];
+		$leftoverDisciplineNames=array();
 		
 		if(isset($result)){
 			foreach($result as $key){
@@ -301,7 +301,7 @@ The class should represent a competition:
 		  die('Error: ' . mysqli_error($con));
 		}
 		
-		$nameOfDisciplines=[];
+		$nameOfDisciplines=array();
 		while($row = $data->fetch_object()){
 		$nameOfDisciplines[] = ['klass' => $row->yearClass,'gren' => $row->discipline, 'Id' => $row->disciplineId];
 		}
@@ -471,7 +471,7 @@ The class should represent a competition:
 	function getAllClassesFromCompetition($competitionId) {
 		include "config.php";
 		$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
-		$array=[];
+		$array=array();
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->yearClass, $array)) {
 				array_push($array, $row->yearClass);
@@ -490,7 +490,7 @@ The class should represent a competition:
 																FROM alldisciplines a
 																INNER JOIN competitiondisciplines cd ON a.disciplineId = cd.disciplineId
 																WHERE cd.competitionId = $competitionId");
-		$array=[];
+		$array=array();
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->disciplineId, $array)) {
 				array_push($array, $row->disciplineId);
@@ -505,7 +505,7 @@ The class should represent a competition:
 	// Output: Array with a lot of information about the
 	function getStartlist($competitionId, $yearClass, $discipline) {
 		include "config.php";
-		$disc =[];
+		$disc =array();
 
 		//Findning all classes and dicipilnes
 		$dataAgeClass = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId = '$competitionId'
@@ -593,7 +593,7 @@ The class should represent a competition:
 			  die('Error: ' . mysqli_error($con));
 		}
 
-		$array=[];
+		$array=array();
 		while($row = $data->fetch_object()) {
 			if (!in_array($row->yearClass, $array)){
 					array_push($array, $row->yearClass);

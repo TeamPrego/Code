@@ -14,7 +14,7 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	
-	$array=[];
+	$array=array();
 	foreach ($name as $grentyp) { 
 	while($row = $data2->fetch_object()){
 		array_push($array, $row->discipline);

@@ -1,6 +1,6 @@
 <?php  
 
-	// 1: WAMP 2: MAMP 3: SurfTown
+	// 1: WAMP 2: MAMP 3: SurfTown 4:Binero
 	$who = 1;
 
 	switch($who) {
@@ -21,6 +21,12 @@
 		  $dbhost="mydb9.surf-town.net";
 		  $dbuser="Tjalve_prego";
 		  $dbpass="4d5J886";
+		  $dbname="Tjalve_prego";
+		  break;
+		 	case 4:
+		  $dbhost="submission-192031.mysql.binero.se";
+		  $dbuser="192031_ds55616";
+		  $dbpass="TeamPrego";
 		  $dbname="192031-submission";
 		  break;
 	}

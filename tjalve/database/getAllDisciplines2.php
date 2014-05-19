@@ -8,7 +8,7 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	
-	$disc=[];
+	$disc=array();
 	while($row = $data->fetch_object()){
 	$disc[] = ['gren'=>$row->discipline];
 	}

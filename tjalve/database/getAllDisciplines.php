@@ -18,17 +18,17 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	
-	$disc=[];
+	$disc=array();
 	while($row = $data->fetch_object()){
 	$disc[] = ['gren'=>$row->discipline];
 	}
 	
-	$compare=[];
+	$compare=array();
 	while($row = $data2->fetch_object()){
 	$compare[] = ['gren'=>$row->discipline];
 	}
 	
-	$compareTmp=[];
+	$compareTmp=array();
 		foreach($disc as $aV){
 		$discTmp[] = $aV['gren'];
 		}
@@ -40,7 +40,7 @@
 		else{
 			$compareTmp[] = 'empty';
 		}
-		$result=[];
+		$result=array();
 		$result=array_diff($discTmp, $compareTmp);
 		echo json_encode($result);
 	

@@ -8,7 +8,7 @@
 	  die('Error: ' . mysqli_error($con));
 	}
 	
-	$class=[];
+	$class=array();
 	while($row = $data->fetch_object()){
 	$class[] = ['class'=>$row->Klass];
 	}
