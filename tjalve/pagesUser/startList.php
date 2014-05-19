@@ -95,9 +95,8 @@ function Update() {
 				// If the participant has some disciplines with prio 1 or 2
 				if(countParticipantDiscipline != 0) {
 					string += '<tr class="spaceOver"><td style="background-color:white"></td></tr>';
-					string += 	'<tr><th>'+ value.className + '</th><th> ' + value.discipline +'</th><th></th><th></th><th></th><th></th>'+
-											'</tr><tr><th>Födelseår</th><th>Förnamn</th><th>Efternamn</th>'
-											+' <th>SB</th><th>PB</th><th>Klubb</th></tr>';
+					string += 	'<tr style="background-color:white; font-size:1.2em; font-weight:bold"><td>'+ value.className + '</td><td> ' + value.discipline +'</td><td></td><td></td><td></td><td></td>'+
+											'</tr><tr><th>Födelseår</th><th>Förnamn</th><th>Efternamn</th><th>SB</th><th>PB</th><th>Klubb</th></tr>';
 					// Foreach discipline
 					$.each(value.participants, function(ind, val) {
 							string += '<tr><td>'+ val.birthYear +'</td><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>'+val.SB+'</td><td>'+val.PB+'</td><td>' + val.club + '</td></tr>';

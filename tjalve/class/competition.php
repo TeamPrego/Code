@@ -503,15 +503,13 @@ The class should represent a competition:
 	// Gets all participants to the startlist
 	// Input: CompetitionId, yearClass and Discipline
 	// Output: Array with a lot of information about the
-	// Gets all participants to the startlist
-	// Input: CompetitionId, yearClass and Discipline
-	// Output: Array with a lot of information about the
 	function getStartlist($competitionId, $yearClass, $discipline) {
 		include "config.php";
 		$disc =[];
 
 		//Findning all classes and dicipilnes
-		$dataAgeClass = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId = '$competitionId'");
+		$dataAgeClass = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId = '$competitionId'
+																				ORDER BY  `competitiondisciplines`.`yearClass` ASC ");
 		if (!$dataAgeClass) {
 		  die('Error: ' . mysqli_error($con));
 		}
