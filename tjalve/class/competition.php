@@ -544,7 +544,10 @@ The class should represent a competition:
 						$participants[] = [	'firstName'	=> $rowDiscipline->firstName,
 																'lastName' 	=> $rowDiscipline->lastName,
 																'club' 			=> getClub($rowDiscipline->clubId)['club'],
-																'prio' 			=> $rowDiscipline->prio];
+																'prio' 			=> $rowDiscipline->prio,
+																'SB' 				=> $rowDiscipline->SB,
+																'PB'				=> $rowDiscipline->PB,
+																'birthYear' => $rowDiscipline->birthYear];
 						$theDiscipline = $rowDiscipline->discipline;
 					}
 				}
