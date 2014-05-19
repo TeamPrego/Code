@@ -13,23 +13,23 @@ include "templates/adminheader.php";
     </tr>
     
     <tr>
-			<td><a href="createCompetition.php"><button class="button">Skapa</button></a></td>
-			<td><a href="editParticipants.php"><button class="button">Ändra</button></a></td>
+			<td><a href="../createCompetition.php"><button class="button">Skapa</button></a></td>
+			<td><a href="editParticipant.php"><button class="button">Ändra</button></a></td>
 			<td><a href="invoicingData.php"><button class="button">Fakturera</button></a></td>
 		</tr>
     
 		<tr>
-			<td><a href=""><button class="button">Ändra</button></a></td>
+			<td><!--<a href=""><button class="button">Ändra</button></a>--></td>
 			<td><a href="acceptLateReg.php"><button class="button">Sen anmälan</button></a></td>
 		</tr>
 		
 		<tr>
-			<td><a href=""><button class="button">Resultat</button></a></td>
+			<td><!--<a href=""><button class="button">Resultat</button></a>--></td>
 			<td><a href="setRaceBib.php"><button class="button">Nummerlapp</button></a></td>
 		</tr>
 		
 		<tr>
-			<td><a href=""><button class="button">Utskrift</button></a></td>
+			<td><!--<a href=""><button class="button">Utskrift</button></a>--></td>
 		</tr>
 	</thead>
 </table>
