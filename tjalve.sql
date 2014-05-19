@@ -2,10 +2,17 @@
 -- version 4.0.4
 -- http://www.phpmyadmin.net
 --
+<<<<<<< HEAD
+-- Host: localhost
+-- Generation Time: May 05, 2014 at 01:13 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.12
+=======
 -- Värd: localhost
 -- Skapad: 13 maj 2014 kl 10:39
 -- Serverversion: 5.6.12-log
 -- PHP-version: 5.4.12
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -207,14 +214,30 @@ CREATE TABLE IF NOT EXISTS `competition` (
   `organizer` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   `logo` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`competitionId`)
+<<<<<<< HEAD
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=10 ;
+=======
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=13 ;
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 
 --
 -- Dumpning av Data i tabell `competition`
 --
 
 INSERT INTO `competition` (`competitionId`, `competitionName`, `dateFrom`, `dateTo`, `lastDate`, `organizer`, `logo`) VALUES
+<<<<<<< HEAD
+(1, 'HannesTävling', '2014-05-23', '0000-00-00', '2014-05-15', 'TjalveAB', ''),
+(2, 'EmmasTävling', '2014-05-17', '0000-00-00', '2014-03-21', 'Rolf', ''),
+(3, 'hejeeee', '2014-12-12', '2014-12-15', '2011-10-09', 'din jävel', 'upload/tjalve_t.png'),
+(4, 'funkar allt nu', '2014-12-12', '2014-12-15', '2011-10-09', 'snälla', 'upload/tjalve_logga.png'),
+(5, 'funkar allt', '2014-12-12', '2014-12-15', '2011-10-09', 'din jävel', 'upload/tjalve_t.png'),
+(6, 'test', '2014-12-12', '2014-12-15', '2011-10-09', 'jag', 'upload/tjalve_t.png'),
+(7, 'ja men de ', '2014-12-12', '2014-12-15', '2011-10-09', 'funkar ju', 'upload/taskig_copy.jpg'),
+(8, 'bänkartävlingen', '2014-12-12', '2014-12-15', '2011-10-09', 'din jävel', 'upload/tjalve_t.png'),
+(9, 'funkar', '2014-12-12', '2014-12-15', '2011-10-09', 'fortfarande', 'upload/tjalve_t.png');
+=======
 (12, 'Tjalve-open', '2014-06-03', '2014-06-02', '2014-05-21', 'Tjalve IK', 'upload/');
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 
 -- --------------------------------------------------------
 
@@ -236,6 +259,118 @@ CREATE TABLE IF NOT EXISTS `competitiondisciplines` (
 -- Dumpning av Data i tabell `competitiondisciplines`
 --
 
+<<<<<<< HEAD
+INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `disciplineId`) VALUES
+(1, 'P17', 0),
+(1, 'P17', 0),
+(1, 'P15', 0),
+(1, 'P15', 0),
+(2, 'P15', 0),
+(2, 'P15', 0),
+(1, 'F12', 0),
+(2, 'F12', 0),
+(2, 'F12', 0),
+(2, 'F13', 0),
+(2, 'F13', 0),
+(2, 'P19', 0),
+(3, 'P12', 100),
+(3, 'P7', 100),
+(3, 'P7', 110),
+(3, 'P7', 120),
+(3, 'P7', 150),
+(3, 'P7', 170),
+(3, 'P7', 180),
+(3, 'P7', 160),
+(3, 'P7', 250),
+(4, 'P7', 40),
+(4, 'P7', 50),
+(4, 'P7', 60),
+(4, 'P7', 70),
+(4, 'P7', 80),
+(4, 'P7', 90),
+(4, 'K22', 590),
+(4, 'K22', 600),
+(4, 'K22', 610),
+(4, 'K22', 620),
+(4, 'K22', 630),
+(4, 'K22', 640),
+(6, 'P17', 20),
+(6, 'P17', 30),
+(6, 'P9', 30),
+(6, 'P9', 70),
+(6, 'P9', 80),
+(6, 'P9', 210),
+(6, 'P9', 330),
+(6, 'P9', 620),
+(8, 'P16', 20),
+(8, 'P16', 30),
+(8, 'P16', 40),
+(8, 'P16', 50),
+(8, 'P16', 60),
+(8, 'P16', 70),
+(8, 'P16', 80),
+(8, 'P16', 90),
+(8, 'P16', 100),
+(8, 'P16', 110),
+(8, 'P16', 120),
+(8, 'P16', 130),
+(8, 'P16', 140),
+(8, 'P16', 150),
+(8, 'P16', 160),
+(8, 'P16', 170),
+(8, 'P16', 180),
+(8, 'P16', 190),
+(8, 'P16', 200),
+(8, 'P16', 210),
+(8, 'P16', 220),
+(8, 'P16', 230),
+(8, 'P16', 240),
+(8, 'P16', 250),
+(8, 'P16', 260),
+(8, 'P16', 270),
+(8, 'P16', 280),
+(8, 'P16', 290),
+(8, 'P16', 300),
+(8, 'P16', 310),
+(8, 'P16', 320),
+(8, 'P16', 330),
+(8, 'P16', 340),
+(8, 'P16', 350),
+(8, 'P16', 360),
+(8, 'P16', 370),
+(8, 'P16', 380),
+(8, 'P16', 390),
+(8, 'P16', 400),
+(8, 'P16', 410),
+(8, 'P16', 420),
+(8, 'P16', 430),
+(8, 'P16', 440),
+(8, 'P16', 450),
+(8, 'P16', 460),
+(8, 'P16', 470),
+(8, 'P16', 480),
+(8, 'P16', 490),
+(8, 'P16', 500),
+(8, 'P16', 520),
+(8, 'P16', 530),
+(8, 'P16', 540),
+(8, 'P16', 550),
+(8, 'P16', 560),
+(8, 'P16', 570),
+(8, 'P16', 580),
+(8, 'P16', 590),
+(8, 'P16', 600),
+(8, 'P16', 610),
+(8, 'P16', 620),
+(8, 'P16', 630),
+(8, 'P16', 640),
+(9, 'P12', 10),
+(9, 'P12', 20),
+(9, 'P12', 30),
+(9, 'P12', 40),
+(9, 'P12', 50),
+(9, 'P15', 20);
+=======
 INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `disciplineId`, `competitionDisciplineId`) VALUES
 (12, 'P7', 10, 1),
 (12, 'P7', 20, 2),
@@ -246,6 +381,7 @@ INSERT INTO `competitiondisciplines` (`competitionId`, `yearClass`, `disciplineI
 (12, 'P9', 10, 7),
 (12, 'P9', 20, 8),
 (12, 'P9', 30, 9);
+>>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 
 -- --------------------------------------------------------
 
