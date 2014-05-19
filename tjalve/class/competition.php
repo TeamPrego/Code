@@ -503,9 +503,11 @@ The class should represent a competition:
 	// Gets all participants to the startlist
 	// Input: CompetitionId, yearClass and Discipline
 	// Output: Array with a lot of information about the
+	// Gets all participants to the startlist
+	// Input: CompetitionId, yearClass and Discipline
+	// Output: Array with a lot of information about the
 	function getStartlist($competitionId, $yearClass, $discipline) {
 		include "config.php";
-    
 		$disc =[];
 
 		//Findning all classes and dicipilnes
@@ -515,19 +517,12 @@ The class should represent a competition:
 		}
 
 		while($rowAgeClass = $dataAgeClass->fetch_object()) {
-<<<<<<< HEAD
-			if(($yearClass === "Alla" && $discipline === "Alla") ||
-			($rowAgeClass->yearClass === $yearClass && $discipline === "Alla") ||
-			($rowAgeClass->disciplineId === $discipline && $yearClass === "Alla") ||
-			($rowAgeClass->disciplineId === $discipline && $rowAgeClass->yearClass === $yearClass)) {
-=======
 			$rawDiscipline = getDisciplineByDisciplineId($rowAgeClass->disciplineId);
 			if(	($yearClass == "Alla" 									&& $discipline == "Alla") 	||
 					($rowAgeClass->yearClass == $yearClass 	&& $discipline == "Alla") 	||
 					($rawDiscipline == $discipline 					&& $yearClass == "Alla") 	||
 					($rawDiscipline == $discipline 					&& $rowAgeClass->yearClass === $yearClass)) {
 				
->>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 				$participants = [];
 				$query = "SELECT p.*, c.*, pd.*, cd.*, ad.*
 									FROM alldisciplines ad
@@ -543,39 +538,24 @@ The class should represent a competition:
 				if (!$dataDiscipline) {
 				  die('Error: ' . mysqli_error($con));
 				}
-<<<<<<< HEAD
-				while($rowDiscipline = $dataDiscipline->fetch_object()){
-					if($rowDiscipline->yearClass === $rowAgeClass->yearClass && $rowDiscipline->disciplineId === $rowAgeClass->disciplineId)
-=======
 				
 				while($rowDiscipline = $dataDiscipline->fetch_object()) {
 					if($rowDiscipline->competitionDisciplineId == $rowAgeClass->competitionDisciplineId) {
->>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 						$participants[] = [	'firstName'	=> $rowDiscipline->firstName,
 																'lastName' 	=> $rowDiscipline->lastName,
 																'club' 			=> getClub($rowDiscipline->clubId)['club'],
 																'prio' 			=> $rowDiscipline->prio,
-																'SB' 				=> $rowDiscipline->SB,
+																'SB'				=> $rowDiscipline->SB,
 																'PB'				=> $rowDiscipline->PB,
-																'birthYear' => $rowDiscipline->birthYear];
+																'birthYear'	=> $rowDiscipline->birthYear];
 						$theDiscipline = $rowDiscipline->discipline;
 					}
 				}
 				if($participants != null) {
-        include "participantdisciplines.php";
-        $temp = new ParticipantDisciplines();
-        $tmp = $rowAgeClass->disciplineId;
-        $result = $temp->getDisciplineByDisciplineId($tmp);
 					$disc[] = [ 'className' 		=> $rowAgeClass->yearClass,
-<<<<<<< HEAD
-											'discipline' 		=> $temp,
-=======
 											'discipline' 		=> $theDiscipline,
->>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
 											'participants' 	=> $participants];
-				
-				 
-        }
+				}
 			}
 		}
 		return $disc;
@@ -593,16 +573,10 @@ The class should represent a competition:
 	  	$array[] = 	[	'competitionId' 				=>	$row->competitionId,
 										'competitionName' 			=> 	$row->competitionName,
 										'competitionOrganizer' 	=> 	$row->organizer,
-<<<<<<< HEAD
-										'competitionDateFrom' 			=> 	$row->dateFrom,
-                    'competitionDateTo' 			=> 	$row->dateTo,
-										'competitionLastDate' 	=> 	$row->lastDate,
-                    'competitionLogo' 	=> 	$row->logo];
-=======
 										'competitionDateFrom' 	=> 	$row->dateFrom,
-										'competitionDateTo' 		=> 	$row->dateTo,
-										'competitionLastDate' 	=> 	$row->lastDate];
->>>>>>> d9bac53153d34c664ac0af21ca60fd27f68542ef
+                    'competitionDateTo' 		=> 	$row->dateTo,
+										'competitionLastDate' 	=> 	$row->lastDate,
+                    'competitionLogo' 			=> 	$row->logo];
 	  }
 	  mysqli_close($con);
 	  return $array;
