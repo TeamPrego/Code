@@ -161,11 +161,13 @@
     include "config.php";
     $competitionName = $_GET['competitionName'];
 
-    $query = "SELECT p.*, c.*
+    $query = "SELECT p . * , c . *, cl . *
               FROM participant p
-              INNER JOIN contact c          ON p.contactId = c.contactId
-              INNER JOIN competition comp   ON c.competitionId = comp.competitionId
-              WHERE comp.competitionName = '$competitionName'";
+              INNER JOIN contact c ON p.contactId = c.contactId
+              INNER JOIN clubs cl ON cl.clubId = c.clubid
+              INNER JOIN competition comp ON c.competitionId = comp.competitionId
+              WHERE comp.competitionId =  '14'
+              ORDER BY cl.club ASC , p.lastName ASC";
 
     $data = mysqli_query($con, $query);
 
@@ -175,13 +177,11 @@
 
     $disc = [];
     while($rowParticipant = $data->fetch_object()) {
-      $clubName = getClub($rowParticipant->clubId)['club'];
-
       $disc[] = ['id'             => $rowParticipant->participantId,
                  'fName'          => $rowParticipant->firstName,
                  'lName'          => $rowParticipant->lastName,
                  'bib'            => $rowParticipant->bib,
-                 'club'           => $clubName,
+                 'club'           => $rowParticipant->club,
                  'participantId'  => $rowParticipant->participantId];
     }
     mysqli_close($con); 
@@ -195,13 +195,20 @@
     $allParticipants = getAllParticipantFromCompetition($competitionName);
     foreach ($allParticipants as $participant) {
       $participantId = $participant['participantId'];
+      foreach ($allParticipants as $participant) {
+        if($participant['participantBib'] == $startNumber)
+          return false;
+      }
       $query = "UPDATE      participant p
                 INNER JOIN  contact c         ON p.contactId = c.contactId
                 INNER JOIN  competition comp  ON c.competitionId = comp.competitionId
                 SET p.bib = '$startNumber'
-                WHERE comp.competitionName = '$competitionName' AND p.participantId = '$participantId'";
+                WHERE comp.competitionName = '$competitionName' AND p.participantId = '$participantId' AND p.bib='0'";
       $update = mysqli_query($con, $query);
-      $startNumber=$startNumber+1;
+      $count = mysqli_affected_rows($con);
+      if($count != 0) {
+        $startNumber=$startNumber+1; 
+      }
     }
   }
 

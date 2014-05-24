@@ -51,11 +51,6 @@
 			</tr>
 			
 			<tr>
-				<td>Upprepa e-mail:	</td>
-				<td><input type="email" name="repeatEmail" id="repeatEmail" placeholder="namn@exempel.se" required></input></td> 
-			</tr>
-			
-			<tr>
 				<td>Telefon:</td>
 				<td><input type="text" name="contactPhone" id="contactPhone" placeholder="ex 07x-xxx xxx xx"required></input></td>
 			</tr>

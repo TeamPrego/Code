@@ -19,6 +19,9 @@ session_start();
 		include "../class/competition.php";
 		$competition = getAllCompetitionsToArray(); 
 		foreach ($competition as $theCompetition)
+			if($_GET['competitionId'] == $theCompetition['competitionId'])
+				echo "<option id='" .$theCompetition['competitionId']. "'selected='selected'>" .$theCompetition['competitionName']. "</option>";
+
 			echo "<option id='" .$theCompetition['competitionId']. "'>" .$theCompetition['competitionName']. "</option>";
 		?>
 	</select>
@@ -36,26 +39,29 @@ session_start();
 	<div id="confirmedDiv">
 		<!-- Info about participant will appear here through ajax-->
 	</div>	
-		<div id="anna">
-		<!-- Info about participant will appear here through ajax-->
-	</div>	
-	<select id="classList">
-		<!-- Classes will appear here -->
-	</select>
+	<!-- Classes will appear here 
+		<select id="classList">
+		</select>
+	-->
 	<div id="classDisciplines">
 		<!-- Disciplines will appear here -->
 	</div>
-</div>
+</div>	
+
 
 
 <script type="text/javascript">
+	function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+
 	//Variable that is used when the Edit button is pressed
 	var disabl = "disabled";
+
 	//***** When competition drop down list is changed do: ******
 	$('#getCompetitions').change(function() {
 		//Get participants from the correct competition
 		var competitionId = $(this).find("option:selected").attr('id');//This is competition id
-		console.log(competitionId);
 		$.ajax({
 			url: '../Ajax/ajax.php?fetchParticipantsByCompId=1&competitionId='+competitionId,
 			success: function(content) {
@@ -63,7 +69,11 @@ session_start();
 				var part_string = '';
 				var substring = '';
 				$.each(content, function(index, value) {
-					if(index===0){
+					if(getURLParameter("participantId") != 0 && getURLParameter("participantId") == value.pId) {
+						part_string += '<option id="'+value.pId+'" selected="selected">'+value.pId+' - '+value.fName+' '+value.lName+'</option>';
+						substring = value.pId + ' - ' + value.fName + ' ' + value.lName;
+					}
+					else if(index===0 && getURLParameter("participantId") == 0){
 						part_string += '<option id="'+value.pId+'" selected="selected">'+value.pId+' - '+value.fName+' '+value.lName+'</option>';
 						substring = value.pId + ' - ' + value.fName + ' ' + value.lName;
 					}
@@ -76,7 +86,8 @@ session_start();
 				$('#adminParticipants').trigger("change");
 			}
 		});
-		getYearClasses(competitionId);
+		//Sets all classes in a dropdownlist
+		//getYearClasses(competitionId);
 	});
 		
 	// ***** Creating the drop down list with classes, this is used when adding new discipline to participant *****
@@ -163,14 +174,12 @@ session_start();
 				});
 				string += '<tr><td><input type=button name="editButton" class="showButton" value="Redigera" onclick="enableFunc('+participantId+')"> '
 				+ '<input type=submit name="saveButton" class="hideButton" value="Spara"> </td></tr>'
-				+ '<tr><td>Lägg till grenar</td></tr>'
 				+ '<input id="contactId" name="contactId" type=hidden value="' + contactId + '">';
 				string +='<tr><div id="disciplines"></tr></table></form></div></div>';
 			}
 		});
 		return string;
 	}
-
 	/*
 	// ***** When class is chosen from drop down list, do: *****
 	$('#classList').change(function(){
@@ -247,7 +256,7 @@ session_start();
 ?>
 <!--The Progress Bar -->
 <div class=progressBar>
-	<div class=progress>50% klart</div>
+	<a href="../pagesAdmin"><button>Tillbaka till startsidan</button></a>
 </div
 
 	

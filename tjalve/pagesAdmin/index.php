@@ -14,12 +14,13 @@ include "templates/adminheader.php";
     
     <tr>
 			<td><a href="../createCompetition.php"><button class="button">Skapa</button></a></td>
-			<td><a href="editParticipant.php"><button class="button">Ändra</button></a></td>
+			<td><a href="editParticipant.php?competitionId=0&participantId=0"><button class="button">Ändra</button></a></td>
 			<td><a href="invoicingData.php"><button class="button">Fakturera</button></a></td>
 		</tr>
     
 		<tr>
-			<td><!--<a href=""><button class="button">Ändra</button></a>--></td>
+			<!--<td><a href="../editCompetition.php"><button class="button">Ändra</button></a></td>-->
+			<td></td>
 			<td><a href="acceptLateReg.php"><button class="button">Sen anmälan</button></a></td>
 		</tr>
 		

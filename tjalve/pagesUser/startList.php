@@ -96,10 +96,10 @@ function Update() {
 				if(countParticipantDiscipline != 0) {
 					string += '<tr class="spaceOver"><td style="background-color:white"></td></tr>';
 					string += 	'<tr style="background-color:white; font-size:1.2em; font-weight:bold"><td>'+ value.className + '</td><td> ' + value.discipline +'</td><td></td><td></td><td></td><td></td>'+
-											'</tr><tr><th>Födelseår</th><th>Förnamn</th><th>Efternamn</th><th>SB</th><th>PB</th><th>Klubb</th></tr>';
+											'</tr><tr><th>Förnamn</th><th>Efternamn</th><th>Födelseår</th><th>Klubb</th><th>SB</th><th>PB</th></tr>';
 					// Foreach discipline
 					$.each(value.participants, function(ind, val) {
-							string += '<tr><td>'+ val.birthYear +'</td><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>'+val.SB+'</td><td>'+val.PB+'</td><td>' + val.club + '</td></tr>';
+							string += '<tr><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>'+ val.birthYear +'</td><td>' + val.club + '</td><td>'+val.SB+'</td><td>'+val.PB+'</td></tr>';
 							countParticipant++;
 					});
 				}

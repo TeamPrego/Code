@@ -18,6 +18,12 @@ session_start();
 <!--The Form Part Two -->
 <div id="leftPartOfApplication">
 	<h2>Skriv in deltagarinformation</h2>
+	<h3>
+		<?php
+			include "../class/Club.php";
+			echo getClubnameByContactId($_GET['contactId']);
+		?>
+	</h3>
 	<form method="post" id="firstForm" name="firstForm" action="../forms/addParticipant.php"> 
 		<table id ="formDiv">
 			<input type="hidden" value= <?php echo $_GET['contactId'] ?> name="contactId">
@@ -209,7 +215,7 @@ function enableFunc(Id, fName, lName, counter, birthYear) {
 </script>
 
 <div id="rightPartOfApplication">
-	<h2>Dina anmälda tävlande</h2>
+	<h2>Följade tävlande är anmäla</h2>
 	<div id="confirmedDiv">
 		<?php
 		//include "database/findParticipants.php";
@@ -240,6 +246,12 @@ function enableFunc(Id, fName, lName, counter, birthYear) {
 	</div>
 </div>
 
+<div class=progressBar>
+	<a href="../"><button class="leftPartOfProgressBar">Tillbaka till startsidan</button></a>
+	<a href="startList.php?competitionId=
+	<?php echo getCompetitionIdFromContactId($_GET['contactId']) ?>
+	"><button class="rightPartOfProgressBar">Till startlistan</button></a>
+</div>
 <!--The Progress Bar -->
 <div class=progressBar>
 	<div class="importantTextRed">Steg 2/2</div>

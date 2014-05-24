@@ -38,6 +38,12 @@ h2{
 	text-align: center;
 }
 
+h3{
+	color: #344cc2;
+	font-family:"Verdana";
+	text-align: center;
+}
+
 h4{
 	margin: 0;
 	margin-left: 5%;
@@ -119,24 +125,19 @@ tr.spaceOver > td {
 	float:left;
 }
 
+.leftPartOfProgressBar {
+	float: left;
+}
+.rightPartOfProgressBar {
+	float: right;
+}
+
 .pass-btn{
   width: 15%;
 }
 
-.progress{
-  border: 1px solid #344cc2;
-  background-color: #344cc2;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-	height: 100%;
-	text-align: right;
-	width: 50%;
-}
-
 /*The Progress bar on apllication-site */
 .progressBar{
-  border: 3px solid #344cc2;
-	border-radius: 7px;
 	clear:both;
 	height: 5%;
   margin-left: auto;

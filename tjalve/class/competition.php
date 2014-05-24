@@ -489,11 +489,12 @@ The class should represent a competition:
 		$data = mysqli_query($con, "SELECT a.*
 																FROM alldisciplines a
 																INNER JOIN competitiondisciplines cd ON a.disciplineId = cd.disciplineId
-																WHERE cd.competitionId = $competitionId");
+																WHERE cd.competitionId = $competitionId
+																ORDER BY  `a`.`disciplineId` ASC");
 		$array=array();
 		while($row = $data->fetch_object()) {
-			if(!in_array($row->disciplineId, $array)) {
-				array_push($array, $row->disciplineId);
+			if(!in_array($row->discipline, $array)) {
+				array_push($array, $row->discipline);
 			}
 		}
 		mysqli_close($con);	

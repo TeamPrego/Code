@@ -111,5 +111,22 @@
 		
 		return $allClubs;
 	}
+
+	function getClubnameByContactId($contactId) {
+		include "config.php";
+
+		$query = "SELECT c.club
+							FROM clubs c 
+							INNER JOIN contact con ON c.clubId = con.clubId
+							WHERE con.contactId = '$contactId'";
+		$data = mysqli_query($con, $query);
+
+		if (!$data) {
+		  die('Error: ' . mysqli_error($con));
+		}
+
+		$clubname = $data->fetch_object()->club;
+		return $clubname;
+		}
 ?>
 

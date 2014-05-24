@@ -84,10 +84,10 @@ if(isset($_GET['compName'])) {
 	//Updates the bibnumbers on all participant in one competition.
 	//Uses a startnumber and go throw all with an increasing number.
 	if(isset($_GET['competitionName']) && isset($_GET['startNumber'])) {
-		addRaceBibToAllParticipants($_GET['competitionName'], $_GET['startNumber']);
+		echo json_encode(addRaceBibToAllParticipants($_GET['competitionName'], $_GET['startNumber']));
 	}
 
-// Gets all participant from one competition and returns JSON
+  // Gets all participant from one competition and returns JSON
 	if(isset($_GET['getAllParticipantCompetition']) && isset($_GET['competitionName'])) {
 		echo json_encode(getAllParticipantFromCompetition($_GET['competitionName']));
 	}

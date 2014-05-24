@@ -72,7 +72,8 @@
 		$.ajax({
 			url: '../Ajax/ajax.php?competitionName='+competitionName+'&startNumber='+startNumber+'',
 			success: function(content){
-				console.log("success");
+				if(!content)
+					console.log("WHAAAT?!");
 				// Trigger a change in the competition-dropdownlist
 				$('#chooseCompetition').trigger("change");
 			}
@@ -114,7 +115,6 @@
 </script>
 
 <div class=progressBar>
-	0% klart
 </div>
 
 <?php
