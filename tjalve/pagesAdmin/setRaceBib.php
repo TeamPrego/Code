@@ -36,22 +36,27 @@
 		</tr>
 	</table>
 	<input type='button' name='addParticipator' id='Update' value='Uppdatera'/>
+
+	<div>
+		Lite information hur det går till..
+		Vill man att tävlarna skriv in bokstäver i fälten.. dock olika bokstäver om man vill ändra många samtidigt
+	</div>
 </div>
 
 <!--	This is the right part of the page
 			This will contain all Participants in a competition-->
 <div id = "rightPartOfApplication">
 	<h2>Tävlingsdeltagare</h2>
-	<div id="up" style="margin-left:5%">
+	<div id="up" class='importantTextRed' style="margin-left:5%">
 		<?php
 			// If someone tried to change racebib
 			if(isset($_GET['check'])) {
 				// If something was wrong
 				if($_GET['check'] == 0)
-					echo "<div class='importantTextRed'>Fel: Finns en eller flera med samma nummerlapp, kolla igenom så ingen deltagare har samma nummerlapp</div>";
+					echo "<div id='korv'class='importantTextRed'>Fel: Finns en eller flera med samma nummerlapp, kolla igenom så ingen deltagare har samma nummerlapp</div>";
 				// If everything was correct
 				else
-					echo "<div class='importantTextRed'>Ändrat</div>";
+					echo "<div id='korv'class='importantTextRed'>Ändrat</div>";
 			}
 		?>
 	</div>
@@ -63,17 +68,23 @@
 
 	//When the Update-button is clicked the DB will be updated.
 	$('#Update').click(function() {
-
-		document.getElementById('up').innerHTML ="<div class='importantTextRed'>Ändrat</div>";
 		// Get some variables
 		var competitionName =  $('#chooseCompetition').find(":selected").text();
 		var startNumber = $('#bibBegin').val();
 		// Update database with ajax
 		$.ajax({
 			url: '../Ajax/ajax.php?competitionName='+competitionName+'&startNumber='+startNumber+'',
-			success: function(content){
-				if(!content)
-					console.log("WHAAAT?!");
+			success: function(content) {
+				content = $.parseJSON(content);
+				$.each(content, function(index, value) {
+					if(value.check == 0)
+						var string = "Ändrat";
+					else {
+						var string = "Nummerlappen:" + value.check + " finns redan registrerad";
+					}
+						console.log(string);
+						document.getElementById('up').innerHTML = string;
+				});
 				// Trigger a change in the competition-dropdownlist
 				$('#chooseCompetition').trigger("change");
 			}

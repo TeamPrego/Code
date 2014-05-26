@@ -193,12 +193,17 @@
   function addRaceBibToAllParticipants($competitionName,$startNumber) {
     include "config.php";
     $allParticipants = getAllParticipantFromCompetition($competitionName);
+    $allPCheck = $allParticipants;
+    $checkArray = [];
+
+    foreach ($allPCheck as $pCheck) {
+      array_push($checkArray, $pCheck['bib']);
+    }
     foreach ($allParticipants as $participant) {
-      $participantId = $participant['participantId'];
-      foreach ($allParticipants as $participant) {
-        if($participant['participantBib'] == $startNumber)
-          return false;
+      if (in_array($startNumber, $checkArray)){
+        return array(['check' => $startNumber]);
       }
+      $participantId = $participant['participantId'];
       $query = "UPDATE      participant p
                 INNER JOIN  contact c         ON p.contactId = c.contactId
                 INNER JOIN  competition comp  ON c.competitionId = comp.competitionId
@@ -210,6 +215,7 @@
         $startNumber=$startNumber+1; 
       }
     }
+    return array(['check' => 0]);
   }
 
   function getAllParticipantsAndDisciplinesFromContactId($contactId) {

@@ -470,7 +470,10 @@ The class should represent a competition:
 	// Output: An array with all classes
 	function getAllClassesFromCompetition($competitionId) {
 		include "config.php";
-		$data = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId= '$competitionId'");
+		$data = mysqli_query($con, "SELECT * 
+																FROM competitiondisciplines
+																WHERE competitionId =  '$competitionId'
+																ORDER BY  `competitiondisciplines`.`yearClass` ASC ");
 		$array=array();
 		while($row = $data->fetch_object()) {
 			if(!in_array($row->yearClass, $array)) {
@@ -509,8 +512,10 @@ The class should represent a competition:
 		$disc =array();
 
 		//Findning all classes and dicipilnes
-		$dataAgeClass = mysqli_query($con, "SELECT * FROM competitiondisciplines WHERE competitionId = '$competitionId'
-																				ORDER BY  `competitiondisciplines`.`yearClass` ASC ");
+		$dataAgeClass = mysqli_query($con, "SELECT * 
+																				FROM competitiondisciplines 
+																				WHERE competitionId = '$competitionId'
+																				ORDER BY  `competitiondisciplines`.`yearClass` ASC");
 		if (!$dataAgeClass) {
 		  die('Error: ' . mysqli_error($con));
 		}

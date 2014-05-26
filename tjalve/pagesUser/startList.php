@@ -99,8 +99,10 @@ function Update() {
 											'</tr><tr><th>Förnamn</th><th>Efternamn</th><th>Födelseår</th><th>Klubb</th><th>SB</th><th>PB</th></tr>';
 					// Foreach discipline
 					$.each(value.participants, function(ind, val) {
+						if(val.prio != 0) {
 							string += '<tr><td>' + val.firstName + '</td><td>' + val.lastName + '</td><td>'+ val.birthYear +'</td><td>' + val.club + '</td><td>'+val.SB+'</td><td>'+val.PB+'</td></tr>';
 							countParticipant++;
+						}
 					});
 				}
 			});
